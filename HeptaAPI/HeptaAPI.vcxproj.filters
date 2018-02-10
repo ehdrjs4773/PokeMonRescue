@@ -171,6 +171,15 @@
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -250,6 +259,15 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>playGround\최동건</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>playGround\최동건</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>playGround\최동건</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

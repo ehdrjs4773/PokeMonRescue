@@ -58,6 +58,27 @@
     <Filter Include="2DGameFramework\Manager">
       <UniqueIdentifier>{6962b22c-d548-4262-9752-fb1e528a3599}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\최동건">
+      <UniqueIdentifier>{4c894137-d570-44f9-ae67-5da7bc571151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\정경훈">
+      <UniqueIdentifier>{f280135c-5722-4046-8f9f-403bd44fc925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\한재윤">
+      <UniqueIdentifier>{4772a891-7297-4f1f-92f0-10c101c7152d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\이정민">
+      <UniqueIdentifier>{671de3cd-adc7-4ab5-ac95-d1930183c7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\배건하">
+      <UniqueIdentifier>{1db9e4c8-b206-42b7-8118-2b3a1c82ae3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\박근화">
+      <UniqueIdentifier>{826fd0f8-54c9-4cea-8c36-11653e46d561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\이준우">
+      <UniqueIdentifier>{2f3f2432-8220-453f-9878-700c5633ba85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

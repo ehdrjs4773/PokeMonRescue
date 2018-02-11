@@ -22,12 +22,58 @@ HRESULT soundManager::init()
 	_sound = new Sound*[TOTALSOUNDBUFFER];
 	_channel = new Channel*[TOTALSOUNDBUFFER];
 
-
 	ZeroMemory(_sound, sizeof(_sound));
 	ZeroMemory(_channel, sizeof(_channel));
 
 
+
+
+	//마스터그룹 추가된 모든 음악을 조절가능
+	_system->getMasterChannelGroup(&_masterGroup);
+
+
+	//이펙트 채널 그룹
+	_system->createChannelGroup("channelEffect", &_effectGroup);
+
+	//BGM 채널 그룹
+	_system->createChannelGroup("channelMusic", &_musicGroup);
+
+	_system->createChannelGroup("MP3Group", &_mp3Group);
+
+	//마스터사운드그룹 추가
+	_system->getMasterSoundGroup(&_masterSound);
+
+	//노래 사운드 그룹	
+	_system->createSoundGroup("musicSound", &_musicSound);
+
+	//노래 사운드 그룹	
+	_system->createSoundGroup("effectSound", &_effectSound);
+
+
+
+	//로우패스 필터
+	_system->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &dspLowPass);
+	//하이패스필터
+	_system->createDSPByType(FMOD_DSP_TYPE_HIGHPASS, &dspHighPass);
+
+
+
+
+
+	_musicGroup->addGroup(_mp3Group);
+
+	//DSP영역 초기화
+	addDspLowPass();
+	addDspHighPass();
+
+
+	_currentMusic = 0;
+
+
+	_maxCount = 0;
+
 	return S_OK;
+
 }
 
 void soundManager::release()
@@ -66,55 +112,85 @@ void soundManager::update()
 }
 
 
+
 //사운드 추가 함수
 void soundManager::addSound(string keyName, string soundName, bool bgm, bool loop)
 {
-	FMOD_RESULT result;
 	if (loop)
 	{
 		if (bgm)
-		{
-			result = _system->createStream(soundName.c_str(), FMOD_LOOP_NORMAL, NULL, &_sound[_mTotalSounds.size()]);
+		{ 
+			_system->createStream(soundName.c_str(), FMOD_LOOP_NORMAL, NULL, &_sound[_mTotalSounds.size()]);
 		}
 		else
 		{
-			result = _system->createSound(soundName.c_str(), FMOD_LOOP_NORMAL, NULL, &_sound[_mTotalSounds.size()]);
+			_system->createSound(soundName.c_str(), FMOD_LOOP_NORMAL , NULL, &_sound[_mTotalSounds.size()]);
 		}
+		_maxCount++;
 	}
 	else
 	{
 		if (bgm)
 		{
-			result = _system->createStream(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
+			_system->createStream(soundName.c_str(), FMOD_DEFAULT , NULL, &_sound[_mTotalSounds.size()]);
 		}
 		else
 		{
-			result = _system->createSound(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
+			_system->createSound(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
 		}
+		_maxCount++;
 	}
 
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
+
 }
 
 
-// 1.0 maximum 0.0 ~ 1.0 -> 0 ~ 255
-void soundManager::play(string keyName, float volume)
+
+
+//						키값,			볼륨			  BGM = ture,  Effect = false
+void soundManager::play(string keyName, float volume, bool isMusic)
 {
 	arrSoundsIter iter = _mTotalSounds.begin();
 	//배열 의 몇번째인지 세알리기위한 카운트 변수
 	int count = 0;
-
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_system->playSound(*iter->second, NULL, false, &_channel[count]);
-
+			_system->playSound(*iter->second, 0, false, &_channel[count]);
+			_channel[count]->setLoopPoints(0, FMOD_TIMEUNIT_MS, 0, FMOD_TIMEUNIT_MS);
+			
 			_channel[count]->setVolume(volume);
+
+			if (isMusic)
+			{
+				_channel[count]->setChannelGroup(_musicGroup);
+			}
+			else if (!isMusic)
+			{
+				_channel[count]->setChannelGroup(_effectGroup);
+			}
+
 			break;
 		}
 	}
 }
+
+void soundManager::currentPlay()
+{
+	bool isPlay;
+	for(int i=0;i<=_maxCount;i++)
+	{
+
+		_channel[i]->stop();
+	}
+	_system->playSound(_sound[_currentMusic-1], 0, false, &_channel[_currentMusic-1]);
+	_channel[_currentMusic - 1]->setVolume(0.75);
+
+	_channel[_currentMusic - 1]->setChannelGroup(_mp3Group);
+}
+
 
 void soundManager::stop(string keyName)				 
 {
@@ -167,7 +243,7 @@ void soundManager::resume(string keyName)
 
 bool soundManager::isPlaySound(string keyName) 
 {
-	bool isPlay = false;
+	bool isPlay;
 
 	arrSoundsIter iter = _mTotalSounds.begin();
 
@@ -187,7 +263,7 @@ bool soundManager::isPlaySound(string keyName)
 
 bool soundManager::isPauseSound(string keyName)
 {
-	bool isPause = false;
+	bool isPause;
 
 	arrSoundsIter iter = _mTotalSounds.begin();
 
@@ -205,174 +281,285 @@ bool soundManager::isPauseSound(string keyName)
 	return isPause;
 }
 
-bool soundManager::isMuteSound(string keyName)
-{
-	bool isMute = false;
+//준우의 사운드매니저!!!!!!!!!!!!!!!!!!!!!!!!!!!!//준우의 사운드매니저!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	arrSoundsIter iter = _mTotalSounds.begin();
 
-	int count = 0;
 
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-			_channel[count]->getMute(&isMute);
-			break;
-		}
-	}
 
-	return isMute;
-}
-
-void soundManager::setVolume(string keyName, float volume)
-{
-	arrSoundsIter iter = _mTotalSounds.begin();
-
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		if (keyName == iter->first)
-		{
-			_channel[count]->setVolume(volume);
-			break;
-		}
-	}
-}
-
+//마스터볼륨 -- 전체적 볼륨을 조절한다
+//채널의 볼륨얻어오기
 float soundManager::getVolume(string keyName)
 {
-	float volume = 0.0f;
-
 	arrSoundsIter iter = _mTotalSounds.begin();
-
 	int count = 0;
+	float volume;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_channel[count]->getVolume(&volume);
-			break;
+	_channel[count]->getVolume(&volume);
+	break;
 		}
 	}
-
 	return volume;
 }
 
-void soundManager::setMute(string keyName)
+
+
+//채널의 볼륨설정하기
+
+//키값을 받아서 직접 볼륨을 설정
+void soundManager::setVolume(string keyName, float volume)
 {
-	bool isMute = false;
-
 	arrSoundsIter iter = _mTotalSounds.begin();
-
 	int count = 0;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_channel[count]->getMute(&isMute);
-			_channel[count]->setMute(!isMute);
-			break;
+		_channel[count]->setVolume(volume);
+	break;
 		}
 	}
 }
 
-unsigned int soundManager::getLength(string keyName)
+
+//전체 볼륨을 얻어온다
+float soundManager::getMasterVolume()
 {
-	unsigned int length = 0;
+	float volume;
+	_masterGroup->getVolume(&volume);
+	return volume;
+}
 
+//전체 볼륨을 설정한다.
+void soundManager::setMasterVolume(float volume)
+{
+	_masterGroup->setVolume(volume);
+}
+
+//BGM관련 음악을 설정한다.
+float soundManager::getMusicVolume()
+{
+	float volume;
+	_musicGroup->getVolume(&volume);
+	return volume;
+}
+void soundManager::setMusicVolume(float volume)
+{
+	_musicGroup->setVolume(volume);
+}
+
+
+//이펙트 그룹 관련 볼륨을 설정한다.
+float soundManager::getEffectVolume()
+{
+	float volume;
+	_effectGroup->getVolume(&volume);
+	return volume;
+}
+void soundManager::setEffectVolume(float volume)
+{
+	_effectGroup->setVolume(volume);
+}
+
+
+void soundManager::setMP3Volume(float volume)
+{
+	_mp3Group->setVolume(volume);
+}
+
+
+// 타이틀을 얻어서 string형태로 반환
+string soundManager::getTagTitle(string keyName)
+{
+	const int fileName = 255;
+	char tag[fileName] = { 0 };
 	arrSoundsIter iter = _mTotalSounds.begin();
-
 	int count = 0;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			(*iter->second)->getLength(&length, FMOD_TIMEUNIT_MS);
-			break;
+		_sound[count]->getTag("TITLE", 0, &Ftag);
+	break;
 		}
 	}
-
-	return length;
+	return (char*)Ftag.data;
 }
 
-void soundManager::setPosition(string keyName, unsigned int position)
+string soundManager::getTagTitle(bool isPlus)
 {
-	arrSoundsIter iter = _mTotalSounds.begin();
 
+	
+	unsigned int tempLenght = 0;
+
+
+		while (1)
+		{
+			_sound[_currentMusic]->getLength(&tempLenght, FMOD_TIMEUNIT_MS);
+
+			if (tempLenght <= 50000)
+			{
+				if (_maxCount > _currentMusic)
+					_currentMusic++;
+				else if (_maxCount <= _currentMusic)
+					_currentMusic = 0;
+			}
+			else
+			{
+				break;
+			}
+		}
+		_sound[_currentMusic]->getTag("TITLE", 0, &Ftag);
+
+		if (_maxCount > _currentMusic)
+			_currentMusic++;
+		else if (_maxCount < _currentMusic)
+			_currentMusic = 0;
+	
+	
+
+
+	return (char*)Ftag.data;
+}
+
+// 작곡가를 얻어서 string형태로 반환
+string soundManager::getTagArtist(string keyName)
+{
+	const int fileName = 255;
+	char tag[fileName] = { 0 };
+	
+	arrSoundsIter iter = _mTotalSounds.begin();
 	int count = 0;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_channel[count]->setPosition(position, FMOD_TIMEUNIT_MS);
-			break;
+	_sound[count]->getTag("ARTIST", 0, &Ftag);
+	break;
 		}
 	}
+
+	return (char*)Ftag.data;
 }
 
-unsigned int soundManager::getPosition(string keyName)
+
+
+
+///////////***************///////////////
+///////////***************///////////////
+///////////**** 팬설정 ****///////////////
+///////////***************///////////////
+//-1 ~ 0 ~ 1 로 왼쪽부터 오른쪽까지의 좌우음향설정
+void soundManager::setPan(string keyName, float panValue)
 {
-	unsigned int length = 0;
-
 	arrSoundsIter iter = _mTotalSounds.begin();
-
 	int count = 0;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_channel[count]->getPosition(&length, FMOD_TIMEUNIT_MS);
+			_channel[count]->setPan(panValue);
 			break;
 		}
 	}
-
-	return length;
 }
 
-string soundManager::getCurrentPlay()
+void soundManager::setPan(float panValue)
 {
-	bool isPlay = false;
-
-	arrSoundsIter iter = _mTotalSounds.begin();
-
-	int count = 0;
-
-	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
-	{
-		_channel[count]->isPlaying(&isPlay);
-
-		if (isPlay)
-		{
-			return iter->first;
-		}
-	}
-
-	return "";
+	_masterGroup->setPan(panValue);
 }
 
-FMOD_TAG soundManager::getTag(string keyName, int index)
+
+
+//현재 주파수를 얻어온후 주파수의 진동수를 speed의 배수로 곱한다.
+//진동수가 빨라질수록 곡의 길이는 짧아지고 재생속도는 빨라진다.
+void soundManager::multipleFrequency(string keyName, float speed)
 {
-	FMOD_TAG temp;
-
 	arrSoundsIter iter = _mTotalSounds.begin();
-
 	int count = 0;
 
 	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
 	{
 		if (keyName == iter->first)
 		{
-			_sound[count]->getTag(NULL, index, &temp);
-			break;
+	_channel[count]->getFrequency(&_frequency);
+	_frequency *= speed;
+	_channel[count]->setFrequency(_frequency);
+
+	break;
 		}
 	}
+}
 
-	return temp;
+void soundManager::setFrequency(float speed)
+{
+	
+	_channel[_currentMusic-1]->getFrequency(&_frequency);
+	_frequency *= speed;
+	_channel[_currentMusic-1]->setFrequency(_frequency);
+
+}
+
+//반사음설정
+void soundManager::setReverb()
+{
+
+	//모든 그룹에 반사음의 우선순위를 2로 넣어놓는다.
+	_masterGroup->setReverbProperties(1, 0.5);
+	//그 채널의 우선순위를 1로 넣는다.
+
+	
+}
+
+//FMod를 사용하여 반사음의 효과를 넣을 수 있음
+void soundManager::reverbOn()
+{
+	FMOD_REVERB_PROPERTIES propOn = FMOD_PRESET_CONCERTHALL;
+
+	_system->setReverbProperties(0, &propOn);
+}
+
+void soundManager::reverbOff()
+{
+	FMOD_REVERB_PROPERTIES propOff = FMOD_PRESET_OFF;
+
+	_system->setReverbProperties(0, &propOff);
+}
+
+
+// digital signal pulse영역
+
+
+//저음역 주파수만 통과
+void soundManager::addDspLowPass()
+{
+	_masterGroup->addDSP(0, dspLowPass);
+	dspLowPass->setBypass(true);
+}
+
+//고음역 주파수만 통과
+void soundManager::addDspHighPass()
+{
+	_masterGroup->addDSP(0, dspHighPass);
+	dspHighPass->setBypass(true);
+}
+
+
+//리버스함수들은 토글방식으로 위에서 추가한 dsp효과들을
+//껏다켰다 가능 false일때가 On 
+//true일때가 off
+void soundManager::reverseLowPass(bool byPass)
+{
+	dspLowPass->setBypass(byPass);
+}
+void soundManager::reverseHighPass(bool byPass)
+{
+	dspHighPass->setBypass(byPass);
 }

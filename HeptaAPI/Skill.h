@@ -20,7 +20,7 @@ enum type				// 스킬 타입 지정
 	type_Fairy,			// 페어리 타입
 	type_Steel,			// 강철 타입
 	type_Rock,			// 바위 타입
-	type_bug,			// 벌레 타입
+	type_bug,			// 벌레 타입5j
 	type_Sprattle,		// 격투 타입
 	type_Poison			// 독 타입
 };
@@ -36,7 +36,7 @@ struct skillInfo
 	float y;				// 스킬 y 좌표
 	int count;				// 스킬 카운트
 	int currentFramex;		// 스킬 프레임 
-	
+
 };
 
 
@@ -57,6 +57,8 @@ public:
 	virtual void render();
 
 
+	virtual void setSkillEffect(char* name, int x, int y);
+	void skillEffectInfo();
 
 	Skill();
 	~Skill();

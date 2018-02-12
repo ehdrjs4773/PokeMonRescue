@@ -1,10 +1,12 @@
 #pragma once
 #include "gameNode.h"
-
+#include "tempScene.h"
 
 class playGround : public gameNode
 {
 private:
+
+
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

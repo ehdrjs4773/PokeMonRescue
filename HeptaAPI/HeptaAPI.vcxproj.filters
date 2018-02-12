@@ -79,6 +79,12 @@
     <Filter Include="playGround\이준우">
       <UniqueIdentifier>{2f3f2432-8220-453f-9878-700c5633ba85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\이준우\enemy">
+      <UniqueIdentifier>{4be085dd-5f0e-4723-a5b1-398438e76537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\이준우\enemy\child">
+      <UniqueIdentifier>{79adfe91-7d44-4cea-9c13-8122c789648d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -180,6 +186,30 @@
     <ClInclude Include="Item.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
+    <ClInclude Include="tempScene.h">
+      <Filter>playGround\이준우</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>playGround\이준우</Filter>
+    </ClInclude>
+    <ClInclude Include="Pokemon.h">
+      <Filter>playGround\이준우</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>playGround\이준우\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="chicorita.h">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClInclude>
+    <ClInclude Include="dandegi.h">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClInclude>
+    <ClInclude Include="purin.h">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -268,6 +298,30 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>playGround\최동건</Filter>
+    </ClCompile>
+    <ClCompile Include="tempScene.cpp">
+      <Filter>playGround\이준우</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>playGround\이준우</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager+ImageInit.cpp">
+      <Filter>playGround\이준우</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>playGround\이준우\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="chicorita.cpp">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClCompile>
+    <ClCompile Include="dandegi.cpp">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>playGround\이준우\enemy\child</Filter>
+    </ClCompile>
+    <ClCompile Include="purin.cpp">
+      <Filter>playGround\이준우\enemy\child</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

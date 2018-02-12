@@ -9,13 +9,21 @@ playGround::playGround()
 
 playGround::~playGround()
 {
-
+	
 }
 
 HRESULT playGround::init()
 {
 	gameNode::init(true);
 
+	
+
+
+
+	SCENEMANAGER->addScene("ÀÓ½Ã¾À", new tempScene);
+
+	SCENEMANAGER->init("ÀÓ½Ã¾À");
+	SCENEMANAGER->changeScene("ÀÓ½Ã¾À");
 	return S_OK;
 }
 
@@ -24,14 +32,15 @@ void playGround::release(void)
 {
 	gameNode::release();
 
+	
 }
 
 //¿¬»ê
 void playGround::update(void)
 {
 	gameNode::update();
-
 	SCENEMANAGER->update();
+
 }
 
 //±×¸®´Â°Å.......

@@ -1,51 +1,90 @@
 #pragma once
+#include "gameNode.h"
+#include <vector>
+#include <math.h>
 
+#define LEVEL_MAX	99		// 최대 레벨
 
-struct tagTempPokemon
+enum ELEMENT
 {
-	image* idleImage;
-	image* moveImage;
-	image* atkImage;
-	image* hurtImage;
-
-	char* idleImageName;
-	char* moveImageName;
-	char* atkImageName;
-	char* hurtImageName;
-
-	float x;
-	float y;
-	int direction;
-	int state;
+	ELEMENT_NORMAL,		// 노말
+	ELEMENT_FIRE,		// 불
+	ELEMENT_WATER,		// 물
+	ELEMENT_ELECTRIC,	// 전기
+	ELEMENT_PLANT,		// 풀
+	ELEMENT_ICE,		// 얼음
+	ELEMENT_FIGHT,		// 격투
+	ELEMENT_POISON,		// 독
+	ELEMENT_EARTH,		// 땅
+	ELEMENT_WING,		// 비행
+	ELEMENT_ESPER,		// 에스퍼
+	ELEMENT_INSECT,		// 곤충
+	ELEMENT_ROCK,		// 바위
+	ELEMENT_GHOST,		// 고스트
+	ELEMENT_DRAGON,		// 드래곤
+	ELEMENT_DARK,		// 악
+	ELEMENT_STEEL,		// 강철
+	ELEMENT_END
 };
 
+// 자... 이제 시작이야...(내꿈은~) 내꿈을 위한 여행~(피↗카↘츄↗!~) 걱정따윈없어 (없어↗!~~)
+// 내 친구와!↗ 함께니까(픽↗까↘픽↗까↘!) 처음시작은 어색할지도 몰라~ (몰라!내친구 피카츄!~~) 
+//날 지켜줄 거라고 믿고 있어~ 누구라도 얕보다간 큰일 나! 
+//언제~나 어디서나 (피카츄가 옆에 있어!) 약할 때나 강할 때나 (피카츄가 옆에 있어!)
+//너와 나 함께라면 우린 최고야~
 
-//현재 상태 바라보는 방향
-enum direction
+class pokemon : public gameNode
 {
-	UP,
-	LEFTUP,
-	LEFT,
-	LEFTDOWN,
-	DOWN,
-	RIGHTDOWN,
-	RIGHT,
-	RIGHTUP,
-};
+protected:
+	ELEMENT _element;		// 포켓몬의 속성
+	string _pokemonName;	// 포켓몬 이름(종류)
 
-enum state
-{
-	STATE_IDLE,
-	STATE_ATTACK,
-	STATE_MOVE,
-	STATE_HURT
-};
+	USHORT _level;			// 레벨	
 
-//이미지의 이름을 구조체화로 하여 부모클래스에 넘겨서 따로따로 할 필요 없이 한개의 함수로 끝내기 위한 편의성 구조체
-struct tagImageName
-{
-	char* idleImage;
-	char* moveImage;
-	char* attackImage;
-	char* hurtImage;
+	//포켓몬(종족)마다 처음 가지고있는 기본 능력치들
+	USHORT _racialHP;		
+	USHORT _racialATK;
+	USHORT _racialDEF;
+	USHORT _racialSpecialATK;		//기술썼을때 들어갈 데미지용 능력치
+	USHORT _racialSpecialDEF;
+
+
+	//종족치 + 레벨에 따라 늘어날 능력치 합한것을 넣을 공간
+	USHORT _maxHP;
+	USHORT _currentHP;
+	USHORT _atk;
+	USHORT _def;
+	USHORT _specialATK;
+	USHORT _specialDEF;
+	USHORT _maxEXP;
+	USHORT _currentEXP;
+
+	// 적을 잡으면 얻는 경험치
+	USHORT _exp;
+
+public:
+	pokemon();
+	~pokemon();
+
+	HRESULT init();
+	void pokemonStatus(string name, int level, ELEMENT element);
+	void expPlus(int exp);
+	void islevelUp();
+
+	//각종 접근자
+	inline int getMaxHP() { return _maxHP; }
+	inline int getCurrentHP() { return _currentHP; }
+	inline int getMaxEXP() { return _maxEXP; }
+	inline int getCurrentEXP() { return _currentEXP; }
+	inline int getAtk() { return _atk; }
+	inline int getDef() { return _def; }
+	inline int getSpecialDef() { return _specialATK; }
+	inline int getSpecialDef() { return _specialDEF; }
+	inline int getLevel() { return _level; }
+	inline ELEMENT getElement() { return _element; }
+	inline string getName() { return _pokemonName; }
+
+	//설정자
+	inline int setCurrentEXP(int exp) { _currentEXP = exp; }
+
 };

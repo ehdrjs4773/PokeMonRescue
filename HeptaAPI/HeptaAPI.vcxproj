@@ -160,6 +160,7 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="playGround+imageInitialization.cpp" />
     <ClCompile Include="playGround.cpp" />
+    <ClCompile Include="pokemon.cpp" />
     <ClCompile Include="polygon.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="purin.cpp" />

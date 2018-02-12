@@ -15,16 +15,14 @@ Skill::~Skill()
 }
 
 
- HRESULT Skill::init()
+ HRESULT Skill::init(char* name, int x, int y)
 {
 	 _skill.count = 0;
 	 _skill.currentFramex = 0;
-	 _skill.name = NULL;
-	 _skill.x = 0;
-	 _skill.y = 0;
-	 _skill.rc = RectMakeCenter(_skill.x, _skill.y, _skill.image.getFrameWidth(), _skill.image.getFrameHeight());
-
-
+	 _skill.name = name;
+	 _skill.x = x;
+	 _skill.y = y;
+	 _skill.rc = RectMakeCenter(_skill.x, _skill.y, _skill.image->getFrameWidth(), _skill.image->getFrameHeight());
 
 	 return S_OK;
 }
@@ -37,16 +35,20 @@ Skill::~Skill()
 
  void Skill::update() 
 {
-
+	//_skill.count++;
+	//
+	//if (_skill.count % 10 == 0)
+	//{
+	//	 if (_skill.currentFramex > _skill.image->getMaxFrameX()) _skill.currentFramex = 0;
+	//	 _skill.currentFramex++;
+	//	 _skill.count = 0;
+	//}
 
 }
 
  void Skill::render() 
 {
 
+	 //IMAGEMANAGER->findImage(_skill.name)->frameRender(getMemDC(), _skill.x, _skill.y, _skill.currentFramex, 1);
 
 }
- void Skill::setSkillEffect(char* name, int x, int y)
- {
-	 IMAGEMANAGER->findImage(name)->frameRender(getMemDC(), x, y, _skill.currentFramex, 1);
- }

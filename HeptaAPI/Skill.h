@@ -20,7 +20,7 @@ enum type				// 스킬 타입 지정
 	type_Fairy,			// 페어리 타입
 	type_Steel,			// 강철 타입
 	type_Rock,			// 바위 타입
-	type_bug,			// 벌레 타입5j
+	type_bug,			// 벌레 타입
 	type_Sprattle,		// 격투 타입
 	type_Poison			// 독 타입
 };
@@ -30,7 +30,7 @@ enum type				// 스킬 타입 지정
 struct skillInfo
 {
 	char* name;				// 스킬 이름
-	image image;			// 스킬 이미지
+	image* image;			// 스킬 이미지
 	RECT rc;			    // 스킬 박스 생성
 	float x;				// 스킬 x 좌표
 	float y;				// 스킬 y 좌표
@@ -51,14 +51,11 @@ private :
 
 public:
 	
-	virtual HRESULT init();
+	virtual HRESULT init(char* name, int x, int y);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 
-
-	virtual void setSkillEffect(char* name, int x, int y);
-	void skillEffectInfo();
 
 	Skill();
 	~Skill();

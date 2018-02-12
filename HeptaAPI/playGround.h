@@ -1,11 +1,10 @@
 #pragma once
 #include "gameNode.h"
-#include "tempScene.h"
+#include "Npc.h"
 
 class playGround : public gameNode
 {
 private:
-
 
 
 public:
@@ -14,6 +13,7 @@ public:
 	virtual void update(void);		//업데이트(연산)
 	virtual void render(void);		//그려주는 함수
 
+	virtual void imageInitaialization(void); // 이미지 초기화 함수
 	playGround();
 	~playGround();
 };

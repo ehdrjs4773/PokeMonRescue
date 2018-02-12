@@ -20,8 +20,12 @@ HRESULT playGround::init()
 
 
 	SCENEMANAGER->addScene("npc", new Npc);
-	
+
 	SCENEMANAGER->init("npc");
+
+	SCENEMANAGER->addScene("Stage1", new Stage1);
+	
+	SCENEMANAGER->init("Stage1");
 
 	SCENEMANAGER->changeScene("npc");
 

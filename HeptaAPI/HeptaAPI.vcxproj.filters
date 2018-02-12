@@ -180,9 +180,6 @@
     <ClInclude Include="Item.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="chicorita.h">
       <Filter>playGround\이준우</Filter>
     </ClInclude>
@@ -194,6 +191,24 @@
     </ClInclude>
     <ClInclude Include="enemyManager.h">
       <Filter>playGround\이준우</Filter>
+    </ClInclude>
+    <ClInclude Include="Pokemon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="purin.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="tempScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1.h">
+      <Filter>playGround\정경훈</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>playGround\정경훈</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +299,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
-    <ClCompile Include="playGround+imageInitialization.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
     <ClCompile Include="chicorita.cpp">
       <Filter>playGround\이준우</Filter>
     </ClCompile>
@@ -302,10 +314,23 @@
     <ClCompile Include="enemyManager+ImageInit.cpp">
       <Filter>playGround\이준우</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="HeptaAPI1.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="purin.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="tempScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1.cpp">
+      <Filter>playGround\정경훈</Filter>
+    </ClCompile>
+    <ClCompile Include="tile.cpp">
+      <Filter>playGround\정경훈</Filter>
+    </ClCompile>
+    <ClCompile Include="playGround+imageInitialization.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

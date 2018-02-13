@@ -20,6 +20,10 @@ HRESULT Stage1::init()
 
 	_playerIndexPt = PointMake(76 % 20, 76 / 20);
 
+	_em = new enemyManager;
+	_em->setTileMemoryAdressLink(_tiles);
+	_em->init();
+
 	return S_OK;
 }
 
@@ -30,7 +34,7 @@ void Stage1::release()
 
 void Stage1::update() 
 {
-
+	_em->update();
 }
 
 void Stage1::render() 
@@ -43,6 +47,8 @@ void Stage1::render()
 			_tiles[i].getIndexX() * TILESIZEX, _tiles[i].getIndexY() * TILESIZEY,
 			_tiles[i].getTarrainFrameX(), _tiles[i].getTarrainFrameY());
 	}
+
+	_em->render();
 }
 
 

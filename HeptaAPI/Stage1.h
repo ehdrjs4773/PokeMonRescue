@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tile.h"
+#include "enemyManager.h"
 
 enum TERRAIN
 {
@@ -21,6 +22,9 @@ private:
 
 	//플레이어 시작 좌표
 	POINT		_playerIndexPt;
+
+	//에너미 매니저
+	enemyManager* _em;
 
 public:
 	Stage1();

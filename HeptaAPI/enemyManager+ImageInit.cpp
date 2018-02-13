@@ -16,8 +16,8 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_chicoName.attackImage, ".//enemyImage//Chicorita_Move.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_chicoName.hurtImage, ".//enemyImage//Chicorita_Hurts.BMP", 576, 72, 8,
-		1, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_chicoName.hurtImage, ".//enemyImage//Chicorita_Hurts.BMP", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
 
 
 	_dandegiName.idleImage = "DANDEGI_IDLE";
@@ -29,10 +29,10 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_dandegiName.moveImage, ".//enemyImage//Dandegi_Move.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_dandegiName.attackImage, ".//enemyImage//Dandegi_Attack.BMP", 216, 576, 3,
+	IMAGEMANAGER->addFrameImage(_dandegiName.attackImage, ".//enemyImage//Dandegi_Attack.BMP", 288, 576, 4,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_dandegiName.hurtImage, ".//enemyImage//Dandegi_Hurts.BMP", 576, 72, 8,
-		1, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_dandegiName.hurtImage, ".//enemyImage//Dandegi_Hurts.BMP", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
 
 
 
@@ -47,8 +47,8 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_polygonName.attackImage, ".//enemyImage//Polygon_Attack.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_polygonName.hurtImage, ".//enemyImage//Polygon_Hurts.BMP", 576, 72, 8,
-		1, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_polygonName.hurtImage, ".//enemyImage//Polygon_Hurts.BMP", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
 
 
 	_purinName.idleImage = "PURIN_IDLE";
@@ -56,13 +56,13 @@ void enemyManager::imageInit()
 	_purinName.attackImage = "PURIN_ATTACK";
 	_purinName.hurtImage = "PURIN_HURTS";
 
-	IMAGEMANAGER->addFrameImage(_purinName.idleImage, ".//enemyImage//Purin_Idle.BMP", 72, 576, 1,
+	IMAGEMANAGER->addFrameImage(_purinName.idleImage, ".//enemyImage//Purin_Idle.BMP", 144, 576, 2,
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_purinName.moveImage, ".//enemyImage//Purin_Move.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_purinName.attackImage, ".//enemyImage//Purin_Attack.BMP", 216, 576, 3,
+	IMAGEMANAGER->addFrameImage(_purinName.attackImage, ".//enemyImage//Purin_Attack.BMP", 144, 576, 2,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_purinName.hurtImage, ".//enemyImage//Purin_Hurts.BMP", 576, 72, 8,
-		1, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_purinName.hurtImage, ".//enemyImage//Purin_Hurts.BMP", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
 
 }

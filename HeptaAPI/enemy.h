@@ -56,8 +56,23 @@ struct tagImageName
 class enemy : public gameNode
 {
 private:
-	int idleIndex;
+	int _idleIndex;
+	int _moveIndex;
+	int _atkIndex;
+	int _hurtIndex;
 	int _count;
+
+	bool _idleReverse;
+	bool _atkReverse;
+	bool _hurtReverse;
+	bool _moveReverse;
+
+
+	//공격은 한번만 진행되어야 하기 때문에
+	bool _isOnceAttack;
+	//당연 타격도 한번만 진행
+	bool _isOnceHurt;
+
 
 protected:
 	//귀차느니 프로텍티로 아이클래스들이 자신꺼 스스로 건들일수 있도록
@@ -79,6 +94,11 @@ public:
 	void setState();
 	void enemyMove();
 
+
+	void enemyAttackMotion();
+	void enemyHurtMotion();
+
+	void enemyAngleSetting();
 	tagTempPokemon getPokemon() { return _pokemon; }
 		
 };

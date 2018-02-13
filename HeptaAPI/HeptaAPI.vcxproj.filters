@@ -210,6 +210,9 @@
     <ClInclude Include="Pokemon.h">
       <Filter>playGround\배건하</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\이정민</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -334,6 +337,24 @@
     </ClCompile>
     <ClCompile Include="pokemon.cpp">
       <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="player+correction.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="player+draw.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="player+frameUpdate.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="player+move.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="player+valueInit.cpp">
+      <Filter>playGround\이정민</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

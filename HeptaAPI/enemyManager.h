@@ -27,6 +27,11 @@ private:
 	vector<enemy*> _vEnemyPokemon;
 	vector<enemy*>::iterator _viEnemyPokemon;
 
+
+
+	
+
+
 public:
 	enemyManager();
 	~enemyManager();
@@ -40,10 +45,11 @@ public:
 	void render();
 
 
-	vector<enemy*> getVEnemyPokemon() { return _vEnemyPokemon; };
-	vector<enemy*>::iterator getVIEnemyPokemon() { return _viEnemyPokemon; };	
+	inline vector<enemy*> getVEnemyPokemon() { return _vEnemyPokemon; };
+	inline vector<enemy*>::iterator getVIEnemyPokemon() { return _viEnemyPokemon; };	
 
-	void setTileMemoryAdressLink(tile* tiles) { _tile = tiles; }
+	inline void setTileMemoryAdressLink(tile* tiles) { _tile = tiles; }
+	void enemyMoveManager();
 
 };
 

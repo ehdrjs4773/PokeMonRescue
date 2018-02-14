@@ -4,6 +4,7 @@
 
 chicorita::chicorita()
 {
+	_pokemon.speed = 4;
 }
 
 

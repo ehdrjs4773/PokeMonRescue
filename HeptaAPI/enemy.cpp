@@ -39,8 +39,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y)
 	//좌표 초기화 뭐 이건 나중에 리스폰지역으로 받아오면 되니까
 	_pokemon.x = x;
 	_pokemon.y = y;
-
-
+	
 	//디렉션은 기본적으로 아래를 바라보자
 	_pokemon.direction = UP;
 
@@ -57,9 +56,8 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y)
 	_moveReverse = false;
 	_hurtReverse = false;
 	_atkReverse = false;
-
-	_isOnceHurt = false;
-
+	_isMove = false;
+	_distance = 0;
 
 	_count = 0;
 	
@@ -71,21 +69,19 @@ void enemy::release()
 }
 void enemy::update() 
 {
-	//키입력등을 받아주는 함수 임시용이다 쓸데 없다.
-	//keyControl();
+
 	//현재 상태를 받아서 한다.
 	setState();
 	//적의 움직임을 스위치로 관리한다 하지만 아직 각도가아닌 키입력이기에
 	
-	enemyAngleSetting();
-
-	
-	if (KEYMANAGER->isStayKeyDown('S'))
+	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
-		enemyAttackMotion();
+		_isMove = true;
 	}
-	enemyMove();
-
+	if (_isMove)
+		enemyTileMove();
+	else if(!_isMove)
+		enemyAngleSetting();
 
 }
 
@@ -120,37 +116,12 @@ void enemy::render()
 		break;
 	}
 
-	
+	Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
 
-
-	//Rectangle(getMemDC(), _pokemon.x-12, _pokemon.y-12, _pokemon.x+12, _pokemon.y+12);
 } 
 
 
-void enemy::keyControl()
-{
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT))
-	{
-		_pokemon.direction = LEFT;
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT))
-	{
-		_pokemon.direction = RIGHT;
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_UP))
-	{
-		_pokemon.direction = UP;
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
-	{
-		_pokemon.direction = DOWN;
-	}
-	_pokemon.idleImage->setFrameY(_pokemon.direction);
-	_pokemon.moveImage->setFrameY(_pokemon.direction);
-	_pokemon.atkImage->setFrameY(_pokemon.direction);
-	_pokemon.hurtImage->setFrameY(_pokemon.direction);
-}
-
+//애들의 상태의 프레임을 계산하는 함수
 void enemy::setState()
 {
 	_count++;
@@ -194,7 +165,7 @@ void enemy::setState()
 			_hurtIndex = 0;
 			break;
 		case STATE_HURT:
-			if (0 != _pokemon.hurtImage->getMaxFrameX() && _isOnceHurt)
+			if (0 != _pokemon.hurtImage->getMaxFrameX())
 			{
 				if (_hurtReverse) { _hurtIndex--; }
 				if (!_hurtReverse) { _hurtIndex++; }
@@ -240,50 +211,6 @@ void enemy::setState()
 
 }
 
-void enemy::enemyMove()
-{
-	switch (_pokemon.direction)
-	{
-	case UP:
-		_pokemon.y--;
-		break;
-	case LEFTUP:
-		_pokemon.y--;
-		_pokemon.x--;
-		break;
-	case LEFT:
-		_pokemon.x--;
-		break;
-	case LEFTDOWN:
-		_pokemon.y++;
-		_pokemon.x--;
-		break;
-	case DOWN:
-		_pokemon.y++;
-		break;
-	case RIGHTDOWN:
-		_pokemon.x++;
-		_pokemon.y++;
-		break;
-	case RIGHT:
-		_pokemon.x++;
-		break;
-	case RIGHTUP:
-		_pokemon.y--;
-		_pokemon.x++;
-		break;
-	}
-}
-
-
-void enemy::enemyAttackMotion()
-{
-	_pokemon.state = STATE_ATTACK;
-}
-void enemy::enemyHurtMotion()
-{
-	_pokemon.state = STATE_HURT;
-}
 
 void enemy::enemyAngleSetting()
 {
@@ -324,4 +251,81 @@ void enemy::enemyAngleSetting()
 	_pokemon.moveImage->setFrameY(_pokemon.direction);
 	_pokemon.atkImage->setFrameY(_pokemon.direction);
 	_pokemon.hurtImage->setFrameY(_pokemon.direction);
+}
+
+void enemy::enemyTileMove()
+{
+	if (_distance < 24)
+	{
+		_tempSpeed = _pokemon.speed;
+
+		if (_distance + _pokemon.speed <= 24)
+		{
+			_distance += _pokemon.speed;
+		}
+		else if (_distance + _pokemon.speed > 24)
+		{
+			_pokemon.speed = 24 - _distance;
+			_distance += _pokemon.speed;
+		}
+	}
+	if (_distance > 24)
+	{
+		_distance = 0;
+		_isMove = false;
+		_pokemon.speed = _tempSpeed;
+		return;
+	}
+	if (_distance == 24)
+	{
+		_distance = 0;
+		_isMove = false;
+		
+	}
+
+	switch (_pokemon.direction)
+	{
+	case UP:
+		_pokemon.y -= _pokemon.speed;
+		break;
+	case LEFTUP:
+		_pokemon.y -= _pokemon.speed;
+		_pokemon.x -= _pokemon.speed;
+		break;
+	case LEFT:
+		_pokemon.x -= _pokemon.speed;
+		break;
+	case LEFTDOWN:
+		_pokemon.y += _pokemon.speed;
+		_pokemon.x -= _pokemon.speed;
+		break;
+	case DOWN:
+		_pokemon.y += _pokemon.speed;
+		break;
+	case RIGHTDOWN:
+		_pokemon.x += _pokemon.speed;
+		_pokemon.y += _pokemon.speed;
+		break;
+	case RIGHT:
+		_pokemon.x += _pokemon.speed;
+		break;
+	case RIGHTUP:
+		_pokemon.y -= _pokemon.speed;
+		_pokemon.x += _pokemon.speed;
+		break;
+	}
+	_pokemon.speed = _tempSpeed;
+}
+
+void enemy::enemyAttackMotion()
+{
+	_pokemon.state = STATE_ATTACK;
+}
+void enemy::enemyHurtMotion()
+{
+	_pokemon.state = STATE_HURT;
+}
+void enemy::enemyMoveSign()
+{
+	_isMove = true;
 }

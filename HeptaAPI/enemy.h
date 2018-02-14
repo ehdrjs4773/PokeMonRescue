@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "gameNode.h";
+#include "gameNode.h"
 //임시포켓몬
 
 struct tagTempPokemon
@@ -17,6 +17,8 @@ struct tagTempPokemon
 
 	float x;
 	float y;
+	float speed;
+
 	int direction;
 	int state;
 };
@@ -56,22 +58,23 @@ struct tagImageName
 class enemy : public gameNode
 {
 private:
+	//프레임 인덱스 4종류로 나눠놓고
 	int _idleIndex;
 	int _moveIndex;
 	int _atkIndex;
 	int _hurtIndex;
 	int _count;
 
+	//인덱스 상승을 뒤집어줄 4종류 나눠놨지만 2개는 결국 안쓰였다고 흑흑
 	bool _idleReverse;
 	bool _atkReverse;
 	bool _hurtReverse;
 	bool _moveReverse;
+	bool _isMove;
 
-
-	//공격은 한번만 진행되어야 하기 때문에
-	bool _isOnceAttack;
-	//당연 타격도 한번만 진행
-	bool _isOnceHurt;
+	//타일단위 이동을 위한 이동거리와 임시 스피드!
+	float _distance;
+	float _tempSpeed;
 
 
 protected:
@@ -89,17 +92,22 @@ public:
 	void update();
 	void render();
 
-
-	void keyControl();
 	void setState();
-	void enemyMove();
-
-
 	void enemyAttackMotion();
 	void enemyHurtMotion();
 
+
 	void enemyAngleSetting();
-	tagTempPokemon getPokemon() { return _pokemon; }
-		
+	void enemyTileMove();
+	void enemyMoveSign();
+
+
+	inline tagTempPokemon getPokemon() { return _pokemon; }
+	inline float getX() { return _pokemon.x; }
+	inline float getY() { return _pokemon.y; }
+	inline int getDirection() { return _pokemon.direction; }
+
+
+
 };
 

@@ -4,6 +4,7 @@
 
 dandegi::dandegi()
 {
+	_pokemon.speed = 4;
 }
 
 

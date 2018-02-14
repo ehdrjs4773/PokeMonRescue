@@ -19,14 +19,32 @@ HRESULT UI::init()
 	_infoUI[0].img = IMAGEMANAGER->addImage("마을기본메뉴", ".\\bmps\\UI\\마을기본메뉴UI.bmp", 148, 118, false, true, MAGENTA);
 	_infoUI[1].img = IMAGEMANAGER->addImage("맵표시", ".\\bmps\\UI\\맵표시UI.bmp", 267, 58, false, true, MAGENTA);
 	_infoUI[2].img = IMAGEMANAGER->addImage("돈표시", ".\\bmps\\UI\\하단돈표시UI.bmp", 416, 88, false, true, MAGENTA);
+	_infoUI[3].img = IMAGEMANAGER->addImage("도구상자", ".\\bmps\\UI\\도구메뉴UI.bmp", 267, 278, false, true, MAGENTA);
+
+	IMAGEMANAGER->addImage("selectIcon", ".\\bmps\\UI\\selectIcon.bmp", 7, 7, false, true, MAGENTA);
 	
 
 	_infoUI[0].rc = RectMakeCenter(100, 100, _infoUI[0].img->getWidth(), _infoUI[0].img->getHeight());
 	_infoUI[1].rc = RectMakeCenter(325, 100, _infoUI[1].img->getWidth(), _infoUI[1].img->getHeight());
 	_infoUI[2].rc = RectMakeCenter(240, 300, _infoUI[2].img->getWidth(), _infoUI[2].img->getHeight());
+	_infoUI[3].rc = RectMake(50, 50, _infoUI[3].img->getWidth(), _infoUI[3].img->getHeight());
 
 
-	_isMenu = true;
+	_mainMenu[0] = "도구";
+	_mainMenu[1] = "팀";
+	_mainMenu[2] = "의뢰리스트";
+	//도구 탭 들어가면
+	_mainMenu[3] = "도구상자";
+
+	_isMenu = false;
+	
+	_infoUI[0].isSelcet = false;
+	_infoUI[1].isSelcet = false;
+	_infoUI[2].isSelcet = false;
+
+
+	_selectNum = 0;
+
 
 
 	return S_OK;
@@ -39,16 +57,94 @@ void UI::release()
 
 void UI::update() 
 {
+	//플레이어의 지정 키가 아직 없어서 UI 에서 '일단' 지정키를 등록
+	//그리고 예외처리
+	if (!_isMenu && !_infoUI[0].isSelcet && !_infoUI[1].isSelcet && !_infoUI[2].isSelcet)
+	{
+		if (KEYMANAGER->isOnceKeyDown('X'))
+		{
+			_isMenu = true;					//X 키를 누르면 메뉴 유아이의 불값이 트루가 된다.
+		}
+		
+	}
+	
+
+	if (_isMenu || _infoUI[0].isSelcet)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))		// 메뉴 창에서 UP 키를 누르면 셀릭트 아이콘이 위아래로 움직인다.
+		{
+			_selectNum--;
+			if (_selectNum < 0)
+				_selectNum = 2;
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			_selectNum++;
+			if (_selectNum > 2)
+				_selectNum = 0;
+		}
+
+		if (KEYMANAGER->isOnceKeyDown('X'))			//셀렉트 아이콘 움직임에 넘버를 주어서 X 키를 누르면 그 메뉴를 선택하게 된다.
+		{
+			if (_selectNum == 0)
+			{
+				_infoUI[0].isSelcet = true;
+				_isMenu = false;
+			}
+			else if (_selectNum == 1)
+			{
+				_infoUI[1].isSelcet = true;
+				_isMenu = false;
+			}
+			else
+			{
+				_infoUI[2].isSelcet = true;
+				_isMenu = false;
+			}
+		}
+	}
+	if (KEYMANAGER->isOnceKeyDown('C'))			// 플레이어의 지정 키를 누르면 뒤로 가게 처리(지금은 임시로 뒤로가는 키를 부여)
+	{
+		_isMenu = false;
+		if (!_isMenu && _infoUI[0].isSelcet || _infoUI[1].isSelcet || _infoUI[2].isSelcet)
+		{
+			_infoUI[0].isSelcet = false;
+			_infoUI[1].isSelcet = false;
+			_infoUI[2].isSelcet = false;
+
+			_isMenu = true;
+		}
+	}
 
 }
 
 void UI::render() 
 {
-	if (_isMenu)
+	if (_isMenu) // 메인메뉴 이미지의 불값이 트루가 되면 메인메뉴 이미지 렌더 및 셀렉트 아이콘 렌더
 	{
 		IMAGEMANAGER->findImage("마을기본메뉴")->render(getMemDC(), _infoUI[0].rc.left, _infoUI[0].rc.top);
 		IMAGEMANAGER->findImage("맵표시")->render(getMemDC(), _infoUI[1].rc.left, _infoUI[1].rc.top);
 		IMAGEMANAGER->findImage("돈표시")->render(getMemDC(), _infoUI[2].rc.left, _infoUI[2].rc.top);
+
+		SetBkMode(getMemDC(), TRANSPARENT);
+		SetTextColor(getMemDC(), WHITE);
+		for (int i = 0; i < 3; ++i)
+		{
+			TextOut(getMemDC(), 55, 55 + 20 * i, _mainMenu[i].c_str(), strlen(_mainMenu[i].c_str()));
+			IMAGEMANAGER->findImage("selectIcon")->render(getMemDC(), 45 , 65 + 20 * _selectNum - 6);
+		}
 	}
+
+	if (_infoUI[0].isSelcet) // 메인 메뉴에서 _infoUI[0] 배열 (도구) 가 선택되어 트루가 되면 도구상자 UI 렌더
+	{
+		IMAGEMANAGER->findImage("도구상자")->render(getMemDC(), _infoUI[3].rc.left, _infoUI[3].rc.top);
+		SetBkMode(getMemDC(), TRANSPARENT);
+		SetTextColor(getMemDC(), WHITE);
+		
+		TextOut(getMemDC(), 80, 60 , _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
+		IMAGEMANAGER->findImage("selectIcon")->render(getMemDC(), 70, 100 + 20 * _selectNum - 6);
+		
+	}
+
 }
 

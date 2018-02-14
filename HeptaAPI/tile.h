@@ -26,9 +26,15 @@ enum TILEKIND
 
 enum OBJECT
 {
-	OBJECT_GAIN,
+	OBJECT_ITEM0,
+	OBJECT_ITEM1,
+	OBJECT_ITEM2,
+	OBJECT_ITEM3,
+	OBJECT_ITEM4,
+	OBJECT_ITEM5,
 	OBJECT_RESPAWN,
-	OBJECT_PORTAL,
+	OBJECT_PORTAL_UP,
+	OBJECT_PORTAL_DOWN,
 	OBJECT_NONE
 };
 
@@ -109,7 +115,9 @@ public:
 	inline int getTarrainFrameY() { return _terrainFrameY; }
 	inline void setTarrainFrameY(int terrainframey) { _terrainFrameY = terrainframey; }
 
-	//_object
+	inline int getobject() { return (int)_object; }
+	inline void resetobject() { _object = OBJECT_NONE; }
+
 	inline int getObjFrameX() { return _objFrameX; }
 	inline void setObjFrameX(int objframex) { _objFrameX = objframex; }
 

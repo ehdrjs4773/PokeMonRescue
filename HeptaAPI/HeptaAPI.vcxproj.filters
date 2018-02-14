@@ -201,9 +201,6 @@
     <ClInclude Include="tempScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage1.h">
-      <Filter>playGround\정경훈</Filter>
-    </ClInclude>
     <ClInclude Include="tile.h">
       <Filter>playGround\정경훈</Filter>
     </ClInclude>
@@ -212,6 +209,12 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>playGround\이정민</Filter>
+    </ClInclude>
+    <ClInclude Include="StageScene.h">
+      <Filter>playGround\정경훈</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>playGround\정경훈</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -323,12 +326,6 @@
     <ClCompile Include="purin.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="tempScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage1.cpp">
-      <Filter>playGround\정경훈</Filter>
-    </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>playGround\정경훈</Filter>
     </ClCompile>
@@ -355,6 +352,12 @@
     </ClCompile>
     <ClCompile Include="player+valueInit.cpp">
       <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="StageScene.cpp">
+      <Filter>playGround\정경훈</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>playGround\정경훈</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

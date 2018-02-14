@@ -11,7 +11,7 @@ enum TERRAIN
 	TERRAIN_NONE
 };
 
-class Stage1 : public gameNode
+class Stage : public gameNode
 {
 private:
 	int			_tileCountX;
@@ -27,14 +27,24 @@ private:
 	enemyManager* _em;
 
 public:
-	Stage1();
-	~Stage1();
+	Stage();
+	~Stage();
 
-	HRESULT init();
+	HRESULT init(string name);
 	void release();
 	void update();
 	void render();
 
-	void load();
+	void load(string name);
+
+
+	int gettileCountX() { return _tileCountX; }
+	int gettileCountY() { return _tileCountY; }
+	tile* getTileAdress() { return _tiles; }
+	string getMapName() { return _name; }
+	TERRAIN getTarrain() { return _terrain; }
+
+	//플레이어 시작 좌표
+	POINT getPlayerStartpt() { return _playerIndexPt; }
 };
 

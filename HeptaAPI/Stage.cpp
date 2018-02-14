@@ -1,23 +1,20 @@
 #include "stdafx.h"
-#include "Stage1.h"
+#include "Stage.h"
 
-Stage1::Stage1()
+Stage::Stage()
 {
 }
 
 
-Stage1::~Stage1()
+Stage::~Stage()
 {
 
 }
 
-HRESULT Stage1::init()
+HRESULT Stage::init(string name)
 {
-	this->load();
-	IMAGEMANAGER->addFrameImage("tarrain0-0", ".//bmps//map//tarrain0//0.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain0-1", ".//bmps//map//tarrain0//1.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain0-2", ".//bmps//map//tarrain0//2.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-
+	_name = name;
+	this->load(_name);
 	_playerIndexPt = PointMake(76 % 20, 76 / 20);
 
 	_em = new enemyManager;
@@ -27,17 +24,17 @@ HRESULT Stage1::init()
 	return S_OK;
 }
 
-void Stage1::release()
+void Stage::release()
 {
 
 }
 
-void Stage1::update() 
+void Stage::update() 
 {
 	_em->update();
 }
 
-void Stage1::render() 
+void Stage::render() 
 {
 	char str[256];
 	for (int i = 0; i < _tileCountX * _tileCountY; ++i)
@@ -53,10 +50,10 @@ void Stage1::render()
 
 
 
-void Stage1::load()
+void Stage::load(string name)
 {
 	char str[256];
-	sprintf(str, ".//map//num1map.map");
+	sprintf(str, ".//map//%s.map", _name.c_str());
 	HANDLE file;
 	DWORD read;
 

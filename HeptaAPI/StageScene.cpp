@@ -28,6 +28,9 @@ HRESULT StageScene::init()
 	_nowStage = new Stage;
 	_nowStage->init("0-0");
 
+	_playerpt.x = WINSIZEX / 2;
+	_playerpt.y = WINSIZEY / 2;
+
 	return S_OK;
 }
 
@@ -43,5 +46,5 @@ void StageScene::update()
 
 void StageScene::render() 
 {
-	_nowStage->render();
+	_nowStage->render(RectMakeCenter(_playerpt.x, _playerpt.y, WINSIZEX, WINSIZEY), _playerpt.x, _playerpt.y);
 }

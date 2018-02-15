@@ -17,10 +17,6 @@ HRESULT Stage::init(string name)
 	this->load(_name);
 	_playerIndexPt = PointMake(76 % 20, 76 / 20);
 
-	_em = new enemyManager;
-	_em->setTileMemoryAdressLink(_tiles);
-	_em->init();
-
 	return S_OK;
 }
 
@@ -31,21 +27,20 @@ void Stage::release()
 
 void Stage::update() 
 {
-	_em->update();
+	
 }
 
-void Stage::render() 
+void Stage::render(RECT nowrc, int x, int y) 
 {
 	char str[256];
 	for (int i = 0; i < _tileCountX * _tileCountY; ++i)
 	{
-		sprintf(str, "tarrain%d-%d", (int)_terrain, _tiles[i].gettileKind());
+		sprintf(str, "tarrain%d-%d", (int)_terrain, _tiles[i]->gettileKind());
 		IMAGEMANAGER->findImage(str)->frameRender(getMemDC(),
-			_tiles[i].getIndexX() * TILESIZEX, _tiles[i].getIndexY() * TILESIZEY,
-			_tiles[i].getTarrainFrameX(), _tiles[i].getTarrainFrameY());
+			_tiles[i]->getIndexX() * TILESIZEX, _tiles[i]->getIndexY() * TILESIZEY,
+			_tiles[i]->getTarrainFrameX(), _tiles[i]->getTarrainFrameY());
 	}
 
-	_em->render();
 }
 
 
@@ -63,12 +58,13 @@ void Stage::load(string name)
 	ReadFile(file, &_tileCountX, sizeof(_tileCountX), &read, NULL);
 	ReadFile(file, &_tileCountY, sizeof(_tileCountY), &read, NULL);
 
-	_tiles = new tile[_tileCountX * _tileCountY];
-
-	memset(_tiles, NULL, sizeof(tile) * _tileCountX * _tileCountY);
-
-	ReadFile(file, _tiles, sizeof(tile) * _tileCountX * _tileCountY, &read, NULL);
-	
+	for (int i = 0; i < _tileCountX * _tileCountY; ++i)
+	{
+		tile* temp;
+		temp = new tile;
+		_tiles.push_back(temp);
+		ReadFile(file, &(*_tiles[i]), sizeof(tile), &read, NULL);
+	}
 
 	CloseHandle(file);
 }

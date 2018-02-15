@@ -10,6 +10,8 @@ private:
 	int _mapNum;
 	int _floor;
 
+	POINT _playerpt;
+
 public:
 	StageScene();
 	~StageScene();

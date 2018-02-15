@@ -23,11 +23,11 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->init("npc");
 
-	SCENEMANAGER->addScene("Stage1", new Stage1);
+	SCENEMANAGER->addScene("Stage1", new StageScene);
 	
 	SCENEMANAGER->init("Stage1");
 
-	SCENEMANAGER->changeScene("npc");
+	SCENEMANAGER->changeScene("Stage1");
 
 	return S_OK;
 }

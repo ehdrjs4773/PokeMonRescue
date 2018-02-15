@@ -14,17 +14,14 @@ enum TERRAIN
 class Stage : public gameNode
 {
 private:
-	int			_tileCountX;
-	int			_tileCountY;
-	tile*		_tiles;
-	string		_name;
-	TERRAIN		_terrain;
+	int					_tileCountX;
+	int					_tileCountY;
+	vector<tile*>		_tiles;
+	string				_name;
+	TERRAIN				_terrain;
 
 	//플레이어 시작 좌표
-	POINT		_playerIndexPt;
-
-	//에너미 매니저
-	enemyManager* _em;
+	POINT				_playerIndexPt;
 
 public:
 	Stage();
@@ -33,14 +30,14 @@ public:
 	HRESULT init(string name);
 	void release();
 	void update();
-	void render();
+	void render(RECT nowrc, int x, int y);
 
 	void load(string name);
 
 
 	int gettileCountX() { return _tileCountX; }
 	int gettileCountY() { return _tileCountY; }
-	tile* getTileAdress() { return _tiles; }
+	vector<tile*> getTileAdress() { return _tiles; }
 	string getMapName() { return _name; }
 	TERRAIN getTarrain() { return _terrain; }
 

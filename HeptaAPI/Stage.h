@@ -19,9 +19,13 @@ private:
 	vector<tile*>		_tiles;
 	string				_name;
 	TERRAIN				_terrain;
+	vector<tile*>		_respontiles;
 
 	//플레이어 시작 좌표
-	POINT				_playerIndexPt;
+	POINT				_playerStartUpid;
+	POINT				_playerStartDownid;
+
+	RECT				_renderrc;
 
 public:
 	Stage();
@@ -29,8 +33,8 @@ public:
 
 	HRESULT init(string name);
 	void release();
-	void update();
-	void render(RECT nowrc, int x, int y);
+	void update(int playerx, int playery);
+	void render();
 
 	void load(string name);
 
@@ -42,6 +46,7 @@ public:
 	TERRAIN getTarrain() { return _terrain; }
 
 	//플레이어 시작 좌표
-	POINT getPlayerStartpt() { return _playerIndexPt; }
+	POINT getPlayerStartUpid() { return _playerStartUpid; }
+	POINT getPlayerStartDownid() { return _playerStartDownid; }
 };
 

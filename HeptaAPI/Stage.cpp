@@ -15,7 +15,6 @@ HRESULT Stage::init(string name)
 {
 	_name = name;
 	this->load(_name);
-	_playerIndexPt = PointMake(76 % 20, 76 / 20);
 
 	return S_OK;
 }
@@ -25,22 +24,54 @@ void Stage::release()
 
 }
 
-void Stage::update() 
+void Stage::update(int playerx, int playery) 
 {
-	
+	_renderrc = RectMake((playerx / 24 - 11) * 24, (playery / 24 - 8) * 24, WINSIZEX, WINSIZEY);
+	if (_renderrc.left < 0)
+	{
+		_renderrc.left = 0;
+		_renderrc.right = _renderrc.left + WINSIZEX;
+	}
+	if (_renderrc.top < 0)
+	{
+		_renderrc.top = 0;
+		_renderrc.bottom = WINSIZEY;
+	}
+	if (_renderrc.right > _tileCountX * 24)
+	{
+		_renderrc.right = _tileCountX * 24;
+		_renderrc.left = _tileCountX * 24 - WINSIZEX;
+	}
+	if (_renderrc.bottom > _tileCountY * 24)
+	{
+		_renderrc.bottom = _tileCountY * 24;
+		_renderrc.top = _tileCountY * 24 - WINSIZEY;
+	}
 }
 
-void Stage::render(RECT nowrc, int x, int y) 
+void Stage::render() 
 {
 	char str[256];
-	for (int i = 0; i < _tileCountX * _tileCountY; ++i)
+	int tempid = (_renderrc.left / 24) + (_renderrc.top / 24) * _tileCountX;
+	for (int i = 0; i < 21 * 16; ++i)
 	{
-		sprintf(str, "tarrain%d-%d", (int)_terrain, _tiles[i]->gettileKind());
+		if (tempid % 21 > _tileCountX - 1)continue;
+		if (tempid / 21 > _tileCountY - 1)continue;
+		RECT temp;
+		RECT temptilerc = RectMake(_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexX() * 24, 
+			_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexY() * 24, 24, 24);
+		if (!IntersectRect(&temp, &_renderrc, &temptilerc))continue;
+		sprintf(str, "tarrain%d-%d", (int)_terrain, _tiles[tempid + i % 21 + i / 21 * _tileCountX]->gettileKind());
 		IMAGEMANAGER->findImage(str)->frameRender(getMemDC(),
-			_tiles[i]->getIndexX() * TILESIZEX, _tiles[i]->getIndexY() * TILESIZEY,
-			_tiles[i]->getTarrainFrameX(), _tiles[i]->getTarrainFrameY());
+			_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexX() * TILESIZEX - _renderrc.left, 
+			_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexY() * TILESIZEY - _renderrc.top,
+			_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getTarrainFrameX(), 
+			_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getTarrainFrameY());
+		IMAGEMANAGER->findImage("objectlist")->frameRender(getMemDC(),
+			0 - _renderrc.left + _tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexX() * TILESIZEX,
+			0 - _renderrc.top + _tiles[tempid + i % 21 + i / 21 * _tileCountX]->getIndexY() * TILESIZEY,
+			(int)_tiles[tempid + i % 21 + i / 21 * _tileCountX]->getObject(), 0);
 	}
-
 }
 
 
@@ -57,6 +88,8 @@ void Stage::load(string name)
 	ReadFile(file, &_terrain, sizeof(_terrain), &read, NULL);
 	ReadFile(file, &_tileCountX, sizeof(_tileCountX), &read, NULL);
 	ReadFile(file, &_tileCountY, sizeof(_tileCountY), &read, NULL);
+	ReadFile(file, &_playerStartUpid, sizeof(_playerStartUpid), &read, NULL);
+	ReadFile(file, &_playerStartDownid, sizeof(_playerStartDownid), &read, NULL);
 
 	for (int i = 0; i < _tileCountX * _tileCountY; ++i)
 	{
@@ -64,6 +97,10 @@ void Stage::load(string name)
 		temp = new tile;
 		_tiles.push_back(temp);
 		ReadFile(file, &(*_tiles[i]), sizeof(tile), &read, NULL);
+		if (temp->getObject() == OBJECT_RESPAWN)
+		{
+			_respontiles.push_back(temp);
+		}
 	}
 
 	CloseHandle(file);

@@ -36,6 +36,8 @@ HRESULT tile::init(int idx, int idy)
 	_isgo = false;
 	_parentNode = NULL;
 
+	_isprint = false;
+
 	return S_OK;
 }
 

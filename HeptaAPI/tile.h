@@ -63,6 +63,8 @@ private:
 	bool		_isgo;				//갈 수 있는 타일검출용
 	tile*		_parentNode;		//A*용
 
+	bool		_isprint;			//미니멥용
+
 public:
 	tile();
 	~tile();
@@ -114,9 +116,9 @@ public:
 
 	inline int getTarrainFrameY() { return _terrainFrameY; }
 	inline void setTarrainFrameY(int terrainframey) { _terrainFrameY = terrainframey; }
-
-	inline int getobject() { return (int)_object; }
-	inline void resetobject() { _object = OBJECT_NONE; }
+	
+	inline OBJECT getObject() { return _object; }
+	inline void setObject(OBJECT object) { _object = object; }
 
 	inline int getObjFrameX() { return _objFrameX; }
 	inline void setObjFrameX(int objframex) { _objFrameX = objframex; }
@@ -141,5 +143,8 @@ public:
 
 	inline tile* getParentNode() { return _parentNode; }
 	inline void setParentNode(tile* parentNode) { _parentNode = parentNode; }
+
+	inline bool getisprint() { return _isprint; }
+	inline void setisprint(bool isprint) { _isprint = isprint; }
 };
 

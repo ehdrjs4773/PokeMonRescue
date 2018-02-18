@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="aStar.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="chicorita.cpp" />
@@ -146,10 +147,12 @@
     <ClCompile Include="dialogue.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
+    <ClCompile Include="electivire.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="enemyManager+ImageInit.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="graena.cpp" />
     <ClCompile Include="groundDestroyManager.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
@@ -157,6 +160,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="mankey.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="player+correction.cpp" />
     <ClCompile Include="player+draw.cpp" />
@@ -170,12 +174,14 @@
     <ClCompile Include="polygon.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="purin.cpp" />
+    <ClCompile Include="rukario.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="tanguri.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
@@ -186,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
+    <ClInclude Include="aStar.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="chicorita.h" />
@@ -196,9 +203,11 @@
     <ClInclude Include="dialogue.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
+    <ClInclude Include="electivire.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="gameNode.h" />
+    <ClInclude Include="graena.h" />
     <ClInclude Include="groundDestroyManager.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
@@ -206,6 +215,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="mankey.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playGround.h" />
@@ -215,6 +225,7 @@
     <ClInclude Include="purin.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="rukario.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="Skill.h" />
@@ -222,6 +233,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageScene.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tanguri.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tempScene.h" />
     <ClInclude Include="tile.h" />

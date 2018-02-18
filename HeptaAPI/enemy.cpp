@@ -79,7 +79,10 @@ void enemy::update()
 		_isMove = true;
 	}
 	if (_isMove)
+	{
 		enemyTileMove();
+			
+	}
 	else if(!_isMove)
 		enemyAngleSetting();
 
@@ -116,7 +119,7 @@ void enemy::render()
 		break;
 	}
 
-	Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
+	//Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
 
 } 
 
@@ -215,6 +218,8 @@ void enemy::setState()
 void enemy::enemyAngleSetting()
 {
 	float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
+	
+	
 	if(target <= PI8 && target >=0 || target >= PI8*15 && target <= PI8 * 16)
 	{
 		_pokemon.direction = RIGHT;
@@ -252,6 +257,10 @@ void enemy::enemyAngleSetting()
 	_pokemon.atkImage->setFrameY(_pokemon.direction);
 	_pokemon.hurtImage->setFrameY(_pokemon.direction);
 }
+
+
+
+
 
 void enemy::enemyTileMove()
 {
@@ -313,6 +322,15 @@ void enemy::enemyTileMove()
 		_pokemon.y -= _pokemon.speed;
 		_pokemon.x += _pokemon.speed;
 		break;
+	}
+	
+	if (_isMove)
+	{
+		_pokemon.state = STATE_MOVE;
+	}
+	else if (!_isMove)
+	{
+		_pokemon.state= STATE_IDLE;
 	}
 	_pokemon.speed = _tempSpeed;
 }

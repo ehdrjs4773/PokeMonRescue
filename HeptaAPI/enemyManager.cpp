@@ -27,10 +27,8 @@ HRESULT enemyManager::init()
 	_vEnemyPokemon.push_back(_chicorita);
 
 	_dandegi = new dandegi;
-	_dandegi->init(_dandegiName, _tile[TILEX - 3 + TILEX * 14].getCenterX()
-		, _tile[TILEX - 3 + TILEX * 14].getCenterY());
-
-	
+	_dandegi->init(_dandegiName, _tile[TILEX - 3 + TILEX * 12].getCenterX()
+		, _tile[TILEX - 3 + TILEX * 12 ].getCenterY());
 	_vEnemyPokemon.push_back(_dandegi);
 
 

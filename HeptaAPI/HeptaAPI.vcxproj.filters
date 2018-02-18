@@ -79,6 +79,9 @@
     <Filter Include="playGround\정경훈">
       <UniqueIdentifier>{f280135c-5722-4046-8f9f-403bd44fc925}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\이준우\적객체모집">
+      <UniqueIdentifier>{7940f756-1577-4a7e-b846-348f38d484de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -180,23 +183,11 @@
     <ClInclude Include="Item.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
-    <ClInclude Include="chicorita.h">
-      <Filter>playGround\이준우</Filter>
-    </ClInclude>
-    <ClInclude Include="dandegi.h">
-      <Filter>playGround\이준우</Filter>
-    </ClInclude>
     <ClInclude Include="enemy.h">
       <Filter>playGround\이준우</Filter>
     </ClInclude>
     <ClInclude Include="enemyManager.h">
       <Filter>playGround\이준우</Filter>
-    </ClInclude>
-    <ClInclude Include="polygon.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="purin.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="tempScene.h">
       <Filter>헤더 파일</Filter>
@@ -215,6 +206,36 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>playGround\정경훈</Filter>
+    </ClInclude>
+    <ClInclude Include="aStar.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
+    <ClInclude Include="chicorita.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="dandegi.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="electivire.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="graena.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="mankey.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="rukario.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="tanguri.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="purin.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -305,12 +326,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
-    <ClCompile Include="chicorita.cpp">
-      <Filter>playGround\이준우</Filter>
-    </ClCompile>
-    <ClCompile Include="dandegi.cpp">
-      <Filter>playGround\이준우</Filter>
-    </ClCompile>
     <ClCompile Include="enemy.cpp">
       <Filter>playGround\이준우</Filter>
     </ClCompile>
@@ -319,12 +334,6 @@
     </ClCompile>
     <ClCompile Include="enemyManager+ImageInit.cpp">
       <Filter>playGround\이준우</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="purin.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>playGround\정경훈</Filter>
@@ -358,6 +367,36 @@
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>playGround\정경훈</Filter>
+    </ClCompile>
+    <ClCompile Include="aStar.cpp">
+      <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="chicorita.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="dandegi.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="electivire.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="graena.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="mankey.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="rukario.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="tanguri.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="purin.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

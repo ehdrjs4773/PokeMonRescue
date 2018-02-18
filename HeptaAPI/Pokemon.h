@@ -78,7 +78,7 @@ public:
 	inline int getCurrentEXP() { return _currentEXP; }
 	inline int getAtk() { return _atk; }
 	inline int getDef() { return _def; }
-	inline int getSpecialDef() { return _specialATK; }
+	inline int getSpecialAtk() { return _specialATK; }
 	inline int getSpecialDef() { return _specialDEF; }
 	inline int getLevel() { return _level; }
 	inline ELEMENT getElement() { return _element; }

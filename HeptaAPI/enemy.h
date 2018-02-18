@@ -101,13 +101,10 @@ public:
 	void enemyTileMove();
 	void enemyMoveSign();
 
-
 	inline tagTempPokemon getPokemon() { return _pokemon; }
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
 	inline int getDirection() { return _pokemon.direction; }
-
-
 
 };
 

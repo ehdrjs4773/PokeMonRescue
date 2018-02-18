@@ -1,7 +1,4 @@
 #include "enemyManager.h"
-
-
-
 void enemyManager::imageInit()
 {
 
@@ -64,5 +61,89 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_purinName.hurtImage, ".//enemyImage//Purin_Hurts.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));
+
+
+	//건하의 이미지 영역
+
+	//그라에나
+	_graenaName.idleImage = "GRAENA_IDLE";
+	_graenaName.moveImage = "GRAENA_MOVE";
+	_graenaName.attackImage = "GRAENA_ATTACK";
+	_graenaName.hurtImage = "GRAENA_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_graenaName.idleImage, ".//enemyImage//그라에나IDLE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_graenaName.moveImage, ".//enemyImage//그라에나MOVE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_graenaName.attackImage, ".//enemyImage//그라에나ATK.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_graenaName.hurtImage, ".//enemyImage//그라에나HURT.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
+	//그라에나
+
+
+	//루카리오
+	_rukarioName.idleImage = "RUKARIO_IDLE";
+	_rukarioName.moveImage = "RUKARIO_MOVE";
+	_rukarioName.attackImage = "RUKARIO_ATTACK";
+	_rukarioName.hurtImage = "RUKARIO_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_rukarioName.idleImage, ".//enemyImage//루카리오IDLE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_rukarioName.moveImage, ".//enemyImage//루카리오MOVE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_rukarioName.attackImage, ".//enemyImage//루카리오ATK.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_rukarioName.hurtImage, ".//enemyImage//루카리오HURT.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
+	//루카리오
+
+
+	//망키
+	_mankeyName.idleImage = "MANKEY_IDLE";
+	_mankeyName.moveImage = "MANKEY_MOVE";
+	_mankeyName.attackImage = "MANKEY_ATTACK";
+	_mankeyName.hurtImage = "MANKEY_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_mankeyName.idleImage, ".//enemyImage//망키IDLE.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_mankeyName.moveImage, ".//enemyImage//망키MOVE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_mankeyName.attackImage, ".//enemyImage//망키ATK.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	//망키
+
+
+	//탕구리
+	_tanguriName.idleImage = "TANGURI_IDLE";
+	_tanguriName.moveImage = "TANGURI_MOVE";
+	_tanguriName.attackImage = "TANGURI_ATTACK";
+	_tanguriName.hurtImage = "TANGURI_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_tanguriName.idleImage, ".//enemyImage//텅구리IDLE.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_tanguriName.moveImage, ".//enemyImage//텅구리MOVE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_tanguriName.attackImage, ".//enemyImage//텅구리ATK.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_tanguriName.hurtImage, ".//enemyImage//텅구리HURT.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
+	//탕구리
+
+	//에레키블
+	_electivireName.idleImage = "ELECTIVIRE_IDLE";
+	_electivireName.moveImage = "ELECTIVIRE_MOVE";
+	_electivireName.attackImage = "ELECTIVIRE_ATTACK";
+	_electivireName.hurtImage = "ELECTIVIRE_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_electivireName.idleImage, ".//enemyImage//에레키블IDLE.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_electivireName.moveImage, ".//enemyImage//에레키블MOVE.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_electivireName.attackImage, ".//enemyImage//에레키블ATK.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_electivireName.hurtImage, ".//enemyImage//에레키블HURT.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
+	//에레키블
 
 }

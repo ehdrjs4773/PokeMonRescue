@@ -1,9 +1,20 @@
 #pragma once
 #include "stdafx.h"
 #include "enemy.h"
+#include "gameNode.h"
+
+
+
 #include "chicorita.h"
 #include "dandegi.h"
-#include "gameNode.h"
+#include "polygon.h"
+#include "purin.h"
+#include "rukario.h"
+
+#include "mankey.h"
+#include "tanguri.h"
+#include "graena.h"
+#include "electivire.h"
 
 
 //전방선언!!!!!!
@@ -11,15 +22,38 @@ class tile;
 class enemyManager : public gameNode
 {
 private:
-	chicorita* _chicorita;
-	dandegi* _dandegi;
 
 	tile* _tile;
 
-	tagImageName _chicoName;
-	tagImageName _dandegiName;
-	tagImageName _polygonName;
-	tagImageName _purinName;
+
+	chicorita*		_chicorita;
+	dandegi*		_dandegi;
+	polygon*		_polygon;
+	purin*			_purin;
+
+
+
+
+	//건하 이미지감사
+	graena*			 _graena;
+	rukario*		_rukario;
+	mankey*			_mankey;
+	tanguri*		_tanguri;
+	electivire*		_electivire;
+
+
+	tagImageName	_chicoName;
+	tagImageName	_dandegiName;
+	tagImageName	_polygonName;
+	tagImageName	_purinName;
+	
+	tagImageName	_graenaName;
+	tagImageName	_rukarioName;
+	tagImageName	_mankeyName;
+	tagImageName	_tanguriName;
+	tagImageName	_electivireName;
+
+	 
 
 private:
 	//적포켓몬들을 담아줄 벡터
@@ -38,6 +72,7 @@ public:
 
 
 	HRESULT init();
+
 
 	void imageInit();
 	void release();

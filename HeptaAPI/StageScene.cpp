@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageScene.h"
 #include "player.h"
+#include "enemyManager.h"
 
 
 
@@ -34,12 +35,24 @@ HRESULT StageScene::init()
 	_nowStage = new Stage;
 	_nowStage->init("0-0");
 
+	_em = new enemyManager;
+
+
 	_player->setStageMemAdressLink(_nowStage);
 
 	_playerpt.x = WINSIZEX / 2;
 	_playerpt.y = WINSIZEY / 2; 
 
+
+	
 	_player->init("¸®ÀÚ¸ù", _nowStage->getPlayerStartUpid().x * TILESIZEX + 12, _nowStage->getPlayerStartUpid().y * TILESIZEY + 12);
+
+
+	_em->setStageMemoryAdressLink(_nowStage);
+	_em->setTileMemoryAdressLink(_nowStage->getTileAdress());
+	_em->setPlayerMemoryAdressLink(_player);
+
+	_em->init();
 
 	CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
 
@@ -54,11 +67,14 @@ void StageScene::release()
 void StageScene::update() 
 {
 	_player->update();
+	_em->update();
 	_nowStage->update(_player->getX(), _player->getY());
 }
 
 void StageScene::render() 
 {
 	_nowStage->render();
+	_em->render();
+
 	_player->render();
 }

@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "Stage.h"
 
 
 
@@ -84,40 +85,38 @@ void enemy::update()
 	if (_isMove)
 	{
 		enemyTileMove();
-			
 	}
-	else if(!_isMove)
+	if(_pokemon.state == STATE_IDLE)
 		enemyAngleSetting();
 
 }
 
 void enemy::render() 
 {
-
 	switch (_pokemon.state)
 	{
 
 		//±âº»·»´õ
 	case STATE_IDLE:
-		_pokemon.idleImage->frameRender(getMemDC(), _pokemon.x - _pokemon.idleImage->getFrameHeight() / 2,
+		_pokemon.idleImage->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - _pokemon.idleImage->getFrameHeight() / 2,
 			_pokemon.y - _pokemon.idleImage->getFrameWidth() / 2,_idleIndex, _pokemon.direction);
 		break;
 
 		//ÀÌµ¿·»´õ
 	case STATE_MOVE:
-		_pokemon.moveImage->frameRender(getMemDC(), _pokemon.x - _pokemon.moveImage->getFrameHeight() / 2,
+		_pokemon.moveImage->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - _pokemon.moveImage->getFrameHeight() / 2,
 			_pokemon.y - _pokemon.moveImage->getFrameWidth() / 2, _moveIndex, _pokemon.direction);
 		break;
 		
 		//°í¿Ë°Ý·»´õ
 	case STATE_ATTACK:
-		_pokemon.atkImage->frameRender(getMemDC(), _pokemon.x - _pokemon.atkImage->getFrameHeight() / 2,
+		_pokemon.atkImage->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - _pokemon.atkImage->getFrameHeight() / 2,
 			_pokemon.y - _pokemon.atkImage->getFrameWidth() / 2, _atkIndex, _pokemon.direction);
 		break;
 
 		//Å¸°Ý·»´õ
 	case STATE_HURT:
-		_pokemon.hurtImage->frameRender(getMemDC(), _pokemon.x - _pokemon.hurtImage->getFrameHeight() / 2,
+		_pokemon.hurtImage->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - _pokemon.hurtImage->getFrameHeight() / 2,
 			_pokemon.y - _pokemon.hurtImage->getFrameWidth() / 2,_hurtIndex, _pokemon.direction);
 		break;
 	}
@@ -258,6 +257,9 @@ void enemy::enemyAngleSetting()
 
 void enemy::enemyTileMove()
 {
+	_pokemon.idx = _pokemon.x / 24;
+	_pokemon.idy = _pokemon.y / 24;
+	_pokemon.tileIndex = _pokemon.idx + _pokemon.idy;
 	if (_distance < 24)
 	{
 		_tempSpeed = _pokemon.speed;

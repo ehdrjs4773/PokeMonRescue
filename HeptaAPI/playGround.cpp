@@ -27,8 +27,8 @@ HRESULT playGround::init()
 	
 	SCENEMANAGER->init("npc");
 
-	SCENEMANAGER->addScene("Opening", new oPeningMovie);
-	
+	//SCENEMANAGER->addScene("Opening", new oPeningMovie);
+	//
 	//SCENEMANAGER->init("Opening");
 	
 	SCENEMANAGER->addScene("Stage1", new StageScene);

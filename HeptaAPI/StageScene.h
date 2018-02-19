@@ -3,15 +3,17 @@
 #include "Stage.h"
 
 class player;
-
+class enemyManager;
 class StageScene : public gameNode
 {
 private:
-	Stage* _nowStage;
-	player* _player;
+	Stage*		  _nowStage;
+	player*		  _player;
+	enemyManager* _em;
 
-	int _mapNum;
-	int _floor;
+private:
+	int			  _mapNum;
+	int			  _floor;
 
 	POINT _playerpt;
 
@@ -26,7 +28,5 @@ public:
 
 	//플레이어 메모리 설정
 	void setPlayerMemAdressLink(player* player) { _player = player; }
-
-	//void serEnemyManagerAdress();
 };
 

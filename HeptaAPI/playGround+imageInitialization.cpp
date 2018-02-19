@@ -21,4 +21,16 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addImage("gandy", ".\\bmps\\npc\\啊叼.bmp", 16, 23, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("windy", ".\\bmps\\npc\\扩叼.bmp", 22, 30, false, true, MAGENTA);
 
+	//府磊根
+	IMAGEMANAGER->addFrameImage("府磊根_idle", ".\\bmps\\pokemon_state\\府磊根_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//扁夯惑怕
+	IMAGEMANAGER->addFrameImage("府磊根_move", ".\\bmps\\pokemon_state\\府磊根_move.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//框流烙
+	IMAGEMANAGER->addFrameImage("府磊根_attack", ".\\bmps\\pokemon_state\\府磊根_attack.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//傍拜
+	IMAGEMANAGER->addFrameImage("府磊根_specialAttack", ".\\bmps\\pokemon_state\\府磊根_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//胶其既傍拜
+	IMAGEMANAGER->addFrameImage("府磊根_hurt", ".\\bmps\\pokemon_state\\府磊根_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//乔拜
+
 }

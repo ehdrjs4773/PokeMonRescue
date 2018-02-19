@@ -2,6 +2,7 @@
 void enemyManager::imageInit()
 {
 
+	_chicoName.pokemonName = "치코리타";
 	_chicoName.attackImage = "CHICORITA_ATTACK";
 	_chicoName.idleImage= "CHICORITA_IDLE";
 	_chicoName.moveImage = "CHICORITA_MOVE";
@@ -17,6 +18,7 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 
 
+	_dandegiName.pokemonName = "단데기";
 	_dandegiName.idleImage = "DANDEGI_IDLE";
 	_dandegiName.moveImage = "DANDEGI_MOVE";
 	_dandegiName.attackImage = "DANDEGI_ATTACK";
@@ -32,7 +34,7 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 
 
-
+	_polygonName.pokemonName = "폴리곤";
 	_polygonName.idleImage = "POLYGON_IDLE";
 	_polygonName.moveImage = "POLYGON_MOVE";
 	_polygonName.attackImage = "POLYGON_ATTACK";
@@ -47,7 +49,7 @@ void enemyManager::imageInit()
 	IMAGEMANAGER->addFrameImage(_polygonName.hurtImage, ".//enemyImage//Polygon_Hurts.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));
 
-
+	_purinName.pokemonName = "푸린";
 	_purinName.idleImage = "PURIN_IDLE";
 	_purinName.moveImage = "PURIN_MOVE";
 	_purinName.attackImage = "PURIN_ATTACK";
@@ -66,6 +68,7 @@ void enemyManager::imageInit()
 	//건하의 이미지 영역
 
 	//그라에나
+	_graenaName.pokemonName = "그라에나";
 	_graenaName.idleImage = "GRAENA_IDLE";
 	_graenaName.moveImage = "GRAENA_MOVE";
 	_graenaName.attackImage = "GRAENA_ATTACK";
@@ -83,6 +86,7 @@ void enemyManager::imageInit()
 
 
 	//루카리오
+	_rukarioName.pokemonName = "루카리오";
 	_rukarioName.idleImage = "RUKARIO_IDLE";
 	_rukarioName.moveImage = "RUKARIO_MOVE";
 	_rukarioName.attackImage = "RUKARIO_ATTACK";
@@ -100,6 +104,7 @@ void enemyManager::imageInit()
 
 
 	//망키
+	_mankeyName.pokemonName = "성원숭";
 	_mankeyName.idleImage = "MANKEY_IDLE";
 	_mankeyName.moveImage = "MANKEY_MOVE";
 	_mankeyName.attackImage = "MANKEY_ATTACK";
@@ -111,10 +116,13 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_mankeyName.attackImage, ".//enemyImage//망키ATK.bmp", 144, 576, 2,
 		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_mankeyName.hurtImage,  ".//enemyImage//망키HURT.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
 	//망키
 
 
 	//탕구리
+	_tanguriName.pokemonName = "텅구리";
 	_tanguriName.idleImage = "TANGURI_IDLE";
 	_tanguriName.moveImage = "TANGURI_MOVE";
 	_tanguriName.attackImage = "TANGURI_ATTACK";
@@ -131,12 +139,13 @@ void enemyManager::imageInit()
 	//탕구리
 
 	//에레키블
+	_electivireName.pokemonName = "에레키블";
 	_electivireName.idleImage = "ELECTIVIRE_IDLE";
 	_electivireName.moveImage = "ELECTIVIRE_MOVE";
 	_electivireName.attackImage = "ELECTIVIRE_ATTACK";
 	_electivireName.hurtImage = "ELECTIVIRE_HURTS";
 
-	IMAGEMANAGER->addFrameImage(_electivireName.idleImage, ".//enemyImage//에레키블IDLE.bmp", 144, 576, 2,
+	IMAGEMANAGER->addFrameImage(_electivireName.idleImage, ".//enemyImage//에레키블IDLE.bmp", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_electivireName.moveImage, ".//enemyImage//에레키블MOVE.bmp", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));

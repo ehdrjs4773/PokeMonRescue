@@ -17,22 +17,36 @@
 #include "electivire.h"
 
 
+enum ENEMY
+{
+	ENEMY_CHICORITA,
+	ENEMY_DANDEGI,
+	ENEMY_POLYGON,
+	ENEMY_PURIN,
+	ENEMY_GRAENA,
+	ENEMY_RUKARIO,
+	ENEMY_MANKEY,
+	ENEMY_TANGURI,
+	ENEMY_ELECTIVIRE
+};
+
+
 //전방선언!!!!!!
 class tile;
+class Stage;
 class enemyManager : public gameNode
 {
 private:
 
-	tile* _tile;
+	vector<tile*> _tile;
+	Stage* _stage;
 
 
+	//적의 객체 틀 생성중...
 	chicorita*		_chicorita;
 	dandegi*		_dandegi;
 	polygon*		_polygon;
 	purin*			_purin;
-
-
-
 
 	//건하 이미지감사
 	graena*			 _graena;
@@ -40,8 +54,10 @@ private:
 	mankey*			_mankey;
 	tanguri*		_tanguri;
 	electivire*		_electivire;
+	//적의 객체 틀 생성 완료
 
 
+	//구조체로 이름을 정해두고 보내서 쉽게 쉽게 가즈아!!!!
 	tagImageName	_chicoName;
 	tagImageName	_dandegiName;
 	tagImageName	_polygonName;
@@ -83,8 +99,11 @@ public:
 	inline vector<enemy*> getVEnemyPokemon() { return _vEnemyPokemon; };
 	inline vector<enemy*>::iterator getVIEnemyPokemon() { return _viEnemyPokemon; };	
 
-	inline void setTileMemoryAdressLink(tile* tiles) { _tile = tiles; }
+
+	inline void setTileMemoryAdressLink(vector<tile*> tiles) { _tile = tiles; }
+	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }
 	void enemyMoveManager();
 
+	void enemyBirth(ENEMY enemy, int tileX, int tileY, int level);
 };
 

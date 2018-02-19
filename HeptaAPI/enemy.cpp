@@ -19,9 +19,11 @@ HRESULT enemy::init()
 	return S_OK;
 }
 
-HRESULT enemy::init(tagImageName PokemonName, float x, float y)
+HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level,ELEMENT elelment)
 {
 
+	//구조체에 묶어두었던 포켓몬의 이름을 받아오며 스테이터스 초기화
+	_pokemonStatus.pokemonStatus(PokemonName.pokemonName, level, elelment);
 
 	//4대 이미지 초기화
 	_pokemon.idleImageName = PokemonName.idleImage;
@@ -40,6 +42,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y)
 	_pokemon.x = x;
 	_pokemon.y = y;
 	
+	_pokemon.speed = 2;
 	//디렉션은 기본적으로 아래를 바라보자
 	_pokemon.direction = UP;
 
@@ -97,25 +100,25 @@ void enemy::render()
 		//기본렌더
 	case STATE_IDLE:
 		_pokemon.idleImage->frameRender(getMemDC(), _pokemon.x - _pokemon.idleImage->getFrameHeight() / 2,
-			_pokemon.y - _pokemon.idleImage->getFrameWidth() / 2);
+			_pokemon.y - _pokemon.idleImage->getFrameWidth() / 2,_idleIndex, _pokemon.direction);
 		break;
 
 		//이동렌더
 	case STATE_MOVE:
 		_pokemon.moveImage->frameRender(getMemDC(), _pokemon.x - _pokemon.moveImage->getFrameHeight() / 2,
-			_pokemon.y - _pokemon.moveImage->getFrameWidth() / 2);
+			_pokemon.y - _pokemon.moveImage->getFrameWidth() / 2, _moveIndex, _pokemon.direction);
 		break;
 		
 		//고옹격렌더
 	case STATE_ATTACK:
 		_pokemon.atkImage->frameRender(getMemDC(), _pokemon.x - _pokemon.atkImage->getFrameHeight() / 2,
-			_pokemon.y - _pokemon.atkImage->getFrameWidth() / 2);
+			_pokemon.y - _pokemon.atkImage->getFrameWidth() / 2, _atkIndex, _pokemon.direction);
 		break;
 
 		//타격렌더
 	case STATE_HURT:
 		_pokemon.hurtImage->frameRender(getMemDC(), _pokemon.x - _pokemon.hurtImage->getFrameHeight() / 2,
-			_pokemon.y - _pokemon.hurtImage->getFrameWidth() / 2);
+			_pokemon.y - _pokemon.hurtImage->getFrameWidth() / 2,_hurtIndex, _pokemon.direction);
 		break;
 	}
 
@@ -207,11 +210,6 @@ void enemy::setState()
 		if (_hurtIndex >= _pokemon.hurtImage->getMaxFrameX()) { _hurtReverse = true; }
 		else if (_hurtIndex <= 0) { _hurtReverse = false; }
 
-	_pokemon.idleImage->setFrameX(_idleIndex);
-	_pokemon.moveImage->setFrameX(_moveIndex);
-	_pokemon.atkImage->setFrameX(_atkIndex);
-	_pokemon.hurtImage->setFrameX(_hurtIndex);
-
 }
 
 
@@ -252,10 +250,6 @@ void enemy::enemyAngleSetting()
 	{
 		_pokemon.direction = RIGHTDOWN;
 	}
-	_pokemon.idleImage->setFrameY(_pokemon.direction);
-	_pokemon.moveImage->setFrameY(_pokemon.direction);
-	_pokemon.atkImage->setFrameY(_pokemon.direction);
-	_pokemon.hurtImage->setFrameY(_pokemon.direction);
 }
 
 

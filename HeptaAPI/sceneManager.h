@@ -62,5 +62,6 @@ public:
 	friend DWORD CALLBACK loadingThread(LPVOID prc);
 
 	inline string getLastSceneName() { return _lastSceneName; }
+	inline sceneNode* getCurrentScene() { return _currentScene; }
 };
 

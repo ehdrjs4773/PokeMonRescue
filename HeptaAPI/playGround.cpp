@@ -24,10 +24,14 @@ HRESULT playGround::init()
 	
 	SCENEMANAGER->init("npc");
 
+	SCENEMANAGER->addScene("Opening", new oPeningMovie);
+	
+	SCENEMANAGER->init("Opening");
+	
 	SCENEMANAGER->addScene("Stage1", new StageScene);
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
-	SCENEMANAGER->changeScene("Stage1");
+	SCENEMANAGER->changeScene("Opening");
 	
 
 	return S_OK;
@@ -53,6 +57,9 @@ void playGround::update(void)
 //그리는거.......
 void playGround::render(void)
 {
+	//오프닝 PeekMessage 방지
+	if (SCENEMANAGER->getCurrentScene() == SCENEMANAGER->findScene("Opening")) return;
+
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================== 이 위는 손대지 마시오 =========================
 	SCENEMANAGER->render();

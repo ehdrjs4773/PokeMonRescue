@@ -3,6 +3,7 @@
 #include "Npc.h"
 #include "StageScene.h"
 #include "player.h"
+#include "oPeningMovie.h"
 
 class playGround : public gameNode
 {

@@ -4,164 +4,193 @@
 // ====================
 // ## 플레이어 움직임 ##
 // ====================
-void player::playerMove()
+void player::playerTownMove()
 {
 	switch (_player.state)
 	{
-	case PLAYER_IDLE:
-		switch (_player.direction)
-		{
-			case PLAYER_BOTTOM:
-			break;
-			case PLAYER_LEFT_BOTTOM:
-			break;
-			case PLAYER_LEFT:
-			break;
-			case PLAYER_LEFT_TOP:
-			break;
-			case PLAYER_TOP:
-			break;
-			case PLAYER_RIGHT_TOP:
-			break;
-			case PLAYER_RIGHT:
-			break;
-			case PLAYER_RIGHT_BOTTOM:
-			break;
-			case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
 	case PLAYER_MOVE:
 		switch (_player.direction)
 		{
 			case PLAYER_BOTTOM:
-				_player.y += PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.y += PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				_player.y += PLAYER_TOWN_SPEED;
 			break;
 			case PLAYER_LEFT_BOTTOM:
-				_player.x -= PLAYER_SPEED;
-				_player.y += PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x -= PLAYER_TOWN_SPEED * 2;
+					_player.y += PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				{
+					_player.x -= PLAYER_TOWN_SPEED;
+					_player.y += PLAYER_TOWN_SPEED;
+				}		
 			break;
 			case PLAYER_LEFT:
-				_player.x -= PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x -= PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				_player.x -= PLAYER_TOWN_SPEED;
 			break;
 			case PLAYER_LEFT_TOP:
-				_player.x -= PLAYER_SPEED;
-				_player.y -= PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x -= PLAYER_TOWN_SPEED * 2;
+					_player.y -= PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				{
+					_player.x -= PLAYER_TOWN_SPEED;
+					_player.y -= PLAYER_TOWN_SPEED;
+				}
 			break;
 			case PLAYER_TOP:
-				_player.y -= PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.y -= PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				_player.y -= PLAYER_TOWN_SPEED;
 			break;
 			case PLAYER_RIGHT_TOP:
-				_player.x += PLAYER_SPEED;
-				_player.y -= PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x += PLAYER_TOWN_SPEED * 2;
+					_player.y -= PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				{
+					_player.x += PLAYER_TOWN_SPEED;
+					_player.y -= PLAYER_TOWN_SPEED;
+				}
 			break;
 			case PLAYER_RIGHT:
-				_player.x += PLAYER_SPEED;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x += PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				_player.x += PLAYER_TOWN_SPEED;
 			break;
 			case PLAYER_RIGHT_BOTTOM:
-				_player.x += PLAYER_SPEED;
-				_player.y += PLAYER_SPEED;
-			break;
-			case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
-	case PLAYER_ATTACK:
-		switch (_player.direction)
-		{
-			case PLAYER_BOTTOM:
-			break;
-			case PLAYER_LEFT_BOTTOM:
-			break;
-			case PLAYER_LEFT:
-			break;
-			case PLAYER_LEFT_TOP:
-			break;
-			case PLAYER_TOP:
-			break;
-			case PLAYER_RIGHT_TOP:
-			break;
-			case PLAYER_RIGHT:
-			break;
-			case PLAYER_RIGHT_BOTTOM:
-			break;
-			case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
-	case PLAYER_SPECIAL_ATTACK_1:
-		switch (_player.direction)
-		{
-			case PLAYER_BOTTOM:
-			break;
-			case PLAYER_LEFT_BOTTOM:
-			break;
-			case PLAYER_LEFT:
-			break;
-			case PLAYER_LEFT_TOP:
-			break;
-			case PLAYER_TOP:
-			break;
-			case PLAYER_RIGHT_TOP:
-			break;
-			case PLAYER_RIGHT:
-			break;
-			case PLAYER_RIGHT_BOTTOM:
-			break;
-			case PLAYER_DIRECTION_END:
-			break;
+				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x += PLAYER_TOWN_SPEED * 2;
+					_player.y += PLAYER_TOWN_SPEED * 2;
+				}
+				else
+				{
+					_player.x += PLAYER_TOWN_SPEED;
+					_player.y += PLAYER_TOWN_SPEED;
+				}
 
-		}
-		break;
-	case PLAYER_SPECIAL_ATTACK_2:
-		break;
-	case PLAYER_HURT:
-		switch (_player.direction)
-		{
-			case PLAYER_BOTTOM:
-			break;
-			case PLAYER_LEFT_BOTTOM:
-			break;
-			case PLAYER_LEFT:
-			break;
-			case PLAYER_LEFT_TOP:
-			break;
-			case PLAYER_TOP:
-			break;
-			case PLAYER_RIGHT_TOP:
-			break;
-			case PLAYER_RIGHT:
-			break;
-			case PLAYER_RIGHT_BOTTOM:
 			break;
 			case PLAYER_DIRECTION_END:
 			break;
 		}
 		break;
-	case PLAYER_DIE:
+	}
+}
+
+void player::playerDgMove()
+{
+	switch (_player.state)
+	{
+	case PLAYER_MOVE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
+		case PLAYER_BOTTOM:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.y += PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+			_player.y += PLAYER_DUNGEON_SPEED;
+				
 			break;
-			case PLAYER_LEFT_BOTTOM:
+		case PLAYER_LEFT_BOTTOM:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x -= PLAYER_DUNGEON_SPEED * 4;
+				_player.y += PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+			{
+				_player.x -= PLAYER_DUNGEON_SPEED;
+				_player.y += PLAYER_DUNGEON_SPEED;
+			}
 			break;
-			case PLAYER_LEFT:
+		case PLAYER_LEFT:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x -= PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+				_player.x -= PLAYER_DUNGEON_SPEED;
 			break;
-			case PLAYER_LEFT_TOP:
+		case PLAYER_LEFT_TOP:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x -= PLAYER_DUNGEON_SPEED * 4;
+				_player.y -= PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+			{
+				_player.x -= PLAYER_DUNGEON_SPEED;
+				_player.y -= PLAYER_DUNGEON_SPEED;
+			}
 			break;
-			case PLAYER_TOP:
+		case PLAYER_TOP:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.y -= PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+				_player.y -= PLAYER_DUNGEON_SPEED;
 			break;
-			case PLAYER_RIGHT_TOP:
+		case PLAYER_RIGHT_TOP:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x += PLAYER_DUNGEON_SPEED * 4;
+				_player.y -= PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+			{
+				_player.x += PLAYER_DUNGEON_SPEED;
+				_player.y -= PLAYER_DUNGEON_SPEED;
+			}
 			break;
-			case PLAYER_RIGHT:
+		case PLAYER_RIGHT:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x += PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+				_player.x += PLAYER_DUNGEON_SPEED;
 			break;
-			case PLAYER_RIGHT_BOTTOM:
+		case PLAYER_RIGHT_BOTTOM:
+			if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+			{
+				_player.x += PLAYER_DUNGEON_SPEED * 4;
+				_player.y += PLAYER_DUNGEON_SPEED * 4;
+			}
+			else
+			{
+				_player.x += PLAYER_DUNGEON_SPEED;
+				_player.y += PLAYER_DUNGEON_SPEED;
+			}
+
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 		}
-		break;
-	case PLAYER_STATE_END:
 		break;
 	}
 }

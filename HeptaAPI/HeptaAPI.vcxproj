@@ -166,8 +166,10 @@
     <ClCompile Include="player+draw.cpp" />
     <ClCompile Include="player+frameUpdate.cpp" />
     <ClCompile Include="player+move.cpp" />
+    <ClCompile Include="player+tileCheak.cpp" />
     <ClCompile Include="player+valueInit.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerPartner.cpp" />
     <ClCompile Include="playGround+imageInitialization.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokemon.cpp" />
@@ -218,6 +220,7 @@
     <ClInclude Include="mankey.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="playerPartner.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="polygon.h" />

@@ -26,12 +26,12 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("Opening", new oPeningMovie);
 	
-	SCENEMANAGER->init("Opening");
+	//SCENEMANAGER->init("Opening");
 	
 	SCENEMANAGER->addScene("Stage1", new StageScene);
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
-	SCENEMANAGER->changeScene("Opening");
+	SCENEMANAGER->changeScene("Stage1");
 	
 
 	return S_OK;

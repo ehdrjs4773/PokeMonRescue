@@ -1,7 +1,10 @@
 #pragma once
 #include "gameNode.h"
+#include "player.h"
 
 
+class player;
+class Stage;
 
 enum type				// 스킬 타입 지정
 {
@@ -22,7 +25,8 @@ enum type				// 스킬 타입 지정
 	type_Rock,			// 바위 타입
 	type_bug,			// 벌레 타입
 	type_Sprattle,		// 격투 타입
-	type_Poison			// 독 타입
+	type_Poison,			// 독 타입
+	type_End
 };
 
 
@@ -36,7 +40,8 @@ struct skillInfo
 	float y;				// 스킬 y 좌표
 	int count;				// 스킬 카운트
 	int currentFramex;		// 스킬 프레임 
-
+	type type;				// 스킬 타입
+	float damege;			// 스킬 대미지
 };
 
 
@@ -45,13 +50,15 @@ struct skillInfo
 class Skill : public gameNode
 {
 private :
-
+	
+	player* _player;
+	Stage* _stage;
 	skillInfo _skill;
 	
 
 public:
 	
-	virtual HRESULT init(char* name, int x, int y);
+	virtual HRESULT init(char* name, int x, int y, type type);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -59,5 +66,10 @@ public:
 
 	Skill();
 	~Skill();
+
+	void setStageMemoryAdressLink(Stage* stages) { _stage = stages; }
+	void setPlayerMemoryAdressLink(player* plays) { _player = plays; }
+
+
 };
 

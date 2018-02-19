@@ -178,6 +178,7 @@
     <ClCompile Include="purin.cpp" />
     <ClCompile Include="rukario.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="shopchildren.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="rukario.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="shopchildren.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="soundManager.h" />

@@ -19,6 +19,9 @@ HRESULT playGround::init()
 	this->imageInitaialization();
 
 	_player = new player;
+	_pokemon = new pokemon;
+
+	_player->setPokemonMemAdressLink(_pokemon);
 
 	SCENEMANAGER->addScene("npc", new Npc);
 	
@@ -29,6 +32,7 @@ HRESULT playGround::init()
 	//SCENEMANAGER->init("Opening");
 	
 	SCENEMANAGER->addScene("Stage1", new StageScene);
+	SCENEMANAGER->addChildScene("npc", "shopchiled", new shopchildren);
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
 	SCENEMANAGER->changeScene("Stage1");

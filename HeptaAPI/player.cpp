@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
 #include "Stage.h"
+#include "pokemon.h"
 
 player::player()
 {
@@ -29,6 +30,11 @@ HRESULT player::init(string charName, float startX, float startY)
 	tempNameSpecialAttack = charName + "_specialAttack";
 	tempNameHurt = charName + "_hurt";
 
+	_pokemon->pokemonStatus(charName, 1, ELEMENT_FIRE);
+	//플레이어 기본정보?
+	_player.money = 0;
+	_player.currentHp = _pokemon->getCurrentHP();
+
 	//방향 및 상태
 	_player.direction = PLAYER_BOTTOM;
 	_player.state = PLAYER_IDLE;
@@ -47,9 +53,6 @@ HRESULT player::init(string charName, float startX, float startY)
 	//이미지 그려주는 렉트
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
-
-	//_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
-	//	_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
 
 	//실제 사용될 렉트
 	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
@@ -114,9 +117,9 @@ void player::render()
 	sprintf_s(str8, " _player.idy 값 : %d ", _player.idy);
 	TextOut(hdc, x + 200, y + 225, str8, strlen(str8));
 
-	//char str9[128];
-	//sprintf_s(str9, " _isMove 값 : %d ", _isMove);
-	//TextOut(hdc, x + 200, y + 250, str9, strlen(str9));
+	char str9[128];
+	sprintf_s(str9, " _player.currentHp 값 : %d ", _player.currentHp);
+	TextOut(hdc, x + 200, y + 250, str9, strlen(str9));
 
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 	draw();

@@ -4,11 +4,14 @@
 #include "StageScene.h"
 #include "player.h"
 #include "oPeningMovie.h"
+#include "Pokemon.h"
+#include "shopchildren.h"
 
 class playGround : public gameNode
 {
 private:
 	player* _player;
+	pokemon* _pokemon;
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

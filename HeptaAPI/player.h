@@ -51,15 +51,25 @@ struct tagPlayer
 	float angle;					//앵글
 	int idx, idy;					//몇번째 x, y타일에 있는지 인덱스 
 	int tileIndex;					//몇번째 타일에 있는지 인덱스
+	int money;						//돈
+	int currentHp, maxHp;			//현재 체력 , 맥스 체력
+	int atk;						//공격력
+	int def;						//방어력
+	int specialAtk;					//특수공격
+	int specialDef;					//특수방어력
 };
 
 class Stage;
+class pokemon;
 class item;
 
 class player : public gameNode
 {
 private: // ## 맵 정보 ##
 	Stage* _stage;
+
+private: // ## 포켓몬 정보 ##
+	pokemon* _pokemon;
 
 private:
 	tagPlayer _player;		//플레이어
@@ -210,6 +220,9 @@ public:
 	inline int getPlayerTileIndexY() { return _player.idy; }						//인덱스 Y
 
 	//설정자
-	void setStageMemAdressLink(Stage* stage) { _stage = stage; }
+	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
+	void setPokemonMemAdressLink(pokemon* pokemon) { _pokemon = pokemon; }			//포케몬
+
+
 };
 

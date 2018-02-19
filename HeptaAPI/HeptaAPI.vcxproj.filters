@@ -237,6 +237,9 @@
     <ClInclude Include="polygon.h">
       <Filter>playGround\이준우\적객체모집</Filter>
     </ClInclude>
+    <ClInclude Include="shopchildren.h">
+      <Filter>playGround\최동건</Filter>
+    </ClInclude>
     <ClInclude Include="playerPartner.h">
       <Filter>playGround\이정민</Filter>
     </ClInclude>
@@ -400,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="polygon.cpp">
       <Filter>playGround\이준우\적객체모집</Filter>
+    </ClCompile>
+    <ClCompile Include="shopchildren.cpp">
+      <Filter>playGround\최동건</Filter>
     </ClCompile>
     <ClCompile Include="player+tileCheak.cpp">
       <Filter>playGround\이정민</Filter>

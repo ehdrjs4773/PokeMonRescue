@@ -33,4 +33,13 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 
+	
+																							
+	// 상점 이미지 초기화
+
+	IMAGEMANAGER->addImage("shopMenu", ".\\bmps\\npc\\shopmenu.bmp", 175, 194, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("대화창", ".\\bmps\\npc\\대화창.bmp", 450, 98, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("상점씬", ".\\bmps\\npc\\상점씬.bmp", 450, 326, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("point", ".\\bmps\\npc\\포인트.bmp", 14, 21, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("shop", ".\\bmps\\npc\\shop.bmp", 156, 98, false, true, MAGENTA);
 }

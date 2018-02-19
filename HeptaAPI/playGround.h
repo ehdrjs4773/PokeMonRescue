@@ -2,11 +2,12 @@
 #include "gameNode.h"
 #include "Npc.h"
 #include "StageScene.h"
+#include "player.h"
 
 class playGround : public gameNode
 {
 private:
-
+	player* _player;
 
 public:
 	virtual HRESULT init(void);		//초기화 함수

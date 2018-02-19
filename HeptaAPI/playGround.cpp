@@ -18,16 +18,17 @@ HRESULT playGround::init()
 
 	this->imageInitaialization();
 
+	_player = new player;
 
 	SCENEMANAGER->addScene("npc", new Npc);
-
+	
 	SCENEMANAGER->init("npc");
 
 	SCENEMANAGER->addScene("Stage1", new StageScene);
-	
+	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
-
 	SCENEMANAGER->changeScene("Stage1");
+	
 
 	return S_OK;
 }
@@ -46,7 +47,6 @@ void playGround::update(void)
 
 	SCENEMANAGER->update();
 
-
 	
 }
 
@@ -56,6 +56,8 @@ void playGround::render(void)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//================== 이 위는 손대지 마시오 =========================
 	SCENEMANAGER->render();
+	CAMERAMANAGER->render(getMemDC());
+	TIMEMANAGER->render(getMemDC());
 
 	//================== 이 아래는 손대지 마시오 ========================
 	this->getBackBuffer()->render(getHDC(), 0, 0);//hdc영역에 그려준다 

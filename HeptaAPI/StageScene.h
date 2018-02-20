@@ -12,10 +12,12 @@ private:
 	enemyManager* _em;
 
 private:
-	int			  _mapNum;
-	int			  _floor;
-
-	POINT _playerpt;
+	int				_mapNum;
+	int				_alphaMap;
+	int				_floor;
+	int				DungoenNum;
+	bool			UpId;
+	bool			DownId;
 
 public:
 	StageScene();

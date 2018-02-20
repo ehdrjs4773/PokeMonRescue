@@ -17,23 +17,15 @@ StageScene::~StageScene()
 
 HRESULT StageScene::init()
 {
-	
-	IMAGEMANAGER->addFrameImage("tarrain0-0", ".//bmps//map//tarrain0//0.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain0-1", ".//bmps//map//tarrain0//1.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain0-2", ".//bmps//map//tarrain0//2.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain1-0", ".//bmps//map//tarrain1//0.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain1-1", ".//bmps//map//tarrain1//1.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain1-2", ".//bmps//map//tarrain1//2.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain2-0", ".//bmps//map//tarrain2//0.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain2-1", ".//bmps//map//tarrain2//1.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("tarrain2-2", ".//bmps//map//tarrain2//2.bmp", 384, 384, 16, 16, false, true, RGB(255, 0, 255));
-	
-	IMAGEMANAGER->addFrameImage("minimap", ".//bmps//map//wallmini.bmp", 96, 96, 16, 16, true, true, RGB(255, 0, 255));
-
-	IMAGEMANAGER->addFrameImage("objectlist", ".//bmps//map//items.bmp", 240, 24, 10, 1, false, true, RGB(255, 0, 255));
-
+	_alphaMap = 0;
+	DungoenNum = 0;
+	UpId = true;
+	DownId = false;
+	_floor = 0;
+	char tempfloor[256];
+	sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
 	_nowStage = new Stage;
-	_nowStage->init("0-0");
+	_nowStage->init(tempfloor);
 
 	_em = new enemyManager;
 
@@ -60,8 +52,81 @@ void StageScene::release()
 
 void StageScene::update() 
 {
+	if (_alphaMap == 255)
+	{
+		_player->dungeonMove();
+		if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartDownid().x &&
+			_player->getPlayerTileIndexY() == _nowStage->getPlayerStartDownid().y)
+		{
+			if (DownId);
+			else
+			{
+				_alphaMap = 0;
+				UpId = true;
+				DownId = true;
+				++_floor;
+				if (_floor > 2)
+				{
+					_floor = 0;
+					++DungoenNum;
+				}
+				char tempfloor[256];
+				sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
+				_nowStage->release();
+				_nowStage->init(tempfloor);
+
+				CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
+
+				_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
+			}
+		}
+		else
+		{
+			DownId = false;
+		}
+		if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartUpid().x &&
+			_player->getPlayerTileIndexY() == _nowStage->getPlayerStartUpid().y)
+		{
+			if (UpId);
+			else
+			{
+				if (_floor || DungoenNum)
+				{
+					_alphaMap = 0;
+					UpId = true;
+					DownId = true;
+					--_floor;
+					if (_floor < 0)
+					{
+						_floor = 2;
+						--DungoenNum;
+					}
+					char tempfloor[256];
+					sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
+					_nowStage->release();
+					_nowStage->init(tempfloor);
+
+					CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
+
+					_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
+				}
+				else
+				{
+
+				}
+			}
+		}
+		else
+		{
+			UpId = false;
+		}
+	}
+	else
+	{
+		_alphaMap += 5;
+		if (_alphaMap > 255)_alphaMap = 255;
+	}
 	_player->update();
-	_player->dungeonMove();
 	_em->update();
 	_nowStage->update(_player->getX(), _player->getY());
 }
@@ -72,4 +137,5 @@ void StageScene::render()
 	_em->render();
 
 	_player->render();
+	IMAGEMANAGER->findImage("alphamap")->alphaRender(CAMERAMANAGER->getMemDC(), CAMERAMANAGER->getX(), CAMERAMANAGER->getY(), 255 - _alphaMap);
 }

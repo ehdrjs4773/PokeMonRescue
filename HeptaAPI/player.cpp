@@ -32,7 +32,7 @@ HRESULT player::init(string charName, float startX, float startY , bool isTown)
 
 	_isTown = isTown;
 
-	_pokemon->pokemonStatus(charName, 1, ELEMENT_FIRE);
+	_pokemon->pokemonStatus(charName, 1);
 	//플레이어 기본정보?
 	_player.money = 0;
 	_player.currentHp = _pokemon->getCurrentHP();

@@ -149,14 +149,14 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_chicorita = new chicorita;
 		_chicorita->setStageMemoryAdressLink(_stage);
 		_chicorita->init(_chicoName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 5, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 5);
 		_vEnemyPokemon.push_back(_chicorita);
 		break;
 	case ENEMY_DANDEGI:
 		_dandegi = new dandegi;
 		_dandegi->setStageMemoryAdressLink(_stage);
 		_dandegi->init(_dandegiName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 9, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 9);
 		_vEnemyPokemon.push_back(_dandegi);
 		break;
 	case ENEMY_POLYGON:
@@ -164,7 +164,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_polygon->setStageMemoryAdressLink(_stage);
 
 		_polygon->init(_polygonName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_polygon);
 		break;
 	case ENEMY_PURIN:
@@ -172,7 +172,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_purin->setStageMemoryAdressLink(_stage);
 
 		_purin->init(_purinName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_purin);
 		break;
 	case ENEMY_GRAENA:
@@ -180,7 +180,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_graena->setStageMemoryAdressLink(_stage);
 
 		_graena->init(_graenaName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_graena);
 		break;
 	case ENEMY_RUKARIO:
@@ -188,7 +188,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_rukario->setStageMemoryAdressLink(_stage);
 
 		_rukario->init(_rukarioName, _tile[tileX]->getCenterX()
-		, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+		, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_rukario);
 		break;
 	case ENEMY_MANKEY:
@@ -196,7 +196,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_mankey->setStageMemoryAdressLink(_stage);
 
 		_mankey->init(_mankeyName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_mankey);
 		break;
 	case ENEMY_TANGURI:
@@ -204,7 +204,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_tanguri->setStageMemoryAdressLink(_stage);
 
 		_tanguri->init(_tanguriName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_tanguri);
 		break;
 	case ENEMY_ELECTIVIRE:
@@ -212,7 +212,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 		_electivire->setStageMemoryAdressLink(_stage);
 
 		_electivire->init(_electivireName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level, ELEMENT_WATER);
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_electivire);
 		break;
 	}

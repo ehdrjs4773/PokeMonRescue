@@ -20,11 +20,11 @@ HRESULT enemy::init()
 	return S_OK;
 }
 
-HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level,ELEMENT elelment)
+HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 {
 
 	//구조체에 묶어두었던 포켓몬의 이름을 받아오며 스테이터스 초기화
-	pokemonStatus(PokemonName.pokemonName, level, elelment);
+	pokemonStatus(PokemonName.pokemonName, level);
 
 	//4대 이미지 초기화
 	_pokemon.idleImageName = PokemonName.idleImage;

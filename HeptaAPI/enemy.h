@@ -106,7 +106,7 @@ public:
 	~enemy();
 
 	HRESULT init();
-	HRESULT init(tagImageName PokemonName, float x, float y, int level, ELEMENT elelment);
+	HRESULT init(tagImageName PokemonName, float x, float y, int level);
 	void release();
 	void update();
 	void render();

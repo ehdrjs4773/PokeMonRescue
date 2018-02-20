@@ -97,7 +97,7 @@ private:
 	//이건 부모클래스에서 충분히 할 수 있을듯 싶어서 이렇게!!!
 	pokemon _pokemonStatus;
 	tagTempPokemon _pokemon;
-	
+
 	Stage* _stage;
 	player* _pl;
 
@@ -138,5 +138,16 @@ public:
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
 	inline int getDirection() { return _pokemon.direction; }
+	inline void damageToHP(int damage) { _currentHP-=damage; }
+
+	bool getIsAttack() 
+	{
+		if (_pokemon.state == STATE_ATTACK)
+			return true;
+		else
+			return false;
+	}
+
+
 };
 

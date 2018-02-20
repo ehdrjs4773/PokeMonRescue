@@ -19,11 +19,7 @@ HRESULT playGround::init()
 	this->imageInitaialization();
 
 	_player = new player;
-	_pokemon = new pokemon;
-
-	_player->setPokemonMemAdressLink(_pokemon);
 	
-
 	SCENEMANAGER->addScene("npc", new Npc);
 
 //	SCENEMANAGER->addScene("Opening", new oPeningMovie);

@@ -135,11 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.cpp" />
-    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+draw.cpp" />
-    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+frameUpdate.cpp" />
-    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+move.cpp" />
-    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+valueInit.cpp" />
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="aStar.cpp" />
@@ -168,6 +163,7 @@
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="mankey.cpp" />
     <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="oPeningMovie.cpp" />
     <ClCompile Include="player+correction.cpp" />
     <ClCompile Include="player+draw.cpp" />
     <ClCompile Include="player+frameUpdate.cpp" />
@@ -175,6 +171,10 @@
     <ClCompile Include="player+tileCheak.cpp" />
     <ClCompile Include="player+valueInit.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerPartner+draw.cpp" />
+    <ClCompile Include="playerPartner+frameUpdate.cpp" />
+    <ClCompile Include="playerPartner+move.cpp" />
+    <ClCompile Include="playerPartner+valueInit.cpp" />
     <ClCompile Include="playerPartner.cpp" />
     <ClCompile Include="playGround+imageInitialization.cpp" />
     <ClCompile Include="playGround.cpp" />
@@ -200,7 +200,6 @@
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.h" />
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="aStar.h" />
@@ -229,6 +228,7 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="mankey.h" />
     <ClInclude Include="Npc.h" />
+    <ClInclude Include="oPeningMovie.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerPartner.h" />
     <ClInclude Include="playGround.h" />

@@ -83,6 +83,7 @@ private:
 private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
 	bool _onceMove;		//던전에서는 한번만 움직이게
+	bool _isTown;		//마을이니?
 	
 	// 던전이동시 필요한 불값
 	// 움직일 수 있니? ( 앞에 벽이 있니? )
@@ -191,8 +192,8 @@ public:
 	~player();
 
 	virtual HRESULT init();
-	//키값 , 시작점 X, Y;
-	virtual HRESULT init(string charName, float startX , float startY);		//프레임렌더 짱짱맨
+	//키값 , 시작점 X, Y , 마을이면 true , 아니면 false
+	virtual HRESULT init(string charName, float startX , float startY , bool isTown);		//프레임렌더 짱짱맨
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -215,6 +216,11 @@ public:
 	inline RECT getRect() { return _player.rc; }									//렉트
 	inline float getX() { return _player.x; }										//플레이어 센터 X
 	inline float getY() { return _player.y; }										//플레이어 센터 Y
+	inline int getMoney() { return _player.money; }
+	inline int getAttack() { return _player.atk; }
+	inline int getSpecial() { return _player.specialAtk; }
+	inline int getCruuentHp() { return _player.currentHp; }
+
 
 	inline int getPlayerTileIndexX() { return _player.idx; }						//인덱스 X
 	inline int getPlayerTileIndexY() { return _player.idy; }						//인덱스 Y
@@ -222,7 +228,8 @@ public:
 	//설정자
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
 	void setPokemonMemAdressLink(pokemon* pokemon) { _pokemon = pokemon; }			//포케몬
-
+	void setCurrentHp(int set) { _player.currentHp = set; }
+	void setMoney(int money) { _player.money = money; }
 
 };
 

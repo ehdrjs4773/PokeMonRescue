@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "shopchildren.h"
+#include "player.h"
 
 
 
@@ -65,7 +66,7 @@ void shopchildren::update()
 	keyMove();
 	if (!_shopbuy.buySelect)
 	{
-		if (KEYMANAGER->isOnceKeyDown('X'))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
 			switch (_shopinfo)
 			{
@@ -93,7 +94,7 @@ void shopchildren::update()
 
 	if (_shopbuy.buySelect)
 	{
-		if(KEYMANAGER->isOnceKeyDown('X'))
+		if(KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
 			switch (_itembuy)
 			{
@@ -114,7 +115,7 @@ void shopchildren::update()
 
 	if (_itembuy == item_potion)
 	{
-		if (KEYMANAGER->isOnceKeyDown('X'))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
 			switch (_sele)
 			{
@@ -128,7 +129,7 @@ void shopchildren::update()
 		}
 	}
 
-	if (KEYMANAGER->isOnceKeyDown('C'))
+	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
 		if(!_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet)
 		{
@@ -205,17 +206,36 @@ void shopchildren::render()
 	case shop_buy :																			// 산다 선택했을때
 		_shopbuy.buyimage->render(dc, _shopbuy.x, _shopbuy.y);
 		
-		SetBkMode(dc, TRANSPARENT); //글씨배경투명화									// 목록 이름
-		SetTextColor(dc, RGB(255, 255, 255));
+		SetBkMode(dc, TRANSPARENT); //글씨배경투명화	// 목록 이름
+		
+		if (_player->getMoney() < 50)
+		{
+			SetTextColor(dc, RGB(255, 0, 0));
+		}
+		if (_player->getMoney() > 50)
+		{
+			SetTextColor(dc, RGB(255, 255, 255));
+		}
+
 		char temp[128];	
 		sprintf(temp, "회복약");
 		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 50, temp, strlen(temp));
+		char price[128];
+		sprintf(price, "50");
+		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 50, price, strlen(price));
 		char four[128];
 		sprintf(four, "PP포션");
 		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 100, four, strlen(four));
+		char price1[128];
+		sprintf(price1, "100");
+		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 100, price1, strlen(price1));
 		char tall[128];
 		sprintf(tall, "폭렬열매");
 		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 150, tall, strlen(tall));
+		char price2[128];
+		sprintf(price2, "150");
+		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 150, price2, strlen(price2));
+
 
 		switch (_itembuy)																		//아이템 선택 햇을때!!
 		{
@@ -246,12 +266,12 @@ void shopchildren::render()
 
 				switch (_sele)
 				{
-				case buy:
-					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 30);
-					break;
-				case no:
-					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 60);
-					break;
+					case buy:
+						_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 30);
+						break;
+					case no:
+						_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 60);
+						break;
 				}
 			}
 			break;
@@ -263,12 +283,12 @@ void shopchildren::render()
 
 				switch (_sele)
 				{
-				case buy:
-					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 30);
-					break;
-				case no:
-					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 60);
-					break;
+					case buy:
+						_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 30);
+						break;
+					case no:
+						_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 60);
+						break;
 				}
 			}
 			break;

@@ -2,7 +2,7 @@
 #include "gameNode.h"
 #include "Item.h"
 
-class player;
+
 
 
 struct shop
@@ -76,6 +76,9 @@ struct itemSelcet
 	bool ppPotionSelect;
 	bool skillSelcet;
 };
+
+class player;
+
 
 
 class shopchildren : public gameNode

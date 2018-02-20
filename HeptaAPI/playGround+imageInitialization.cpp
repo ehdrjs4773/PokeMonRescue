@@ -42,4 +42,31 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addImage("상점씬", ".\\bmps\\npc\\상점씬.bmp", 450, 326, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("point", ".\\bmps\\npc\\포인트.bmp", 14, 21, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("shop", ".\\bmps\\npc\\shop.bmp", 156, 98, false, true, MAGENTA);
+
+
+	//	마을 이미지 초기화
+	IMAGEMANAGER->addImage("town", ".\\bmps\\map\\townmap.bmp", 480, 360, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("townMagenta", ".\\bmps\\map\\townmapcrash.bmp", 480, 360, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("saveTown", ".\\bmps\\map\\savemap.bmp", 360, 281, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("saveTownMagenta", ".\\bmps\\map\\savemapcrash.bmp", 360, 281, false, true, MAGENTA);
+
+
+
+	// 던전용 이미지 초기화
+
+	IMAGEMANAGER->addFrameImage("tarrain0-0", ".//bmps//map//tarrain0//0.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain0-1", ".//bmps//map//tarrain0//1.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain0-2", ".//bmps//map//tarrain0//2.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain1-0", ".//bmps//map//tarrain1//0.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain1-1", ".//bmps//map//tarrain1//1.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain1-2", ".//bmps//map//tarrain1//2.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain2-0", ".//bmps//map//tarrain2//0.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain2-1", ".//bmps//map//tarrain2//1.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+	IMAGEMANAGER->addFrameImage("tarrain2-2", ".//bmps//map//tarrain2//2.bmp", 384, 384, 16, 16, false, true, MAGENTA);
+
+	IMAGEMANAGER->addFrameImage("minimap", ".//bmps//map//wallmini.bmp", 96, 96, 16, 16, true, true, MAGENTA);
+
+	IMAGEMANAGER->addFrameImage("objectlist", ".//bmps//map//items.bmp", 240, 24, 10, 1, false, true, MAGENTA);
+
+
 }

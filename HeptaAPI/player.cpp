@@ -19,7 +19,7 @@ HRESULT player::init()
 	return S_OK;
 }
 
-HRESULT player::init(string charName, float startX, float startY)
+HRESULT player::init(string charName, float startX, float startY , bool isTown)
 {
 	//변수 초기화 ( player+valueInit.cpp에 있음 )
 	valueInit();
@@ -29,6 +29,8 @@ HRESULT player::init(string charName, float startX, float startY)
 	tempNameAttack = charName + "_attack";
 	tempNameSpecialAttack = charName + "_specialAttack";
 	tempNameHurt = charName + "_hurt";
+
+	_isTown = isTown;
 
 	_pokemon->pokemonStatus(charName, 1, ELEMENT_FIRE);
 	//플레이어 기본정보?
@@ -65,11 +67,16 @@ void player::release()
 }
 void player::update() 
 {
-	//마을에서 움직임
-	//townMove();
-
-	//던전에서 움직임
-	dungeonMove();
+	if (_isTown)
+	{
+		//마을에서 움직임
+		townMove();
+	}
+	if (!_isTown)
+	{
+		//던전에서 움직임
+		dungeonMove();
+	}
 
 	//몇번째 타일에 있는지 인덱스 x,y
 	_player.idx = _player.x / 24;
@@ -82,7 +89,10 @@ void player::update()
 	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
 		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
 
-	CAMERAMANAGER->cameraMove(_player.x, _player.y);
+	if(!_isTown)
+	{
+		CAMERAMANAGER->cameraMove(_player.x, _player.y);
+	}
 }
 void player::render() 
 {

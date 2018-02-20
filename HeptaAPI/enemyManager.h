@@ -81,6 +81,7 @@ private:
 	int _tileCheckY;
 	
 
+	int _r;
 	bool _canAtk;
 
 public:

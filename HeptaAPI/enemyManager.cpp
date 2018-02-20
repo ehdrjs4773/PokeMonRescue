@@ -29,10 +29,6 @@ HRESULT enemyManager::init()
 	enemyBirth(ENEMY_GRAENA, 4, 2, 99);
 	enemyBirth(ENEMY_MANKEY, 4, 3, 99);
 	enemyBirth(ENEMY_TANGURI, 4, 4, 99);
-	
-
-	
-	
 	return S_OK;
 }
 void enemyManager::release()
@@ -47,7 +43,6 @@ void enemyManager::update()
 	}
 	_tileCheckX = _pl->getPlayerTileIndexX();
 	_tileCheckY = _pl->getPlayerTileIndexY();
-	
 	enemyTrunManager();
 	enemyDead();
 

@@ -125,6 +125,7 @@ public:
 	void enemyAngleSetting();
 	void enemyTileMove();
 	void enemyMoveSign();
+	void enemyASTARStart();
 
 
 

@@ -5,6 +5,7 @@
 
 
 enemy::enemy()
+	:_ast(NULL)
 {
 }
 
@@ -80,43 +81,9 @@ void enemy::release()
 void enemy::update() 
 {
 
-	//bool isOpen = false;
-	//tile start;
-	//tile end;
-	//
-	//for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
-	//{
-	//	RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
-	//		_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
-	//	if (PtInRect(&temp, PointMake(_pokemon.x, _pokemon.y)))
-	//	{
-	//		start = *_stage->getTileAdress()[i];
-	//		break;
-	//	}
-	//}
-	//
-	//for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
-	//{
-	//	RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
-	//		_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
-	//	if (PtInRect(&temp, PointMake(_ptMouse.x, _ptMouse.y)))
-	//	{
-	//		if (!_stage->getTileAdress()[i]->getIsOpen()) continue;
-	//		else if (_stage->getTileAdress()[i]->getIsOpen())
-	//		{
-	//			isOpen = true;
-	//			end = *_stage->getTileAdress()[i];
-	//		}
-	//		break;
-	//	}
-	//}
-	//
-	//if (!isOpen)
-	//{
-	//	return;
-	//}
-	//_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
-	//_vCloseList = _ast->pathFinder(start);
+	
+
+	
 
 	
 	//현재 상태를 받아서 한다.
@@ -136,6 +103,7 @@ void enemy::update()
 	}
 	if(_pokemon.state == STATE_IDLE)
 		enemyAngleSetting();
+	
 }
 
 void enemy::render() 
@@ -178,8 +146,10 @@ void enemy::setState()
 {
 	_count++;
 
-	if (_count % 20 == 0)
+	if (_count % 10 == 0)
 	{
+
+
 		//리버스가 만약 트루면 거꾸로 재생을 하고
 		//리버스가 만약 폴스면 기본으로 프레임을 재생한다.
 		//기본 이동 공격 아파하는것 등등은 
@@ -261,12 +231,12 @@ void enemy::setState()
 
 void enemy::enemyAngleSetting()
 {
-	//if (_vCloseList.size() <= 0)
-	//	return;
+	if (_vCloseList.size() <= 0)
+		return;
 
-	//RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
-	float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
-	//float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
+	RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
+	//float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
+	float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
 
 	
 	if(target <= PI8 && target >=0 || target >= PI8*15 && target <= PI8 * 16)
@@ -304,7 +274,39 @@ void enemy::enemyAngleSetting()
 }
 
 
+void enemy::enemyASTARStart()
+{
+	tile start;
+	tile end;
 
+	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	{
+		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+		if (PtInRect(&temp, PointMake(_pokemon.x, _pokemon.y)))
+		{
+			start = *_stage->getTileAdress()[i];
+			break;
+		}
+	}
+
+	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	{
+		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+		if (PtInRect(&temp, PointMake(_pl->getX(), _pl->getY())))
+		{
+			if (!_stage->getTileAdress()[i]->getIsOpen()) return;
+			end = (*_stage->getTileAdress()[i]);
+			break;
+		}
+	}
+
+	if (_ast == NULL)
+		_ast = new aStar;
+	_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
+	_vCloseList = _ast->pathFinder(start);
+}
 
 
 void enemy::enemyTileMove()
@@ -394,4 +396,6 @@ void enemy::enemyHurtMotion()
 void enemy::enemyMoveSign()
 {
 	_isMove = true;
+	if (getDistance(_pl->getX(), _pl->getY(), _pokemon.x, _pokemon.y) <= 240)
+		enemyASTARStart();
 }

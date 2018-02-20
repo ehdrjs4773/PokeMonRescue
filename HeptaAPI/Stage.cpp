@@ -106,6 +106,7 @@ void Stage::load(string name)
 		{
 			_respontiles.push_back(temp);
 		}
+		if (_tiles[i]->getIsGo())_tiles[i]->setIsOpen(true);
 	}
 
 	CloseHandle(file);

@@ -8,34 +8,10 @@ void player::correction()
 {
 	switch (_player.state)
 	{
-	case PLAYER_IDLE:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
 	case PLAYER_MOVE:
 		switch (_player.direction)
 		{
-		case PLAYER_BOTTOM:	
+		case PLAYER_BOTTOM:
 			if (KEYMANAGER->isStayKeyDown(VK_UP))
 			{
 				_player.direction = PLAYER_BOTTOM;
@@ -91,7 +67,7 @@ void player::correction()
 				return;
 			}
 			break;
-		case PLAYER_TOP:	
+		case PLAYER_TOP:
 			if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 			{
 				_player.direction = PLAYER_TOP;
@@ -119,7 +95,7 @@ void player::correction()
 				return;
 			}
 			break;
-		case PLAYER_RIGHT:	
+		case PLAYER_RIGHT:
 			if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 			{
 				_player.direction = PLAYER_RIGHT;
@@ -150,103 +126,6 @@ void player::correction()
 		case PLAYER_DIRECTION_END:
 			break;
 		}
-		break;
-	case PLAYER_ATTACK:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
-	case PLAYER_SPECIAL_ATTACK_1:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-
-		}
-		break;
-	case PLAYER_SPECIAL_ATTACK_2:
-		break;
-	case PLAYER_HURT:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
-	case PLAYER_DIE:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-		}
-		break;
-	case PLAYER_STATE_END:
 		break;
 	}
 }

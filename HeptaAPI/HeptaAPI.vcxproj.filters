@@ -446,5 +446,8 @@
     <ClCompile Include="oPeningMovie.cpp">
       <Filter>playGround\한재윤</Filter>
     </ClCompile>
+    <ClCompile Include="player+pixelCollision.cpp">
+      <Filter>playGround\이정민</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

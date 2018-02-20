@@ -36,7 +36,6 @@ HRESULT player::init(string charName)
 	_player.direction = PLAYER_BOTTOM;
 	_player.state = PLAYER_IDLE;
 
-
 	return S_OK;
 }
 void player::release()
@@ -50,16 +49,6 @@ void player::update()
 
 	//던전에서 움직임
 	//dungeonMove();
-
-	//프레임 업데이트
-	FrameUpdate();
-
-	//몇번째 타일에 있는지 인덱스 x,y
-	_player.idx = _player.x / 24;
-	_player.idy = _player.y / 24;
-
-	//몇번째 타일에 있냐
-	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 
 	//실제 적용될 플레이어 렉트
 	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
@@ -78,33 +67,33 @@ void player::render()
 	int x = CAMERAMANAGER->getX();
 	int y = CAMERAMANAGER->getY();
 
-	SetBkMode(hdc, TRANSPARENT);
-	char str[128];
-	sprintf_s(str, " ( _player.x) 현재 값 : %f ", _player.x);
-	TextOut(hdc, x + 200, y + 50, str, strlen(str));
-	char str2[128];
-	sprintf_s(str2, " ( _player.y ) 현재 값 : %f ", _player.y);
-	TextOut(hdc, x + 200, y + 75, str2, strlen(str2));
-	char str3[128];
-	sprintf_s(str3, " ( _player.startX ) 현재 값 : %f ", _player.startX);
-	TextOut(hdc, x + 200, y + 100, str3, strlen(str3));
-	char str4[128];
-	sprintf_s(str4, " ( _player.startY ) 현재 값 : %f ", _player.startY);
-	TextOut(hdc, x + 200, y + 125, str4, strlen(str4));
-
-	char str5[128];
-	sprintf_s(str5, " _player.x / 24 : %f ", _player.x / 24);
-	TextOut(hdc, x + 200, y + 150, str5, strlen(str5));
-	char str6[128];
-	sprintf_s(str6, " _player.y / 24 : %f ", _player.y / 24);
-	TextOut(hdc, x + 200, y + 175, str6, strlen(str6));
-
-	char str7[128];
-	sprintf_s(str7, " _player.idx 값 : %d ", _player.idx);
-	TextOut(hdc, x + 200, y + 200, str7, strlen(str7));
-	char str8[128];
-	sprintf_s(str8, " _player.idy 값 : %d ", _player.idy);
-	TextOut(hdc, x + 200, y + 225, str8, strlen(str8));
+	//SetBkMode(hdc, TRANSPARENT);
+	//char str[128];
+	//sprintf_s(str, " ( _player.x) 현재 값 : %f ", _player.x);
+	//TextOut(hdc, x + 200, y + 50, str, strlen(str));
+	//char str2[128];
+	//sprintf_s(str2, " ( _player.y ) 현재 값 : %f ", _player.y);
+	//TextOut(hdc, x + 200, y + 75, str2, strlen(str2));
+	//char str3[128];
+	//sprintf_s(str3, " ( _player.startX ) 현재 값 : %f ", _player.startX);
+	//TextOut(hdc, x + 200, y + 100, str3, strlen(str3));
+	//char str4[128];
+	//sprintf_s(str4, " ( _player.startY ) 현재 값 : %f ", _player.startY);
+	//TextOut(hdc, x + 200, y + 125, str4, strlen(str4));
+	//
+	//char str5[128];
+	//sprintf_s(str5, " _player.x / 24 : %f ", _player.x / 24);
+	//TextOut(hdc, x + 200, y + 150, str5, strlen(str5));
+	//char str6[128];
+	//sprintf_s(str6, " _player.y / 24 : %f ", _player.y / 24);
+	//TextOut(hdc, x + 200, y + 175, str6, strlen(str6));
+	//
+	//char str7[128];
+	//sprintf_s(str7, " _player.idx 값 : %d ", _player.idx);
+	//TextOut(hdc, x + 200, y + 200, str7, strlen(str7));
+	//char str8[128];
+	//sprintf_s(str8, " _player.idy 값 : %d ", _player.idy);
+	//TextOut(hdc, x + 200, y + 225, str8, strlen(str8));
 
 
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
@@ -317,6 +306,8 @@ void player::townMove()
 		}
 	}
 
+	//프레임 업데이트
+	FrameUpdate();
 	//프레임 보정
 	correction();
 	//player+move.cpp에 있음
@@ -324,6 +315,16 @@ void player::townMove()
 	//이미지 뿌려주는 rc
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+	//실제렉트
+	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
+		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
+
+	//몇번째 타일에 있는지 인덱스 x,y
+	_player.idx = _player.x / 24;
+	_player.idy = _player.y / 24;
+
+	//몇번째 타일에 있냐
+	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 }
 
 // ============================================================================================
@@ -506,7 +507,11 @@ void player::dungeonMove()
 			_player.state = PLAYER_MOVE;
 		}
 	}
-
+	
+	//프레임 보정 ( 던전에선 필요 없을듯 )
+	//correction();
+	//player+move.cpp에 있음
+	playerDgMove();
 
 	//이걸로 한타일씩 이동하는것처럼 보이게 할거임
 	switch (_player.state)
@@ -518,7 +523,7 @@ void player::dungeonMove()
 			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
-				//보정
+				//보정			
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
@@ -665,14 +670,11 @@ void player::dungeonMove()
 		}
 		break;
 	}
-
-	//프레임 보정 ( 던전에선 필요 없을듯 )
-	//correction();
-	//player+move.cpp에 있음
-	playerDgMove();
 	//이미지 뿌려주는 rc
-	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
-		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+	_player.imageRc = RectMakeCenter(_player.x, _player.y, 72, 72);
+	//실제렉트
+	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
+		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
 }
 
 void player::addPartner(pokemon* p)

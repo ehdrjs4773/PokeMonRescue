@@ -168,6 +168,7 @@
     <ClCompile Include="player+draw.cpp" />
     <ClCompile Include="player+frameUpdate.cpp" />
     <ClCompile Include="player+move.cpp" />
+    <ClCompile Include="player+pixelCollision.cpp" />
     <ClCompile Include="player+tileCheak.cpp" />
     <ClCompile Include="player+valueInit.cpp" />
     <ClCompile Include="player.cpp" />

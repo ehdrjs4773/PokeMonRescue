@@ -209,6 +209,7 @@ public:
 	void dgMoveValueInit();	//던전 움직임 불값 초기화
 	void draw();			//그리는것도 김
 	void correction();		//보정작업
+	void pixelCollision();	//픽셀충돌
 	void tileCheak();		//타일검출
 
 	void addPartner(pokemon* p);	//파트너 추가 함수

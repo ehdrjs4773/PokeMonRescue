@@ -8,42 +8,37 @@ void player::valueInit()
 {	
 	//아래 ( bottom )
 	_bottomIdleCount = _bottomMoveCount = _bottomAttackCount = _bottomSpecialAttackCount = _bottomHurtCount = 0;
-	_bottomIdleFrameX = _bottomIdleFrameY = _bottomMoveFrameX = _bottomMoveFrameY = _bottomAttackFrameX = 
-	_bottomAttackFrameY = _bottomSpecialAttackFrameX = _bottomSpecialAttackFrameY = _bottomHurtFrameX =
-	_bottomHurtFrameY = 0;
+	_bottomIdleFrameX = _bottomMoveFrameX = _bottomAttackFrameX = _bottomSpecialAttackFrameX = _bottomHurtFrameX = 0;
+	_bottomIdleFrameY = _bottomMoveFrameY = _bottomAttackFrameY = _bottomSpecialAttackFrameY = _bottomHurtFrameY = _player.direction;
 	//왼쪽 ( left )
 	_leftIdleCount = _leftMoveCount = _leftAttackCount = _leftSpecialAttackCount = _leftHurtCount = 0;
-	_leftIdleFrameX = _leftIdleFrameY = _leftMoveFrameX = _leftMoveFrameY = _leftAttackFrameX = _leftAttackFrameY =
-	_leftSpecialAttackFrameX = _leftSpecialAttackFrameY = _leftHurtFrameX = _leftHurtFrameY = 0;
+	_leftIdleFrameX = _leftMoveFrameX = _leftAttackFrameX = _leftSpecialAttackFrameX = _leftHurtFrameX = 0;
+	_leftIdleFrameY = _leftMoveFrameY = _leftAttackFrameY = _leftSpecialAttackFrameY = _leftHurtFrameY = _player.direction;
 	//오른쪽 ( right )
 	_rightIdleCount = _rightMoveCount = _rightAttackCount = _rightSpecialAttackCount = _rightHurtCount = 0;
-	_rightIdleFrameX = _rightIdleFrameY = _rightMoveFrameX = _rightMoveFrameY = _rightAttackFrameX = _rightAttackFrameY =
-	_rightSpecialAttackFrameX = _rightSpecialAttackFrameY = _rightHurtFrameX = _rightHurtFrameY = 0;
+	_rightIdleFrameX = _rightMoveFrameX = _rightAttackFrameX =_rightSpecialAttackFrameX = _rightHurtFrameX = 0;
+	_rightIdleFrameY = _rightMoveFrameY = _rightAttackFrameY = _rightSpecialAttackFrameY = _rightHurtFrameY = _player.direction;
 	//위 ( top )
 	_topIdleCount = _topMoveCount = _topAttackCount = _topSpecialAttackCount = _topHurtCount = 0;
-	_topIdleFrameX = _topIdleFrameY = _topMoveFrameX = _topMoveFrameY = _topAttackFrameX = _topAttackFrameY = 
-	_topSpecialAttackFrameX = _topSpecialAttackFrameY = _topHurtFrameX = _topHurtFrameY = 0;
+	_topIdleFrameX = _topMoveFrameX = _topAttackFrameX = _topSpecialAttackFrameX = _topHurtFrameX = 0;
+	_topIdleFrameY = _topMoveFrameY = _topAttackFrameY = _topSpecialAttackFrameY = _topHurtFrameY = _player.direction;
 	//왼쪽아래 ( left , Bottom )
 	_leftBottomIdleCount = _leftBottomMoveCount = _leftBottomAttackCount = _leftBottomSpecialAttackCount =
 	_leftBottomHurtCount = 0;
-	_leftBottomIdleFrameX = _leftBottomIdleFrameY = _leftBottomMoveFrameX = _leftBottomMoveFrameY =
-	_leftBottomAttackFrameX = _leftBottomAttackFrameY = _leftBottomSpecialAttackFrameX = _leftBottomSpecialAttackFrameY =
-	_leftBottomHurtFrameX = _leftBottomHurtFrameY = 0;
+	_leftBottomIdleFrameX = _leftBottomMoveFrameX =_leftBottomAttackFrameX = _leftBottomSpecialAttackFrameX =_leftBottomHurtFrameX = 0;
+	_leftBottomIdleFrameY = _leftBottomMoveFrameY = _leftBottomAttackFrameY = _leftBottomSpecialAttackFrameY = _leftBottomHurtFrameY = _player.direction;
 	//왼쪽위 ( left , top )
 	_leftTopIdleCount = _leftTopMoveCount = _leftTopAttackCount = _leftTopSpecialAttackCount = _leftTopHurtCount = 0;
-	_leftTopIdleFrameX = _leftTopIdleFrameY = _leftTopMoveFrameX = _leftTopMoveFrameY =
-	_leftTopAttackFrameX = _leftTopAttackFrameY = _leftTopSpecialAttackFrameX = _leftTopSpecialAttackFrameY = 
-	_leftTopHurtFrameX = _leftTopHurtFrameY = 0;
+	_leftTopIdleFrameX = _leftTopMoveFrameX =_leftTopAttackFrameX = _leftTopSpecialAttackFrameX = _leftTopHurtFrameX = 0;
+	_leftTopIdleFrameY = _leftTopMoveFrameY = _leftTopAttackFrameY = _leftTopSpecialAttackFrameY = _leftTopHurtFrameY = _player.direction;
 	//오른쪽위 ( right , top )
 	_rightTopIdleCount = _rightTopMoveCount = _rightTopAttackCount = _rightTopSpecialAttackCount = _rightTopHurtCount = 0;
-	_rightTopIdleFrameX = _rightTopIdleFrameY = _rightTopMoveFrameX = _rightTopMoveFrameY =
-	_rightTopAttackFrameX = _rightTopAttackFrameY = _rightTopSpecialAttackFrameX = _rightTopSpecialAttackFrameY =
-	_rightTopHurtFrameX = _rightTopHurtFrameY = 0;
+	_rightTopIdleFrameX = _rightTopMoveFrameX = _rightTopAttackFrameX = _rightTopSpecialAttackFrameX =_rightTopHurtFrameX = 0;
+	_rightTopIdleFrameY = _rightTopMoveFrameY = _rightTopAttackFrameY = _rightTopSpecialAttackFrameY = _rightTopHurtFrameY = _player.direction;
 	//오른쪽아래 ( right , bottom )
 	_rightBottomIdleCount = _rightBottomMoveCount = _rightBottomAttackCount = _rightBottomSpecialAttackCount = _rightBottomHurtCount = 0;
-	_rightBottomIdleFrameX = _rightBottomIdleFrameY = _rightBottomMoveFrameX = _rightBottomMoveFrameY =
-	_rightBottomAttackFrameX = _rightBottomAttackFrameY = _rightBottomSpecialAttackFrameX = _rightBottomSpecialAttackFrameY =
-	_rightBottomHurtFrameX = _rightBottomHurtFrameY = 0;
+	_rightBottomIdleFrameX = _rightBottomMoveFrameX = _rightBottomAttackFrameX = _rightBottomSpecialAttackFrameX = _rightBottomHurtFrameX = 0;
+	_rightBottomIdleFrameY = _rightBottomMoveFrameY = _rightBottomAttackFrameY = _rightBottomSpecialAttackFrameY = _rightBottomHurtFrameY = _player.direction;
 
 	_isAttack = false;	//공격햇늬?
 	_onceMove = false;	//던전에서는 한번만 움직이거라

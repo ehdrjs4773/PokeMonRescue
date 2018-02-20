@@ -155,9 +155,10 @@ void player::FrameUpdate()
 					_bottomAttackFrameX++;
 					if (_bottomAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 					{
+						valueInit();
 						_player.direction = PLAYER_BOTTOM;
 						_player.state = PLAYER_IDLE;
-						valueInit();
+						
 					}			
 					_bottomAttackCount = 0;
 				}
@@ -170,9 +171,10 @@ void player::FrameUpdate()
 					_leftBottomAttackFrameX++;
 					if (_leftBottomAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 					{
+						valueInit();
 						_player.direction = PLAYER_LEFT_BOTTOM;
 						_player.state = PLAYER_IDLE;
-						valueInit();
+						
 					}				
 					_leftBottomAttackCount = 0;
 				}
@@ -185,9 +187,9 @@ void player::FrameUpdate()
 					_leftAttackFrameX++;
 					if (_leftAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 					{
+						valueInit();
 						_player.direction = PLAYER_LEFT;
 						_player.state = PLAYER_IDLE;
-						valueInit();
 					}
 					_leftAttackCount = 0;
 				}
@@ -245,9 +247,10 @@ void player::FrameUpdate()
 					_rightAttackFrameX++;
 					if (_rightAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 					{
+						valueInit();
 						_player.direction = PLAYER_RIGHT;
 						_player.state = PLAYER_IDLE;
-						valueInit();
+						
 					}
 					_rightAttackCount = 0;
 				}
@@ -269,7 +272,6 @@ void player::FrameUpdate()
 			break;
 			case PLAYER_DIRECTION_END:
 			break;
-
 		}
 		break;
 	case PLAYER_SPECIAL_ATTACK_1:

@@ -1,15 +1,19 @@
 #pragma once
 #include "gameNode.h"
+#include "playerPartner.h"
+#include "pokemon.h"
 
 #define PLAYER_TOWN_SPEED 5
 #define PLAYER_DUNGEON_SPEED 1
 
-#define MOVE_FRAME_UPDATE_SPEED 5
-#define ATTACK_FRAME_UPDATE_SPEED 5
-#define S_ATTACK_FRAME_UPDATE_SPEED 10
-#define HURT_FRAME_UPDATE_SPEED 20
+//#define MOVE_FRAME_UPDATE_SPEED 5
+//#define ATTACK_FRAME_UPDATE_SPEED 5
+//#define S_ATTACK_FRAME_UPDATE_SPEED 10
+//#define HURT_FRAME_UPDATE_SPEED 20
 
 #define SPEED_UP_KEY 'Z'
+
+#define MAX_PARTNER 3
 
 //플레이어 방향
 enum PLAYER_DIRECTION
@@ -45,22 +49,16 @@ struct tagPlayer
 	PLAYER_STATE state;				//상태
 	RECT imageRc;					//이미지 덮는 렉트
 	RECT rc;						//실제 적용될 렉트 ( 타격 ? 같은거)
-	animation* animation;			//애니랜더에 쓸 거
 	float startX, startY;			//시작점 x, y ( 던전이동에 필요함 )
 	float x, y;						//중점 x, y
 	float angle;					//앵글
 	int idx, idy;					//몇번째 x, y타일에 있는지 인덱스 
 	int tileIndex;					//몇번째 타일에 있는지 인덱스
 	int money;						//돈
-	int currentHp, maxHp;			//현재 체력 , 맥스 체력
-	int atk;						//공격력
-	int def;						//방어력
-	int specialAtk;					//특수공격
-	int specialDef;					//특수방어력
+	int dgNum;						//던전 번호
 };
 
 class Stage;
-class pokemon;
 class item;
 
 class player : public gameNode
@@ -69,7 +67,11 @@ private: // ## 맵 정보 ##
 	Stage* _stage;
 
 private: // ## 포켓몬 정보 ##
-	pokemon* _pokemon;
+	pokemon* _playerStatus;
+
+private: // ## 파트너 정보 ##
+	vector<playerPartner*> _vPartner;
+	vector<playerPartner*>::iterator _viPartner;
 
 private:
 	tagPlayer _player;		//플레이어
@@ -83,10 +85,9 @@ private:
 private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
 	bool _onceMove;		//던전에서는 한번만 움직이게
-	bool _isTown;		//마을이니?
-	
-	// 던전이동시 필요한 불값
-	// 움직일 수 있니? ( 앞에 벽이 있니? )
+
+						// 던전이동시 필요한 불값
+						// 움직일 수 있니? ( 앞에 벽이 있니? )
 	bool _isBottomMove;
 	bool _isLeftBottomMove;
 	bool _isLeftMove;
@@ -96,13 +97,13 @@ private: // ## 불값 ##
 	bool _isRightMove;
 	bool _isRightBottomMove;
 	// 아직안씀
-	bool _speedUp;		
+	bool _speedUp;
 
 private: // ## 프레임 돌릴 변수들 ## 
 	SHORT _bottomIdleCount;											//바텀 정지상태에 쓸 카운트
-	SHORT _bottomIdleFrameX , _bottomIdleFrameY;					//        ""        인덱스
+	SHORT _bottomIdleFrameX, _bottomIdleFrameY;					//        ""        인덱스
 	SHORT _bottomMoveCount;											//바텀 무브상태에 쓸 카운트
-	SHORT _bottomMoveFrameX , _bottomMoveFrameY;					//		  ""		인덱스
+	SHORT _bottomMoveFrameX, _bottomMoveFrameY;					//		  ""		인덱스
 	SHORT _bottomAttackCount;										//바텀 공격상태에 쓸 카운트
 	SHORT _bottomAttackFrameX, _bottomAttackFrameY;					//		  ""		인덱스
 	SHORT _bottomSpecialAttackCount;								//바텀 스페셜공격 상태에 쓸 카운트
@@ -192,8 +193,8 @@ public:
 	~player();
 
 	virtual HRESULT init();
-	//키값 , 시작점 X, Y , 마을이면 true , 아니면 false
-	virtual HRESULT init(string charName, float startX , float startY , bool isTown);		//프레임렌더 짱짱맨
+	//키값 , 시작점 X, Y;
+	virtual HRESULT init(string charName);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -201,7 +202,7 @@ public:
 	void townMove();		//마을에서 이동
 	void dungeonMove();		//던전에서 이동
 
-	void playerTownMove();		//무브패턴 너무길어서 따로 빼놓음 
+	void playerTownMove();	//무브패턴 너무길어서 따로 빼놓음 
 	void playerDgMove();
 	void FrameUpdate();		//프레임 돌리려는것도 너무 길어서 따로 빼놓음
 	void valueInit();		//변수 초기화도 김
@@ -210,26 +211,42 @@ public:
 	void correction();		//보정작업
 	void tileCheak();		//타일검출
 
+	void addPartner(pokemon* p);	//파트너 추가 함수
+
 	//접근자
-	inline PLAYER_DIRECTION getPlayerDirection() { return _player.direction; }		//방향
-	inline PLAYER_STATE getPlayerState() { return _player.state; }					//상태
+	inline PLAYER_DIRECTION getPlayerDirection() { return (PLAYER_DIRECTION)_player.direction; }		//방향
+	inline PLAYER_STATE getPlayerState() { return (PLAYER_STATE)_player.state; }						//상태
 	inline RECT getRect() { return _player.rc; }									//렉트
+	inline float getPlayerAngle() { return _player.angle; }							//앵글값
 	inline float getX() { return _player.x; }										//플레이어 센터 X
 	inline float getY() { return _player.y; }										//플레이어 센터 Y
-	inline int getMoney() { return _player.money; }
-	inline int getAttack() { return _player.atk; }
-	inline int getSpecial() { return _player.specialAtk; }
-	inline int getCruuentHp() { return _player.currentHp; }
-
 
 	inline int getPlayerTileIndexX() { return _player.idx; }						//인덱스 X
 	inline int getPlayerTileIndexY() { return _player.idy; }						//인덱스 Y
 
-	//설정자
-	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
-	void setPokemonMemAdressLink(pokemon* pokemon) { _pokemon = pokemon; }			//포케몬
-	void setCurrentHp(int set) { _player.currentHp = set; }
-	void setMoney(int money) { _player.money = money; }
+	inline int getMoney() { return _player.money; }									//돈
 
+	inline int getCurrentHP() { return _playerStatus->getCurrentHP(); }				//현재체력
+	inline int getMaxHP() { return _playerStatus->getMaxHP(); }						//전체체력
+	inline int getMaxExp() { return _playerStatus->getMaxEXP(); }					//전체경험치
+	inline int getCurrentExp() { return _playerStatus->getCurrentEXP(); }			//현재경험치
+	inline int getAtkDamage() { return _playerStatus->getAtk(); }					//공격력
+	inline int getDef() { return _playerStatus->getDef(); }							//방어력
+	inline int getSpecialAtk() { return _playerStatus->getSpecialATK(); }			//스페셜공격력
+	inline int getSpecialDef() { return _playerStatus->getSpecialDef(); }			//스페셜방어력
+	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
+
+	//설정자																			
+	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
+
+	void setX(float x) { _player.x = x; }											//X좌표 설정
+	void setY(float y) { _player.y = y; }											//Y좌표 설정
+
+	void setAddMoney(int money) { _player.money = money; }							//돈
+
+	inline int getDungeonNum() { return _player.dgNum; }							//던전넘버 겟
+	void setDungeonNum(int dgNum) { _player.dgNum = dgNum; }						//던전넘버 셋
+
+	void setPosition(float startX, float startY);									//좌표설정
 };
 

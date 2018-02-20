@@ -82,6 +82,9 @@
     <Filter Include="playGround\이준우\적객체모집">
       <UniqueIdentifier>{7940f756-1577-4a7e-b846-348f38d484de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\이정민\파트너">
+      <UniqueIdentifier>{7a9129f1-298d-4078-be4b-bbffc0c0eb37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -240,14 +243,17 @@
     <ClInclude Include="shopchildren.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
-    <ClInclude Include="playerPartner.h">
-      <Filter>playGround\이정민</Filter>
-    </ClInclude>
     <ClInclude Include="skills.h">
       <Filter>playGround\배건하</Filter>
     </ClInclude>
     <ClInclude Include="battleScene.h">
       <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="playerPartner.h">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.h">
+      <Filter>playGround\한재윤</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -416,14 +422,29 @@
     <ClCompile Include="player+tileCheak.cpp">
       <Filter>playGround\이정민</Filter>
     </ClCompile>
-    <ClCompile Include="playerPartner.cpp">
-      <Filter>playGround\이정민</Filter>
-    </ClCompile>
     <ClCompile Include="skills.cpp">
       <Filter>playGround\배건하</Filter>
     </ClCompile>
     <ClCompile Include="battleScene.cpp">
       <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="playerPartner.cpp">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+draw.cpp">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+frameUpdate.cpp">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+move.cpp">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+valueInit.cpp">
+      <Filter>playGround\이정민\파트너</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

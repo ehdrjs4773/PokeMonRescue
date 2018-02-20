@@ -107,3 +107,4 @@ void player::tileCheak()
 	//	break;
 	//}
 }
+

@@ -37,16 +37,10 @@ HRESULT StageScene::init()
 
 	_em = new enemyManager;
 
-
 	_player->setStageMemAdressLink(_nowStage);
 
-	_playerpt.x = WINSIZEX / 2;
-	_playerpt.y = WINSIZEY / 2; 
-
-
-	
-	_player->init("府磊根", _nowStage->getPlayerStartUpid().x * TILESIZEX + 12, _nowStage->getPlayerStartUpid().y * TILESIZEY + 12);
-
+	_player->init("府磊根");
+	_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
 
 	_em->setStageMemoryAdressLink(_nowStage);
 	_em->setTileMemoryAdressLink(_nowStage->getTileAdress());
@@ -67,6 +61,7 @@ void StageScene::release()
 void StageScene::update() 
 {
 	_player->update();
+	_player->dungeonMove();
 	_em->update();
 	_nowStage->update(_player->getX(), _player->getY());
 }

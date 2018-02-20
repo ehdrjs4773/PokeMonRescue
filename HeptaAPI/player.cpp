@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "player.h"
 #include "Stage.h"
-#include "pokemon.h"
 
 player::player()
 {
@@ -14,12 +13,12 @@ player::~player()
 
 HRESULT player::init()
 {
-	
+
 
 	return S_OK;
 }
 
-HRESULT player::init(string charName, float startX, float startY , bool isTown)
+HRESULT player::init(string charName)
 {
 	//변수 초기화 ( player+valueInit.cpp에 있음 )
 	valueInit();
@@ -30,34 +29,13 @@ HRESULT player::init(string charName, float startX, float startY , bool isTown)
 	tempNameSpecialAttack = charName + "_specialAttack";
 	tempNameHurt = charName + "_hurt";
 
-	_isTown = isTown;
-
-	_pokemon->pokemonStatus(charName, 1);
-	//플레이어 기본정보?
-	_player.money = 0;
-	_player.currentHp = _pokemon->getCurrentHP();
+	_playerStatus = new pokemon;
+	_playerStatus->pokemonStatus(charName, 1);
 
 	//방향 및 상태
 	_player.direction = PLAYER_BOTTOM;
 	_player.state = PLAYER_IDLE;
 
-	//좌표
-	_player.x = startX /** 24 + 12*/;
-	_player.y = startY /** 24 + 12*/;
-
-	//몇번째 타일 x, y에 있나
-	_player.idx = _player.x / 24;
-	_player.idy = _player.y / 24;
-
-	//몇번째 타일에 있냐
-	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
-
-	//이미지 그려주는 렉트
-	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
-		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
-
-	//실제 사용될 렉트
-	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
 
 	return S_OK;
 }
@@ -65,18 +43,16 @@ void player::release()
 {
 
 }
-void player::update() 
+void player::update()
 {
-	if (_isTown)
-	{
-		//마을에서 움직임
-		townMove();
-	}
-	if (!_isTown)
-	{
-		//던전에서 움직임
-		dungeonMove();
-	}
+	//마을에서 움직임
+	//townMove();
+
+	//던전에서 움직임
+	//dungeonMove();
+
+	//프레임 업데이트
+	FrameUpdate();
 
 	//몇번째 타일에 있는지 인덱스 x,y
 	_player.idx = _player.x / 24;
@@ -89,16 +65,19 @@ void player::update()
 	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
 		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
 
-	if(!_isTown)
-	{
-		CAMERAMANAGER->cameraMove(_player.x, _player.y);
-	}
+	CAMERAMANAGER->cameraMove(_player.x, _player.y);
+
+	//for (_viPartner = _vPartner.begin(); _viPartner != _vPartner.end(); ++_viPartner)
+	//{
+	//	(*_viPartner)->update();
+	//}
 }
-void player::render() 
+void player::render()
 {
 	HDC hdc = CAMERAMANAGER->getMemDC();
 	int x = CAMERAMANAGER->getX();
 	int y = CAMERAMANAGER->getY();
+
 	SetBkMode(hdc, TRANSPARENT);
 	char str[128];
 	sprintf_s(str, " ( _player.x) 현재 값 : %f ", _player.x);
@@ -127,11 +106,12 @@ void player::render()
 	sprintf_s(str8, " _player.idy 값 : %d ", _player.idy);
 	TextOut(hdc, x + 200, y + 225, str8, strlen(str8));
 
-	char str9[128];
-	sprintf_s(str9, " _player.currentHp 값 : %d ", _player.currentHp);
-	TextOut(hdc, x + 200, y + 250, str9, strlen(str9));
 
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	//for (_viPartner = _vPartner.begin(); _viPartner != _vPartner.end(); ++_viPartner)
+	//{
+	//	(*_viPartner)->render();
+	//}
 	draw();
 }
 
@@ -186,6 +166,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
 		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack)
 	{
+		_player.angle = 225 * DEG2RAD;
 		_player.direction = PLAYER_LEFT_BOTTOM;
 		_player.state = PLAYER_MOVE;
 	}
@@ -193,6 +174,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
 		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack)
 	{
+		_player.angle = 315 * DEG2RAD;
 		_player.direction = PLAYER_RIGHT_BOTTOM;
 		_player.state = PLAYER_MOVE;
 	}
@@ -200,6 +182,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
 		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack)
 	{
+		_player.angle = 135 * DEG2RAD;
 		_player.direction = PLAYER_LEFT_TOP;
 		_player.state = PLAYER_MOVE;
 	}
@@ -207,6 +190,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
 		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack)
 	{
+		_player.angle = 45 * DEG2RAD;
 		_player.direction = PLAYER_RIGHT_TOP;
 		_player.state = PLAYER_MOVE;
 	}
@@ -214,6 +198,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
 		&& !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !_isAttack)
 	{
+		_player.angle = 270 * DEG2RAD;
 		_player.direction = PLAYER_BOTTOM;
 		_player.state = PLAYER_MOVE;
 	}
@@ -221,6 +206,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_LEFT))
 		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack)
 	{
+		_player.angle = 90 * DEG2RAD;
 		_player.direction = PLAYER_TOP;
 		_player.state = PLAYER_MOVE;
 	}
@@ -228,6 +214,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
 		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack)
 	{
+		_player.angle = 180 * DEG2RAD;
 		_player.direction = PLAYER_LEFT;
 		_player.state = PLAYER_MOVE;
 	}
@@ -235,6 +222,7 @@ void player::townMove()
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
 		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack)
 	{
+		_player.angle = 0 * DEG2RAD;
 		_player.direction = PLAYER_RIGHT;
 		_player.state = PLAYER_MOVE;
 	}
@@ -328,8 +316,7 @@ void player::townMove()
 			_player.state = PLAYER_IDLE;
 		}
 	}
-	//프레임 업데이트
-	FrameUpdate();
+
 	//프레임 보정
 	correction();
 	//player+move.cpp에 있음
@@ -342,7 +329,7 @@ void player::townMove()
 // ============================================================================================
 // ================================== ## 던전에서 움직임 ## ====================================
 // ============================================================================================
-void player::dungeonMove() 
+void player::dungeonMove()
 {
 	//타일검출
 	tileCheak();
@@ -352,7 +339,7 @@ void player::dungeonMove()
 		_isAttack = true;
 		_player.state = PLAYER_SPECIAL_ATTACK_1;
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_F2) && !_onceMove )
+	if (KEYMANAGER->isOnceKeyDown(VK_F2) && !_onceMove)
 	{
 		_isAttack = true;
 		_player.state = PLAYER_HURT;
@@ -427,7 +414,7 @@ void player::dungeonMove()
 			_player.startY = _player.y;
 
 			_player.state = PLAYER_MOVE;
-		}	
+		}
 	}
 	//왼쪽위
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
@@ -446,7 +433,7 @@ void player::dungeonMove()
 	}
 	//오른쪽위
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove )
+		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
 	{
 		_player.direction = PLAYER_RIGHT_TOP;
 
@@ -457,7 +444,7 @@ void player::dungeonMove()
 			_player.startY = _player.y;
 
 			_player.state = PLAYER_MOVE;
-		}	
+		}
 	}
 	//아래
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
@@ -679,8 +666,6 @@ void player::dungeonMove()
 		break;
 	}
 
-	//프레임 업데이트
-	FrameUpdate();
 	//프레임 보정 ( 던전에선 필요 없을듯 )
 	//correction();
 	//player+move.cpp에 있음
@@ -688,4 +673,36 @@ void player::dungeonMove()
 	//이미지 뿌려주는 rc
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+}
+
+void player::addPartner(pokemon* p)
+{
+	if (_vPartner.size() >= 3)
+		return;
+
+	playerPartner* temp;
+	temp->init(p->getName());
+
+	_vPartner.push_back(temp);
+}
+
+void player::setPosition(float startX, float startY)
+{
+	//좌표
+	_player.x = startX /** 24 + 12*/;
+	_player.y = startY /** 24 + 12*/;
+
+	//몇번째 타일 x, y에 있나
+	_player.idx = _player.x / 24;
+	_player.idy = _player.y / 24;
+
+	//몇번째 타일에 있냐
+	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
+
+	//이미지 그려주는 렉트
+	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
+		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+
+	//실제 사용될 렉트
+	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
 }

@@ -135,6 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.cpp" />
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+draw.cpp" />
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+frameUpdate.cpp" />
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+move.cpp" />
+    <ClCompile Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\playerPartner+valueInit.cpp" />
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="aStar.cpp" />
@@ -195,6 +200,7 @@
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\임시 포켓몬 레스큐 - 복사본\HeptaAPI\oPeningMovie.h" />
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="aStar.h" />

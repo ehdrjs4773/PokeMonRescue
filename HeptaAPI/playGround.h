@@ -12,7 +12,6 @@ class playGround : public gameNode
 {
 private:
 	player* _player;
-	pokemon* _pokemon;
 	Npc* _npc;
 	shopchildren* _shop;
 

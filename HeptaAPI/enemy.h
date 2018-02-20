@@ -64,7 +64,8 @@ struct tagImageName
 	char* hurtImage;
 };
 
-
+class Stage;
+class player;
 class enemy : public gameNode
 {
 

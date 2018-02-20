@@ -22,19 +22,23 @@ HRESULT playGround::init()
 	_pokemon = new pokemon;
 
 	_player->setPokemonMemAdressLink(_pokemon);
+	
 
 	SCENEMANAGER->addScene("npc", new Npc);
-	
-	SCENEMANAGER->init("npc");
 
-	//SCENEMANAGER->addScene("Opening", new oPeningMovie);
-	//
+	SCENEMANAGER->addScene("Opening", new oPeningMovie);
+	
 	//SCENEMANAGER->init("Opening");
 	
 	SCENEMANAGER->addScene("Stage1", new StageScene);
 	SCENEMANAGER->addChildScene("npc", "shopchiled", new shopchildren);
+	
+	map<string, gameNode*>::iterator tempIter = SCENEMANAGER->findScene("npc")->children.find("shopchiled");
+	((shopchildren*)tempIter->second)->setPlayerMemoryAdressLink(_player);
+	((Npc*)SCENEMANAGER->findScene("npc")->currentScene)->setPlayerMemoryAdressLink(_player);
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
+	SCENEMANAGER->init("npc");
 	SCENEMANAGER->changeScene("Stage1");
 	
 

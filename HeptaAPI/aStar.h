@@ -27,7 +27,7 @@ public:
 	aStar();
 	~aStar();
 
-	HRESULT init(tile* map, int numX, int numY, tile start, tile end);
+	HRESULT init(vector<tile*> map, int numX, int numY, tile start, tile end);
 	void release();
 
 	vector<tile> addOpenList(tile current);

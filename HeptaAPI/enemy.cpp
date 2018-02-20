@@ -24,7 +24,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level,ELEME
 {
 
 	//구조체에 묶어두었던 포켓몬의 이름을 받아오며 스테이터스 초기화
-	_pokemonStatus.pokemonStatus(PokemonName.pokemonName, level, elelment);
+	pokemonStatus(PokemonName.pokemonName, level, elelment);
 
 	//4대 이미지 초기화
 	_pokemon.idleImageName = PokemonName.idleImage;
@@ -74,6 +74,35 @@ void enemy::release()
 void enemy::update() 
 {
 
+	tile start;
+	tile end;
+
+	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	{
+		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+		if (PtInRect(&temp, PointMake(_pokemon.x, _pokemon.y)))
+		{
+			start = *_stage->getTileAdress()[i];
+			break;
+		}
+	}
+
+	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	{
+		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+		if (PtInRect(&temp, PointMake(_ptMouse.x, _ptMouse.y)))
+		{
+			if (!_stage->getTileAdress()[i]->getIsOpen()) return;
+			end = *_stage->getTileAdress()[i];
+			break;
+		}
+	}
+
+	_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
+	_vCloseList = _ast->pathFinder(start);
+
 	//현재 상태를 받아서 한다.
 	setState();
 	//적의 움직임을 스위치로 관리한다 하지만 아직 각도가아닌 키입력이기에
@@ -88,6 +117,7 @@ void enemy::update()
 	}
 	if(_pokemon.state == STATE_IDLE)
 		enemyAngleSetting();
+
 
 }
 
@@ -214,8 +244,13 @@ void enemy::setState()
 
 void enemy::enemyAngleSetting()
 {
-	float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
-	
+	if (_vCloseList.size() <= 0)
+		return;
+
+	RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
+	//float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
+	float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
+
 	
 	if(target <= PI8 && target >=0 || target >= PI8*15 && target <= PI8 * 16)
 	{

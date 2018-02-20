@@ -12,13 +12,13 @@ aStar::~aStar()
 
 }
 
-HRESULT aStar::init(tile* map, int numX, int numY, tile start, tile end)
+HRESULT aStar::init(vector<tile*> map, int numX, int numY, tile start, tile end)
 {
 	this->release();
 
 	for (int i = 0; i < numX*numY; ++i)
 	{
-		_vTotalList.push_back(map[i]);
+		_vTotalList.push_back(*map[i]);
 	}
 
 	_startTile = _currentTile = start;

@@ -1,7 +1,8 @@
 #pragma once
 #include "stdafx.h"
-#include "gameNode.h"
 #include "Pokemon.h"
+#include "aStar.h"
+
 //임시포켓몬
 
 struct tagTempPokemon
@@ -10,7 +11,6 @@ struct tagTempPokemon
 	image* moveImage;
 	image* atkImage;
 	image* hurtImage;
-
 
 
 	char* idleImageName;
@@ -66,7 +66,8 @@ struct tagImageName
 
 class Stage;
 class player;
-class enemy : public gameNode
+class tile;
+class enemy : public pokemon
 {
 
 private:
@@ -96,6 +97,8 @@ private:
 	Stage* _stage;
 	player* _pl;
 
+	aStar* _ast;
+	vector<tile> _vCloseList;
 
 
 public:

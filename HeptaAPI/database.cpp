@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "database.h"
-
+#include "pokemon.h"
 
 database::database()
 {

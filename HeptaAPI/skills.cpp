@@ -7,7 +7,7 @@ skills::skills()
 skills::~skills()
 {
 }
-
+						//스킬이름(*주의*텍스트파일에 있는 이름으로 복붙해주는 센스필요)
 HRESULT skills::init(string name)
 {
 	_skillName = DATABASE->getSkillsData(name)->name;

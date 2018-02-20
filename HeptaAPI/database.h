@@ -4,6 +4,7 @@
 #include <map>
 
 class pokemon;
+//class player;
 
 struct DBstatus
 {
@@ -52,6 +53,8 @@ private:
 	vPokemon* _vEnemyPokemon;
 	map<string, DBskills*> _mTotalSkill;
 
+	//player* _playerMemory;
+
 public:
 	database();
 	~database();
@@ -64,6 +67,9 @@ public:
 
 	//inline vPokemon* getVEnemyPokemon() { return _vEnemyPokemon; }
 	//inline void setVEnemyPokemon(vPokemon* poke) { _vEnemyPokemon = poke; }
+
+	//inline void setPlayerMemory(player* player) { _playerMemory = player; }
+	//inline player* getPlayerMemory() { return _playerMemory; }
 
 	HRESULT init();
 	void update();

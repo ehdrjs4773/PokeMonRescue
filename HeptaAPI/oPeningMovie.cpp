@@ -47,8 +47,13 @@ void oPeningMovie::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
-		SCENEMANAGER->changeScene("Stage1");
-		SCENEMANAGER->init("Stage1");
+		DIALOGUE->loadingTextFile(".\\textData\\opening_sin.txt");
+		DIALOGUE->setPoint(PointMake(100, WINSIZEY - 50));
+	
+		SCENEMANAGER->init("openingSelect");	
+		SCENEMANAGER->changeScene("openingSelect");
+		//SCENEMANAGER->changeScene("Stage1");
+		//SCENEMANAGER->init("Stage1");
 		this->release();
 	}
 }

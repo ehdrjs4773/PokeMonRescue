@@ -110,5 +110,8 @@ public:
 	void enemyAtkManager(int arrNum);
 	void enemyMoveManager(int arrNum);
 	void enemyBirth(ENEMY enemy, int tileX, int tileY, int level);
+
+
+	void enemyDead();
 };
 

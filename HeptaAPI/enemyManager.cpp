@@ -22,13 +22,13 @@ HRESULT enemyManager::init()
 {
 	imageInit();
 	enemyBirth(ENEMY_CHICORITA, 2, 2, 99);
-	//enemyBirth(ENEMY_DANDEGI, 2, 3, 99);
-	//enemyBirth(ENEMY_POLYGON, 2, 4, 99);
-	//enemyBirth(ENEMY_PURIN, 3, 2, 99);
-	//enemyBirth(ENEMY_RUKARIO, 3, 4, 99);
-	//enemyBirth(ENEMY_GRAENA, 4, 2, 99);
-	//enemyBirth(ENEMY_MANKEY, 4, 3, 99);
-	//enemyBirth(ENEMY_TANGURI, 4, 4, 99);
+	enemyBirth(ENEMY_DANDEGI, 2, 3, 99);
+	enemyBirth(ENEMY_POLYGON, 2, 4, 99);
+	enemyBirth(ENEMY_PURIN, 3, 2, 99);
+	enemyBirth(ENEMY_RUKARIO, 3, 4, 99);
+	enemyBirth(ENEMY_GRAENA, 4, 2, 99);
+	enemyBirth(ENEMY_MANKEY, 4, 3, 99);
+	enemyBirth(ENEMY_TANGURI, 4, 4, 99);
 	
 
 	
@@ -49,7 +49,7 @@ void enemyManager::update()
 	_tileCheckY = _pl->getPlayerTileIndexY();
 	
 	enemyTrunManager();
-
+	enemyDead();
 
 }
 void enemyManager::render()	
@@ -147,6 +147,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	{
 	case ENEMY_CHICORITA:
 		_chicorita = new chicorita;
+		_chicorita->setPlayerMemoryAdressLink(_pl);
 		_chicorita->setStageMemoryAdressLink(_stage);
 		_chicorita->init(_chicoName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 5);
@@ -155,6 +156,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_DANDEGI:
 		_dandegi = new dandegi;
 		_dandegi->setStageMemoryAdressLink(_stage);
+		_dandegi->setPlayerMemoryAdressLink(_pl);
 		_dandegi->init(_dandegiName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), 9);
 		_vEnemyPokemon.push_back(_dandegi);
@@ -162,6 +164,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_POLYGON:
 		_polygon = new polygon;
 		_polygon->setStageMemoryAdressLink(_stage);
+		_polygon->setPlayerMemoryAdressLink(_pl);
 
 		_polygon->init(_polygonName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -170,6 +173,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_PURIN:
 		_purin = new purin;
 		_purin->setStageMemoryAdressLink(_stage);
+		_purin->setPlayerMemoryAdressLink(_pl);
 
 		_purin->init(_purinName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -178,6 +182,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_GRAENA:
 		_graena = new graena;
 		_graena->setStageMemoryAdressLink(_stage);
+		_graena->setPlayerMemoryAdressLink(_pl);
 
 		_graena->init(_graenaName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -186,6 +191,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_RUKARIO:
 		_rukario = new rukario;
 		_rukario->setStageMemoryAdressLink(_stage);
+		_rukario->setPlayerMemoryAdressLink(_pl);
 
 		_rukario->init(_rukarioName, _tile[tileX]->getCenterX()
 		, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -194,6 +200,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_MANKEY:
 		_mankey = new mankey;
 		_mankey->setStageMemoryAdressLink(_stage);
+		_mankey->setPlayerMemoryAdressLink(_pl);
 
 		_mankey->init(_mankeyName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -202,6 +209,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_TANGURI:
 		_tanguri = new tanguri;
 		_tanguri->setStageMemoryAdressLink(_stage);
+		_tanguri->setPlayerMemoryAdressLink(_pl);
 
 		_tanguri->init(_tanguriName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -210,6 +218,7 @@ void enemyManager::enemyBirth(ENEMY enemy, int tileX, int tileY, int level)
 	case ENEMY_ELECTIVIRE:
 		_electivire = new electivire;
 		_electivire->setStageMemoryAdressLink(_stage);
+		_electivire->setPlayerMemoryAdressLink(_pl);
 
 		_electivire->init(_electivireName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
@@ -259,4 +268,17 @@ void enemyManager::enemyTrunManager()
 		}
 	}
 
+}
+
+
+void enemyManager::enemyDead()
+{
+	for (int i = 0; i < _vEnemyPokemon.size(); i++)
+	{
+		//언사인드 인트라 체력이 0밑으로가면 오버플로우로 제일 윗부분으로 가서 그냥 이렇게 해놨음 ㅎ
+		if (_vEnemyPokemon[i]->getCurrentHP() >= 60000 || _vEnemyPokemon[i]->getCurrentHP() <=0)
+		{
+			_vEnemyPokemon.erase(_vEnemyPokemon.begin() + i);
+		}
+	}
 }

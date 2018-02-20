@@ -93,6 +93,8 @@ private:
 	float _distance;
 	float _tempSpeed;
 
+	bool _isAttack;
+
 private:
 	//이건 부모클래스에서 충분히 할 수 있을듯 싶어서 이렇게!!!
 	pokemon _pokemonStatus;
@@ -126,6 +128,7 @@ public:
 
 
 
+
 	inline tagTempPokemon getPokemon() { return _pokemon; }
 	inline pokemon getPokemonStatus() { return _pokemonStatus; }
 
@@ -143,11 +146,13 @@ public:
 	bool getIsAttack() 
 	{
 		if (_pokemon.state == STATE_ATTACK)
-			return true;
+			_isAttack = true;
 		else
-			return false;
+			_isAttack = false;
+
+			return _isAttack;
 	}
 
-
+	bool setIsAttack(bool isattack) { _isAttack = isattack; }
 };
 

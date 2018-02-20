@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "player.h"
 #include "Stage.h"
 
 
@@ -117,9 +118,7 @@ void enemy::update()
 	//_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
 	//_vCloseList = _ast->pathFinder(start);
 
-
-
-
+	
 	//현재 상태를 받아서 한다.
 	setState();
 	//적의 움직임을 스위치로 관리한다 하지만 아직 각도가아닌 키입력이기에
@@ -128,6 +127,7 @@ void enemy::update()
 
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
+		damageToHP(10);
 		_isMove = true;
 	}
 	if (_isMove)

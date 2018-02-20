@@ -7,23 +7,23 @@
 
 enum ELEMENT
 {
-	ELEMENT_NORMAL,		// 노말
-	ELEMENT_FIRE,		// 불
-	ELEMENT_WATER,		// 물
-	ELEMENT_ELECTRIC,	// 전기
-	ELEMENT_PLANT,		// 풀
-	ELEMENT_ICE,		// 얼음
-	ELEMENT_FIGHT,		// 격투
-	ELEMENT_POISON,		// 독
-	ELEMENT_EARTH,		// 땅
-	ELEMENT_WING,		// 비행
-	ELEMENT_ESPER,		// 에스퍼
-	ELEMENT_INSECT,		// 곤충
-	ELEMENT_ROCK,		// 바위
-	ELEMENT_GHOST,		// 고스트
-	ELEMENT_DRAGON,		// 드래곤
-	ELEMENT_DARK,		// 악
-	ELEMENT_STEEL,		// 강철
+	ELEMENT_NORMAL,		// 노말	0
+	ELEMENT_FIRE,		// 불	1
+	ELEMENT_WATER,		// 물	2
+	ELEMENT_ELECTRIC,	// 전기	3
+	ELEMENT_PLANT,		// 풀	4
+	ELEMENT_ICE,		// 얼음	5
+	ELEMENT_FIGHT,		// 격투	6
+	ELEMENT_POISON,		// 독	7
+	ELEMENT_EARTH,		// 땅	8
+	ELEMENT_WING,		// 비행	9
+	ELEMENT_ESPER,		// 에스퍼10
+	ELEMENT_INSECT,		// 곤충	11
+	ELEMENT_ROCK,		// 바위	12
+	ELEMENT_GHOST,		// 고스트13
+	ELEMENT_DRAGON,		// 드래곤14
+	ELEMENT_DARK,		// 악	15
+	ELEMENT_STEEL,		// 강철	16
 	ELEMENT_END
 };
 
@@ -67,7 +67,7 @@ public:
 	~pokemon();
 
 	HRESULT init();
-	void pokemonStatus(string name, int level, ELEMENT element);
+	void pokemonStatus(string name, int level);
 	void expPlus(int exp);
 	void islevelUp();
 
@@ -78,7 +78,7 @@ public:
 	inline int getCurrentEXP() { return _currentEXP; }
 	inline int getAtk() { return _atk; }
 	inline int getDef() { return _def; }
-	inline int getSpecialAtk() { return _specialATK; }
+	inline int getSpecialATK() { return _specialATK; }
 	inline int getSpecialDef() { return _specialDEF; }
 	inline int getLevel() { return _level; }
 	inline ELEMENT getElement() { return _element; }

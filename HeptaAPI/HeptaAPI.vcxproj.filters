@@ -243,6 +243,12 @@
     <ClInclude Include="playerPartner.h">
       <Filter>playGround\이정민</Filter>
     </ClInclude>
+    <ClInclude Include="skills.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
+    <ClInclude Include="battleScene.h">
+      <Filter>playGround\배건하</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -412,6 +418,12 @@
     </ClCompile>
     <ClCompile Include="playerPartner.cpp">
       <Filter>playGround\이정민</Filter>
+    </ClCompile>
+    <ClCompile Include="skills.cpp">
+      <Filter>playGround\배건하</Filter>
+    </ClCompile>
+    <ClCompile Include="battleScene.cpp">
+      <Filter>playGround\배건하</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

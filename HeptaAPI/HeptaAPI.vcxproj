@@ -138,6 +138,7 @@
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="aStar.cpp" />
+    <ClCompile Include="battleScene.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="chicorita.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="shopchildren.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="skills.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageScene.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="aStar.h" />
+    <ClInclude Include="battleScene.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="chicorita.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="shopchildren.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="skills.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageScene.h" />

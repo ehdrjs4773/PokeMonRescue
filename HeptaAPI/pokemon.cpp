@@ -15,31 +15,35 @@ HRESULT pokemon::init()
 	
 	return S_OK;
 }
-//							포켓몬이름,레벨,포켓몬의 속성
-void pokemon::pokemonStatus(string name, int level, ELEMENT element)
+//							포켓몬이름,설정할 레벨 (*주의* 포켓몬이름은 텍스트에 있는대로 넣어주는 센스필요) 
+void pokemon::pokemonStatus(string name, int level)
 {
 	if (level > LEVEL_MAX)
 		level = LEVEL_MAX;
 
 	_pokemonName = name;
 	_level = level;
-	_element = element;
 	
-	_racialHP = DATABASE->getElementData(name)->hp;
-	_racialATK = DATABASE->getElementData(name)->atk;
-	_racialDEF = DATABASE->getElementData(name)->def;
-	_racialSpecialATK = DATABASE->getElementData(name)->specialATK;
-	_racialSpecialDEF = DATABASE->getElementData(name)->specialDEF;
+	
+	_racialHP = DATABASE->getStatusData(name)->hp;
+	_racialATK = DATABASE->getStatusData(name)->atk;
+	_racialDEF = DATABASE->getStatusData(name)->def;
+	_racialSpecialATK = DATABASE->getStatusData(name)->specialATK;
+	_racialSpecialDEF = DATABASE->getStatusData(name)->specialDEF;
+	_element = (ELEMENT)DATABASE->getStatusData(name)->element;
 
-	_maxHP = _racialHP;
-	_currentHP = _maxHP;
+	_currentEXP = 0;
 	_maxEXP = 100;
+	
+	_maxHP = _racialHP;		
+	_currentHP = _maxHP;	//맨처음엔 풀피니까
+
 	_atk = _racialATK;
 	_def = _racialDEF;
 	_specialATK = _racialSpecialATK;
 	_specialDEF = _racialSpecialDEF;
 
-	_currentEXP = 0;
+	
 	
 }
 

@@ -32,6 +32,7 @@ private:
 	bool _house;	// 하우스 들어갔나요오~
 	RECT _rc;		// 입구 죠~
 	RECT _rc2;		// 출구 죠~
+	RECT _rc3;		// 스테이지 입구죠~
 
 	player* _player;
 
@@ -43,7 +44,9 @@ public:
 	void render();
 
 	void setPlayerMemoryAdressLink(player* play) { _player = play; }
-
+	
+	// 접 근 자~
+	inline bool getHouse() { return _house; }
 
 	Npc();
 	~Npc();

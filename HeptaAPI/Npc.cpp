@@ -41,6 +41,7 @@ HRESULT Npc::init()
 
 	_rc = RectMakeCenter(WINSIZEX / 2 - 60, WINSIZEY / 2 + 10, 30, 30);
 	_rc2 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2+ 130, 50, 30);
+	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 25, 15, 50);
 	_house = false;
 
 	CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
@@ -68,6 +69,7 @@ void Npc::update()
 				SCENEMANAGER->changeChild("shopchiled");
 				SCENEMANAGER->init("npc");
 			}
+
 		}
 
 		if (IntersectRect(&temp, &_rc, &_player->getRect()))
@@ -88,6 +90,18 @@ void Npc::update()
 		}
 	}
 
+
+	if (KEYMANAGER->isOnceKeyDown('Q'))
+	{
+		SCENEMANAGER->changeChild("ui");
+		SCENEMANAGER->init("npc");
+	}
+
+	if (IntersectRect(&temp, &_rc3, &_player->getRect()))
+	{
+		SCENEMANAGER->init("Stage1");
+		SCENEMANAGER->changeScene("Stage1");
+	}
 	
 }
 
@@ -96,7 +110,7 @@ void Npc::render()
 {
 	HDC dc = CAMERAMANAGER->getMemDC();
 	//Rectangle(dc, _npc1.rc.left, _npc1.rc.top, _npc1.rc.right, _npc1.rc.bottom);
-	
+
 	if(_town.inout)
 	{
 		IMAGEMANAGER->findImage("townMagenta")->render(dc, 0, 0);
@@ -114,7 +128,7 @@ void Npc::render()
 		IMAGEMANAGER->findImage("saveTown")->render(dc, WINSIZEX / 2 - IMAGEMANAGER->findImage("saveTown")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("saveTown")->getHeight() / 2);
 		Rectangle(dc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
 	}
-
+	Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
 	_player->render();
 }
 

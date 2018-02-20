@@ -112,7 +112,10 @@ void StageScene::update()
 				}
 				else
 				{
-
+					
+					SCENEMANAGER->init("npc");
+					_player->setPosition(WINSIZEX - 30, WINSIZEY - 25);
+					SCENEMANAGER->changeScene("npc");
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "Item.h"
+#include <vector>
 
 
 
@@ -85,6 +86,9 @@ class shopchildren : public gameNode
 {
 
 private :
+
+	vector<item*> _vitem;
+	vector<item*>::iterator _viItem;
 
 	select _sele;
 	shopinfo _shopinfo;		// 상점 상태

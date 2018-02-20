@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "battleScene.h"
+#include "player.h"
 
 
 battleScene::battleScene()
@@ -30,23 +31,25 @@ void battleScene::update()
 		//플레이어의 행동패턴의 종류는 (기본공격,스킬사용,플레이어가 한 타일을 이동,아이템을 사용) 
 		//에너미랑 싸울때는 내가 공격하는 상대의 속성도 불러와야하는건가...?
 
-		if (_playerAction == playerMove)	
+		if (_player->getplayerAction() == playerMove)	
 		{
 			//움직이고 턴을 넘겨줌
+			//_player->dungeonMove();
+
 			_battleTrun = partnerTurn;
 		}
-		else if (_playerAction == playerAttack)	
+		else if (_player->getplayerAction() == playerAttack)
 		{
 			//공격하고 턴을 넘겨줌
-			
+			//_player->
 			_battleTrun = partnerTurn;
 		}
-		else if (_playerAction == playerUseSkill)
+		else if (_player->getplayerAction() == playerUseSkill)
 		{
 			//스킬쓰고 넘겨줌
 			_battleTrun = partnerTurn;
 		}
-		else if (_playerAction == playerUseItem)
+		else if (_player->getplayerAction() == playerUseItem)
 		{
 			//아이템쓰고 넘겨줌
 			_battleTrun = partnerTurn;

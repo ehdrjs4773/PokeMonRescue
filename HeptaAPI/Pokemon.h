@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "skills.h"
 #include <vector>
 #include <math.h>
 
@@ -62,6 +63,9 @@ protected:
 	// 적을 잡으면 얻는 경험치
 	USHORT _exp;
 
+	vector<skills*>				_vSkills;		// 스킬 벡터
+	vector<skills*>::iterator	_vSkillsIter;	// 스킬 벡터 이터레이터
+
 public:
 	pokemon();
 	~pokemon();
@@ -70,6 +74,7 @@ public:
 	void pokemonStatus(string name, int level);
 	void expPlus(int exp);
 	void islevelUp();
+	bool addSkill(skills* sk);
 
 	//각종 접근자
 	inline int getMaxHP() { return _maxHP; }
@@ -83,6 +88,9 @@ public:
 	inline int getLevel() { return _level; }
 	inline ELEMENT getElement() { return _element; }
 	inline string getName() { return _pokemonName; }
+
+	inline vector<skills*> getVSkill() { return _vSkills; }
+
 
 	//설정자
 	inline int setCurrentEXP(int exp) { _currentEXP = exp; }

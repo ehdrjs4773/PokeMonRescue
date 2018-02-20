@@ -43,8 +43,6 @@ void pokemon::pokemonStatus(string name, int level)
 	_specialATK = _racialSpecialATK;
 	_specialDEF = _racialSpecialDEF;
 
-	
-	
 }
 
 //경험치올려주는거
@@ -61,10 +59,21 @@ void pokemon::islevelUp()
 		_level++;
 		_currentEXP = _currentEXP - _maxEXP; //레벨업하고 남은 경험치는 레벨업되고 남아야하니까
 		_maxEXP += _level * 30;				 //음...공식으로 집어넣고싶은데
-		_maxHP += 3;					
+		_maxHP += 3;
 		_atk += 2;
 		_def += 2;
 		_specialATK += 2;
 		_specialDEF += 2;
+	}
+}
+
+bool pokemon::addSkill(skills* sk)
+{
+	if (_vSkills.size() >= 4)
+		return false;
+	else
+	{
+		_vSkills.push_back(sk);
+		return true;
 	}
 }

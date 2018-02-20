@@ -2,6 +2,8 @@
 #include "gameNode.h"
 #include <vector>
 
+class player;
+
 //일단 플레이어턴,파트너턴,에너미턴을 만들 이넘문
 enum TurnChange
 {
@@ -10,13 +12,7 @@ enum TurnChange
 	enemyTurn
 };
 
-enum playerAction	//(임시)
-{
-	playerMove = 1,
-	playerAttack,
-	playerUseSkill,
-	playerUseItem
-};
+
 
 enum partnerAction	//(임시)
 {
@@ -37,9 +33,11 @@ class battleScene
 private:
 	TurnChange _battleTrun;
 
-	playerAction _playerAction;		
+	
 	partnerAction _partnerAction;
 	EnemyAction _enemyAction;
+
+	player*		  _player;
 	
 public:
 	battleScene();
@@ -50,5 +48,6 @@ public:
 	void update();
 	void render();
 
+	void setPlayerMemAdressLink(player* player) { _player = player; }
 };
 

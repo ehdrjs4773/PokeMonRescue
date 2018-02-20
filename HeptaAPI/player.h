@@ -42,6 +42,14 @@ enum PLAYER_STATE
 	PLAYER_STATE_END
 };
 
+enum playerAction	//(임시)
+{
+	playerMove = 1,
+	playerAttack,
+	playerUseSkill,
+	playerUseItem
+};
+
 //플레이어 기본정보들 담을 구조체
 struct tagPlayer
 {
@@ -68,6 +76,7 @@ private: // ## 맵 정보 ##
 
 private: // ## 포켓몬 정보 ##
 	pokemon* _playerStatus;
+	playerAction _playerAction;		//(임시)
 
 private: // ## 파트너 정보 ##
 	vector<playerPartner*> _vPartner;
@@ -236,6 +245,7 @@ public:
 	inline int getSpecialAtk() { return _playerStatus->getSpecialATK(); }			//스페셜공격력
 	inline int getSpecialDef() { return _playerStatus->getSpecialDef(); }			//스페셜방어력
 	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
+	inline playerAction getplayerAction() { return _playerAction; }					//액션 이넘 (임시)
 
 	//설정자																			
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지

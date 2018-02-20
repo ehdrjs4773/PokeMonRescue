@@ -42,6 +42,11 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	//좌표 초기화 뭐 이건 나중에 리스폰지역으로 받아오면 되니까
 	_pokemon.x = x;
 	_pokemon.y = y;
+
+
+	_pokemon.rc = RectMakeCenter(_pokemon.x, _pokemon.y, 20, 20);
+	//Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
+
 	
 	_pokemon.speed = 2;
 	//디렉션은 기본적으로 아래를 바라보자
@@ -74,39 +79,53 @@ void enemy::release()
 void enemy::update() 
 {
 
-	tile start;
-	tile end;
+	//bool isOpen = false;
+	//tile start;
+	//tile end;
+	//
+	//for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	//{
+	//	RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+	//		_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+	//	if (PtInRect(&temp, PointMake(_pokemon.x, _pokemon.y)))
+	//	{
+	//		start = *_stage->getTileAdress()[i];
+	//		break;
+	//	}
+	//}
+	//
+	//for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
+	//{
+	//	RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
+	//		_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
+	//	if (PtInRect(&temp, PointMake(_ptMouse.x, _ptMouse.y)))
+	//	{
+	//		if (!_stage->getTileAdress()[i]->getIsOpen()) continue;
+	//		else if (_stage->getTileAdress()[i]->getIsOpen())
+	//		{
+	//			isOpen = true;
+	//			end = *_stage->getTileAdress()[i];
+	//		}
+	//		break;
+	//	}
+	//}
+	//
+	//if (!isOpen)
+	//{
+	//	return;
+	//}
+	//_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
+	//_vCloseList = _ast->pathFinder(start);
 
-	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
-	{
-		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
-			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
-		if (PtInRect(&temp, PointMake(_pokemon.x, _pokemon.y)))
-		{
-			start = *_stage->getTileAdress()[i];
-			break;
-		}
-	}
 
-	for (int i = 0; i < _stage->gettileCountX()* _stage->gettileCountY(); ++i)
-	{
-		RECT temp = RectMakeCenter(_stage->getTileAdress()[i]->getCenterX(),
-			_stage->getTileAdress()[i]->getCenterY(), TILESIZEX, TILESIZEY);
-		if (PtInRect(&temp, PointMake(_ptMouse.x, _ptMouse.y)))
-		{
-			if (!_stage->getTileAdress()[i]->getIsOpen()) return;
-			end = *_stage->getTileAdress()[i];
-			break;
-		}
-	}
 
-	_ast->init(_stage->getTileAdress(), _stage->gettileCountX(), _stage->gettileCountY(), start, end);
-	_vCloseList = _ast->pathFinder(start);
 
 	//현재 상태를 받아서 한다.
 	setState();
 	//적의 움직임을 스위치로 관리한다 하지만 아직 각도가아닌 키입력이기에
 	
+	_pokemon.rc = RectMakeCenter(_pokemon.x, _pokemon.y, 20, 20);
+
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
 		_isMove = true;
@@ -117,8 +136,6 @@ void enemy::update()
 	}
 	if(_pokemon.state == STATE_IDLE)
 		enemyAngleSetting();
-
-
 }
 
 void enemy::render() 
@@ -244,12 +261,12 @@ void enemy::setState()
 
 void enemy::enemyAngleSetting()
 {
-	if (_vCloseList.size() <= 0)
-		return;
+	//if (_vCloseList.size() <= 0)
+	//	return;
 
-	RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
-	//float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
-	float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
+	//RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
+	float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
+	//float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
 
 	
 	if(target <= PI8 && target >=0 || target >= PI8*15 && target <= PI8 * 16)

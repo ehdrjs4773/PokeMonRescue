@@ -7,6 +7,9 @@
 
 struct tagTempPokemon
 {
+
+	RECT rc;
+
 	image* idleImage;
 	image* moveImage;
 	image* atkImage;
@@ -28,6 +31,7 @@ struct tagTempPokemon
 
 	int direction;
 	int state;
+	
 };
 
 
@@ -128,6 +132,8 @@ public:
 	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }
 	inline void setPlayerMemoryAdressLink(player* pl) { _pl = pl; }
 
+
+	inline RECT getEnemyRect() { return _pokemon.rc; }
 
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }

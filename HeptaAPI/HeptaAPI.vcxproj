@@ -184,6 +184,7 @@
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="purin.cpp" />
     <ClCompile Include="rukario.cpp" />
+    <ClCompile Include="SaveLoad.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="shopchildren.cpp" />
     <ClCompile Include="Skill.cpp" />

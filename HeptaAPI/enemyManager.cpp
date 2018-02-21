@@ -20,15 +20,26 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
+
+
 	imageInit();
-	enemyBirth(ENEMY_CHICORITA, 2, 2,	1);
-	enemyBirth(ENEMY_DANDEGI, 2, 3,		1);
-	enemyBirth(ENEMY_POLYGON, 2, 4,		1);
-	enemyBirth(ENEMY_PURIN, 3, 2,		1);
-	enemyBirth(ENEMY_RUKARIO, 3, 4,		1);
-	enemyBirth(ENEMY_GRAENA, 4, 2,		1);
-	enemyBirth(ENEMY_MANKEY, 4, 3,		1);
-	enemyBirth(ENEMY_TANGURI, 4, 4,		1);
+	enemyBirth(ENEMY_CHICORITA, 
+	_stage->getrespontile()[0]->getIndexX(),
+	_stage->getrespontile()[0]->getIndexY(),	1);
+	enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
+		_stage->getrespontile()[1]->getIndexY(), 1);
+//	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
+//		_stage->getrespontile()[3]->getIndexY(), 1);
+	enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
+		_stage->getrespontile()[4]->getIndexY(), 1);
+	enemyBirth(ENEMY_RUKARIO, _stage->getrespontile()[5]->getIndexX(),
+		_stage->getrespontile()[5]->getIndexY(), 1);
+	enemyBirth(ENEMY_GRAENA, _stage->getrespontile()[6]->getIndexX(),
+		_stage->getrespontile()[6]->getIndexY(), 1);
+	enemyBirth(ENEMY_MANKEY, _stage->getrespontile()[7]->getIndexX(),
+		_stage->getrespontile()[7]->getIndexY(), 1);
+	enemyBirth(ENEMY_TANGURI, _stage->getrespontile()[8]->getIndexX(),
+		_stage->getrespontile()[8]->getIndexY(), 		1);
 
 	_selectSkill = 0;
 	_enemyTurn = false;
@@ -46,7 +57,6 @@ void enemyManager::update()
 	}
 	_tileCheckX = _pl->getPlayerTileIndexX();
 	_tileCheckY = _pl->getPlayerTileIndexY();
-	enemyTrunManager();
 	enemyDead();
 
 }
@@ -321,12 +331,16 @@ void enemyManager::enemyTrunManager()
 				//여기가 완전히 턴이 끝나는부분
 				_enemyAction = enemyMove;
 			}
+
 			if (!_vEnemyPokemon[i]->getMyturn())
 			{	
 					continue;	
 			}
 
 
+
+
+	
 			_vEnemyPokemon[i]->enemyASTARStart();
 
 			bool canAtk = false;
@@ -352,13 +366,15 @@ void enemyManager::enemyTrunManager()
 			}
 			else if (!canAtk)
 			{
+				//if (getDistance(_pl->getX(), _pl->getY(), _vEnemyPokemon[i]->getX(), _vEnemyPokemon[i]->getY()) >= 240)
+				//{
+				//	_vEnemyPokemon[i]->setMyturn(false);
+				//}
+
 				enemyMoveManager(i);
 				continue;
 			}
-			else
-			{
-				_vEnemyPokemon[i]->setMyturn(false);
-			}
+
 			_vEnemyPokemon[i]->setMyturn(false);
 		}
 

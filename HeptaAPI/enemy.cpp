@@ -308,7 +308,7 @@ void enemy::enemyAngleSetting()
 
 void enemy::enemyASTARStart()
 {
-	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480) return;
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 120) return;
 	tile start;
 	tile end;
 
@@ -440,6 +440,10 @@ void enemy::enemyHurtMotion()
 }
 void enemy::enemyMoveSign()
 {
-	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480) return;
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480)
+	{
+		_myTrun = false;
+		return;
+	}
 	_isMove = true;
 }

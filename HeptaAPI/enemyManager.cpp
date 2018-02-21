@@ -21,16 +21,16 @@ enemyManager::~enemyManager()
 HRESULT enemyManager::init()
 {
 	imageInit();
-	enemyBirth(ENEMY_CHICORITA, 2, 2, 99);
-	enemyBirth(ENEMY_DANDEGI, 2, 3, 99);
-	enemyBirth(ENEMY_POLYGON, 2, 4, 99);
-	enemyBirth(ENEMY_PURIN, 3, 2, 99);
-	enemyBirth(ENEMY_RUKARIO, 3, 4, 99);
-	enemyBirth(ENEMY_GRAENA, 4, 2, 99);
-	enemyBirth(ENEMY_MANKEY, 4, 3, 99);
-	enemyBirth(ENEMY_TANGURI, 4, 4, 99);
+	enemyBirth(ENEMY_CHICORITA, 2, 2,	1);
+	enemyBirth(ENEMY_DANDEGI, 2, 3,		1);
+	enemyBirth(ENEMY_POLYGON, 2, 4,		1);
+	enemyBirth(ENEMY_PURIN, 3, 2,		1);
+	enemyBirth(ENEMY_RUKARIO, 3, 4,		1);
+	enemyBirth(ENEMY_GRAENA, 4, 2,		1);
+	enemyBirth(ENEMY_MANKEY, 4, 3,		1);
+	enemyBirth(ENEMY_TANGURI, 4, 4,		1);
 
-
+	_selectSkill = 0;
 	_enemyTurn = false;
 	return S_OK;
 }
@@ -69,74 +69,76 @@ void enemyManager::enemyMoveManager(int arrNum)
 
 				switch (_vEnemyPokemon[arrNum]->getDirection())
 				{
-			case DOWN:
-				if (currentTileX == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
-				if (_tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
-			case UP:
-				if (currentTileX == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
-				if (_tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
-			case RIGHT:
-				if (currentTileX + 1 == _tileCheckX  && currentTileY == _tileCheckY)
+				case DOWN:
+					if (currentTileX == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
+
+					if (_tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
 					break;
-				if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
-			case LEFT:
-				if (currentTileX - 1 == _tileCheckX && currentTileY == _tileCheckY) break;
-				if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
+				case UP:
+					if (currentTileX == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
 
-			case RIGHTUP:
-				if (currentTileX + 1 == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
+					if (_tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
+				case RIGHT:
+					if (currentTileX + 1 == _tileCheckX && currentTileY == _tileCheckY) break;
 
-				if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
-					&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND
-					&& _tile[currentTileX + 1 + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
-			case LEFTUP:
-				if (currentTileX - 1 == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
-				if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
-					&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND
-					&& _tile[currentTileX - 1 + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
+					if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
+				case LEFT:
+					if (currentTileX - 1 == _tileCheckX && currentTileY == _tileCheckY) break;
+					if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
 
-			case RIGHTDOWN:
-				if (currentTileX + 1 == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
-				if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
-					&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND
-					&& _tile[currentTileX + 1 + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
-			case LEFTDOWN:
-				if (currentTileX - 1 == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
-				if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
-					&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND
-					&& _tile[currentTileX - 1 + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
-				{
-					_vEnemyPokemon[arrNum]->enemyMoveSign();
-				}
-				break;
+				case RIGHTUP:
+					if (currentTileX + 1 == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
+
+					if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
+						&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND
+						&& _tile[currentTileX + 1 + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
+				case LEFTUP:
+					if (currentTileX - 1 == _tileCheckX && currentTileY - 1 == _tileCheckY) break;
+					if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
+						&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND
+						&& _tile[currentTileX - 1 + _stage->gettileCountX() *(currentTileY - 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
+
+				case RIGHTDOWN:
+					if (currentTileX + 1 == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
+					if (_tile[currentTileX + 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
+						&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND
+						&& _tile[currentTileX + 1 + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
+				case LEFTDOWN:
+					if (currentTileX - 1 == _tileCheckX && currentTileY + 1 == _tileCheckY) break;
+					if (_tile[currentTileX - 1 + _stage->gettileCountX() *currentTileY]->gettileKind() == LAND
+						&& _tile[currentTileX + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND
+						&& _tile[currentTileX - 1 + _stage->gettileCountX() *(currentTileY + 1)]->gettileKind() == LAND)
+					{
+						_vEnemyPokemon[arrNum]->enemyMoveSign();
+					}
+					break;
 				}
 
 }
@@ -230,15 +232,47 @@ void enemyManager::enemyBirth(ENEMY enemys, int tileX, int tileY, int level)
 
 void enemyManager::enemyAtkManager(int arrNum)
 {
-	_vEnemyPokemon[arrNum]->enemyAttackMotion();
-	_vEnemyPokemon[arrNum]->getPokemonStatus();
+	if(_vEnemyPokemon[arrNum]->getState() != STATE_ATTACK 
+		&&_vEnemyPokemon[arrNum]->getState() != STATE_SKILL)
+	_selectSkill = RND->getInt(2);
+
+	if (_vEnemyPokemon[arrNum]->getPokemoName() != "단데기")
+	{
+		_selectSkill = 0;
+	}
+
+	switch (_selectSkill)
+	{
+	case 0:
+		if (_vEnemyPokemon[arrNum]->getState() != STATE_ATTACK)
+		{
+			int plHP = _pl->getCurrentHP();
+			int emAtk = _vEnemyPokemon[arrNum]->getAtk();
+			plHP -= emAtk;
+			_pl->getStatus()->setCurrentHP(plHP);
+		}
+		_vEnemyPokemon[arrNum]->enemyAttackMotion();
+		break;
+
+	case 1:
+		_vEnemyPokemon[arrNum]->enemyskillSign();
+		if (_vEnemyPokemon[arrNum]->getState() != STATE_ATTACK)
+		{
+			int plHP = _pl->getCurrentHP();
+			int emAtk = _vEnemyPokemon[arrNum]->getSpecialATK();
+			plHP -= emAtk;
+			_pl->getStatus()->setCurrentHP(plHP);
+		}
+		break;
+	}
 }
 void enemyManager::enemyTrunManager()
 {
 	
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
-		//시작부분
+		//시작부분     
+		
 		_enemyTurn = true;
 	}
 
@@ -285,7 +319,6 @@ void enemyManager::enemyTrunManager()
 				}
 				_enemyTurn = false;
 				//여기가 완전히 턴이 끝나는부분
-				_enemyAction = enemyMove;
 			}
 			if (!_vEnemyPokemon[i]->getMyturn())
 			{	
@@ -321,11 +354,11 @@ void enemyManager::enemyTrunManager()
 				enemyMoveManager(i);
 				continue;
 			}
+			else
+			{
+				_vEnemyPokemon[i]->setMyturn(false);
+			}
 			_vEnemyPokemon[i]->setMyturn(false);
-
-
-
-
 		}
 
 

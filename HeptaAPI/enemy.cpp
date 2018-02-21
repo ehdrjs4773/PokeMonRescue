@@ -26,6 +26,8 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 {
 
 	//구조체에 묶어두었던 포켓몬의 이름을 받아오며 스테이터스 초기화
+
+	_pokemoName = PokemonName.pokemonName;
 	pokemonStatus(PokemonName.pokemonName, level);
 
 	//4대 이미지 초기화
@@ -58,7 +60,6 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 
 
 
-
 	//프레임번호와 카운트의 초기화
 	_idleIndex	= 0;
 	_moveIndex	= 0;
@@ -68,6 +69,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	_distance	= 0;
 	_target		= 0;
 	_count		= 0;
+	_hurtTimer	= 0;
 
 	_idleReverse	=		false;
 	_moveReverse	=		false;
@@ -101,7 +103,6 @@ void enemy::update()
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
 		damageToHP(10);
-		_isMove = true;
 	}
 	if (_isMove)
 	{
@@ -138,6 +139,10 @@ void enemy::render()
 	case STATE_HURT:
 		_pokemon.hurtImage->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - _pokemon.hurtImage->getFrameHeight() / 2,
 			_pokemon.y - _pokemon.hurtImage->getFrameWidth() / 2,_hurtIndex, _pokemon.direction);
+		break;
+	case STATE_SKILL:
+		IMAGEMANAGER->findImage("단데기스킬")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x -24,
+			_pokemon.y -60, _atkIndex , _pokemon.direction);
 		break;
 	}
 
@@ -190,14 +195,26 @@ void enemy::setState()
 			_hurtIndex = 0;
 			break;
 		case STATE_HURT:
-			if (0 != _pokemon.hurtImage->getMaxFrameX())
-			{
-				if (_hurtReverse) { _hurtIndex--; }
-				if (!_hurtReverse) { _hurtIndex++; }
-			}
+
+				_hurtTimer += TIMEMANAGER->getElapsedTime();
+				if (_hurtTimer >= 0.05)
+				{
+					_pokemon.state = STATE_IDLE;
+				}
+				_hurtIndex = 0;
 			_idleIndex = 0;
 			_moveIndex = 0;
 			_atkIndex = 0;
+			break;
+
+		case STATE_SKILL:
+			if (0 != IMAGEMANAGER->findImage("단데기스킬")->getMaxFrameX())
+			{
+				_atkIndex++;
+			}
+			_idleIndex = 0;
+			_moveIndex = 0;
+			_hurtIndex = 0;
 			break;
 		}
 		
@@ -407,8 +424,18 @@ void enemy::enemyAttackMotion()
 {
 	_pokemon.state = STATE_ATTACK;
 }
+
+void enemy::enemyskillSign()
+{
+	if(_pokemoName =="단데기")
+	_pokemon.state = STATE_SKILL;
+}
 void enemy::enemyHurtMotion()
 {
+	if (_pokemon.state != STATE_HURT)
+	{
+		_hurtTimer = 0;
+	}
 	_pokemon.state = STATE_HURT;
 }
 void enemy::enemyMoveSign()

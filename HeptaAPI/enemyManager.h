@@ -19,12 +19,15 @@ enum ENEMY
 	ENEMY_ELECTIVIRE
 };
 
-enum EnemyAction	//(임시)
+
+enum ENEMYACTION
 {
 	enemyMove = 1,
 	enemyAttack,
-	enemyUseSkill
+	enemyUseSkill,
+	enemyEnd,
 };
+
 
 //전방선언!!!!!!
 class tile;
@@ -50,7 +53,7 @@ private://적객체 관련 생산
 	enemy*	_tanguri;
 	enemy*	_electivire;
 	//적의 객체 틀 생성 완료
-	EnemyAction _enemyAction; //에너미 액션이넘 (임시)
+
 
 	//구조체로 이름을 정해두고 보내서 쉽게 쉽게 가즈아!!!!
 	tagImageName	_chicoName;
@@ -64,6 +67,8 @@ private://적객체 관련 생산
 	tagImageName	_tanguriName;
 	tagImageName	_electivireName;
 
+	ENEMYACTION _enemyAction;
+
 private://벡터관련 생산
 
 	//적포켓몬들을 담아줄 벡터
@@ -74,7 +79,7 @@ private://벡터관련 생산
 private:
 	int _tileCheckX;
 	int _tileCheckY;
-	
+	int _selectSkill;
 
 	int _r;
 	bool _canAtk;
@@ -103,7 +108,10 @@ public:
 	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }
 	inline void setPlayerMemoryAdressLink(player* pl) { _pl = pl; }
 
-	inline EnemyAction getEnemyAction() { return _enemyAction; }					//액션 이넘 (임시)
+
+	inline ENEMYACTION getEnemyAction() { return _enemyAction; }
+	inline void setEnemyAction(ENEMYACTION enemyAction) { _enemyAction = enemyAction; }
+
 
 	void enemyTrunManager();
 	void enemyAtkManager(int arrNum);

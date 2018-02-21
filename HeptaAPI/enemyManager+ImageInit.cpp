@@ -32,6 +32,7 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_dandegiName.hurtImage, ".//enemyImage//Dandegi_Hurts.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("단데기스킬", ".//enemyImage//Dandegi_Skill.BMP", 120, 960, 2, 8, true, true, RGB(255, 0, 255));
 
 
 	_polygonName.pokemonName =	 "폴리곤";

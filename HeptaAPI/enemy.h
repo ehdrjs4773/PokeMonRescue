@@ -53,7 +53,8 @@ enum state
 	STATE_IDLE,
 	STATE_ATTACK,
 	STATE_MOVE,
-	STATE_HURT
+	STATE_HURT,
+	STATE_SKILL
 };
 
 
@@ -88,6 +89,8 @@ private:
 	bool _hurtReverse;
 	bool _moveReverse;
 	bool _isMove;
+	
+	string _pokemoName;
 
 	//타일단위 이동을 위한 이동거리와 임시 스피드!
 	float _distance;
@@ -99,6 +102,8 @@ private:
 	bool _cheackTrun;
 
 	float _target;
+
+	float _hurtTimer;
 
 private:
 	//이건 부모클래스에서 충분히 할 수 있을듯 싶어서 이렇게!!!
@@ -130,6 +135,7 @@ public:
 	void enemyAngleSetting();
 	void enemyTileMove();
 	void enemyMoveSign();
+	void enemyskillSign( );
 	void enemyASTARStart();
 
 
@@ -144,17 +150,31 @@ public:
 
 	inline RECT getEnemyRect() { return _pokemon.rc; }
 	inline bool getMyturn() { return _myTrun; }
-	inline void setMyturn(bool myTurn) { _myTrun = myTurn; }
 	inline bool getCheakTrun() { return _cheackTrun; }
+
+	inline void setMyturn(bool myTurn) { _myTrun = myTurn; }
 	inline void setCheakturn(bool cheakTrun) { _cheackTrun = cheakTrun; }
+
+
+	inline int getState() { return _pokemon.state; }
+	inline int getDirection() { return _pokemon.direction; }
+	inline int getAtk() { return _atk; }
+
 
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
 	inline float getTileX() { return _pokemon.x/24; }
 	inline float getTileY() { return _pokemon.y/24; }
-	inline int getDirection() { return _pokemon.direction; }
-	inline void damageToHP(int damage) { _currentHP-=damage; }
+	
 	inline void setNeedAstar(bool needAstar) { _needAstar = needAstar; }
+
+
+	inline void damageToHP(int damage)
+	{
+		_currentHP -= damage;
+		enemyHurtMotion();
+	}
+
 
 	bool getIsAttack() 
 	{
@@ -166,5 +186,7 @@ public:
 			return _isAttack;
 	}
 
+
+	string getPokemoName() { return _pokemoName; }
 	bool setIsAttack(bool isattack) { _isAttack = isattack; }
 };

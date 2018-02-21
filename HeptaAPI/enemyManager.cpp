@@ -20,8 +20,7 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-
-
+	soundInit();
 	imageInit();
 	enemyBirth(ENEMY_CHICORITA, 
 	_stage->getrespontile()[0]->getIndexX(),
@@ -175,6 +174,7 @@ void enemyManager::enemyAtkManager(int arrNum)
 			int emAtk = _vEnemyPokemon[arrNum]->getAtk();
 			plHP -= emAtk;
 			_pl->getStatus()->setCurrentHP(plHP);
+			SOUNDMANAGER->play("공격", 1, false);
 		}
 		_vEnemyPokemon[arrNum]->enemyAttackMotion();
 		break;
@@ -186,6 +186,8 @@ void enemyManager::enemyAtkManager(int arrNum)
 			int emAtk = _vEnemyPokemon[arrNum]->getSpecialATK();
 			plHP -= emAtk;
 			_pl->getStatus()->setCurrentHP(plHP);
+
+			SOUNDMANAGER->play("레쿠쟈", 1, false);
 		}
 		_vEnemyPokemon[arrNum]->enemyskillSign();
 
@@ -407,6 +409,12 @@ void enemyManager::enemyDead()
 		//언사인드 인트라 체력이 0밑으로가면 오버플로우로 제일 윗부분으로 가서 그냥 이렇게 해놨음 ㅎ
 		if (_vEnemyPokemon[i]->getCurrentHP() >= 60000 || _vEnemyPokemon[i]->getCurrentHP() <= 0)
 		{
+			if (_vEnemyPokemon[i]->getName() == "푸린")
+			{
+				if (SOUNDMANAGER->isPlaySound("푸린의노래"))
+					SOUNDMANAGER->stop("푸린의노래");
+
+			}
 			_vEnemyPokemon.erase(_vEnemyPokemon.begin() + i);
 		}
 	}

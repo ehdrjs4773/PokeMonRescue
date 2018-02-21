@@ -127,6 +127,7 @@ public:
 	void update();
 	void render();
 
+
 	void setState();
 	void enemyAttackMotion();
 	void enemyHurtMotion();

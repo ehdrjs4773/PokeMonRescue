@@ -356,6 +356,7 @@ void player::dungeonMove()
 	//½ºÆä¼È °ø°Ý 1
 	if (KEYMANAGER->isOnceKeyDown('Q') && !_isAttack && !_onceMove && !_isHurt)
 	{
+		SOUNDMANAGER->play("Æø¹ßÀ½");
 		_isAttack = true;
 		_player.state = PLAYER_SPECIAL_ATTACK_1;
 	}

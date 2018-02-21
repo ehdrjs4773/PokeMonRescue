@@ -440,10 +440,23 @@ void enemy::enemyHurtMotion()
 }
 void enemy::enemyMoveSign()
 {
-	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480)
+	if (_pokemoName == "Çª¸°")
+	{
+		float volumedisTance = getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) / 200;
+		float volume = 1 / volumedisTance / 2;
+		SOUNDMANAGER->setVolume("Çª¸°ÀÇ³ë·¡", volume);
+		if (!SOUNDMANAGER->isPlaySound("Çª¸°ÀÇ³ë·¡"))
+			SOUNDMANAGER->play("Çª¸°ÀÇ³ë·¡", volume, true);
+
+	}
+
+
+
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 120)
 	{
 		_myTrun = false;
 		return;
 	}
+
 	_isMove = true;
 }

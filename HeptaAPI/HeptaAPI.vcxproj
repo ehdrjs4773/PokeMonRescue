@@ -141,19 +141,15 @@
     <ClCompile Include="battleScene.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
-    <ClCompile Include="chicorita.cpp" />
     <ClCompile Include="collision.cpp" />
-    <ClCompile Include="dandegi.cpp" />
     <ClCompile Include="database.cpp" />
     <ClCompile Include="dialogue.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
-    <ClCompile Include="electivire.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="enemyManager+ImageInit.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
-    <ClCompile Include="graena.cpp" />
     <ClCompile Include="groundDestroyManager.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
@@ -162,7 +158,6 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="keyAniManager.cpp" />
     <ClCompile Include="keyManager.cpp" />
-    <ClCompile Include="mankey.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="oPeningMovie.cpp" />
     <ClCompile Include="oPeningSelect.cpp" />
@@ -183,10 +178,7 @@
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokeinfo.cpp" />
     <ClCompile Include="pokemon.cpp" />
-    <ClCompile Include="polygon.cpp" />
     <ClCompile Include="progressBar.cpp" />
-    <ClCompile Include="purin.cpp" />
-    <ClCompile Include="rukario.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="shopchildren.cpp" />
@@ -196,7 +188,6 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="tanguri.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
@@ -204,6 +195,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="enemyManager+soundInit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action.h" />
@@ -212,19 +204,15 @@
     <ClInclude Include="battleScene.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
-    <ClInclude Include="chicorita.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="commonMacroFunction.h" />
-    <ClInclude Include="dandegi.h" />
     <ClInclude Include="database.h" />
     <ClInclude Include="dialogue.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
-    <ClInclude Include="electivire.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="gameNode.h" />
-    <ClInclude Include="graena.h" />
     <ClInclude Include="groundDestroyManager.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
@@ -233,7 +221,6 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="keyAniManager.h" />
     <ClInclude Include="keyManager.h" />
-    <ClInclude Include="mankey.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="oPeningMovie.h" />
     <ClInclude Include="oPeningSelect.h" />
@@ -242,12 +229,9 @@
     <ClInclude Include="playGround.h" />
     <ClInclude Include="pokeinfo.h" />
     <ClInclude Include="Pokemon.h" />
-    <ClInclude Include="polygon.h" />
     <ClInclude Include="progressBar.h" />
-    <ClInclude Include="purin.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="rukario.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="shopchildren.h" />
     <ClInclude Include="singletonBase.h" />
@@ -257,7 +241,6 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageScene.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="tanguri.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="tempScene.h" />
     <ClInclude Include="tile.h" />

@@ -213,33 +213,6 @@
     <ClInclude Include="aStar.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
-    <ClInclude Include="chicorita.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="dandegi.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="electivire.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="graena.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="mankey.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="rukario.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="tanguri.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="purin.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
-    <ClInclude Include="polygon.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClInclude>
     <ClInclude Include="shopchildren.h">
       <Filter>playGround\최동건</Filter>
     </ClInclude>
@@ -401,33 +374,6 @@
     <ClCompile Include="aStar.cpp">
       <Filter>playGround\한재윤</Filter>
     </ClCompile>
-    <ClCompile Include="chicorita.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="dandegi.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="electivire.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="graena.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="mankey.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="rukario.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="tanguri.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="purin.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
-    </ClCompile>
     <ClCompile Include="shopchildren.cpp">
       <Filter>playGround\최동건</Filter>
     </ClCompile>
@@ -475,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="oPeningSelect.cpp">
       <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager+soundInit.cpp">
+      <Filter>playGround\이준우</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -103,6 +103,7 @@ public:
 	inline vector<enemy*> getVEnemyPokemon() { return _vEnemyPokemon; };
 	inline vector<enemy*>::iterator getVIEnemyPokemon() { return _viEnemyPokemon; };	
 
+	void soundInit();
 
 	inline void setTileMemoryAdressLink(vector<tile*> tiles) { _tile = tiles; }
 	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }

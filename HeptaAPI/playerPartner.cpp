@@ -44,10 +44,7 @@ void playerPartner::update()
 	this->townMove();
 	//this->dgMove();
 
-	_partner.imageRc = RectMakeCenter(_partner.x, _partner.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
-		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
-
-	_partner.rc = RectMakeCenter(_partner.x, _partner.y, 24, 24);
+	
 }
 void playerPartner::render() 
 {

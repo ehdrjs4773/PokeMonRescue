@@ -40,5 +40,9 @@ public:
 	
 	//vector<Item> setVitem(Item* item) { _vitem.push_back(item); }
 
+	void save();
+
+	bool load();
+
 };
 

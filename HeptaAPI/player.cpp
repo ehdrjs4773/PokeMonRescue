@@ -31,6 +31,7 @@ HRESULT player::init(string charName)
 
 	_isWallCrash = false;
 	_player.townSpeed = 3.0f;
+	_player.money = 1000;
 
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
@@ -55,8 +56,6 @@ void player::update()
 	//던전에서 움직임
 	//dungeonMove();
 
-	CAMERAMANAGER->cameraMove(_player.x, _player.y);
-
 	//this->FrameUpdate();
 
 	//for (_viPartner = _vPartner.begin(); _viPartner != _vPartner.end(); ++_viPartner)
@@ -71,9 +70,9 @@ void player::render()
 	int y = CAMERAMANAGER->getY();
 
 	//SetBkMode(hdc, TRANSPARENT);
-	char str[128];
-	sprintf_s(str, " 충돌 불값 현재 값 : %d ", _town->getHouse());
-	TextOut(hdc, x + 200, y + 50, str, strlen(str));
+	//char str[128];
+	//sprintf_s(str, " 바텀무브 불값 : %d ", _isBottomMove);
+	//TextOut(hdc, x + 200, y + 50, str, strlen(str));
 	//char str2[128];
 	//sprintf_s(str2, " ( _player.y ) 현재 값 : %f ", _player.y);
 	//TextOut(hdc, x + 200, y + 75, str2, strlen(str2));
@@ -320,13 +319,13 @@ void player::townMove()
 			_player.state = PLAYER_IDLE;
 		}
 	}
-	
+
+	//player+move.cpp에 있음
+	playerTownMove();
 	//프레임 업데이트
 	FrameUpdate();
 	//프레임 보정
 	correction();
-	//player+move.cpp에 있음
-	playerTownMove();
 	//실제렉트
 	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
 	//이미지 뿌려주는 rc
@@ -524,9 +523,6 @@ void player::dungeonMove()
 			_player.state = PLAYER_MOVE;
 		}
 	}
-	
-	//프레임 업뎃
-	FrameUpdate();
 	//프레임 보정 ( 던전에선 필요 없을듯 )
 	//correction();
 	//player+move.cpp에 있음
@@ -542,12 +538,12 @@ void player::dungeonMove()
 			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+				
 				//보정			
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_BOTTOM;
 				_player.state = PLAYER_IDLE;
 				_playerAction = playerMove;			//임시
 				//아이템 먹었을 때
@@ -562,12 +558,12 @@ void player::dungeonMove()
 				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_LEFT_BOTTOM;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -580,12 +576,12 @@ void player::dungeonMove()
 			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_LEFT;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -599,12 +595,12 @@ void player::dungeonMove()
 				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_LEFT_TOP;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -617,12 +613,12 @@ void player::dungeonMove()
 			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_TOP;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -636,12 +632,12 @@ void player::dungeonMove()
 				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_RIGHT_TOP;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -654,12 +650,12 @@ void player::dungeonMove()
 			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_RIGHT;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -673,12 +669,12 @@ void player::dungeonMove()
 				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 			{
 				_onceMove = false;
+
 				//보정
 				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
 					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.direction = PLAYER_RIGHT_BOTTOM;
 				_player.state = PLAYER_IDLE;
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
@@ -690,6 +686,11 @@ void player::dungeonMove()
 		}
 		break;
 	}
+
+	//프레임 업뎃
+	FrameUpdate();
+
+	CAMERAMANAGER->cameraMove(_player.x, _player.y);
 	
 	//실제렉트
 	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
@@ -706,6 +707,8 @@ void player::addPartner(pokemon* p)
 
 	playerPartner* temp;
 	temp->init(p->getName());
+	_playerStatus = new pokemon;
+	_playerStatus->pokemonStatus(p->getName(), 1);
 
 	_vPartner.push_back(temp);
 }
@@ -729,6 +732,9 @@ void player::setPosition(float startX, float startY)
 	//이미지 그려주는 렉트
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+}
 
-	
+void player::enemyAttack()
+{
+
 }

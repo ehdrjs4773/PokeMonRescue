@@ -55,9 +55,18 @@ void playerPartner::partnerTownMove()
 	{
 		_partner.direction = PARTNER_RIGHT_BOTTOM;
 	}
+	_partner.rc = RectMakeCenter(_partner.x, _partner.y, 24, 24);
+	
+	_partner.imageRc = RectMakeCenter(_partner.x, _partner.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
+		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
+
 	
 }
 void playerPartner::partnerDgMove()
 {
 
+	_partner.rc = RectMakeCenter(_partner.x, _partner.y, 24, 24);
+
+	_partner.imageRc = RectMakeCenter(_partner.x, _partner.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
+		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
 }

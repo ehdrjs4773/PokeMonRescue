@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "oPeningSelect.h"
 #include "inventoryChiled.h"
+#include "player.h"
 
 
 
@@ -18,12 +19,15 @@ oPeningSelect::~oPeningSelect()
 HRESULT oPeningSelect::init(void)
 {
 	map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
-	if (((inventoryChiled*)tmepIter->second)->load())
+	bool temptemp = ((inventoryChiled*)tmepIter->second)->load();
+	if (temptemp)
 	{
 		SCENEMANAGER->changeScene("npc");
 		SCENEMANAGER->init("npc");
 		return S_OK;
 	}
+
+	CAMERAMANAGER->init(WINSIZEX, WINSIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
 
 	IMAGEMANAGER->addImage("臂硅版", ".\\bmps\\oPeningSelect\\openingDialogue.bmp", 320, 58, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("硅版", ".\\bmps\\oPeningSelect\\Mail.bmp", 480, 360, false, true, MAGENTA);
@@ -31,13 +35,13 @@ HRESULT oPeningSelect::init(void)
 	IMAGEMANAGER->addImage("select", ".\\bmps\\oPeningSelect\\selectImg.bmp", 15, 15, false, true, MAGENTA);
 
 	_startingMonster[0] = "府磊根";
-	_startingMonster[1] = "部何扁";
-	_startingMonster[2] = "捞惑秦揪";
+	_startingMonster[1] = "府磊根";
+	_startingMonster[2] = "瘤扼摹";
 	_startingMonster[3] = "府磊根";
-	_startingMonster[4] = "部何扁";
-	_startingMonster[5] = "捞惑秦揪";
+	_startingMonster[4] = "府磊根";
+	_startingMonster[5] = "府磊根";
 	_startingMonster[6] = "府磊根";
-	_startingMonster[7] = "部何扁";
+	_startingMonster[7] = "府磊根";
 
 	_Opening = Opening_One;
 	_selectNum = 0;
@@ -193,6 +197,8 @@ void oPeningSelect::keyControl(void)
 			if (DIALOGUE->getCurrentLine() <= 32) DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
 			break;
 		case Opening_Four:
+
+			_player->init(_startingMonster[_selectNum].c_str());
 			SCENEMANAGER->changeScene("npc");
 			SCENEMANAGER->init("npc");
 			break;

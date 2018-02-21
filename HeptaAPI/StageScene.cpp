@@ -31,7 +31,6 @@ HRESULT StageScene::init()
 
 	_player->setStageMemAdressLink(_nowStage);
 
-	_player->init("¸®ÀÚ¸ù");
 	_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
 
 	_em->setStageMemoryAdressLink(_nowStage);

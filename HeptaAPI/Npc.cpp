@@ -35,7 +35,6 @@ HRESULT Npc::init()
 
 	_town.inout = false;
 	
-	_player->init("¸®ÀÚ¸ù");
 	_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
 
 	//´Ù ‰ç¾î¿ä Âô±ß ><*
@@ -112,8 +111,8 @@ void Npc::update()
 
 	if (IntersectRect(&temp, &_rc3, &_player->getRect()))
 	{
-		SCENEMANAGER->init("Stage1");
 		SCENEMANAGER->changeScene("Stage1");
+		SCENEMANAGER->init("Stage1");
 	}
 	
 }

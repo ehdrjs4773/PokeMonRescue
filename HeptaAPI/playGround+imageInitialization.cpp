@@ -67,6 +67,17 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 
+	IMAGEMANAGER->addFrameImage("지라치_idle", ".\\bmps\\pokemon_state\\지라치_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
+	IMAGEMANAGER->addFrameImage("지라치_move", ".\\bmps\\pokemon_state\\지라치_move.bmp"
+		, 0, 0, 216, 576, 3, 8, false, true, RGB(255, 0, 255));								//움직임
+	IMAGEMANAGER->addFrameImage("지라치_attack", ".\\bmps\\pokemon_state\\지라치_attack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//공격
+	IMAGEMANAGER->addFrameImage("지라치_specialAttack", ".\\bmps\\pokemon_state\\지라치_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
+	IMAGEMANAGER->addFrameImage("지라치_hurt", ".\\bmps\\pokemon_state\\지라치_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
+
 
 	// UI 이미지 초기화 
 

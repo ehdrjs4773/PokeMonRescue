@@ -14,6 +14,8 @@ enum OpeningScene
 	Opening_END
 };
 
+class player;
+
 class oPeningSelect : public gameNode
 {
 private:
@@ -24,6 +26,7 @@ private:
 	int _dialogueTime;
 	bool _isSelect;
 
+	player* _player;
 
 public:
 	oPeningSelect();
@@ -36,5 +39,6 @@ public:
 
 	void keyControl(void);
 
+	void setPlayerMemoryAdressLink(player* play) { _player = play; }
 };
 

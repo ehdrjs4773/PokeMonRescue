@@ -14,6 +14,13 @@ void inventoryChiled::save()
 	{
 		file = CreateFile(str, GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	}
+
+	int strlening = strlen(_player->getStatus()->getName().c_str());
+	WriteFile(file, &strlening, sizeof(int), &write, NULL);
+	char tempstr[128];
+	sprintf(tempstr, "%s", _player->getStatus()->getName().c_str());
+	WriteFile(file, &tempstr, 128, &write, NULL);
+
 	int tempnum = _vitem.size();
 	WriteFile(file, &(*_player->getStatus()), sizeof(pokemon), &write, NULL);
 	int tempmoney = _player->getMoney();
@@ -34,11 +41,12 @@ bool inventoryChiled::load()
 	intptr_t _handle;
 	int result = 1;
 	_handle = _findfirst(".//*.load", &fd);
-	_findclose(_handle);
 	if (_handle == -1)
 	{
+		_findclose(_handle);
 		return false;
 	}
+	_findclose(_handle);
 
 	char str[256];
 	sprintf(str, ".//save.load");
@@ -47,6 +55,12 @@ bool inventoryChiled::load()
 
 	file = CreateFile(str, GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
+	int strlening;
+	ReadFile(file, &strlening, sizeof(int), &read, NULL);
+	char tempstr[128];
+	ReadFile(file, &tempstr,128, &read, NULL);
+
+	_player->init(tempstr);
 	int tempnum = _vitem.size();
 	ReadFile(file, &(*_player->getStatus()), sizeof(pokemon), &read, NULL);
 	int tempmoney;
@@ -55,9 +69,10 @@ bool inventoryChiled::load()
 	ReadFile(file, &tempnum, sizeof(int), &read, NULL);
 	for (int i = 0; i < tempnum; ++i)
 	{
-		Item temp;
-		_vitem.push_back(temp);
-		ReadFile(file, &_vitem[i], sizeof(Item), &read, NULL);
+		Item* temp;
+		temp = new Item;
+		ReadFile(file, &(*temp), sizeof(Item), &read, NULL);
+		this->setItem(temp);
 	}
 
 

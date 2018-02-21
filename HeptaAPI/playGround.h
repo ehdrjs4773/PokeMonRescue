@@ -9,6 +9,7 @@
 #include "inventoryChiled.h"
 #include "UI.h"
 #include "pokeinfo.h"
+#include "oPeningSelect.h"
 //#include "battleScene.h"	//°ÇÇÏ²¨ µ¥½º!
 
 class playGround : public gameNode

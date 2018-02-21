@@ -23,10 +23,6 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("npc", new Npc);
 	_player->setTownMapMemAdressLink((Npc*)SCENEMANAGER->findScene("npc")->currentScene);
 
-//	SCENEMANAGER->addScene("Opening", new oPeningMovie);
-	
-	//SCENEMANAGER->init("Opening");
-	
 	SCENEMANAGER->addScene("Stage1", new StageScene);						//테스트용 데스!
 	//SCENEMANAGER->addScene("Stage1", new battleScene);						//건하꺼 데스!
 	
@@ -55,7 +51,13 @@ HRESULT playGround::init()
 	//((battleScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//건하꺼 데스!
 	SCENEMANAGER->init("Stage1");
 	SCENEMANAGER->init("npc");
-	SCENEMANAGER->changeScene("npc");
+
+	SCENEMANAGER->addScene("Opening", new oPeningMovie);
+	SCENEMANAGER->addScene("openingSelect", new oPeningSelect);
+
+	SCENEMANAGER->init("Opening");
+
+	SCENEMANAGER->changeScene("Opening");
 	
 
 	return S_OK;

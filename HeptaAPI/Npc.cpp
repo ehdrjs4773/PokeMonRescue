@@ -33,10 +33,10 @@ HRESULT Npc::init()
 	_npc2.rc = RectMakeCenter(_npc2.x, _npc2.y, _npc2.image->getWidth(), _npc2.image->getHeight());
 	_npc2.collsionrc = RectMakeCenter(_npc2.x, _npc2.y + 10, _npc2.image->getWidth(), 15);
 
-	_town.inout = true;
+	_town.inout = false;
 	
 	_player->init("¸®ÀÚ¸ù");
-	_player->setPosition(WINSIZEX / 2 , WINSIZEY - 50);
+	_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
 
 	//´Ù ‰ç¾î¿ä Âô±ß ><*
 
@@ -44,7 +44,7 @@ HRESULT Npc::init()
 	_rc2 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2+ 130, 50, 30);
 	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 40, 15, 80);
 	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
-	_house = false;
+	_house = true;
 
 	CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
 	return S_OK;

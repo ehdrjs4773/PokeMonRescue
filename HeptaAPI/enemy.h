@@ -94,6 +94,8 @@ private:
 	float _tempSpeed;
 
 	bool _isAttack;
+	bool _needAstar;
+	float _target;
 
 private:
 	//이건 부모클래스에서 충분히 할 수 있을듯 싶어서 이렇게!!!
@@ -139,10 +141,14 @@ public:
 
 	inline RECT getEnemyRect() { return _pokemon.rc; }
 
+	
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
+	inline float getTileX() { return _pokemon.x/24; }
+	inline float getTileY() { return _pokemon.y/24; }
 	inline int getDirection() { return _pokemon.direction; }
 	inline void damageToHP(int damage) { _currentHP-=damage; }
+	inline void setNeedAstar(bool needAstar) { _needAstar = needAstar; }
 
 	bool getIsAttack() 
 	{
@@ -156,4 +162,3 @@ public:
 
 	bool setIsAttack(bool isattack) { _isAttack = isattack; }
 };
-

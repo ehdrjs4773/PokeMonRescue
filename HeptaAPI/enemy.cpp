@@ -68,8 +68,11 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	_hurtReverse = false;
 	_atkReverse = false;
 	_isMove = false;
-	_distance = 0;
 
+	_needAstar = false;
+
+	_distance = 0;
+	_target = 0;
 	_count = 0;
 	
 	return S_OK;
@@ -80,18 +83,14 @@ void enemy::release()
 }
 void enemy::update() 
 {
-
-	
-
-	
-
-	
 	//현재 상태를 받아서 한다.
 	setState();
 	//적의 움직임을 스위치로 관리한다 하지만 아직 각도가아닌 키입력이기에
 	
 	_pokemon.rc = RectMakeCenter(_pokemon.x, _pokemon.y, 20, 20);
-
+	if (_pokemon.state == STATE_IDLE)
+		enemyAngleSetting();
+	
 	if (KEYMANAGER->isOnceKeyDown('S'))
 	{
 		damageToHP(10);
@@ -101,8 +100,7 @@ void enemy::update()
 	{
 		enemyTileMove();
 	}
-	if(_pokemon.state == STATE_IDLE)
-		enemyAngleSetting();
+
 	
 }
 
@@ -146,10 +144,10 @@ void enemy::setState()
 {
 	_count++;
 
-	if (_count % 10 == 0)
+	if (_count % 20 == 0)
 	{
 
-
+		//enemyASTARStart();
 		//리버스가 만약 트루면 거꾸로 재생을 하고
 		//리버스가 만약 폴스면 기본으로 프레임을 재생한다.
 		//기본 이동 공격 아파하는것 등등은 
@@ -215,7 +213,7 @@ void enemy::setState()
 		else if (_moveIndex <= 0) { _moveReverse = false; }
 
 	//공격관련
-		if (_atkIndex >= _pokemon.atkImage->getMaxFrameX())
+		if (_atkIndex >= _pokemon.atkImage->getMaxFrameX()+1)
 		{
 			_atkIndex = 0;
 			_pokemon.state = STATE_IDLE;
@@ -231,43 +229,54 @@ void enemy::setState()
 
 void enemy::enemyAngleSetting()
 {
-	if (_vCloseList.size() <= 0)
-		return;
 
-	RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
-	//float target = getAngle(_pokemon.x, _pokemon.y, _ptMouse.x, _ptMouse.y);
-	float target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) <= TILESIZEX*2)
+	{
+		_target = getAngle(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY());
+	}
+	else
+	{
+		if (_vCloseList.size() <= 0) return;
+
+		RECT temp = RectMakeCenter(_vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY(), TILESIZEX, TILESIZEY);
+
+		_target = getAngle(_pokemon.x, _pokemon.y, _vCloseList[_vCloseList.size() - 1].getCenterX(), _vCloseList[_vCloseList.size() - 1].getCenterY());
+	}
+	
+	
+
 
 	
-	if(target <= PI8 && target >=0 || target >= PI8*15 && target <= PI8 * 16)
+	
+	if(_target <= PI8 && _target >=0 || _target >= PI8*15 && _target <= PI8 * 16)
 	{
 		_pokemon.direction = RIGHT;
 	}
-	if (PI8 < target && PI8*3 > target)
+	if (PI8 < _target && PI8*3 > _target)
 	{
 		_pokemon.direction = RIGHTUP;
 	}
-	if (PI8 * 3 <= target && PI8 * 5 >= target)
+	if (PI8 * 3 <= _target && PI8 * 5 >= _target)
 	{
 		_pokemon.direction = UP;
 	}
-	if (PI8 * 5 < target && PI8 * 7 > target)
+	if (PI8 * 5 < _target && PI8 * 7 > _target)
 	{
 		_pokemon.direction = LEFTUP;
 	}
-	if (PI8 * 7 <= target && PI8 * 9 >= target)
+	if (PI8 * 7 <= _target && PI8 * 9 >= _target)
 	{
 		_pokemon.direction = LEFT;
 	}
-	if (PI8 * 9< target && PI8 * 11 > target)
+	if (PI8 * 9< _target && PI8 * 11 > _target)
 	{
 		_pokemon.direction = LEFTDOWN;
 	}
-	if (PI8 * 11 <= target && PI8 * 13 >= target)
+	if (PI8 * 11 <= _target && PI8 * 13 >= _target)
 	{
 		_pokemon.direction = DOWN;
 	}
-	if (PI8 * 13 < target && PI8 * 15 > target)
+	if (PI8 * 13 < _target && PI8 * 15 > _target)
 	{
 		_pokemon.direction = RIGHTDOWN;
 	}
@@ -276,6 +285,7 @@ void enemy::enemyAngleSetting()
 
 void enemy::enemyASTARStart()
 {
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480) return;
 	tile start;
 	tile end;
 
@@ -395,7 +405,6 @@ void enemy::enemyHurtMotion()
 }
 void enemy::enemyMoveSign()
 {
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 480) return;
 	_isMove = true;
-	if (getDistance(_pl->getX(), _pl->getY(), _pokemon.x, _pokemon.y) <= 240)
-		enemyASTARStart();
 }

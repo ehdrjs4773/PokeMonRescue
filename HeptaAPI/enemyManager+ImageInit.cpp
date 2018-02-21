@@ -2,11 +2,11 @@
 void enemyManager::imageInit()
 {
 
-	_chicoName.pokemonName = "치코리타";
-	_chicoName.attackImage = "CHICORITA_ATTACK";
-	_chicoName.idleImage= "CHICORITA_IDLE";
-	_chicoName.moveImage = "CHICORITA_MOVE";
-	_chicoName.hurtImage= "CHICORITA_HURTS";
+	_chicoName.pokemonName	=	"치코리타";
+	_chicoName.attackImage	=	"CHICORITA_ATTACK";
+	_chicoName.idleImage	=	"CHICORITA_IDLE";
+	_chicoName.moveImage	=	"CHICORITA_MOVE";
+	_chicoName.hurtImage	=	"CHICORITA_HURTS";
 
 	IMAGEMANAGER->addFrameImage(_chicoName.idleImage, ".//enemyImage//Chicorita_Idle.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
@@ -18,27 +18,27 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 
 
-	_dandegiName.pokemonName = "단데기";
-	_dandegiName.idleImage = "DANDEGI_IDLE";
-	_dandegiName.moveImage = "DANDEGI_MOVE";
-	_dandegiName.attackImage = "DANDEGI_ATTACK";
-	_dandegiName.hurtImage = "DANDEGI_HURTS";
+	_dandegiName.pokemonName =	"단데기";
+	_dandegiName.idleImage	 =	"DANDEGI_IDLE";
+	_dandegiName.moveImage	 =	"DANDEGI_MOVE";
+	_dandegiName.attackImage =	"DANDEGI_ATTACK";
+	_dandegiName.hurtImage	 =	"DANDEGI_HURTS";
 
 	IMAGEMANAGER->addFrameImage(_dandegiName.idleImage, ".//enemyImage//Dandegi_Idle.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_dandegiName.moveImage, ".//enemyImage//Dandegi_Move.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage(_dandegiName.attackImage, ".//enemyImage//Dandegi_Attack.BMP", 288, 576, 4,
+	IMAGEMANAGER->addFrameImage(_dandegiName.attackImage, ".//enemyImage//Dandegi_Attack.BMP", 216, 576, 3,
 		8, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage(_dandegiName.hurtImage, ".//enemyImage//Dandegi_Hurts.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));
 
 
-	_polygonName.pokemonName = "폴리곤";
-	_polygonName.idleImage = "POLYGON_IDLE";
-	_polygonName.moveImage = "POLYGON_MOVE";
-	_polygonName.attackImage = "POLYGON_ATTACK";
-	_polygonName.hurtImage = "POLYGON_HURTS";
+	_polygonName.pokemonName =	 "폴리곤";
+	_polygonName.idleImage	 =	 "POLYGON_IDLE";
+	_polygonName.moveImage	 =	 "POLYGON_MOVE";
+	_polygonName.attackImage =	 "POLYGON_ATTACK";
+	_polygonName.hurtImage	 =	 "POLYGON_HURTS";
 
 	IMAGEMANAGER->addFrameImage(_polygonName.idleImage, ".//enemyImage//Polygon_Idle.BMP", 72, 576, 1,
 		8, true, true, RGB(255, 0, 255));

@@ -5,17 +5,6 @@
 
 
 
-#include "chicorita.h"
-#include "dandegi.h"
-#include "polygon.h"
-#include "purin.h"
-#include "rukario.h"
-
-#include "mankey.h"
-#include "tanguri.h"
-#include "graena.h"
-#include "electivire.h"
-
 
 enum ENEMY
 {
@@ -45,15 +34,15 @@ private: //전방선언 클래스 선언구간
 private://적객체 관련 생산
 
 	//적의 객체 틀 생성
-	chicorita*		_chicorita;
-	dandegi*		_dandegi;
-	polygon*		_polygon;
-	purin*			_purin;
-	graena*			 _graena;
-	rukario*		_rukario;
-	mankey*			_mankey;
-	tanguri*		_tanguri;
-	electivire*		_electivire;
+	enemy*	_chicorita;
+	enemy*	_dandegi;
+	enemy*	_polygon;
+	enemy*	_purin;
+	enemy*	 _graena;
+	enemy*	_rukario;
+	enemy*	_mankey;
+	enemy*	_tanguri;
+	enemy*	_electivire;
 	//적의 객체 틀 생성 완료
 
 

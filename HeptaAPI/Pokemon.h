@@ -73,5 +73,5 @@ public:
 
 	//¼³Á¤ÀÚ
 	inline int setCurrentEXP(int exp) { _currentEXP = exp; }
-	inline int setCurrentHP(int currentHP) { return currentHP; }
+	inline void setCurrentHP(int currentHP) { _currentHP  = currentHP; }
 };

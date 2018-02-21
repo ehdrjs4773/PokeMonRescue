@@ -30,7 +30,7 @@ void pokemon::pokemonStatus(string name, int level)
 	_racialDEF = DATABASE->getStatusData(name)->def;
 	_racialSpecialATK = DATABASE->getStatusData(name)->specialATK;
 	_racialSpecialDEF = DATABASE->getStatusData(name)->specialDEF;
-	_element = (ELEMENT)DATABASE->getStatusData(name)->element;
+	_element = (SKILL_ELEMENT)DATABASE->getStatusData(name)->element;
 
 	_currentEXP = 0;
 	_maxEXP = 100;

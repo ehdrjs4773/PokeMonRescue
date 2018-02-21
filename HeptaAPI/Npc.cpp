@@ -41,7 +41,7 @@ HRESULT Npc::init()
 
 	_rc = RectMakeCenter(WINSIZEX / 2 - 60, WINSIZEY / 2 + 10, 30, 30);
 	_rc2 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2+ 130, 50, 30);
-	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 25, 15, 50);
+	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 40, 15, 80);
 	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
 	_house = false;
 

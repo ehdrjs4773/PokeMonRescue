@@ -67,4 +67,13 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 
+
+	// UI 이미지 초기화 
+
+	IMAGEMANAGER->addImage("마을기본메뉴", ".\\bmps\\UI\\마을기본메뉴UI.bmp", 148, 118, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("맵표시", ".\\bmps\\UI\\맵표시UI.bmp", 267, 58, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("돈표시", ".\\bmps\\UI\\하단돈표시UI.bmp", 416, 88, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("도구상자", ".\\bmps\\UI\\도구메뉴UI.bmp", 267, 278, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("selectIcon", ".\\bmps\\UI\\selectIcon.bmp", 7, 7, false, true, MAGENTA);
+
 }

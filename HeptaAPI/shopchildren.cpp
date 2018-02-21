@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "shopchildren.h"
 #include "player.h"
+#include "inventoryChiled.h"
 
 
 
@@ -87,6 +88,8 @@ void shopchildren::update()
 				SCENEMANAGER->changeParent();
 				break;
 			}
+
+		
 		}
 	}
 
@@ -110,21 +113,16 @@ void shopchildren::update()
 			case item_end:
 				break;
 			}
-		}
-	}
 
-	if (_itembuy == item_potion)
-	{
-		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
-		{
-			switch (_sele)
+			if (_sele == buy && _itemSelcet.potionSelcet)
 			{
-			case buy :
+				if (_inven->getVitem().size() >10) return;
+				Item* potion = new Item;
 
-				break;
-			case no :
+				potion->setPotion("È¸º¹¾à", 1, 50, 50, type_hpPotion);
 
-				break;
+
+				_inven->setItem(potion);
 			}
 		}
 	}
@@ -137,6 +135,7 @@ void shopchildren::update()
 			{
 				case shop_info :
 					SCENEMANAGER->changeParent();
+
 					break;
 				case shop_buy :
 					_shopClick = shop_info;

@@ -255,6 +255,12 @@
     <ClInclude Include="oPeningMovie.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>playGround\박근화</Filter>
+    </ClInclude>
+    <ClInclude Include="inventoryChiled.h">
+      <Filter>playGround\박근화</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -451,6 +457,12 @@
     </ClCompile>
     <ClCompile Include="SaveLoad.cpp">
       <Filter>playGround\정경훈</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>playGround\박근화</Filter>
+    </ClCompile>
+    <ClCompile Include="inventoryChiled.cpp">
+      <Filter>playGround\박근화</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

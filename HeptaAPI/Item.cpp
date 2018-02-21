@@ -38,3 +38,9 @@ void Item::setSkillItem(string name, string skillname, int num, int price, type 
 	_item.price = price;
 	_item.Type = Type;
 }
+
+void Item::setItem(string name, string map, int setx, int sety, type Type)
+{
+	_item.name = name;
+	_item.mapname = map;
+}

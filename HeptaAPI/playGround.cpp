@@ -29,9 +29,15 @@ HRESULT playGround::init()
 	
 	SCENEMANAGER->addScene("Stage1", new StageScene);
 	SCENEMANAGER->addChildScene("npc", "shopchiled", new shopchildren);
-	
+	SCENEMANAGER->addChildScene("npc", "ui", new UI);
+	SCENEMANAGER->addChildScene("npc", "inventory", new inventoryChiled);
+	SCENEMANAGER->addChildScene("Stage1", "ui", new UI);
+	SCENEMANAGER->addChildScene("Stage1", "inventory", new inventoryChiled);
+
 	map<string, gameNode*>::iterator tempIter = SCENEMANAGER->findScene("npc")->children.find("shopchiled");
+	map<string, gameNode*>::iterator tempInven = SCENEMANAGER->findScene("npc")->children.find("inventory");
 	((shopchildren*)tempIter->second)->setPlayerMemoryAdressLink(_player);
+	((shopchildren*)tempIter->second)->setInventoryMemoryAdressLink((inventoryChiled*)tempInven->second);
 	((Npc*)SCENEMANAGER->findScene("npc")->currentScene)->setPlayerMemoryAdressLink(_player);
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");

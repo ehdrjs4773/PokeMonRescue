@@ -6,15 +6,14 @@
 #include "oPeningMovie.h"
 #include "Pokemon.h"
 #include "shopchildren.h"
-
+#include "inventoryChiled.h"
+#include "UI.h"
 
 class playGround : public gameNode
 {
 private:
 	player* _player;
 	Npc* _npc;
-	shopchildren* _shop;
-
 
 public:
 

@@ -79,7 +79,7 @@ struct itemSelcet
 };
 
 class player;
-
+class inventoryChiled;
 
 
 class shopchildren : public gameNode
@@ -87,8 +87,8 @@ class shopchildren : public gameNode
 
 private :
 
-	vector<item*> _vitem;
-	vector<item*>::iterator _viItem;
+	vector<Item*> _vitem;
+	vector<Item*>::iterator _viItem;
 
 	select _sele;
 	shopinfo _shopinfo;		// 상점 상태
@@ -96,8 +96,8 @@ private :
 	itembuy _itembuy;		// 아이템 선택
 	itemSelcet _itemSelcet;
 	player* _player;		// 전방 플레이어 선언
-	Item* _item;
-
+	Item _item;
+	inventoryChiled* _inven; // 인벤토리 선언	
 
 
 
@@ -115,6 +115,8 @@ public:
 	void keyMove();
 
 	void setPlayerMemoryAdressLink(player* plays) { _player = plays; }
+	void setInventoryMemoryAdressLink(inventoryChiled* inven) { _inven = inven; }
+
 
 	shopchildren();
 	~shopchildren();

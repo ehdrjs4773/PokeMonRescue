@@ -28,6 +28,8 @@ public:
 	void update();
 	void render();
 
+	void StageUpDown();
+
 	//플레이어 메모리 설정
 	void setPlayerMemAdressLink(player* player) { _player = player; }
 };

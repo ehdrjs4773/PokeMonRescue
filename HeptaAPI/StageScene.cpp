@@ -55,74 +55,7 @@ void StageScene::update()
 	if (_alphaMap == 255)
 	{
 		_player->dungeonMove();
-		if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartDownid().x &&
-			_player->getPlayerTileIndexY() == _nowStage->getPlayerStartDownid().y)
-		{
-			if (DownId);
-			else
-			{
-				_alphaMap = 0;
-				UpId = true;
-				DownId = true;
-				++_floor;
-				if (_floor > 2)
-				{
-					_floor = 0;
-					++DungoenNum;
-				}
-				char tempfloor[256];
-				sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
-				_nowStage->release();
-				_nowStage->init(tempfloor);
-
-				CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
-
-				_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
-			}
-		}
-		else
-		{
-			DownId = false;
-		}
-		if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartUpid().x &&
-			_player->getPlayerTileIndexY() == _nowStage->getPlayerStartUpid().y)
-		{
-			if (UpId);
-			else
-			{
-				if (_floor || DungoenNum)
-				{
-					_alphaMap = 0;
-					UpId = true;
-					DownId = true;
-					--_floor;
-					if (_floor < 0)
-					{
-						_floor = 2;
-						--DungoenNum;
-					}
-					char tempfloor[256];
-					sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
-					_nowStage->release();
-					_nowStage->init(tempfloor);
-
-					CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
-
-					_player->setPosition(_nowStage->getPlayerStartDownid().x * 24 + 12, _nowStage->getPlayerStartDownid().y * 24 + 12);
-				}
-				else
-				{
-					
-					SCENEMANAGER->init("npc");
-					_player->setPosition(WINSIZEX - 30, WINSIZEY - 25);
-					SCENEMANAGER->changeScene("npc");
-				}
-			}
-		}
-		else
-		{
-			UpId = false;
-		}
+		StageUpDown();
 	}
 	else
 	{
@@ -142,4 +75,75 @@ void StageScene::render()
 	_player->render();
 	_nowStage->getminimap()->alphaRender(CAMERAMANAGER->getMemDC(), CAMERAMANAGER->getX(), CAMERAMANAGER->getY(), 200);
 	IMAGEMANAGER->findImage("alphamap")->alphaRender(CAMERAMANAGER->getMemDC(), CAMERAMANAGER->getX(), CAMERAMANAGER->getY(), 255 - _alphaMap);
+}
+
+void StageScene::StageUpDown()
+{
+	if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartDownid().x &&
+		_player->getPlayerTileIndexY() == _nowStage->getPlayerStartDownid().y)
+	{
+		if (DownId);
+		else
+		{
+			_alphaMap = 0;
+			UpId = true;
+			DownId = true;
+			++_floor;
+			if (_floor > 2)
+			{
+				_floor = 0;
+				++DungoenNum;
+			}
+			char tempfloor[256];
+			sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
+			_nowStage->release();
+			_nowStage->init(tempfloor);
+
+			CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
+
+			_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
+		}
+	}
+	else
+	{
+		DownId = false;
+	}
+	if (_player->getPlayerTileIndexX() == _nowStage->getPlayerStartUpid().x &&
+		_player->getPlayerTileIndexY() == _nowStage->getPlayerStartUpid().y)
+	{
+		if (UpId);
+		else
+		{
+			if (_floor || DungoenNum)
+			{
+				_alphaMap = 0;
+				UpId = true;
+				DownId = true;
+				--_floor;
+				if (_floor < 0)
+				{
+					_floor = 2;
+					--DungoenNum;
+				}
+				char tempfloor[256];
+				sprintf(tempfloor, "%d-%d", DungoenNum, _floor);
+				_nowStage->release();
+				_nowStage->init(tempfloor);
+
+				CAMERAMANAGER->init(_nowStage->gettileCountX() * TILESIZEX, _nowStage->gettileCountY() * TILESIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
+
+				_player->setPosition(_nowStage->getPlayerStartDownid().x * 24 + 12, _nowStage->getPlayerStartDownid().y * 24 + 12);
+			}
+			else
+			{
+				SCENEMANAGER->init("npc");
+				_player->setPosition(WINSIZEX - 30, WINSIZEY - 25);
+				SCENEMANAGER->changeScene("npc");
+			}
+		}
+	}
+	else
+	{
+		UpId = false;
+	}
 }

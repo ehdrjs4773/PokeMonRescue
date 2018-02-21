@@ -73,6 +73,8 @@ private:
 	int _r;
 	bool _canAtk;
 
+	bool _enemyTurn;
+
 public:
 	enemyManager();
 	~enemyManager();

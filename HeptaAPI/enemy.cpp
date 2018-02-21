@@ -48,32 +48,39 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 
 	_pokemon.rc = RectMakeCenter(_pokemon.x, _pokemon.y, 20, 20);
 	//Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
-
-	
 	_pokemon.speed = 2;
 	//디렉션은 기본적으로 아래를 바라보자
 	_pokemon.direction = UP;
-
 	//기본상태
 	_pokemon.state = STATE_IDLE;
 
+
+
+
+
+
 	//프레임번호와 카운트의 초기화
-	_idleIndex = 0;
-	_moveIndex = 0;
-	_atkIndex = 0;
-	_hurtIndex = 0;
+	_idleIndex	= 0;
+	_moveIndex	= 0;
+	_atkIndex	= 0;
+	_hurtIndex	= 0;
 	
-	_idleReverse = false;
-	_moveReverse = false;
-	_hurtReverse = false;
-	_atkReverse = false;
-	_isMove = false;
+	_distance	= 0;
+	_target		= 0;
+	_count		= 0;
 
-	_needAstar = false;
+	_idleReverse	=		false;
+	_moveReverse	=		false;
+	_hurtReverse	=		false;
+	_atkReverse		=		false;
+	_isMove			=		false;
+	_myTrun			=		false;
+	_cheackTrun		=		false;
+	_needAstar		=		false;
 
-	_distance = 0;
-	_target = 0;
-	_count = 0;
+	
+	
+	
 	
 	return S_OK;
 }
@@ -144,10 +151,8 @@ void enemy::setState()
 {
 	_count++;
 
-	if (_count % 20 == 0)
+	if (_count % 15 == 0)
 	{
-
-		//enemyASTARStart();
 		//리버스가 만약 트루면 거꾸로 재생을 하고
 		//리버스가 만약 폴스면 기본으로 프레임을 재생한다.
 		//기본 이동 공격 아파하는것 등등은 
@@ -217,6 +222,7 @@ void enemy::setState()
 		{
 			_atkIndex = 0;
 			_pokemon.state = STATE_IDLE;
+			_myTrun = false;
 		}
 
 
@@ -342,6 +348,7 @@ void enemy::enemyTileMove()
 	{
 		_distance = 0;
 		_isMove = false;
+		_myTrun = false;
 		_pokemon.speed = _tempSpeed;
 		return;
 	}
@@ -349,6 +356,7 @@ void enemy::enemyTileMove()
 	{
 		_distance = 0;
 		_isMove = false;
+		_myTrun = false;
 		
 	}
 

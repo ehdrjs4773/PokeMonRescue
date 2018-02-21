@@ -95,6 +95,9 @@ private:
 
 	bool _isAttack;
 	bool _needAstar;
+	bool _myTrun;
+	bool _cheackTrun;
+
 	float _target;
 
 private:
@@ -140,8 +143,11 @@ public:
 
 
 	inline RECT getEnemyRect() { return _pokemon.rc; }
+	inline bool getMyturn() { return _myTrun; }
+	inline void setMyturn(bool myTurn) { _myTrun = myTurn; }
+	inline bool getCheakTrun() { return _cheackTrun; }
+	inline void setCheakturn(bool cheakTrun) { _cheackTrun = cheakTrun; }
 
-	
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
 	inline float getTileX() { return _pokemon.x/24; }

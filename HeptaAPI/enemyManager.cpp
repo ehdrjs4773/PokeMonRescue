@@ -21,14 +21,17 @@ enemyManager::~enemyManager()
 HRESULT enemyManager::init()
 {
 	imageInit();
-	//enemyBirth(ENEMY_CHICORITA, 2, 2, 99);
+	enemyBirth(ENEMY_CHICORITA, 2, 2, 99);
 	enemyBirth(ENEMY_DANDEGI, 2, 3, 99);
-	//enemyBirth(ENEMY_POLYGON, 2, 4, 99);
-	//enemyBirth(ENEMY_PURIN, 3, 2, 99);
-	//enemyBirth(ENEMY_RUKARIO, 3, 4, 99);
-	//enemyBirth(ENEMY_GRAENA, 4, 2, 99);
-	//enemyBirth(ENEMY_MANKEY, 4, 3, 99);
-	//enemyBirth(ENEMY_TANGURI, 4, 4, 99);
+	enemyBirth(ENEMY_POLYGON, 2, 4, 99);
+	enemyBirth(ENEMY_PURIN, 3, 2, 99);
+	enemyBirth(ENEMY_RUKARIO, 3, 4, 99);
+	enemyBirth(ENEMY_GRAENA, 4, 2, 99);
+	enemyBirth(ENEMY_MANKEY, 4, 3, 99);
+	enemyBirth(ENEMY_TANGURI, 4, 4, 99);
+
+
+	_enemyTurn = false;
 	return S_OK;
 }
 void enemyManager::release()
@@ -235,8 +238,60 @@ void enemyManager::enemyTrunManager()
 	
 	if (KEYMANAGER->isOnceKeyDown('D'))
 	{
+		//시작부분
+		_enemyTurn = true;
+	}
+
+	if (!_enemyTurn)
+	{
+		return;
+	}
+
+
 		for (int i = 0; i < _vEnemyPokemon.size(); i++)
 		{
+			if (i == 0)
+			{
+				if(!_vEnemyPokemon[i]->getCheakTrun())
+				_vEnemyPokemon[i]->setMyturn(true);
+				_vEnemyPokemon[i]->setCheakturn(true);
+			}
+			else
+			{
+				if (!_vEnemyPokemon[i]->getCheakTrun() &&
+					!_vEnemyPokemon[i]->getMyturn()	   &&
+					_vEnemyPokemon[i-1]->getCheakTrun() &&
+					!_vEnemyPokemon[i-1]->getMyturn() )
+				{
+					_vEnemyPokemon[i]->setMyturn(true);
+					_vEnemyPokemon[i]->setCheakturn(true);
+				}
+			}
+			
+			bool isturnOver = false;
+			for (int j = 0; j < _vEnemyPokemon.size(); j++)
+			{
+				if (_vEnemyPokemon[j]->getMyturn() || !_vEnemyPokemon[j]->getCheakTrun())
+				{
+					isturnOver = true;
+				}
+			}
+			if (!isturnOver)
+			{
+				for (int j = 0; j < _vEnemyPokemon.size(); j++)
+				{
+					_vEnemyPokemon[j]->setMyturn(false);
+					_vEnemyPokemon[j]->setCheakturn(false);
+				}
+				_enemyTurn = false;
+				//여기가 완전히 턴이 끝나는부분
+			}
+			if (!_vEnemyPokemon[i]->getMyturn())
+			{	
+					continue;	
+			}
+
+
 			_vEnemyPokemon[i]->enemyASTARStart();
 
 			bool canAtk = false;
@@ -265,8 +320,15 @@ void enemyManager::enemyTrunManager()
 				enemyMoveManager(i);
 				continue;
 			}
+			_vEnemyPokemon[i]->setMyturn(false);
+
+
+
+
 		}
-	}
+
+
+	
 }
 
 

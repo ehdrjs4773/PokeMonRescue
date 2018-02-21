@@ -35,7 +35,7 @@ bool inventoryChiled::load()
 	int result = 1;
 	_handle = _findfirst(".//*.load", &fd);
 	_findclose(_handle);
-	if (_handle != -1)
+	if (_handle == -1)
 	{
 		return false;
 	}

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "oPeningSelect.h"
+#include "inventoryChiled.h"
 
 
 
@@ -16,6 +17,14 @@ oPeningSelect::~oPeningSelect()
 
 HRESULT oPeningSelect::init(void)
 {
+	map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
+	if (((inventoryChiled*)tmepIter->second)->load())
+	{
+		SCENEMANAGER->changeScene("npc");
+		SCENEMANAGER->init("npc");
+		return S_OK;
+	}
+
 	IMAGEMANAGER->addImage("글배경", ".\\bmps\\oPeningSelect\\openingDialogue.bmp", 320, 58, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("배경", ".\\bmps\\oPeningSelect\\Mail.bmp", 480, 360, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("name", ".\\bmps\\oPeningSelect\\SelectName.bmp", 252, 353, false, true, MAGENTA);
@@ -184,8 +193,8 @@ void oPeningSelect::keyControl(void)
 			if (DIALOGUE->getCurrentLine() <= 32) DIALOGUE->setCurrentLine(DIALOGUE->getCurrentLine() + 2);
 			break;
 		case Opening_Four:
-			SCENEMANAGER->changeScene("Stage1");
-			SCENEMANAGER->init("Stage1");
+			SCENEMANAGER->changeScene("npc");
+			SCENEMANAGER->init("npc");
 			break;
 		}
 

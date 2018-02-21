@@ -264,6 +264,9 @@
     <ClInclude Include="pokeinfo.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
+    <ClInclude Include="oPeningSelect.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -468,6 +471,9 @@
       <Filter>playGround\박근화</Filter>
     </ClCompile>
     <ClCompile Include="pokeinfo.cpp">
+      <Filter>playGround\한재윤</Filter>
+    </ClCompile>
+    <ClCompile Include="oPeningSelect.cpp">
       <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>

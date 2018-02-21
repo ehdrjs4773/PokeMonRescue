@@ -50,8 +50,8 @@ void oPeningMovie::update()
 		DIALOGUE->loadingTextFile(".\\textData\\opening_sin.txt");
 		DIALOGUE->setPoint(PointMake(100, WINSIZEY - 50));
 	
-		SCENEMANAGER->init("openingSelect");	
 		SCENEMANAGER->changeScene("openingSelect");
+		SCENEMANAGER->init("openingSelect");
 		//SCENEMANAGER->changeScene("Stage1");
 		//SCENEMANAGER->init("Stage1");
 		this->release();

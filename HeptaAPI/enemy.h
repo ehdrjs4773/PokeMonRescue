@@ -163,8 +163,8 @@ public:
 
 	inline float getX() { return _pokemon.x; }
 	inline float getY() { return _pokemon.y; }
-	inline float getTileX() { return _pokemon.x/24; }
-	inline float getTileY() { return _pokemon.y/24; }
+	inline int getTileX() { return _pokemon.x/24; }
+	inline int getTileY() { return _pokemon.y/24; }
 	
 	inline void setNeedAstar(bool needAstar) { _needAstar = needAstar; }
 

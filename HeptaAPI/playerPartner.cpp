@@ -29,6 +29,10 @@ HRESULT playerPartner::init(string charName)
 	tempNameSpecialAttack = charName + "_specialAttack";
 	tempNameHurt = charName + "_hurt";
 
+	_partnerStatus = new pokemon;
+	_partnerStatus->pokemonStatus(charName, 1);
+
+
 	_partner.angle = 0;
 
 

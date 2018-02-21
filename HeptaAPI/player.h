@@ -37,6 +37,8 @@ enum PLAYER_STATE
 	PLAYER_ATTACK,				//공격
 	PLAYER_SPECIAL_ATTACK_1,	//스페셜 공격 1
 	PLAYER_SPECIAL_ATTACK_2,	//스페셜 공격 2
+	PLAYER_SPECIAL_ATTACK_3,	//스페셜 공격 3
+	PLAYER_SPECIAL_ATTACK_4,	//스페셜 공격 4
 	PLAYER_HURT,				//피격
 	PLAYER_DIE,					//죽었을때?
 	PLAYER_STATE_END
@@ -67,6 +69,7 @@ struct tagPlayer
 	int dgNum;						//던전 번호
 	float townSpeed;				//마을에서의 속도		
 	float dgSpeed;					//던전에서의 속도
+	int currentHp;
 };
 
 class Stage;
@@ -107,6 +110,7 @@ private:
 private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
 	bool _onceMove;		//던전에서는 한번만 움직이게
+	bool _isHurt;		//피격상태늬?
 
 	// 던전이동시 필요한 불값
 	// 움직일 수 있니? ( 앞에 벽이 있니? )
@@ -122,109 +126,38 @@ private: // ## 불값 ##
 	bool _isWallCrash;			//벽에 부딪혔니?
 
 private: // ## 프레임 돌릴 변수들 ## 
-	SHORT _bottomIdleCount;												//바텀 정지상태에 쓸 카운트
-	SHORT _bottomIdleFrameX, _bottomIdleFrameY;							//        ""        인덱스
-	SHORT _bottomMoveCount;												//바텀 무브상태에 쓸 카운트
-	SHORT _bottomMoveFrameX, _bottomMoveFrameY;							//		  ""		인덱스
-	SHORT _bottomAttackCount;											//바텀 공격상태에 쓸 카운트
-	SHORT _bottomAttackFrameX, _bottomAttackFrameY;						//		  ""		인덱스
-	SHORT _bottomSpecialAttackCount;									//바텀 스페셜공격2 상태에 쓸 카운트
-	SHORT _bottomSpecialAttackFrameX, _bottomSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _bottomSpecialAttackCount_2;									//바텀 스페셜공격2 상태에 쓸 카운트
-	SHORT _bottomSpecialAttackFrameX_2, _bottomSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _bottomHurtCount;												//바텀 피격 상태에 쓸 카운트
-	SHORT _bottomHurtFrameX, _bottomHurtFrameY;							//		  ""		인덱스
+	//기본
+	SHORT _idleCount;
+	SHORT _idleFrameX, _idleFrameY;
 
-	SHORT _leftIdleCount;											//왼쪽 정지상태에 쓸 카운트
-	SHORT _leftIdleFrameX, _leftIdleFrameY;							//		  ""        인덱스
-	SHORT _leftMoveCount;											//왼쪽 무브상태에 쓸 카운트
-	SHORT _leftMoveFrameX, _leftMoveFrameY;							//		  ""		인덱스
-	SHORT _leftAttackCount;											//왼쪽 공격상태에 쓸 카운트
-	SHORT _leftAttackFrameX, _leftAttackFrameY;						//		  ""		인덱스
-	SHORT _leftSpecialAttackCount;									//왼쪽 스페셜공격 상태에 쓸 카운트
-	SHORT _leftSpecialAttackFrameX, _leftSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _leftSpecialAttackCount_2;								//왼쪽 스페셜공격 상태에 쓸 카운트
-	SHORT _leftSpecialAttackFrameX_2, _leftSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _leftHurtCount;											//왼쪽 피격 상태에 쓸 카운트
-	SHORT _leftHurtFrameX, _leftHurtFrameY;							//		  ""		인덱스
+	//움직임
+	SHORT _moveCount;
+	SHORT _moveFrameX, _moveFrameY;
 
-	SHORT _rightIdleCount;											//오른쪽 정지상태에 쓸 카운트
-	SHORT _rightIdleFrameX, _rightIdleFrameY;						//        ""        인덱스
-	SHORT _rightMoveCount;											//오른쪽 무브상태에 쓸 카운트
-	SHORT _rightMoveFrameX, _rightMoveFrameY;						//		  ""		인덱스
-	SHORT _rightAttackCount;										//오른쪽 공격상태에 쓸 카운트
-	SHORT _rightAttackFrameX, _rightAttackFrameY;					//		  ""		인덱스
-	SHORT _rightSpecialAttackCount;									//오른쪽 스페셜공격 상태에 쓸 카운트
-	SHORT _rightSpecialAttackFrameX, _rightSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _rightSpecialAttackCount_2;								//오른쪽 스페셜공격 상태에 쓸 카운트
-	SHORT _rightSpecialAttackFrameX_2, _rightSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _rightHurtCount;											//오른쪽 피격 상태에 쓸 카운트
-	SHORT _rightHurtFrameX, _rightHurtFrameY;						//		  ""		인덱스
+	//공격
+	SHORT _attackCount;
+	SHORT _attackFrameX, _attackFrameY;
 
-	SHORT _topIdleCount;											//위 정지상태에 쓸 카운트
-	SHORT _topIdleFrameX, _topIdleFrameY;							//        ""        인덱스
-	SHORT _topMoveCount;											//위 무브상태에 쓸 카운트
-	SHORT _topMoveFrameX, _topMoveFrameY;							//		  ""		인덱스
-	SHORT _topAttackCount;											//위 공격상태에 쓸 카운트
-	SHORT _topAttackFrameX, _topAttackFrameY;						//		  ""		인덱스
-	SHORT _topSpecialAttackCount;									//위 스페셜공격 상태에 쓸 카운트
-	SHORT _topSpecialAttackFrameX, _topSpecialAttackFrameY;			//		  ""		인덱스
-	SHORT _topSpecialAttackCount_2;									//위 스페셜공격 상태에 쓸 카운트
-	SHORT _topSpecialAttackFrameX_2, _topSpecialAttackFrameY_2;		//		  ""		인덱스
-	SHORT _topHurtCount;											//위 피격 상태에 쓸 카운트
-	SHORT _topHurtFrameX, _topHurtFrameY;							//		  ""		인덱스
+	//스페셜공격
+	SHORT _S_AttackCount;
+	SHORT _S_AttackFrameX, _S_AttackFrameY;
 
-	SHORT _leftBottomIdleCount;													//왼쪽아래 정지상태에 쓸 카운트
-	SHORT _leftBottomIdleFrameX, _leftBottomIdleFrameY;							//		  ""        인덱스
-	SHORT _leftBottomMoveCount;													//왼쪽아래 무브상태에 쓸 카운트
-	SHORT _leftBottomMoveFrameX, _leftBottomMoveFrameY;							//		  ""		인덱스
-	SHORT _leftBottomAttackCount;												//왼쪽아래 공격상태에 쓸 카운트
-	SHORT _leftBottomAttackFrameX, _leftBottomAttackFrameY;						//		  ""		인덱스
-	SHORT _leftBottomSpecialAttackCount;										//왼쪽아래 스페셜공격 상태에 쓸 카운트
-	SHORT _leftBottomSpecialAttackFrameX, _leftBottomSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _leftBottomSpecialAttackCount_2;										//왼쪽아래 스페셜공격 상태에 쓸 카운트
-	SHORT _leftBottomSpecialAttackFrameX_2, _leftBottomSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _leftBottomHurtCount;													//왼쪽아래 피격 상태에 쓸 카운트
-	SHORT _leftBottomHurtFrameX, _leftBottomHurtFrameY;							//		  ""		인덱스
+	//스페셜공격2
+	SHORT _S_AttackCount_2;
+	SHORT _S_AttackFrameX_2, _S_AttackFrameY_2;
 
-	SHORT _leftTopIdleCount;												//왼쪽위 정지상태에 쓸 카운트
-	SHORT _leftTopIdleFrameX, _leftTopIdleFrameY;							//		  ""        인덱스
-	SHORT _leftTopMoveCount;												//왼쪽위 무브상태에 쓸 카운트
-	SHORT _leftTopMoveFrameX, _leftTopMoveFrameY;							//		  ""		인덱스
-	SHORT _leftTopAttackCount;												//왼쪽위 공격상태에 쓸 카운트
-	SHORT _leftTopAttackFrameX, _leftTopAttackFrameY;						//		  ""		인덱스
-	SHORT _leftTopSpecialAttackCount;										//왼쪽위 스페셜공격 상태에 쓸 카운트
-	SHORT _leftTopSpecialAttackFrameX, _leftTopSpecialAttackFrameY;			//		  ""		인덱스
-	SHORT _leftTopSpecialAttackCount_2;										//왼쪽위 스페셜공격 상태에 쓸 카운트
-	SHORT _leftTopSpecialAttackFrameX_2, _leftTopSpecialAttackFrameY_2;		//		  ""		인덱스
-	SHORT _leftTopHurtCount;												//왼쪽위 피격 상태에 쓸 카운트
-	SHORT _leftTopHurtFrameX, _leftTopHurtFrameY;							//		  ""		인덱스
+	//스페셜공격3
+	SHORT _S_AttackCount_3;
+	SHORT _S_AttackFrameX_3, _S_AttackFrameY_3;
 
-	SHORT _rightTopIdleCount;												//오른쪽위 정지상태에 쓸 카운트
-	SHORT _rightTopIdleFrameX, _rightTopIdleFrameY;							//		  ""        인덱스
-	SHORT _rightTopMoveCount;												//오른쪽위 무브상태에 쓸 카운트
-	SHORT _rightTopMoveFrameX, _rightTopMoveFrameY;							//		  ""		인덱스
-	SHORT _rightTopAttackCount;												//오른쪽위 공격상태에 쓸 카운트
-	SHORT _rightTopAttackFrameX, _rightTopAttackFrameY;						//		  ""		인덱스
-	SHORT _rightTopSpecialAttackCount;										//오른쪽위 스페셜공격 상태에 쓸 카운트
-	SHORT _rightTopSpecialAttackFrameX, _rightTopSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _rightTopSpecialAttackCount_2;									//오른쪽위 스페셜공격 상태에 쓸 카운트
-	SHORT _rightTopSpecialAttackFrameX_2, _rightTopSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _rightTopHurtCount;												//오른쪽위 피격 상태에 쓸 카운트
-	SHORT _rightTopHurtFrameX, _rightTopHurtFrameY;							//		  ""		인덱스
+	//스페셜공격4
+	SHORT _S_AttackCount_4;
+	SHORT _S_AttackFrameX_4, _S_AttackFrameY_4;
 
-	SHORT _rightBottomIdleCount;												//오른쪽아래 정지상태에 쓸 카운트
-	SHORT _rightBottomIdleFrameX, _rightBottomIdleFrameY;						//		  ""        인덱스
-	SHORT _rightBottomMoveCount;												//오른쪽아래 무브상태에 쓸 카운트
-	SHORT _rightBottomMoveFrameX, _rightBottomMoveFrameY;						//		  ""		인덱스
-	SHORT _rightBottomAttackCount;												//오른쪽아래 공격상태에 쓸 카운트
-	SHORT _rightBottomAttackFrameX, _rightBottomAttackFrameY;					//		  ""		인덱스
-	SHORT _rightBottomSpecialAttackCount;										//오른쪽아래 스페셜공격 상태에 쓸 카운트
-	SHORT _rightBottomSpecialAttackFrameX, _rightBottomSpecialAttackFrameY;		//		  ""		인덱스
-	SHORT _rightBottomSpecialAttackCount_2;										//오른쪽아래 스페셜공격 상태에 쓸 카운트
-	SHORT _rightBottomSpecialAttackFrameX_2, _rightBottomSpecialAttackFrameY_2;	//		  ""		인덱스
-	SHORT _rightBottomHurtCount;												//오른쪽아래 피격 상태에 쓸 카운트
-	SHORT _rightBottomHurtFrameX, _rightBottomHurtFrameY;						//		  ""		인덱스
+	//피격
+	SHORT _hurtCount;
+	SHORT _hurtFrameX, _hurtFrameY;
+
 
 public:
 	player();
@@ -274,6 +207,7 @@ public:
 	inline int getSpecialAtk() { return _playerStatus->getSpecialATK(); }			//스페셜공격력
 	inline int getSpecialDef() { return _playerStatus->getSpecialDef(); }			//스페셜방어력
 	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
+
 	inline playerAction getPlayerAction() { return _playerAction; }					//액션 이넘 (임시)
 
 	inline pokemon* getStatus() { return _playerStatus; }							//포켓몬 정보
@@ -282,12 +216,13 @@ public:
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
 	void setEmMemAdressLink(enemyManager* em) { _em = em; }
 	void setTownMapMemAdressLink(Npc* map) { _town = map; }
+	void setBattleSceneMemory(battleScene* b) { _battle = b; }
 	
 	void setX(float x) { _player.x = x; }											//X좌표 설정
 	void setY(float y) { _player.y = y; }											//Y좌표 설정
 
 	void setCurrentHp(int hp) { _playerStatus->setCurrentHP(hp); }					//체력
-	void setCurrentExp(int exp) { _playerStatus->setCurrentEXP(exp); }
+	void setCurrentExp(int exp) { _playerStatus->setCurrentEXP(exp); }				//경험치
 	void setAddMoney(int money) { _player.money = money; }							//돈
 
 	inline int getDungeonNum() { return _player.dgNum; }							//던전넘버 겟
@@ -296,9 +231,7 @@ public:
 	void setPosition(float startX, float startY);									//좌표설정
 
 	inline void setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }//액션 이넘 (임시)
-	void setBattleSceneMemory(battleScene* b) { _battle = b; }
+	
 
-	void save();
-	void load();
 };
 

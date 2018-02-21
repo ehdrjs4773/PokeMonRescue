@@ -12,35 +12,35 @@ void playerPartner::draw()
 		{
 		case PARTNER_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_bottomIdleFrameX, _bottomIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_LEFT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftBottomIdleFrameX, _leftBottomIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_LEFT:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftIdleFrameX, _leftIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_LEFT_TOP:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftTopIdleFrameX, _leftTopIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_TOP:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_topIdleFrameX, _topIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_RIGHT_TOP:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightTopIdleFrameX, _rightTopIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_RIGHT:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightIdleFrameX, _rightIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_RIGHT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightBottomIdleFrameX, _rightBottomIdleFrameY);
+				_idleFrameX, _idleFrameY);
 			break;
 		case PARTNER_DIRECTION_END:
 			break;
@@ -52,35 +52,35 @@ void playerPartner::draw()
 		{
 		case PARTNER_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_bottomMoveFrameX, _bottomMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_LEFT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftBottomMoveFrameX, _leftBottomMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_LEFT:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftMoveFrameX, _leftMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_LEFT_TOP:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftTopMoveFrameX, _leftTopMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_TOP:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_topMoveFrameX, _topMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_RIGHT_TOP:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightTopMoveFrameX, _rightTopMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_RIGHT:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightMoveFrameX, _rightMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_RIGHT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightBottomMoveFrameX, _rightBottomMoveFrameY);
+				_moveFrameX, _moveFrameY);
 			break;
 		case PARTNER_DIRECTION_END:
 			break;
@@ -92,35 +92,35 @@ void playerPartner::draw()
 		{
 		case PARTNER_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_bottomMoveFrameX, _bottomMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_LEFT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftBottomMoveFrameX, _leftBottomMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_LEFT:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftMoveFrameX, _leftMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_LEFT_TOP:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftTopMoveFrameX, _leftTopMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_TOP:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_topMoveFrameX, _topMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_RIGHT_TOP:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightTopMoveFrameX, _rightTopMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_RIGHT:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightMoveFrameX, _rightMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_RIGHT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightBottomMoveFrameX, _rightBottomMoveFrameY);
+				_attackFrameX, _attackFrameY);
 			break;
 		case PARTNER_DIRECTION_END:
 			break;
@@ -132,35 +132,35 @@ void playerPartner::draw()
 		{
 		case PARTNER_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_bottomSpecialAttackFrameX, _bottomSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_LEFT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftBottomSpecialAttackFrameX, _leftBottomSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_LEFT:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftSpecialAttackFrameX, _leftSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_LEFT_TOP:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftTopSpecialAttackFrameX, _leftTopSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_TOP:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_topSpecialAttackFrameX, _topSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_RIGHT_TOP:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightTopSpecialAttackFrameX, _rightTopSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_RIGHT:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightSpecialAttackFrameX, _rightSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_RIGHT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightBottomSpecialAttackFrameX, _rightBottomSpecialAttackFrameY);
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
 		case PARTNER_DIRECTION_END:
 			break;
@@ -174,35 +174,35 @@ void playerPartner::draw()
 		{
 		case PARTNER_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_bottomHurtFrameX, _bottomHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_LEFT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftBottomHurtFrameX, _leftBottomHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_LEFT:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftHurtFrameX, _leftHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_LEFT_TOP:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_leftTopHurtFrameX, _leftTopHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_TOP:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_topHurtFrameX, _topHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_RIGHT_TOP:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightTopHurtFrameX, _rightTopHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_RIGHT:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightHurtFrameX, _rightHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_RIGHT_BOTTOM:
 			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _partner.imageRc.left, _partner.imageRc.top,
-				_rightBottomHurtFrameX, _rightBottomHurtFrameY);
+				_hurtFrameX, _hurtFrameY);
 			break;
 		case PARTNER_DIRECTION_END:
 			break;

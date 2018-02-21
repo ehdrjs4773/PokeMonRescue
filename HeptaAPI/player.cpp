@@ -30,10 +30,12 @@ HRESULT player::init(string charName)
 	//변수 초기화 ( player+valueInit.cpp에 있음 )
 	valueInit();
 
+	//처음 한번만 초기화 해야 하는것들
+	_isHurt = false;
 	_isWallCrash = false;
 	_player.townSpeed = 3.0f;
 	_player.money = 1000;
-
+	
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
 	tempNameAttack = charName + "_attack";
@@ -42,6 +44,7 @@ HRESULT player::init(string charName)
 
 	_playerStatus = new pokemon;
 	_playerStatus->pokemonStatus(charName, 1);
+	_player.currentHp = _playerStatus->getCurrentHP();
 
 	return S_OK;
 }
@@ -63,6 +66,8 @@ void player::update()
 	//{
 	//	(*_viPartner)->update();
 	//}
+
+	EFFECTMANAGER->update();
 }
 void player::render()
 {
@@ -70,41 +75,20 @@ void player::render()
 	int x = CAMERAMANAGER->getX();
 	int y = CAMERAMANAGER->getY();
 
-	//SetBkMode(hdc, TRANSPARENT);
-	//char str[128];
-	//sprintf_s(str, " 바텀무브 불값 : %d ", _isBottomMove);
-	//TextOut(hdc, x + 200, y + 50, str, strlen(str));
-	//char str2[128];
-	//sprintf_s(str2, " ( _player.y ) 현재 값 : %f ", _player.y);
-	//TextOut(hdc, x + 200, y + 75, str2, strlen(str2));
-	//char str3[128];
-	//sprintf_s(str3, " ( _player.startX ) 현재 값 : %f ", _player.startX);
-	//TextOut(hdc, x + 200, y + 100, str3, strlen(str3));
-	//char str4[128];
-	//sprintf_s(str4, " ( _player.startY ) 현재 값 : %f ", _player.startY);
-	//TextOut(hdc, x + 200, y + 125, str4, strlen(str4));
-	//
-	//char str5[128];
-	//sprintf_s(str5, " _player.x / 24 : %f ", _player.x / 24);
-	//TextOut(hdc, x + 200, y + 150, str5, strlen(str5));
-	//char str6[128];
-	//sprintf_s(str6, " _player.y / 24 : %f ", _player.y / 24);
-	//TextOut(hdc, x + 200, y + 175, str6, strlen(str6));
-	//
-	//char str7[128];
-	//sprintf_s(str7, " _player.idx 값 : %d ", _player.idx);
-	//TextOut(hdc, x + 200, y + 200, str7, strlen(str7));
-	//char str8[128];
-	//sprintf_s(str8, " _player.idy 값 : %d ", _player.idy);
-	//TextOut(hdc, x + 200, y + 225, str8, strlen(str8));
-
+	SetBkMode(hdc, TRANSPARENT);
+	char str[128];
+	sprintf_s(str, " 맞앗닭 : %d ", _isHurt);
+	TextOut(hdc, x + 100, y + 50, str, strlen(str));
+	char str2[128];
+	sprintf_s(str2, " _player.currentHp 현재 값 : %d ", _player.currentHp);
+	TextOut(hdc, x + 100, y + 75, str2, strlen(str2));
+	char str3[128];
+	sprintf_s(str3, " _playerStatus->getCurrentHP() 현재 값 : %d ", _playerStatus->getCurrentHP());
+	TextOut(hdc, x + 100, y + 100, str3, strlen(str3));
 
 	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
-	//for (_viPartner = _vPartner.begin(); _viPartner != _vPartner.end(); ++_viPartner)
-	//{
-	//	(*_viPartner)->render();
-	//}
 	draw();
+	EFFECTMANAGER->render(hdc);
 }
 
 // ================================================================================================
@@ -342,6 +326,13 @@ void player::townMove()
 // ============================================================================================
 void player::dungeonMove()
 {
+
+	//if (_playerStatus->getCurrentHP() <= 0)
+	//{
+	//	_player.state = PLAYER_DIE;
+	//}
+	//if (_player.state == PLAYER_DIE) return;
+
 	//몇번째 타일에 있는지 인덱스 x,y
 	_player.idx = _player.x / 24;
 	_player.idy = _player.y / 24;
@@ -352,61 +343,46 @@ void player::dungeonMove()
 	//타일검출
 	tileCheak();
 
-	if (KEYMANAGER->isOnceKeyDown(VK_F1) && !_onceMove)
+	//피격상태
+	if (_player.currentHp != _playerStatus->getCurrentHP())
+	{
+		_isHurt = true;
+		_player.state = PLAYER_HURT;
+
+	}
+	_player.currentHp = _playerStatus->getCurrentHP();
+	
+
+	//스페셜 공격 1
+	if (KEYMANAGER->isOnceKeyDown('Q') && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_isAttack = true;
 		_player.state = PLAYER_SPECIAL_ATTACK_1;
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_F2) && !_onceMove)
+
+	//스페셜 공격 2
+	if (KEYMANAGER->isOnceKeyDown('W') && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_isAttack = true;
-		_player.state = PLAYER_HURT;
+		_player.state = PLAYER_SPECIAL_ATTACK_2;
+	}
+
+	//스페셜 공격 2
+	if (KEYMANAGER->isOnceKeyDown('E') && !_isAttack && !_onceMove && !_isHurt)
+	{
+		_isAttack = true;
+		_player.state = PLAYER_SPECIAL_ATTACK_3;
 	}
 
 	//공격키
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_onceMove)
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_isAttack = true;
-
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			_player.direction = PLAYER_BOTTOM;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			_player.direction = PLAYER_LEFT_BOTTOM;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_LEFT:
-			_player.direction = PLAYER_LEFT;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_LEFT_TOP:
-			_player.direction = PLAYER_LEFT_TOP;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_TOP:
-			_player.direction = PLAYER_TOP;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_RIGHT_TOP:
-			_player.direction = PLAYER_RIGHT_TOP;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_RIGHT:
-			_player.direction = PLAYER_RIGHT;
-			_player.state = PLAYER_ATTACK;
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			_player.direction = PLAYER_RIGHT_BOTTOM;
-			_player.state = PLAYER_ATTACK;
-			break;
-		}
+		_player.state = PLAYER_ATTACK;
 	}
 	//왼쪽아래
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove)
+		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_LEFT_BOTTOM;
 
@@ -421,7 +397,7 @@ void player::dungeonMove()
 	}
 	//오른쪽아래
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove)
+		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_RIGHT_BOTTOM;
 
@@ -436,7 +412,7 @@ void player::dungeonMove()
 	}
 	//왼쪽위
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
+		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_LEFT_TOP;
 
@@ -451,7 +427,7 @@ void player::dungeonMove()
 	}
 	//오른쪽위
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
+		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_RIGHT_TOP;
 
@@ -466,7 +442,7 @@ void player::dungeonMove()
 	}
 	//아래
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !_isAttack && !_onceMove)
+		&& !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !_isAttack && !_onceMove && !_isHurt )
 	{
 		_player.direction = PLAYER_BOTTOM;
 
@@ -481,7 +457,7 @@ void player::dungeonMove()
 	}
 	//위
 	if (KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_LEFT))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
+		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_TOP;
 
@@ -496,7 +472,7 @@ void player::dungeonMove()
 	}
 	//왼쪽
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
+		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_LEFT;
 
@@ -511,7 +487,7 @@ void player::dungeonMove()
 	}
 	//오른쪽
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove)
+		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
 	{
 		_player.direction = PLAYER_RIGHT;
 
@@ -524,8 +500,7 @@ void player::dungeonMove()
 			_player.state = PLAYER_MOVE;
 		}
 	}
-	//프레임 보정 ( 던전에선 필요 없을듯 )
-	//correction();
+
 	//player+move.cpp에 있음
 	playerDgMove();
 
@@ -715,9 +690,7 @@ void player::addPartner(pokemon* p)
 
 	playerPartner* temp;
 	temp->init(p->getName());
-	_playerStatus = new pokemon;
-	_playerStatus->pokemonStatus(p->getName(), 1);
-
+	
 	_vPartner.push_back(temp);
 }
 

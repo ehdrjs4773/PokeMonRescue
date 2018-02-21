@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "player.h"
+#include "Stage.h"
+#include "enemyManager.h"
 
 // =======================
 // ## 프레임 업뎃 하는곳 ##
@@ -11,135 +13,135 @@ void player::FrameUpdate()
 	case PLAYER_IDLE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				_bottomIdleFrameX = _bottomIdleFrameY = 0;
+		case PLAYER_BOTTOM:
+			_idleFrameX = _idleFrameY = 0;
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				_leftBottomIdleFrameX = 0;
-				_leftBottomIdleFrameY = 1;
+		case PLAYER_LEFT_BOTTOM:
+			_idleFrameX = 0;
+			_idleFrameY = 1;
 			break;
-			case PLAYER_LEFT:
-				_leftIdleFrameX = 0;
-				_leftIdleFrameY = 2;
+		case PLAYER_LEFT:
+			_idleFrameX = 0;
+			_idleFrameY = 2;
 			break;
-			case PLAYER_LEFT_TOP:
-				_leftTopIdleFrameX = 0;
-				_leftTopIdleFrameY = 3;
+		case PLAYER_LEFT_TOP:
+			_idleFrameX = 0;
+			_idleFrameY = 3;
 			break;
-			case PLAYER_TOP:
-				_topIdleFrameX = 0;
-				_topIdleFrameY = 4;
+		case PLAYER_TOP:
+			_idleFrameX = 0;
+			_idleFrameY = 4;
 			break;
-			case PLAYER_RIGHT_TOP:
-				_rightTopIdleFrameX = 0;
-				_rightTopIdleFrameY = 5;
+		case PLAYER_RIGHT_TOP:
+			_idleFrameX = 0;
+			_idleFrameY = 5;
 			break;
-			case PLAYER_RIGHT:
-				_rightIdleFrameX = 0;
-				_rightIdleFrameY = 6;
+		case PLAYER_RIGHT:
+			_idleFrameX = 0;
+			_idleFrameY = 6;
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				_rightBottomIdleFrameX = 0;
-				_rightBottomIdleFrameY = 7;
+		case PLAYER_RIGHT_BOTTOM:
+			_idleFrameX = 0;
+			_idleFrameY = 7;
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
-		}
+		}	  //기본상태
 		break;
 	case PLAYER_MOVE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				_bottomMoveFrameY = 0;
-				_bottomMoveCount++;
-				if (_bottomMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_bottomMoveFrameX++;
-					if (_bottomMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_bottomMoveFrameX = 0;
-					_bottomMoveCount = 0;
-				}
+		case PLAYER_BOTTOM:
+			_moveFrameY = 0;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				_leftBottomMoveFrameY = 1;
-				_leftBottomMoveCount++;
-				if (_leftBottomMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_leftBottomMoveFrameX++;
-					if (_leftBottomMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_leftBottomMoveFrameX = 0;
-					_leftBottomMoveCount = 0;
-				}
+		case PLAYER_LEFT_BOTTOM:
+			_moveFrameY = 1;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_LEFT:
-				_leftMoveFrameY = 2;
-				_leftMoveCount++;
-				if (_leftMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_leftMoveFrameX++;
-					if (_leftMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_leftMoveFrameX = 0;
-					_leftMoveCount = 0;
-				}
+		case PLAYER_LEFT:
+			_moveFrameY = 2;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_TOP:
-				_leftTopMoveFrameY = 3;
-				_leftTopMoveCount++;
-				if (_leftTopMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_leftTopMoveFrameX++;
-					if (_leftTopMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_leftTopMoveFrameX = 0;
-					_leftTopMoveCount = 0;
-				}
+		case PLAYER_LEFT_TOP:
+			_moveFrameY = 3;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_TOP:
-				_topMoveFrameY = 4;
-				_topMoveCount++;
-				if (_topMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_topMoveFrameX++;
-					if (_topMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_topMoveFrameX = 0;
-					_topMoveCount = 0;
-				}
+		case PLAYER_TOP:
+			_moveFrameY = 4;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_TOP:
-				_rightTopMoveFrameY = 5;
-				_rightTopMoveCount++;
-				if (_rightTopMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_rightTopMoveFrameX++;
-					if (_rightTopMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_rightTopMoveFrameX = 0;
-					_rightTopMoveCount = 0;
-				}
+		case PLAYER_RIGHT_TOP:
+			_moveFrameY = 5;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT:
-				_rightMoveFrameY = 6;
-				_rightMoveCount++;
-				if (_rightMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_rightMoveFrameX++;
-					if (_rightMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_rightMoveFrameX = 0;
-					_rightMoveCount = 0;
-				}
+		case PLAYER_RIGHT:
+			_moveFrameY = 6;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				_rightBottomMoveFrameY = 7;
-				_rightBottomMoveCount++;
-				if (_rightBottomMoveCount % MOVE_FRAME_UPDATE_SPEED == 0)
-				{
-					_rightBottomMoveFrameX++;
-					if (_rightBottomMoveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
-					_rightBottomMoveFrameX = 0;
-					_rightBottomMoveCount = 0;
-				}
+		case PLAYER_RIGHT_BOTTOM:
+			_moveFrameY = 7;
+			_moveCount++;
+			if (_moveCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_moveFrameX++;
+				if (_moveFrameX > IMAGEMANAGER->findImage(tempNameMove.c_str())->getMaxFrameX())
+					_moveFrameX = 0;
+				_moveCount = 0;
+			}
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
@@ -147,410 +149,1240 @@ void player::FrameUpdate()
 	case PLAYER_ATTACK:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				_bottomAttackFrameY = 0;
-				_bottomAttackCount++;
-				if (_bottomAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_BOTTOM:
+			_attackFrameY = 0;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_bottomAttackFrameX++;
-					if (_bottomAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						valueInit();
-						_player.direction = PLAYER_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						
-					}			
-					_bottomAttackCount = 0;
-				}
-			break;
-			case PLAYER_LEFT_BOTTOM:
-				_leftBottomAttackFrameY = 1;
-				_leftBottomAttackCount++;
-				if (_leftBottomAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
-				{
-					_leftBottomAttackFrameX++;
-					if (_leftBottomAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
-					{
-						valueInit();
-						_player.direction = PLAYER_LEFT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						
-					}				
-					_leftBottomAttackCount = 0;
-				}
-			break;
-			case PLAYER_LEFT:
-				_leftAttackFrameY = 2;
-				_leftAttackCount++;
-				if (_leftAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
-				{
-					_leftAttackFrameX++;
-					if (_leftAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
-					{
-						valueInit();
-						_player.direction = PLAYER_LEFT;
-						_player.state = PLAYER_IDLE;
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+
+						}
 					}
-					_leftAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_TOP:
-				_leftTopAttackFrameY = 3;
-				_leftTopAttackCount++;
-				if (_leftTopAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_BOTTOM:
+			_attackFrameY = 1;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_leftTopAttackFrameX++;
-					if (_leftTopAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_LEFT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
 					}
-					_leftTopAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_TOP:
-				_topAttackFrameY = 4;
-				_topAttackCount++;
-				if (_topAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT:
+			_attackFrameY = 2;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_topAttackFrameX++;
-					if (_topAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
 					}
-					_topAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT;
+					_player.state = PLAYER_IDLE;
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_TOP:
-				_rightTopAttackFrameY = 5;
-				_rightTopAttackCount++;
-				if (_rightTopAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_TOP:
+			_attackFrameY = 3;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_rightTopAttackFrameX++;
-					if (_rightTopAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_RIGHT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
 					}
-					_rightTopAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT:
-				_rightAttackFrameY = 6;
-				_rightAttackCount++;
-				if (_rightAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_TOP:
+			_attackFrameY = 4;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_rightAttackFrameX++;
-					if (_rightAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						valueInit();
-						_player.direction = PLAYER_RIGHT;
-						_player.state = PLAYER_IDLE;
-						
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
 					}
-					_rightAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				_rightBottomAttackFrameY = 7;
-				_rightBottomAttackCount++;
-				if (_rightBottomAttackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT_TOP:
+			_attackFrameY = 5;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
 				{
-					_rightBottomAttackFrameX++;
-					if (_rightBottomAttackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_RIGHT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
 					}
-					_rightBottomAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_RIGHT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_attackCount = 0;
+			}
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_RIGHT:
+			_attackFrameY = 6;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+				{
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
+					}
+
+					valueInit();
+					_player.direction = PLAYER_RIGHT;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_attackCount = 0;
+			}
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			_attackFrameY = 7;
+			_attackCount++;
+			if (_attackCount % ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_attackFrameX++;
+				if (_attackFrameX > IMAGEMANAGER->findImage(tempNameAttack.c_str())->getMaxFrameX())
+				{
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getAtk());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_attackCount = 0;
+			}
+			break;
+		case PLAYER_DIRECTION_END:
 			break;
 		}
 		break;
 	case PLAYER_SPECIAL_ATTACK_1:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				_bottomSpecialAttackFrameY = 0;
-				_bottomSpecialAttackCount++;
-				if (_bottomSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_BOTTOM:
+			_S_AttackFrameY = 0;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_bottomSpecialAttackFrameX++;
-					if (_bottomSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+
+						}
 					}
-					_bottomSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				_leftBottomSpecialAttackFrameY = 1;
-				_leftBottomSpecialAttackCount++;
-				if (_leftBottomSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_BOTTOM:
+			_S_AttackFrameY = 1;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_leftBottomSpecialAttackFrameX++;
-					if (_leftBottomSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_LEFT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_leftBottomSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_LEFT:
-				_leftSpecialAttackFrameY = 2;
-				_leftSpecialAttackCount++;
-				if (_leftSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT:
+			_S_AttackFrameY = 2;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_leftSpecialAttackFrameX++;
-					if (_leftSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_LEFT;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_leftSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_TOP:
-				_leftTopSpecialAttackFrameY = 3;
-				_leftTopSpecialAttackCount++;
-				if (_leftTopSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_TOP:
+			_S_AttackFrameY = 3;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_leftTopSpecialAttackFrameX++;
-					if (_leftTopSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_LEFT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_leftTopSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_LEFT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_TOP:
-				_topSpecialAttackFrameY = 4;
-				_topSpecialAttackCount++;
-				if (_topSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_TOP:
+			_S_AttackFrameY = 4;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_topSpecialAttackFrameX++;
-					if (_topSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_topSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_TOP:
-				_rightTopSpecialAttackFrameY = 5;
-				_rightTopSpecialAttackCount++;
-				if (_rightTopSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT_TOP:
+			_S_AttackFrameY = 5;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_rightTopSpecialAttackFrameX++;
-					if (_rightTopSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_RIGHT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_rightTopSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_RIGHT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT:
-				_rightSpecialAttackFrameY = 6;
-				_rightSpecialAttackCount++;
-				if (_rightSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT:
+			_S_AttackFrameY = 6;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_rightSpecialAttackFrameX++;
-					if (_rightSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_RIGHT;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_rightSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_RIGHT;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				_rightBottomSpecialAttackFrameY = 7;
-				_rightBottomSpecialAttackCount++;
-				if (_rightBottomSpecialAttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT_BOTTOM:
+			_S_AttackFrameY = 7;
+			_S_AttackCount++;
+			if (_S_AttackCount % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX++;
+				if (_S_AttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
 				{
-					_rightBottomSpecialAttackFrameX++;
-					if (_rightBottomSpecialAttackFrameX > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+					EFFECTMANAGER->play("FireT", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
 					{
-						_player.direction = PLAYER_RIGHT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
 					}
-					_rightBottomSpecialAttackCount = 0;
+					valueInit();
+					_player.direction = PLAYER_RIGHT_BOTTOM;
+					_player.state = PLAYER_IDLE;
 				}
+				_S_AttackCount = 0;
+			}
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
 		break;
 	case PLAYER_SPECIAL_ATTACK_2:
+		switch (_player.direction)
+		{
+		case PLAYER_BOTTOM:
+			_S_AttackFrameY_2 = 0;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_LEFT_BOTTOM:
+			_S_AttackFrameY_2 = 1;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_LEFT:
+			_S_AttackFrameY_2 = 2;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_LEFT_TOP:
+			_S_AttackFrameY_2 = 3;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_TOP:
+			_S_AttackFrameY_2 = 4;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_RIGHT_TOP:
+			_S_AttackFrameY_2 = 5;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_RIGHT:
+			_S_AttackFrameY_2 = 6;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			_S_AttackFrameY_2 = 7;
+			_S_AttackCount_2++;
+			if (_S_AttackCount_2 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_2++;
+				if (_S_AttackFrameX_2 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("fireMeteo", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_DIRECTION_END:
+			break;
+
+		}
+		break;
+	case PLAYER_SPECIAL_ATTACK_3:
+		switch (_player.direction)
+		{
+		case PLAYER_BOTTOM:
+			_S_AttackFrameY_3 = 0;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_LEFT_BOTTOM:
+			_S_AttackFrameY_3 = 1;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_LEFT:
+			_S_AttackFrameY_3 = 2;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_LEFT_TOP:
+			_S_AttackFrameY_3 = 3;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex - 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex - 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_LEFT_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_TOP:
+			_S_AttackFrameY_3 = 4;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_2 = 0;
+			}
+			break;
+		case PLAYER_RIGHT_TOP:
+			_S_AttackFrameY_3 = 5;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 - _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT_TOP;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_RIGHT:
+			_S_AttackFrameY_3 = 6;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT;
+					_player.state = PLAYER_IDLE;
+
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			_S_AttackFrameY_3 = 7;
+			_S_AttackCount_3++;
+			if (_S_AttackCount_3 % S_ATTACK_FRAME_UPDATE_SPEED == 0)
+			{
+				_S_AttackFrameX_3++;
+				if (_S_AttackFrameX_3 > IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->getMaxFrameX())
+				{
+					EFFECTMANAGER->play("ember", _stage->getTileAdress()[_player.tileIndex + 1]->getCenterX()
+						, _stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getCenterY());
+					//공격
+					for (int i = 0; i < _em->getVEnemyPokemon().size(); ++i)
+					{
+						if (_stage->getTileAdress()[_player.tileIndex + 1]->getIndexX() ==
+							_em->getVEnemyPokemon()[i]->getTileX() &&
+							_stage->getTileAdress()[_player.tileIndex + 1 + _stage->gettileCountX()]->getIndexY() ==
+							_em->getVEnemyPokemon()[i]->getTileY())
+						{
+							if (_isAttack)
+							{
+								_em->getVEnemyPokemon()[i]->damageToHP(_playerStatus->getSpecialATK());
+								break;
+							}
+						}
+					}
+					valueInit();
+					_player.direction = PLAYER_RIGHT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+				}
+				_S_AttackCount_3 = 0;
+			}
+			break;
+		case PLAYER_DIRECTION_END:
+			break;
+
+		}
+		break;
+	case PLAYER_SPECIAL_ATTACK_4:
 		break;
 	case PLAYER_HURT:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				_bottomHurtFrameY = 0;
-				_bottomHurtCount++;
-				if (_bottomHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_BOTTOM:
+			_hurtFrameY = 0;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_bottomHurtFrameX++;
-					if (_bottomHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_bottomHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				_leftBottomHurtFrameY = 1;
-				_leftBottomHurtCount++;
-				if (_leftBottomHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_BOTTOM:
+			_hurtFrameY = 1;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_leftBottomHurtFrameX++;
-					if (_leftBottomHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_LEFT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_leftBottomHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_LEFT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_LEFT:
-				_leftHurtFrameY = 2;
-				_leftHurtCount++;
-				if (_leftHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT:
+			_hurtFrameY = 2;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_leftHurtFrameX++;
-					if (_leftHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_LEFT;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_leftHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_LEFT;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_LEFT_TOP:
-				_leftTopHurtFrameY = 3;
-				_leftTopHurtCount++;
-				if (_leftTopHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_LEFT_TOP:
+			_hurtFrameY = 3;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_leftTopHurtFrameX++;
-					if (_leftTopHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_LEFT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_leftTopHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_LEFT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_TOP:
-				_topHurtFrameY = 4;
-				_topHurtCount++;
-				if (_topHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_TOP:
+			_hurtFrameY = 4;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_topHurtFrameX++;
-					if (_topHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_topHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_TOP:
-				_rightTopHurtFrameY = 5;
-				_rightTopHurtCount++;
-				if (_rightTopHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT_TOP:
+			_hurtFrameY = 5;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_rightTopHurtFrameX++;
-					if (_rightTopHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_RIGHT_TOP;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_rightTopHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_RIGHT_TOP;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT:
-				_rightHurtFrameY = 6;
-				_rightHurtCount++;
-				if (_rightHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT:
+			_hurtFrameY = 6;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_rightHurtFrameX++;
-					if (_rightHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_RIGHT;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_rightHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_RIGHT;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				_rightBottomHurtFrameY = 7;
-				_rightBottomHurtCount++;
-				if (_rightBottomHurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+		case PLAYER_RIGHT_BOTTOM:
+			_hurtFrameY = 7;
+			_hurtCount++;
+			if (_hurtCount % HURT_FRAME_UPDATE_SPEED == 0)
+			{
+				_hurtFrameX++;
+				if (_hurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
 				{
-					_rightBottomHurtFrameX++;
-					if (_rightBottomHurtFrameX > IMAGEMANAGER->findImage(tempNameHurt.c_str())->getMaxFrameX())
-					{
-						_player.direction = PLAYER_RIGHT_BOTTOM;
-						_player.state = PLAYER_IDLE;
-						valueInit();
-					}
-					_rightBottomHurtCount = 0;
+					valueInit();
+					_isHurt = false;
+					_player.direction = PLAYER_RIGHT_BOTTOM;
+					_player.state = PLAYER_IDLE;
+
 				}
+				_hurtCount = 0;
+			}
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 		}
 		break;
 	case PLAYER_DIE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
+		case PLAYER_BOTTOM:
 			break;
-			case PLAYER_LEFT_BOTTOM:
+		case PLAYER_LEFT_BOTTOM:
 			break;
-			case PLAYER_LEFT:
+		case PLAYER_LEFT:
 			break;
-			case PLAYER_LEFT_TOP:
+		case PLAYER_LEFT_TOP:
 			break;
-			case PLAYER_TOP:
+		case PLAYER_TOP:
 			break;
-			case PLAYER_RIGHT_TOP:
+		case PLAYER_RIGHT_TOP:
 			break;
-			case PLAYER_RIGHT:
+		case PLAYER_RIGHT:
 			break;
-			case PLAYER_RIGHT_BOTTOM:
+		case PLAYER_RIGHT_BOTTOM:
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}

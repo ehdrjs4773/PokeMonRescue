@@ -12,39 +12,39 @@ void player::draw()
 	case PLAYER_IDLE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_bottomIdleFrameX, _bottomIdleFrameY);
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftBottomIdleFrameX, _leftBottomIdleFrameY);
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_LEFT:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftIdleFrameX, _leftIdleFrameY);
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_LEFT_TOP:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftTopIdleFrameX, _leftTopIdleFrameY);
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_TOP:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_topIdleFrameX, _topIdleFrameY);
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_RIGHT_TOP:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightTopIdleFrameX, _rightTopIdleFrameY);
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_RIGHT:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightIdleFrameX, _rightIdleFrameY);
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightBottomIdleFrameX, _rightBottomIdleFrameY);
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameIdle.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_idleFrameX, _idleFrameY);
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
@@ -52,39 +52,39 @@ void player::draw()
 	case PLAYER_MOVE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_bottomMoveFrameX, _bottomMoveFrameY);
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftBottomMoveFrameX, _leftBottomMoveFrameY);
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_LEFT:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftMoveFrameX, _leftMoveFrameY);
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_LEFT_TOP:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftTopMoveFrameX, _leftTopMoveFrameY);
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_TOP:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_topMoveFrameX, _topMoveFrameY);
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_RIGHT_TOP:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightTopMoveFrameX, _rightTopMoveFrameY);
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_RIGHT:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightMoveFrameX, _rightMoveFrameY);
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightBottomMoveFrameX, _rightBottomMoveFrameY);
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameMove.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_moveFrameX, _moveFrameY);
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
@@ -92,39 +92,39 @@ void player::draw()
 	case PLAYER_ATTACK:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_bottomAttackFrameX, _bottomAttackFrameY);
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftBottomAttackFrameX, _leftBottomAttackFrameY);
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_LEFT:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftAttackFrameX, _leftAttackFrameY);
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_LEFT_TOP:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftTopAttackFrameX, _leftTopAttackFrameY);
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_TOP:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_topAttackFrameX, _topAttackFrameY);
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_RIGHT_TOP:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightTopAttackFrameX, _rightTopAttackFrameY);
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_RIGHT:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightAttackFrameX, _rightAttackFrameY);
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightBottomAttackFrameX, _rightBottomAttackFrameY);
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_attackFrameX, _attackFrameY);
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
@@ -132,105 +132,226 @@ void player::draw()
 	case PLAYER_SPECIAL_ATTACK_1:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_bottomSpecialAttackFrameX, _bottomSpecialAttackFrameY);
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftBottomSpecialAttackFrameX, _leftBottomSpecialAttackFrameY);
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_LEFT:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftSpecialAttackFrameX, _leftSpecialAttackFrameY);
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_LEFT_TOP:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftTopSpecialAttackFrameX, _leftTopSpecialAttackFrameY);
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_TOP:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_topSpecialAttackFrameX, _topSpecialAttackFrameY);
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_RIGHT_TOP:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightTopSpecialAttackFrameX, _rightTopSpecialAttackFrameY);
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_RIGHT:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightSpecialAttackFrameX, _rightSpecialAttackFrameY);
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightBottomSpecialAttackFrameX, _rightBottomSpecialAttackFrameY);
-				break;
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX, _S_AttackFrameY);
 			break;
-			case PLAYER_DIRECTION_END:
+			break;
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}
 		break;
 	case PLAYER_SPECIAL_ATTACK_2:
+		switch (_player.direction)
+		{
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_2, _S_AttackFrameY_2);
+			break;
+			break;
+		case PLAYER_DIRECTION_END:
+			break;
+
+		}
+		break;
+	case PLAYER_SPECIAL_ATTACK_3:
+		switch (_player.direction)
+		{
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_3, _S_AttackFrameY_3);
+			break;
+			break;
+		case PLAYER_DIRECTION_END:
+			break;
+
+		}
+		break;
+	case PLAYER_SPECIAL_ATTACK_4:
+		switch (_player.direction)
+		{
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameSpecialAttack.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_S_AttackFrameX_4, _S_AttackFrameY_4);
+			break;
+			break;
+		case PLAYER_DIRECTION_END:
+			break;
+
+		}
 		break;
 	case PLAYER_HURT:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_bottomHurtFrameX, _bottomHurtFrameY);
+		case PLAYER_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_LEFT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftBottomHurtFrameX, _leftBottomHurtFrameY);
+		case PLAYER_LEFT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_LEFT:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftHurtFrameX, _leftHurtFrameY);
+		case PLAYER_LEFT:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_LEFT_TOP:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_leftTopHurtFrameX, _leftTopHurtFrameY);
+		case PLAYER_LEFT_TOP:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_TOP:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_topHurtFrameX, _topHurtFrameY);
+		case PLAYER_TOP:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_RIGHT_TOP:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightTopHurtFrameX, _rightTopHurtFrameY);
+		case PLAYER_RIGHT_TOP:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_RIGHT:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightHurtFrameX, _rightHurtFrameY);
+		case PLAYER_RIGHT:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_RIGHT_BOTTOM:
-				IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
-					_rightBottomHurtFrameX, _rightBottomHurtFrameY);
+		case PLAYER_RIGHT_BOTTOM:
+			IMAGEMANAGER->findImage(tempNameHurt.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+				_hurtFrameX, _hurtFrameY);
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 		}
 		break;
 	case PLAYER_DIE:
 		switch (_player.direction)
 		{
-			case PLAYER_BOTTOM:
+		case PLAYER_BOTTOM:
 			break;
-			case PLAYER_LEFT_BOTTOM:
+		case PLAYER_LEFT_BOTTOM:
 			break;
-			case PLAYER_LEFT:
+		case PLAYER_LEFT:
 			break;
-			case PLAYER_LEFT_TOP:
+		case PLAYER_LEFT_TOP:
 			break;
-			case PLAYER_TOP:
+		case PLAYER_TOP:
 			break;
-			case PLAYER_RIGHT_TOP:
+		case PLAYER_RIGHT_TOP:
 			break;
-			case PLAYER_RIGHT:
+		case PLAYER_RIGHT:
 			break;
-			case PLAYER_RIGHT_BOTTOM:
+		case PLAYER_RIGHT_BOTTOM:
 			break;
-			case PLAYER_DIRECTION_END:
+		case PLAYER_DIRECTION_END:
 			break;
 
 		}

@@ -27,7 +27,8 @@ HRESULT playGround::init()
 	
 	//SCENEMANAGER->init("Opening");
 	
-	SCENEMANAGER->addScene("Stage1", new StageScene);
+	//SCENEMANAGER->addScene("Stage1", new StageScene);						//테스트용 데스!
+	SCENEMANAGER->addScene("Stage1", new battleScene);						//건하꺼 데스!
 	SCENEMANAGER->addChildScene("npc", "shopchiled", new shopchildren);
 	SCENEMANAGER->addChildScene("npc", "ui", new UI);
 	SCENEMANAGER->addChildScene("npc", "inventory", new inventoryChiled);
@@ -39,7 +40,8 @@ HRESULT playGround::init()
 	((shopchildren*)tempIter->second)->setPlayerMemoryAdressLink(_player);
 	((shopchildren*)tempIter->second)->setInventoryMemoryAdressLink((inventoryChiled*)tempInven->second);
 	((Npc*)SCENEMANAGER->findScene("npc")->currentScene)->setPlayerMemoryAdressLink(_player);
-	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
+	//((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//테스트용 데스!
+	((battleScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//건하꺼 데스!
 	SCENEMANAGER->init("Stage1");
 	SCENEMANAGER->init("npc");
 	SCENEMANAGER->changeScene("npc");

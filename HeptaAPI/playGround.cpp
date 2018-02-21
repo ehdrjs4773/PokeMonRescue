@@ -54,6 +54,7 @@ HRESULT playGround::init()
 
 	SCENEMANAGER->addScene("Opening", new oPeningMovie);
 	SCENEMANAGER->addScene("openingSelect", new oPeningSelect);
+	((oPeningSelect*)SCENEMANAGER->findScene("openingSelect")->currentScene)->setPlayerMemoryAdressLink(_player);
 
 	SCENEMANAGER->init("Opening");
 

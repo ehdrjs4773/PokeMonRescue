@@ -66,9 +66,12 @@ void pokemon::islevelUp()
 		_specialDEF += 2;
 	}
 }
-void pokemon::hitDamege(int damege)
+void pokemon::hitDamage(int damage)
 {
-	
+	if (damage > _currentHP)
+		_currentHP = 0;
+	else
+		_currentHP -= damage;
 }
 
 bool pokemon::addSkill(skills* sk)

@@ -52,7 +52,7 @@ public:
 	void pokemonStatus(string name, int level);
 	void expPlus(int exp);
 	void islevelUp();
-	void hitDamege(int damege);
+	void hitDamage(int damage);
 	bool addSkill(skills* sk);
 
 	//각종 접근자

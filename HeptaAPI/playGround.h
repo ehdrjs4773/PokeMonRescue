@@ -8,7 +8,7 @@
 #include "shopchildren.h"
 #include "inventoryChiled.h"
 #include "UI.h"
-#include "battleScene.h"
+#include "battleScene.h"	//°ÇÇÏ²¨ µ¥½º!
 
 class playGround : public gameNode
 {

@@ -66,6 +66,10 @@ void pokemon::islevelUp()
 		_specialDEF += 2;
 	}
 }
+void pokemon::hitDamege(int damege)
+{
+	
+}
 
 bool pokemon::addSkill(skills* sk)
 {

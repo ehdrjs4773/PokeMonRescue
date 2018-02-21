@@ -41,6 +41,7 @@ public:
 	inline type getPotionType() { return _item.Type; }				// 타입 접근 함수 (열매인지 PP포션인지 등등)
 	inline int getPotionAbillity() { return _item.abillity; }		// 능력 접근 함수 (50 채워주는지 100채워주는지)
 	inline int getPrice() { return _item.price; }					// 가격 접근 함수
+	inline string getName() { return _item.name; }					// 이름 접근 함수
 	inline int getNum() { return _item.num; }						// 갯수 접근 함수
 
 	Item();

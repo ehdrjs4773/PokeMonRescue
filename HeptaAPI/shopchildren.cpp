@@ -95,7 +95,7 @@ void shopchildren::update()
 
 
 
-	if (_shopbuy.buySelect)
+	if (_shopbuy.buySelect && !_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet)
 	{
 		if(KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
@@ -114,18 +114,52 @@ void shopchildren::update()
 				break;
 			}
 
-			if (_sele == buy && _itemSelcet.potionSelcet)
-			{
-				if (_inven->getVitem().size() >10) return;
-				Item* potion = new Item;
-
-				potion->setPotion("회복약", 1, 50, 50, type_hpPotion);
-
-
-				_inven->setItem(potion);
-			}
+			
 		}
 	}
+
+	//========================= 아이템 구매 !===============================//
+
+	if (_sele == buy && _itemSelcet.potionSelcet)
+	{
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		{
+			if (_inven->getVitem().size() >= 10) return;
+			Item* potion = new Item;
+
+			potion->setPotion("회복약", 1, 50, 50, type_hpPotion);
+
+			_inven->setItem(potion);
+			SCENEMANAGER->changeParent();
+			_itemSelcet.potionSelcet = false;
+		}
+	}
+	if (_sele == buy && _itemSelcet.ppPotionSelect)
+	{
+		if (_inven->getVitem().size() >= 10) return;
+		Item* Pppotion = new Item;
+
+		Pppotion->setPotion("PP포션", 1, 50, 50, type_ppPotion);
+
+		_inven->setItem(Pppotion);
+		SCENEMANAGER->changeParent();
+		_itemSelcet.ppPotionSelect = false;
+	}
+	if (_sele == buy && _itemSelcet.skillSelcet)
+	{
+		if (_inven->getVitem().size() >= 10) return;
+		Item* Skill = new Item;
+
+
+		Skill->setSkillItem("폭렬열매", "FireT", 1, 100, type_skillItem);
+
+		_inven->setItem(Skill);
+		SCENEMANAGER->changeParent();
+		_itemSelcet.skillSelcet = false;
+	}
+
+
+	//=============================================================================//
 
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
@@ -135,7 +169,7 @@ void shopchildren::update()
 			{
 				case shop_info :
 					SCENEMANAGER->changeParent();
-
+					_itemSelcet.potionSelcet = false;
 					break;
 				case shop_buy :
 					_shopClick = shop_info;

@@ -261,6 +261,9 @@
     <ClInclude Include="inventoryChiled.h">
       <Filter>playGround\박근화</Filter>
     </ClInclude>
+    <ClInclude Include="pokeinfo.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -463,6 +466,9 @@
     </ClCompile>
     <ClCompile Include="inventoryChiled.cpp">
       <Filter>playGround\박근화</Filter>
+    </ClCompile>
+    <ClCompile Include="pokeinfo.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

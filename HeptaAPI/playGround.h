@@ -1,14 +1,15 @@
 #pragma once
 #include "gameNode.h"
 #include "Npc.h"
-//#include "StageScene.h"		//테스트용 데스!
+#include "StageScene.h"		//테스트용 데스!
 #include "player.h"
 #include "oPeningMovie.h"
 #include "Pokemon.h"
 #include "shopchildren.h"
 #include "inventoryChiled.h"
 #include "UI.h"
-#include "battleScene.h"	//건하꺼 데스!
+#include "pokeinfo.h"
+//#include "battleScene.h"	//건하꺼 데스!
 
 class playGround : public gameNode
 {

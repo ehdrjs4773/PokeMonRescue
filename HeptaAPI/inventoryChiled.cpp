@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "inventoryChiled.h"
+#include "player.h"
 
 
 
@@ -33,6 +34,16 @@ void inventoryChiled::update()
 	{
 		SCENEMANAGER->changeChild("ui");
 	}
+	
+	
+	if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+	{
+		if (_vitem.size() > 0)
+		{
+			
+		}
+	}
+
 }
 
 void inventoryChiled::render() 
@@ -42,9 +53,19 @@ void inventoryChiled::render()
 
 	if (_vitem.size() == 0) return;
 	
-	char str[128];
-	sprintf(str, "%d", _vitem[0].getPrice());
-	TextOut(dc, CAMERAMANAGER->getX() + 100, CAMERAMANAGER->getY() + 100, str, strlen(str));
+	for(int i = 0; i < _vitem.size(); i++)
+	{
+		char str[128];
+		sprintf(str, "%d", _vitem[i].getPrice());
+		TextOut(dc, CAMERAMANAGER->getX() + 250, CAMERAMANAGER->getY() + 70 + i * 20, str, strlen(str));
+		TextOut(dc, CAMERAMANAGER->getX() +100, CAMERAMANAGER->getY() + 70 + i * 20, _vitem[i].getName().c_str(), strlen(_vitem[i].getName().c_str()));
+	}
+
+
+	for (int i = 0; i < _vitem.size(); ++i)
+	{
+		IMAGEMANAGER->findImage("point")->render(dc, 50, 70);
+	}
 }
 
 

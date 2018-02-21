@@ -4,6 +4,7 @@
 #include "shopchildren.h"
 #include <vector>
 
+class player;
 
 class inventoryChiled : public gameNode
 {
@@ -12,6 +13,7 @@ private :
 	vector<Item> _vitem;
 	vector<Item>::iterator _viItem;
 	
+	player* _player;
 
 public:
 	inventoryChiled();
@@ -28,6 +30,8 @@ public:
 
 
 	// Á¢±ÙÀÚ ~!
+
+	void setInvenPlayerMemAdressLink(player* play) { _player = play; }
 
 	vector<Item> getVitem() { return _vitem; }
 	vector<Item>::iterator getViItem() { return _viItem; }

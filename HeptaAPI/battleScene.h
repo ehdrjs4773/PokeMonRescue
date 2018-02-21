@@ -58,6 +58,8 @@ public:
 	void update();
 	void render();
 
+	void StageUpDown();
+
 	void setPlayerMemAdressLink(player* player) { _player = player; }
 };
 

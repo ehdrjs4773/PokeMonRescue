@@ -140,5 +140,6 @@ void StageScene::render()
 	_em->render();
 
 	_player->render();
+	_nowStage->getminimap()->alphaRender(CAMERAMANAGER->getMemDC(), CAMERAMANAGER->getX(), CAMERAMANAGER->getY(), 200);
 	IMAGEMANAGER->findImage("alphamap")->alphaRender(CAMERAMANAGER->getMemDC(), CAMERAMANAGER->getX(), CAMERAMANAGER->getY(), 255 - _alphaMap);
 }

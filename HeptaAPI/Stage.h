@@ -30,6 +30,8 @@ private:
 
 	RECT				_renderrc;
 
+	image*				_minimap;
+
 public:
 	Stage();
 	~Stage();
@@ -59,6 +61,8 @@ public:
 
 	//리스폰 타일 추출
 	vector<tile*> getrespontile() { return _respontiles; }
+
+	image* getminimap() { return _minimap; }
 
 	
 };

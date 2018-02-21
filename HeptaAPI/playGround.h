@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "Npc.h"
-#include "StageScene.h"		//테스트용 데스!
+//#include "StageScene.h"		//테스트용 데스!
 #include "player.h"
 #include "oPeningMovie.h"
 #include "Pokemon.h"
@@ -10,7 +10,7 @@
 #include "UI.h"
 #include "pokeinfo.h"
 #include "oPeningSelect.h"
-//#include "battleScene.h"	//건하꺼 데스!
+#include "battleScene.h"	//건하꺼 데스!
 
 class playGround : public gameNode
 {

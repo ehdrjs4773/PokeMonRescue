@@ -23,8 +23,8 @@ HRESULT playGround::init()
 	SCENEMANAGER->addScene("npc", new Npc);
 	_player->setTownMapMemAdressLink((Npc*)SCENEMANAGER->findScene("npc")->currentScene);
 
-	SCENEMANAGER->addScene("Stage1", new StageScene);						//테스트용 데스!
-	//SCENEMANAGER->addScene("Stage1", new battleScene);						//건하꺼 데스!
+	//SCENEMANAGER->addScene("Stage1", new StageScene);						//테스트용 데스!
+	SCENEMANAGER->addScene("Stage1", new battleScene);						//건하꺼 데스!
 	
 	SCENEMANAGER->addChildScene("npc", "ui", new UI);
 	SCENEMANAGER->addChildScene("npc", "inventory", new inventoryChiled);
@@ -34,7 +34,7 @@ HRESULT playGround::init()
 	map<string, gameNode*>::iterator tempInven = SCENEMANAGER->findScene("npc")->children.find("inventory");
 	map<string, gameNode*>::iterator tempIter = SCENEMANAGER->findScene("npc")->children.find("shopchiled");
 	map<string, gameNode*>::iterator tempInfo = SCENEMANAGER->findScene("npc")->children.find("pokeinfo");
-	SCENEMANAGER->addScene("Stage1", new StageScene);
+	//SCENEMANAGER->addScene("Stage1", new StageScene);
 	SCENEMANAGER->addChildScene("Stage1", "ui", tempIter->second);
 	SCENEMANAGER->addChildScene("Stage1", "inventory", tempInven->second);
 
@@ -43,12 +43,12 @@ HRESULT playGround::init()
 	((shopchildren*)tempIter->second)->setInventoryMemoryAdressLink((inventoryChiled*)tempInven->second);
 	((inventoryChiled*)tempInven->second)->setInvenPlayerMemAdressLink(_player);
 	((Npc*)SCENEMANAGER->findScene("npc")->currentScene)->setPlayerMemoryAdressLink(_player);
-	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
+	//((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 
 
 
-	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//테스트용 데스!
-	//((battleScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//건하꺼 데스!
+	//((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//테스트용 데스!
+	((battleScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);	//건하꺼 데스!
 	SCENEMANAGER->init("Stage1");
 	SCENEMANAGER->init("npc");
 

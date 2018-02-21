@@ -7,7 +7,7 @@ void enemyManager::soundInit()
 	SOUNDMANAGER->addSound("º¸½ºÅ×¸¶", ".//music//bossMusic.mp3", false, false);
 	SOUNDMANAGER->addSound("¿ÀÇÁ´×", ".//music//opening.mp3", false, false);
 
-	SOUNDMANAGER->addSound("Æø¹ßÀ½", ".//music//explosion.wav", false, false);
+	SOUNDMANAGER->addSound("Æø¹ßÀ½", ".//music//explosion.mp3", false, false);
 	SOUNDMANAGER->addSound("°ø°Ý", ".//music//hit.wav", false, false);
 
 }

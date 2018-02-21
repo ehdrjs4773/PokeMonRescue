@@ -27,8 +27,8 @@ HRESULT enemyManager::init()
 	_stage->getrespontile()[0]->getIndexY(),	1);
 	enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
 		_stage->getrespontile()[1]->getIndexY(), 1);
-//	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
-//		_stage->getrespontile()[3]->getIndexY(), 1);
+	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
+		_stage->getrespontile()[3]->getIndexY()+1, 1);
 	enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
 		_stage->getrespontile()[4]->getIndexY(), 1);
 	enemyBirth(ENEMY_RUKARIO, _stage->getrespontile()[5]->getIndexX(),
@@ -260,7 +260,6 @@ void enemyManager::enemyTrunManager()
 
 
 	
-			_vEnemyPokemon[i]->enemyASTARStart();
 
 			bool canAtk = false;
 			if (_vEnemyPokemon[i]->getState() == STATE_MOVE)
@@ -292,6 +291,7 @@ void enemyManager::enemyTrunManager()
 				//{
 				//	_vEnemyPokemon[i]->setMyturn(false);
 				//}
+				_vEnemyPokemon[i]->enemyASTARStart();
 
 				enemyMoveManager(i);
 				continue;

@@ -52,7 +52,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	//Rectangle(getMemDC(), _pokemon.x - 5, _pokemon.y - 5, _pokemon.x + 5, _pokemon.y + 5);
 	_pokemon.speed = 2;
 	//디렉션은 기본적으로 아래를 바라보자
-	_pokemon.direction = UP;
+	_pokemon.direction = DOWN;
 	//기본상태
 	_pokemon.state = STATE_IDLE;
 
@@ -308,7 +308,7 @@ void enemy::enemyAngleSetting()
 
 void enemy::enemyASTARStart()
 {
-	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 120) return;
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 96) return;
 	tile start;
 	tile end;
 
@@ -452,7 +452,7 @@ void enemy::enemyMoveSign()
 
 
 
-	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 120)
+	if (getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) > 96)
 	{
 		_myTrun = false;
 		return;

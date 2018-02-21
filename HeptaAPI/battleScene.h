@@ -21,12 +21,7 @@ enum partnerAction	//(임시)
 	partnerUseSkill
 };
 
-enum EnemyAction	//(임시)
-{
-	enemyMove = 1,
-	enemyAttack,
-	enemyUseSkill
-};
+
 
 class battleScene : public gameNode
 {
@@ -35,7 +30,7 @@ private:
 
 	
 	partnerAction _partnerAction;
-	EnemyAction _enemyAction;
+	//
 
 	Stage*		  _nowStage;
 	player*		  _player;

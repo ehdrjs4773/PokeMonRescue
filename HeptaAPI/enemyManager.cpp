@@ -285,6 +285,7 @@ void enemyManager::enemyTrunManager()
 				}
 				_enemyTurn = false;
 				//여기가 완전히 턴이 끝나는부분
+				_enemyAction = enemyMove;
 			}
 			if (!_vEnemyPokemon[i]->getMyturn())
 			{	

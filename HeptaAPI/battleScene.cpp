@@ -116,12 +116,13 @@ void battleScene::update()				//옵데이트!~~~
 		//에너미턴일때
 		else if (_battleTrun == enemyTurn)
 		{
-			//에너미의 행동패턴의 종류는 (플레이어에게 A*로 이동,기본공격,스킬을 사용)
-			//에너미의 귀찮은점은 필드에 존재하는 에너미의 수를 찾아서 백터에 넣고 그 에너미들에게 움직일 순서를 정해주고
-			//에너미들이 순서대로 전부 움직인 다음에야 플레이어에게 턴을 돌릴 수 있다
+			_em->enemyTrunManager();
 
-			//_em->enemyTrunManager();
-
+			if (_em->getEnemyAction() == enemyMove)
+			{
+				_battleTrun = playerTurn;
+			}
+		
 		}
 	}
 	else

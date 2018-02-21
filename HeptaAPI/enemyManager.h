@@ -19,6 +19,12 @@ enum ENEMY
 	ENEMY_ELECTIVIRE
 };
 
+enum EnemyAction	//(임시)
+{
+	enemyMove = 1,
+	enemyAttack,
+	enemyUseSkill
+};
 
 //전방선언!!!!!!
 class tile;
@@ -44,7 +50,7 @@ private://적객체 관련 생산
 	enemy*	_tanguri;
 	enemy*	_electivire;
 	//적의 객체 틀 생성 완료
-
+	EnemyAction _enemyAction; //에너미 액션이넘 (임시)
 
 	//구조체로 이름을 정해두고 보내서 쉽게 쉽게 가즈아!!!!
 	tagImageName	_chicoName;
@@ -97,6 +103,7 @@ public:
 	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }
 	inline void setPlayerMemoryAdressLink(player* pl) { _pl = pl; }
 
+	inline EnemyAction getEnemyAction() { return _enemyAction; }					//액션 이넘 (임시)
 
 	void enemyTrunManager();
 	void enemyAtkManager(int arrNum);

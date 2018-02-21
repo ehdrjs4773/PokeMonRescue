@@ -76,4 +76,8 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addImage("도구상자", ".\\bmps\\UI\\도구메뉴UI.bmp", 267, 278, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("selectIcon", ".\\bmps\\UI\\selectIcon.bmp", 7, 7, false, true, MAGENTA);
 
+	//포켓인포
+	IMAGEMANAGER->addImage("pokeinfo", ".\\bmps\\UI\\Pokeinfo.bmp", 267, 278, false, true, MAGENTA);
+
+
 }

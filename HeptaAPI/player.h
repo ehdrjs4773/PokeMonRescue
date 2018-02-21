@@ -3,7 +3,7 @@
 #include "playerPartner.h"
 #include "pokemon.h"
 
-#define PLAYER_TOWN_SPEED 5
+#define PLAYER_TOWN_SPEED 3
 #define PLAYER_DUNGEON_SPEED 1
 
 //#define MOVE_FRAME_UPDATE_SPEED 5
@@ -42,13 +42,6 @@ enum PLAYER_STATE
 	PLAYER_STATE_END
 };
 
-enum playerAction	//(임시)
-{
-	playerMove = 1,
-	playerAttack,
-	playerUseSkill,
-	playerUseItem
-};
 
 //플레이어 기본정보들 담을 구조체
 struct tagPlayer
@@ -64,19 +57,26 @@ struct tagPlayer
 	int tileIndex;					//몇번째 타일에 있는지 인덱스
 	int money;						//돈
 	int dgNum;						//던전 번호
+	float townSpeed;				//마을에서의 속도		
+	float dgSpeed;					//던전에서의 속도
 };
 
 class Stage;
 class item;
+class enemyManager;
+class Npc;
 
 class player : public gameNode
 {
 private: // ## 맵 정보 ##
 	Stage* _stage;
+	Npc* _town;
 
 private: // ## 포켓몬 정보 ##
 	pokemon* _playerStatus;
-	playerAction _playerAction;		//(임시)
+
+private: // ## 에너미 정보 ##
+	enemyManager* _em;
 
 private: // ## 파트너 정보 ##
 	vector<playerPartner*> _vPartner;
@@ -95,8 +95,8 @@ private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
 	bool _onceMove;		//던전에서는 한번만 움직이게
 
-						// 던전이동시 필요한 불값
-						// 움직일 수 있니? ( 앞에 벽이 있니? )
+	// 던전이동시 필요한 불값
+	// 움직일 수 있니? ( 앞에 벽이 있니? )
 	bool _isBottomMove;
 	bool _isLeftBottomMove;
 	bool _isLeftMove;
@@ -105,8 +105,8 @@ private: // ## 불값 ##
 	bool _isRightTopMove;
 	bool _isRightMove;
 	bool _isRightBottomMove;
-	// 아직안씀
-	bool _speedUp;
+	
+	bool _isWallCrash;			//벽에 부딪혔니?
 
 private: // ## 프레임 돌릴 변수들 ## 
 	SHORT _bottomIdleCount;											//바텀 정지상태에 쓸 카운트
@@ -245,10 +245,11 @@ public:
 	inline int getSpecialAtk() { return _playerStatus->getSpecialATK(); }			//스페셜공격력
 	inline int getSpecialDef() { return _playerStatus->getSpecialDef(); }			//스페셜방어력
 	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
-	inline playerAction getplayerAction() { return _playerAction; }					//액션 이넘 (임시)
 
 	//설정자																			
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
+	void setEmMemAdressLink(enemyManager* em) { _em = em; }
+	void setTownMapMemAdressLink(Npc* map) { _town = map; }
 
 	void setX(float x) { _player.x = x; }											//X좌표 설정
 	void setY(float y) { _player.y = y; }											//Y좌표 설정

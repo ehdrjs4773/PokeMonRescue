@@ -21,6 +21,7 @@ HRESULT playGround::init()
 	_player = new player;
 	
 	SCENEMANAGER->addScene("npc", new Npc);
+	_player->setTownMapMemAdressLink((Npc*)SCENEMANAGER->findScene("npc")->currentScene);
 
 //	SCENEMANAGER->addScene("Opening", new oPeningMovie);
 	
@@ -35,7 +36,7 @@ HRESULT playGround::init()
 	((StageScene*)SCENEMANAGER->findScene("Stage1")->currentScene)->setPlayerMemAdressLink(_player);
 	SCENEMANAGER->init("Stage1");
 	SCENEMANAGER->init("npc");
-	SCENEMANAGER->changeScene("Stage1");
+	SCENEMANAGER->changeScene("npc");
 	
 
 	return S_OK;

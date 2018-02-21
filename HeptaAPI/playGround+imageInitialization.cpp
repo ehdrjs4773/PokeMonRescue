@@ -20,20 +20,7 @@ void playGround::imageInitaialization(void)
 
 	IMAGEMANAGER->addImage("gandy", ".\\bmps\\npc\\가디.bmp", 16, 23, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("windy", ".\\bmps\\npc\\윈디.bmp", 22, 30, false, true, MAGENTA);
-
-	//리자몽
-	IMAGEMANAGER->addFrameImage("리자몽_idle", ".\\bmps\\pokemon_state\\리자몽_idle.bmp"
-		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
-	IMAGEMANAGER->addFrameImage("리자몽_move", ".\\bmps\\pokemon_state\\리자몽_move.bmp"
-		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//움직임
-	IMAGEMANAGER->addFrameImage("리자몽_attack", ".\\bmps\\pokemon_state\\리자몽_attack.bmp"
-		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//공격
-	IMAGEMANAGER->addFrameImage("리자몽_specialAttack", ".\\bmps\\pokemon_state\\리자몽_specialAttack.bmp"
-		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
-	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
-		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
-
-	
+		
 																							
 	// 상점 이미지 초기화
 
@@ -47,9 +34,8 @@ void playGround::imageInitaialization(void)
 	//	마을 이미지 초기화
 	IMAGEMANAGER->addImage("town", ".\\bmps\\map\\townmap.bmp", 480, 360, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("townMagenta", ".\\bmps\\map\\townmapcrash.bmp", 480, 360, false, true, MAGENTA);
-	IMAGEMANAGER->addImage("saveTown", ".\\bmps\\map\\savemap.bmp", 360, 281, false, true, MAGENTA);
-	IMAGEMANAGER->addImage("saveTownMagenta", ".\\bmps\\map\\savemapcrash.bmp", 360, 281, false, true, MAGENTA);
-
+	IMAGEMANAGER->addImage("saveTown", ".\\bmps\\map\\savemap.bmp", 480, 360, false, true, MAGENTA);
+	IMAGEMANAGER->addImage("saveTownMagenta", ".\\bmps\\map\\savemapcrash.bmp", 480, 360, false, true, MAGENTA);
 
 
 	// 던전용 이미지 초기화
@@ -68,6 +54,17 @@ void playGround::imageInitaialization(void)
 
 	IMAGEMANAGER->addFrameImage("objectlist", ".//bmps//map//items.bmp", 240, 24, 10, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("alphamap", ".\\bmps\\map\\usingalpha.bmp", 480, 360, true, true, MAGENTA);
-
+	
+	//포켓몬 이미지
+	IMAGEMANAGER->addFrameImage("리자몽_idle", ".\\bmps\\pokemon_state\\리자몽_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
+	IMAGEMANAGER->addFrameImage("리자몽_move",".\\bmps\\pokemon_state\\리자몽_move.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//움직임
+	IMAGEMANAGER->addFrameImage("리자몽_attack", ".\\bmps\\pokemon_state\\리자몽_attack.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//공격
+	IMAGEMANAGER->addFrameImage("리자몽_specialAttack",".\\bmps\\pokemon_state\\리자몽_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
+	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 
 }

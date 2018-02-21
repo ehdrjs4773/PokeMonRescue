@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "player.h"
 #include "Stage.h"
+#include "enemyManager.h"
+#include "Npc.h"
 
 player::player()
 {
@@ -20,8 +22,15 @@ HRESULT player::init()
 
 HRESULT player::init(string charName)
 {
+	//방향 및 상태
+	_player.direction = PLAYER_BOTTOM;
+	_player.state = PLAYER_IDLE;
+
 	//변수 초기화 ( player+valueInit.cpp에 있음 )
 	valueInit();
+
+	_isWallCrash = false;
+	_player.townSpeed = 3.0f;
 
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
@@ -31,10 +40,6 @@ HRESULT player::init(string charName)
 
 	_playerStatus = new pokemon;
 	_playerStatus->pokemonStatus(charName, 1);
-
-	//방향 및 상태
-	_player.direction = PLAYER_BOTTOM;
-	_player.state = PLAYER_IDLE;
 
 	return S_OK;
 }
@@ -50,11 +55,9 @@ void player::update()
 	//던전에서 움직임
 	//dungeonMove();
 
-	//실제 적용될 플레이어 렉트
-	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
-		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
-
 	CAMERAMANAGER->cameraMove(_player.x, _player.y);
+
+	//this->FrameUpdate();
 
 	//for (_viPartner = _vPartner.begin(); _viPartner != _vPartner.end(); ++_viPartner)
 	//{
@@ -68,9 +71,9 @@ void player::render()
 	int y = CAMERAMANAGER->getY();
 
 	//SetBkMode(hdc, TRANSPARENT);
-	//char str[128];
-	//sprintf_s(str, " ( _player.x) 현재 값 : %f ", _player.x);
-	//TextOut(hdc, x + 200, y + 50, str, strlen(str));
+	char str[128];
+	sprintf_s(str, " 충돌 불값 현재 값 : %d ", _town->getHouse());
+	TextOut(hdc, x + 200, y + 50, str, strlen(str));
 	//char str2[128];
 	//sprintf_s(str2, " ( _player.y ) 현재 값 : %f ", _player.y);
 	//TextOut(hdc, x + 200, y + 75, str2, strlen(str2));
@@ -216,6 +219,18 @@ void player::townMove()
 		_player.state = PLAYER_MOVE;
 	}
 
+	//픽셀충돌
+	pixelCollision();
+
+	//벽에 부딪혔을때 속도조절
+	if (!_isWallCrash)
+	{
+		_player.townSpeed = 3.0f;
+	}
+	else
+	{
+		_player.townSpeed = 0.0f;
+	}
 
 	//오른쪽키 땟을때
 	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT) && (_player.direction == PLAYER_RIGHT_TOP || _player.direction == PLAYER_RIGHT ||
@@ -305,26 +320,21 @@ void player::townMove()
 			_player.state = PLAYER_IDLE;
 		}
 	}
-
+	
 	//프레임 업데이트
 	FrameUpdate();
 	//프레임 보정
 	correction();
 	//player+move.cpp에 있음
 	playerTownMove();
+	//실제렉트
+	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
 	//이미지 뿌려주는 rc
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
-	//실제렉트
-	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
-		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
 
-	//몇번째 타일에 있는지 인덱스 x,y
-	_player.idx = _player.x / 24;
-	_player.idy = _player.y / 24;
+	
 
-	//몇번째 타일에 있냐
-	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 }
 
 // ============================================================================================
@@ -332,6 +342,13 @@ void player::townMove()
 // ============================================================================================
 void player::dungeonMove()
 {
+	//몇번째 타일에 있는지 인덱스 x,y
+	_player.idx = _player.x / 24;
+	_player.idy = _player.y / 24;
+
+	//몇번째 타일에 있냐
+	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
+
 	//타일검출
 	tileCheak();
 
@@ -508,6 +525,8 @@ void player::dungeonMove()
 		}
 	}
 	
+	//프레임 업뎃
+	FrameUpdate();
 	//프레임 보정 ( 던전에선 필요 없을듯 )
 	//correction();
 	//player+move.cpp에 있음
@@ -670,11 +689,13 @@ void player::dungeonMove()
 		}
 		break;
 	}
+	
+	//실제렉트
+	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
+
 	//이미지 뿌려주는 rc
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, 72, 72);
-	//실제렉트
-	_player.rc = RectMakeCenter(_player.imageRc.right - (_player.imageRc.right - _player.imageRc.left) / 2,
-		_player.imageRc.bottom - (_player.imageRc.bottom - _player.imageRc.top) / 2, 24, 24);
+	
 }
 
 void player::addPartner(pokemon* p)
@@ -701,10 +722,12 @@ void player::setPosition(float startX, float startY)
 	//몇번째 타일에 있냐
 	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 
+	//실제 사용될 렉트
+	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
+
 	//이미지 그려주는 렉트
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
 
-	//실제 사용될 렉트
-	_player.rc = RectMakeCenter(_player.x, _player.y, 24, 24);
+	
 }

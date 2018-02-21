@@ -12,83 +12,95 @@ void player::playerTownMove()
 		switch (_player.direction)
 		{
 			case PLAYER_BOTTOM:
-				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				if (_player.y > WINSIZEY - 13)
 				{
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.y = WINSIZEY - 12;
+				}
+				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
-				_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+					_player.y += -sinf(_player.angle) * _player.townSpeed;
 			break;
 			case PLAYER_LEFT_BOTTOM:
-				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				if (_player.y > WINSIZEY - 13)
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.y = WINSIZEY - 12;
+				}
+				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+					_player.x += cosf(_player.angle) * _player.townSpeed;
+					_player.y += -sinf(_player.angle) * _player.townSpeed;
 				}		
 			break;
 			case PLAYER_LEFT:
 				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
-				_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
+				_player.x += cosf(_player.angle) * _player.townSpeed;
 			break;
 			case PLAYER_LEFT_TOP:
 				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+					_player.x += cosf(_player.angle) * _player.townSpeed;
+					_player.y += -sinf(_player.angle) * _player.townSpeed;
 				}
 			break;
 			case PLAYER_TOP:
 				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
-				_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+				_player.y += -sinf(_player.angle) * _player.townSpeed;
 			break;
 			case PLAYER_RIGHT_TOP:
 				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+					_player.x += cosf(_player.angle) * _player.townSpeed;
+					_player.y += -sinf(_player.angle) * _player.townSpeed;
 				}
 			break;
 			case PLAYER_RIGHT:
 				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
-				_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
+				_player.x += cosf(_player.angle) * _player.townSpeed;
 			break;
 			case PLAYER_RIGHT_BOTTOM:
-				if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				if (_player.y > WINSIZEY - 13)
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED * 2;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED * 2;
+					_player.y = WINSIZEY - 12;
+				}
+				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
+				{
+					_player.x += cosf(_player.angle) * _player.townSpeed * 2;
+					_player.y += -sinf(_player.angle) * _player.townSpeed * 2;
 				}
 				else
 				{
-					_player.x += cosf(_player.angle) * PLAYER_TOWN_SPEED;
-					_player.y += -sinf(_player.angle) * PLAYER_TOWN_SPEED;
+					_player.x += cosf(_player.angle) * _player.townSpeed;
+					_player.y += -sinf(_player.angle) * _player.townSpeed;
 				}
 
 			break;
@@ -97,6 +109,7 @@ void player::playerTownMove()
 		}
 		break;
 	}
+	
 }
 
 void player::playerDgMove()

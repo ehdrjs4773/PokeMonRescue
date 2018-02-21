@@ -35,13 +35,13 @@ void pokemon::pokemonStatus(string name, int level)
 	_currentEXP = 0;
 	_maxEXP = 100;
 	
-	_maxHP = _racialHP;		
+	_maxHP = _racialHP + (level*((_racialHP + 50) / 50));
 	_currentHP = _maxHP;	//맨처음엔 풀피니까
 
-	_atk = _racialATK;
-	_def = _racialDEF;
-	_specialATK = _racialSpecialATK;
-	_specialDEF = _racialSpecialDEF;
+	_atk = _racialATK + (level*((_racialATK + 50) / 50));
+	_def = _racialDEF + (level*((_racialDEF + 50) / 50));
+	_specialATK = _racialSpecialATK + (level * ((_racialSpecialATK + 50) / 50));
+	_specialDEF = _racialSpecialDEF + (level* ((_racialSpecialDEF + 50) / 50));
 
 }
 

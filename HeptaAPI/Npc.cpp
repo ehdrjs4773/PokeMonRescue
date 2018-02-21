@@ -42,6 +42,7 @@ HRESULT Npc::init()
 	_rc = RectMakeCenter(WINSIZEX / 2 - 60, WINSIZEY / 2 + 10, 30, 30);
 	_rc2 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2+ 130, 50, 30);
 	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 25, 15, 50);
+	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
 	_house = false;
 
 	CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
@@ -131,6 +132,7 @@ void Npc::render()
 		Rectangle(dc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
 	}
 	Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
+	Rectangle(dc, _rc4.left, _rc4.top, _rc4.right, _rc4.bottom);
 	_player->render();
 }
 

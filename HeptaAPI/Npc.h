@@ -33,6 +33,7 @@ private:
 	RECT _rc;		// 입구 죠~
 	RECT _rc2;		// 출구 죠~
 	RECT _rc3;		// 스테이지 입구죠~
+	RECT _rc4;		// 세이브죠~
 
 	player* _player;
 

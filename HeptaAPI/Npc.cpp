@@ -75,6 +75,7 @@ void Npc::update()
 		if (IntersectRect(&temp, &_rc, &_player->getRect()))
 		{
 			_town.inout = false;
+			_house = true;
 			_player->setPosition(_rc2.left + 25, WINSIZEY / 2 + 100);
 
 		}
@@ -86,6 +87,7 @@ void Npc::update()
 		if (IntersectRect(&temp, &_rc2, &_player->getRect()))
 		{
 			_town.inout = true;
+			_house = false;
 			_player->setPosition(_rc.left + 15, WINSIZEY / 2 + 45);
 		}
 	}

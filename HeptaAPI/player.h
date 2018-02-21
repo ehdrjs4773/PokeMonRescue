@@ -42,6 +42,13 @@ enum PLAYER_STATE
 	PLAYER_STATE_END
 };
 
+enum playerAction	//(임시)
+{
+	playerMove = 1,
+	playerAttack,
+	playerUseSkill,
+	playerUseItem
+};
 
 //플레이어 기본정보들 담을 구조체
 struct tagPlayer
@@ -74,6 +81,7 @@ private: // ## 맵 정보 ##
 
 private: // ## 포켓몬 정보 ##
 	pokemon* _playerStatus;
+	playerAction _playerAction;		//(임시)
 
 private: // ## 에너미 정보 ##
 	enemyManager* _em;
@@ -245,11 +253,13 @@ public:
 	inline int getSpecialAtk() { return _playerStatus->getSpecialATK(); }			//스페셜공격력
 	inline int getSpecialDef() { return _playerStatus->getSpecialDef(); }			//스페셜방어력
 	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
+	inline playerAction getPlayerAction() { return _playerAction; }					//액션 이넘 (임시)
 
 	//설정자																			
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
 	void setEmMemAdressLink(enemyManager* em) { _em = em; }
 	void setTownMapMemAdressLink(Npc* map) { _town = map; }
+	
 
 	void setX(float x) { _player.x = x; }											//X좌표 설정
 	void setY(float y) { _player.y = y; }											//Y좌표 설정
@@ -260,5 +270,7 @@ public:
 	void setDungeonNum(int dgNum) { _player.dgNum = dgNum; }						//던전넘버 셋
 
 	void setPosition(float startX, float startY);									//좌표설정
+
+	inline playerAction setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }//액션 이넘 (임시)
 };
 

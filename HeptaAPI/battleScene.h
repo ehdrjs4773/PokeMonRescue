@@ -1,8 +1,10 @@
 #pragma once
 #include "gameNode.h"
 #include <vector>
+#include "Stage.h"
 
 class player;
+class enemyManager;
 
 //일단 플레이어턴,파트너턴,에너미턴을 만들 이넘문
 enum TurnChange
@@ -11,8 +13,6 @@ enum TurnChange
 	partnerTurn,
 	enemyTurn
 };
-
-
 
 enum partnerAction	//(임시)
 {
@@ -23,12 +23,12 @@ enum partnerAction	//(임시)
 
 enum EnemyAction	//(임시)
 {
-	EnemyMove = 1,
-	EnemyAttack,
-	EnemyUseSkill
+	enemyMove = 1,
+	enemyAttack,
+	enemyUseSkill
 };
 
-class battleScene
+class battleScene : public gameNode
 {
 private:
 	TurnChange _battleTrun;
@@ -37,8 +37,18 @@ private:
 	partnerAction _partnerAction;
 	EnemyAction _enemyAction;
 
+	Stage*		  _nowStage;
 	player*		  _player;
-	
+	enemyManager* _em;
+
+private:
+	int				_mapNum;
+	int				_alphaMap;
+	int				_floor;
+	int				DungoenNum;
+	bool			UpId;
+	bool			DownId;
+
 public:
 	battleScene();
 	~battleScene();

@@ -549,6 +549,7 @@ void player::dungeonMove()
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.direction = PLAYER_BOTTOM;
 				_player.state = PLAYER_IDLE;
+				_playerAction = playerMove;			//임시
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{

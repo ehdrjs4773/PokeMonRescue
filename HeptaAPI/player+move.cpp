@@ -14,7 +14,9 @@ void player::playerTownMove()
 			case PLAYER_BOTTOM:
 				if (_player.y > WINSIZEY - 13)
 				{
-					_player.y = WINSIZEY - 12;
+					_player.state = PLAYER_IDLE;
+					valueInit();
+					_player.y = WINSIZEY - 12;					
 				}
 				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
@@ -26,7 +28,9 @@ void player::playerTownMove()
 			case PLAYER_LEFT_BOTTOM:
 				if (_player.y > WINSIZEY - 13)
 				{
-					_player.y = WINSIZEY - 12;
+					_player.state = PLAYER_IDLE;
+					valueInit();
+					_player.y = WINSIZEY - 12;			
 				}
 				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{
@@ -90,7 +94,10 @@ void player::playerTownMove()
 			case PLAYER_RIGHT_BOTTOM:
 				if (_player.y > WINSIZEY - 13)
 				{
+					_player.state = PLAYER_IDLE;
+					valueInit();
 					_player.y = WINSIZEY - 12;
+					
 				}
 				else if (KEYMANAGER->isStayKeyDown(SPEED_UP_KEY))
 				{

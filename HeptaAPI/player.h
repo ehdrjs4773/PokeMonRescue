@@ -229,6 +229,8 @@ public:
 	void pixelCollision();	//픽셀충돌
 	void tileCheak();		//타일검출
 
+	void enemyAttack();
+
 	void addPartner(pokemon* p);	//파트너 추가 함수
 
 	//접근자
@@ -255,15 +257,17 @@ public:
 	inline int getLevel() { return _playerStatus->getLevel(); }						//레벨
 	inline playerAction getPlayerAction() { return _playerAction; }					//액션 이넘 (임시)
 
+	inline pokemon* getStatus() { return _playerStatus; }							//포켓몬 정보
+
 	//설정자																			
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }					//스테이지
 	void setEmMemAdressLink(enemyManager* em) { _em = em; }
 	void setTownMapMemAdressLink(Npc* map) { _town = map; }
 	
-
 	void setX(float x) { _player.x = x; }											//X좌표 설정
 	void setY(float y) { _player.y = y; }											//Y좌표 설정
 
+	void setCurrentHp(int hp) { _playerStatus->setCurrentHP(hp); }					//체력
 	void setAddMoney(int money) { _player.money = money; }							//돈
 
 	inline int getDungeonNum() { return _player.dgNum; }							//던전넘버 겟
@@ -271,6 +275,9 @@ public:
 
 	void setPosition(float startX, float startY);									//좌표설정
 
-	inline playerAction setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }//액션 이넘 (임시)
+	inline playerAction setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }	//액션 이넘 (임시)
+
+	void save();
+	void load();
 };
 

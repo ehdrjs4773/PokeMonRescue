@@ -3,6 +3,7 @@
 #include "Stage.h"
 #include "enemyManager.h"
 #include "Npc.h"
+#include "battleScene.h"
 
 player::player()
 {
@@ -545,7 +546,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
-				_playerAction = playerMove;			//임시
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -565,6 +566,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -583,6 +585,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -602,6 +605,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -620,6 +624,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -639,6 +644,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -657,6 +663,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{
@@ -676,6 +683,7 @@ void player::dungeonMove()
 				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
 					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
 				_player.state = PLAYER_IDLE;
+				_battle->setTurn(enemyTurn);
 				//아이템 먹었을 때
 				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 				{

@@ -47,7 +47,8 @@ enum playerAction	//(임시)
 	playerMove = 1,
 	playerAttack,
 	playerUseSkill,
-	playerUseItem
+	playerUseItem,
+	playerEnd
 };
 
 //플레이어 기본정보들 담을 구조체
@@ -72,9 +73,13 @@ class Stage;
 class item;
 class enemyManager;
 class Npc;
+class battleScene;
 
 class player : public gameNode
 {
+private:
+	battleScene * _battle;
+
 private: // ## 맵 정보 ##
 	Stage* _stage;
 	Npc* _town;
@@ -290,7 +295,8 @@ public:
 
 	void setPosition(float startX, float startY);									//좌표설정
 
-	inline playerAction setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }	//액션 이넘 (임시)
+	inline void setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }//액션 이넘 (임시)
+	void setBattleSceneMemory(battleScene* b) { _battle = b; }
 
 	void save();
 	void load();

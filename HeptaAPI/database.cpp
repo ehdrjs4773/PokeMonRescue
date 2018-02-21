@@ -15,7 +15,7 @@ database::~database()
 HRESULT database::init()
 {
 	loadDatabasePokemon(".\\textData\\pokemonstatus.txt");
-	//loadDatabaseSkill(".\\textData\\pokemonskills.txt");	//아직 텍스트파일 없음 ㄱㄷㄱㄷ
+	loadDatabaseSkill(".\\textData\\skill.txt");	
 
 	return S_OK;
 }

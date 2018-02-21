@@ -21,8 +21,6 @@ enum partnerAction	//(юс╫ц)
 	partnerUseSkill
 };
 
-
-
 class battleScene : public gameNode
 {
 private:
@@ -30,7 +28,7 @@ private:
 
 	
 	partnerAction _partnerAction;
-	//
+	
 
 	Stage*		  _nowStage;
 	player*		  _player;
@@ -56,5 +54,7 @@ public:
 	void StageUpDown();
 
 	void setPlayerMemAdressLink(player* player) { _player = player; }
+
+	void setTurn(TurnChange turn) { _battleTrun = turn; }
 };
 

@@ -27,6 +27,7 @@ HRESULT battleScene::init()
 	_em = new enemyManager;
 
 	_player->setStageMemAdressLink(_nowStage);
+	_player->setEmMemAdressLink(_em);
 
 	_player->init("리자몽");
 	_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
@@ -42,6 +43,8 @@ HRESULT battleScene::init()
 	//--------------------------------
 
 	_battleTrun = playerTurn; //항상 던전들어가서 처음은 플레이어 턴
+
+	_player->setBattleSceneMemory(this);
 
 	return S_OK;
 }
@@ -73,7 +76,9 @@ void battleScene::update()				//옵데이트!~~~
 			if (_player->getPlayerAction() == playerMove)  //_playerAction이 playerMove로 바뀌면 일로오겠죠?
 			{
 				// 그럼 이제 움직였다는 거니 다음 누군가의 턴으로 넘겨줍니다
+				_player->setPlayerAction(playerEnd);
 				_battleTrun = enemyTurn; //턴 넘겨줌
+
 			}
 			else if (_player->getPlayerAction() == playerAttack)
 			{
@@ -120,6 +125,7 @@ void battleScene::update()				//옵데이트!~~~
 
 			if (_em->getEnemyAction() == enemyMove)
 			{
+				_em->setEnemyAction(enemyEnd);
 				_battleTrun = playerTurn;
 			}
 		

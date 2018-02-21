@@ -269,17 +269,17 @@ void enemyManager::enemyAtkManager(int arrNum)
 void enemyManager::enemyTrunManager()
 {
 	
-	if (KEYMANAGER->isOnceKeyDown('D'))
-	{
-		//시작부분     
-		
-		_enemyTurn = true;
-	}
-
-	if (!_enemyTurn)
-	{
-		return;
-	}
+	//if (KEYMANAGER->isOnceKeyDown('D'))
+	//{
+	//	//시작부분     
+	//	
+	//	_enemyTurn = true;
+	//}
+	//
+	//if (!_enemyTurn)
+	//{
+	//	return;
+	//}
 
 
 		for (int i = 0; i < _vEnemyPokemon.size(); i++)
@@ -319,6 +319,7 @@ void enemyManager::enemyTrunManager()
 				}
 				_enemyTurn = false;
 				//여기가 완전히 턴이 끝나는부분
+				_enemyAction = enemyMove;
 			}
 			if (!_vEnemyPokemon[i]->getMyturn())
 			{	

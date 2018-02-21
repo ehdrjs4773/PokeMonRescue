@@ -733,8 +733,3 @@ void player::setPosition(float startX, float startY)
 	_player.imageRc = RectMakeCenter(_player.x, _player.y, IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameWidth(),
 		IMAGEMANAGER->findImage(tempNameIdle.c_str())->getFrameHeight());
 }
-
-void player::enemyAttack()
-{
-
-}

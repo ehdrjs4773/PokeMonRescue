@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Npc.h"
 #include "player.h"
+#include "inventoryChiled.h"
 
 
 
@@ -90,6 +91,15 @@ void Npc::update()
 			_town.inout = true;
 			_house = false;
 			_player->setPosition(_rc.left + 15, WINSIZEY / 2 + 45);
+		}
+
+		if (IntersectRect(&temp, &_rc4, &_player->getRect()))
+		{
+			if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+			{
+				map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
+				((inventoryChiled*)tmepIter->second)->save();
+			}
 		}
 	}
 

@@ -35,6 +35,8 @@ HRESULT UI::init()
 	//도구 탭 들어가면
 	_mainMenu[3] = "도구상자";
 
+	_mainMenu[4] = "팀";
+
 	_isMenu = true;
 	
 	_infoUI[0].isSelcet = false;
@@ -87,8 +89,10 @@ void UI::update()
 			}
 			else if (_selectNum == 1)
 			{
-				_infoUI[1].isSelcet = true;
-				_isMenu = false;
+				//_infoUI[1].isSelcet = true;
+				//_isMenu = false;
+				SCENEMANAGER->changeChild("pokeinfo");
+
 			}
 			else
 			{
@@ -146,5 +150,16 @@ void UI::render()
 		
 	}
 
+
+	if (_infoUI[1].isSelcet)
+	{
+		IMAGEMANAGER->findImage("pokeinfo")->render(dc, _infoUI[4].rc.left, _infoUI[4].rc.top);
+		SetBkMode(dc, TRANSPARENT);
+		SetTextColor(dc, WHITE);
+
+		TextOut(dc, CAMERAMANAGER->getX() + 80, CAMERAMANAGER->getY() + 60, _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
+		IMAGEMANAGER->findImage("selectIcon")->render(dc, CAMERAMANAGER->getX() + 70, CAMERAMANAGER->getY() + 100 + 20 * _selectNum - 6);
+
+	}
 }
 

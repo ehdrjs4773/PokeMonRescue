@@ -51,6 +51,7 @@ public:
 	
 	// Á¢ ±Ù ÀÚ~
 	inline bool getHouse() { return _house; }
+	
 
 	Npc();
 	~Npc();

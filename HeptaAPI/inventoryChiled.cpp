@@ -81,6 +81,12 @@ void inventoryChiled::update()
 				_player->setCurrentHp(_player->getMaxHP());
 			}
 			_vitem.erase(_vitem.begin() + _itemNum);
+
+			if (_vitem.size() == 0)
+			{
+				SCENEMANAGER->changeParent();
+				return;
+			}
 		}
 
 		if (SCENEMANAGER->getCurrentScene() != SCENEMANAGER->findScene("npc"))
@@ -100,6 +106,8 @@ void inventoryChiled::update()
 			_y -= 23;
 			_itemNum--;
 		}
+		
+		SCENEMANAGER->changeParent();
 	}
 
 

@@ -78,5 +78,9 @@ bool inventoryChiled::load()
 
 
 	CloseHandle(file);
+
+	SCENEMANAGER->init("Stage1");
+	_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
+
 	return true;
 }

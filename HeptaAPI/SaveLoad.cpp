@@ -61,12 +61,13 @@ bool inventoryChiled::load()
 	ReadFile(file, &tempstr,128, &read, NULL);
 
 	_player->init(tempstr);
-	int tempnum = _vitem.size();
+	int tempnum;
 	ReadFile(file, &(*_player->getStatus()), sizeof(pokemon), &read, NULL);
 	int tempmoney;
 	ReadFile(file, &tempmoney, sizeof(int), &read, NULL);
 	_player->setAddMoney(tempmoney);
 	ReadFile(file, &tempnum, sizeof(int), &read, NULL);
+	_vitem.clear();
 	for (int i = 0; i < tempnum; ++i)
 	{
 		Item* temp;

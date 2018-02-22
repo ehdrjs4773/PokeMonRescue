@@ -48,6 +48,9 @@ HRESULT Npc::init()
 	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
 
 	_issaveload = false;
+	_notload = false;
+
+	_saveloadselect = 0;
 
 	CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
 	return S_OK;
@@ -63,17 +66,49 @@ void Npc::release()
 void Npc::update()
 {
 	_player->update();
-	if (_issaveload)
+	if (_notload)
 	{
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
+			_notload = false;
+		}
+	}
+	else if (_issaveload)
+	{
+		if (KEYMANAGER->isOnceKeyDown(VK_UP))
+		{
+			--_saveloadselect;
+			if (_saveloadselect < 0)_saveloadselect = 0;
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
+		{
+			++_saveloadselect;
+			if (_saveloadselect > 2)_saveloadselect = 2;
+		}
+
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		{
 			map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
-			((inventoryChiled*)tmepIter->second)->save();
+			switch (_saveloadselect)
+			{
+			case 0:
+				((inventoryChiled*)tmepIter->second)->save();
+				break;
+			case 1:
+				if (((inventoryChiled*)tmepIter->second)->load());
+				else
+				{
+					_notload = true;
+				}
+				break;
+			case 2:
+				remove(".//save.load");
+				break;
+			}
 			_issaveload = false;
 		}
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 		{
-			remove(".//save.load");
 			_issaveload = false;
 		}
 	}
@@ -115,6 +150,7 @@ void Npc::update()
 				if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 				{
 					_issaveload = true;
+					_saveloadselect = 0;
 				}
 			}
 		}
@@ -159,14 +195,47 @@ void Npc::render()
 	//Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
 	//Rectangle(dc, _rc4.left, _rc4.top, _rc4.right, _rc4.bottom);
 	_player->render();
-	if (_issaveload)
+
+	if (_notload)
 	{
+		SetTextColor(dc, RGB(255, 255, 255));
 		SetBkMode(dc, 0);
 		IMAGEMANAGER->findImage("대화창")->render(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight());
-		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 30, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20,
-			"세이브를 하려면 'X'", strlen("세이브를 하려면 'X'"));
-		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 30, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 50,
-				"세이브를 지우려면 'C'", strlen("세이브를 지우려면 'C'"));
+		for (int i = 0; i < 9; ++i)
+		{
+			TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40 - 1 + i % 3, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 4 + i / 3,
+				"세이브 파일이", strlen("세이브 파일이"));
+			TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40 - 1 + i % 3, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 4 + i / 3,
+				"존재하지 않습니다.", strlen("존재하지 않습니다."));
+		}
+		SetTextColor(dc, RGB(0, 0, 0));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 41, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 2,
+			"세이브 파일이", strlen("세이브 파일이"));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 41, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 2,
+			"존재하지 않습니다.", strlen("존재하지 않습니다."));
+	}
+	else if (_issaveload)
+	{
+		SetTextColor(dc, RGB(255, 255, 255));
+		SetBkMode(dc, 0);
+		IMAGEMANAGER->findImage("대화창")->render(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight());
+		for (int i = 0; i < 9; ++i)
+		{
+			TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40 - 1 + i % 3, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 4 + i / 3,
+				"세이브", strlen("세이브"));
+			TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40 - 1 + i % 3, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 4 + i / 3,
+				"로드", strlen("로드"));
+			TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40 - 1 + i % 3, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 70 - 4 + i / 3,
+				"세이브 삭제", strlen("세이브 삭제"));
+		}
+		SetTextColor(dc, RGB(0, 0, 0));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 3,
+			"세이브", strlen("세이브"));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 3,
+			"로드", strlen("로드"));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 70 - 3,
+			"세이브 삭제", strlen("세이브 삭제"));
+		IMAGEMANAGER->findImage("point")->render(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 20, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 15 + _saveloadselect * 25);
 	}
 }
 

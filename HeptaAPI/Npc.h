@@ -35,6 +35,8 @@ private:
 	RECT _rc3;			// 스테이지 입구죠~
 	RECT _rc4;			// 세이브죠~
 	bool _issaveload;	// 세이브로드창 이죠~
+	int _saveloadselect;// 세이브로드 선택이죠~
+	bool _notload;		// 세이브파일이 없죠~
 
 	player* _player;
 

@@ -44,6 +44,28 @@ enum PLAYER_STATE
 	PLAYER_STATE_END
 };
 
+enum PLAYER_EL
+{
+	PLAYER_NORMAL,		// 노말	0
+	PLAYER_FIRE,		// 불	1
+	PLAYER_WATER,		// 물	2
+	PLAYER_ELECTRIC,	// 전기	3
+	PLAYER_PLANT,		// 풀	4
+	PLAYER_ICE,			// 얼음	5
+	PLAYER_FIGHT,		// 격투	6
+	PLAYER_POISON,		// 독	7
+	PLAYER_EARTH,		// 땅	8
+	PLAYER_WING,		// 비행	9
+	PLAYER_ESPER,		// 에스퍼10
+	PLAYER_INSECT,		// 곤충	11
+	PLAYER_ROCK,		// 바위	12
+	PLAYER_GHOST,		// 고스트13
+	PLAYER_DRAGON,		// 드래곤14
+	PLAYER_DARK,		// 악	15
+	PLAYER_STEEL,		// 강철	16
+	PLAYER_END
+};
+
 enum playerAction	//(임시)
 {
 	playerMove = 1,
@@ -106,6 +128,8 @@ private:
 	string tempNameAttack;
 	string tempNameSpecialAttack;
 	string tempNameHurt;
+
+	string tempNameEl;
 
 private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
@@ -182,8 +206,10 @@ public:
 	void correction();		//보정작업
 	void pixelCollision();	//픽셀충돌
 	void tileCheak();		//타일검출
+	void effects();
 
-	void addPartner(pokemon* p);	//파트너 추가 함수
+	//void addPartner(pokemon* p);	//파트너 추가 함수
+	//void addPartner(string charName);	//파트너 추가 함수
 
 	//접근자
 	inline PLAYER_DIRECTION getPlayerDirection() { return (PLAYER_DIRECTION)_player.direction; }		//방향
@@ -192,6 +218,7 @@ public:
 	inline float getPlayerAngle() { return _player.angle; }							//앵글값
 	inline float getX() { return _player.x; }										//플레이어 센터 X
 	inline float getY() { return _player.y; }										//플레이어 센터 Y
+	inline bool getIsAttack() { return _isAttack; }									//공격햇늬?
 
 	inline int getPlayerTileIndexX() { return _player.idx; }						//인덱스 X
 	inline int getPlayerTileIndexY() { return _player.idy; }						//인덱스 Y
@@ -232,6 +259,9 @@ public:
 
 	inline void setPlayerAction(playerAction playerAction) { _playerAction = playerAction; }//액션 이넘 (임시)
 	
+	//파트너 겟셋
+	vector<playerPartner*> getVPartner() { return _vPartner;}
+	vector<playerPartner*>::iterator getViPartner() { return _viPartner;}
 
 };
 

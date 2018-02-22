@@ -2,6 +2,8 @@
 #include "playerPartner.h"
 #include "player.h"
 #include "Stage.h"
+#include "enemyManager.h"
+
 
 
 playerPartner::playerPartner()
@@ -31,7 +33,6 @@ HRESULT playerPartner::init(string charName)
 
 	_partnerStatus = new pokemon;
 	_partnerStatus->pokemonStatus(charName, 1);
-
 
 	_partner.angle = 0;
 

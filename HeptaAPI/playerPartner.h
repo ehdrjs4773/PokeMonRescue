@@ -46,11 +46,15 @@ struct tagPlayerPartner
 
 class player;
 class Stage;
+class enemyManager;
 
 class playerPartner : public gameNode
 {
 private: // ## 플레이어 ##
 	player* _player;
+
+private: // ## 에너미 정보 ##
+	enemyManager* _em;
 
 private: // ## 포켓몬 정보 ##
 	pokemon* _partnerStatus;
@@ -116,5 +120,6 @@ public:
 
 	void setPlayerMemAdressLink(player* player) { _player = player; }
 	void setStageMemAdressLink(Stage* stage) { _stage = stage; }
+	void setEmMemAdressLink(enemyManager* em) { _em = em; }
 };
 

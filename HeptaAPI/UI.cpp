@@ -84,7 +84,7 @@ void UI::update()
 				//_infoUI[0].isSelcet = true;
 				//_isMenu = false;
 				SCENEMANAGER->changeChild("inventory");
-				//SCENEMANAGER->init("ui");
+				//SCENEMANAGER->init("npc");
 			
 			}
 			else if (_selectNum == 1)
@@ -92,6 +92,7 @@ void UI::update()
 				//_infoUI[1].isSelcet = true;
 				//_isMenu = false;
 				SCENEMANAGER->changeChild("pokeinfo");
+				
 
 			}
 			else
@@ -126,9 +127,9 @@ void UI::render()
 	HDC dc = CAMERAMANAGER->getMemDC();
 	if (_isMenu) // 메인메뉴 이미지의 불값이 트루가 되면 메인메뉴 이미지 렌더 및 셀렉트 아이콘 렌더
 	{
-		_infoUI[0].img->render(dc, _infoUI[0].rc.left, _infoUI[0].rc.top);
-		_infoUI[1].img->render(dc, _infoUI[1].rc.left, _infoUI[1].rc.top);
-		_infoUI[2].img->render(dc, _infoUI[2].rc.left, _infoUI[2].rc.top);
+		_infoUI[0].img->render(dc, CAMERAMANAGER->getX() +_infoUI[0].rc.left, CAMERAMANAGER->getY() + _infoUI[0].rc.top);
+		_infoUI[1].img->render(dc, CAMERAMANAGER->getX() + _infoUI[1].rc.left, CAMERAMANAGER->getY() + _infoUI[1].rc.top);
+		_infoUI[2].img->render(dc, CAMERAMANAGER->getX() + _infoUI[2].rc.left, CAMERAMANAGER->getY() + _infoUI[2].rc.top);
 
 		SetBkMode(dc, TRANSPARENT);
 		SetTextColor(dc, WHITE);
@@ -139,27 +140,27 @@ void UI::render()
 		}
 	}
 
-	if (_infoUI[0].isSelcet) // 메인 메뉴에서 _infoUI[0] 배열 (도구) 가 선택되어 트루가 되면 도구상자 UI 렌더
-	{
-		IMAGEMANAGER->findImage("도구상자")->render(dc, _infoUI[3].rc.left, _infoUI[3].rc.top);
-		SetBkMode(dc, TRANSPARENT);
-		SetTextColor(dc, WHITE);
-		
-		TextOut(dc, CAMERAMANAGER->getX() +  80, CAMERAMANAGER->getY()+ 60 , _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
-		IMAGEMANAGER->findImage("selectIcon")->render(dc, CAMERAMANAGER->getX() + 70, CAMERAMANAGER->getY() +100 + 20 * _selectNum - 6);
-		
-	}
+	//if (_infoUI[0].isSelcet) // 메인 메뉴에서 _infoUI[0] 배열 (도구) 가 선택되어 트루가 되면 도구상자 UI 렌더
+	//{
+	//	IMAGEMANAGER->findImage("도구상자")->render(dc, _infoUI[3].rc.left, _infoUI[3].rc.top);
+	//	SetBkMode(dc, TRANSPARENT);
+	//	SetTextColor(dc, WHITE);
+	//	
+	//	TextOut(dc, CAMERAMANAGER->getX() +  80, CAMERAMANAGER->getY()+ 60 , _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
+	//	IMAGEMANAGER->findImage("selectIcon")->render(dc, CAMERAMANAGER->getX() + 70, CAMERAMANAGER->getY() +100 + 20 * _selectNum - 6);
+	//	
+	//}
+	//
 
-
-	if (_infoUI[1].isSelcet)
-	{
-		IMAGEMANAGER->findImage("pokeinfo")->render(dc, _infoUI[4].rc.left, _infoUI[4].rc.top);
-		SetBkMode(dc, TRANSPARENT);
-		SetTextColor(dc, WHITE);
-
-		TextOut(dc, CAMERAMANAGER->getX() + 80, CAMERAMANAGER->getY() + 60, _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
-		IMAGEMANAGER->findImage("selectIcon")->render(dc, CAMERAMANAGER->getX() + 70, CAMERAMANAGER->getY() + 100 + 20 * _selectNum - 6);
-
-	}
+	//if (_infoUI[1].isSelcet)
+	//{
+	//	IMAGEMANAGER->findImage("pokeinfo")->render(dc, _infoUI[4].rc.left, _infoUI[4].rc.top);
+	//	SetBkMode(dc, TRANSPARENT);
+	//	SetTextColor(dc, WHITE);
+	//
+	//	TextOut(dc, CAMERAMANAGER->getX() + 80, CAMERAMANAGER->getY() + 60, _mainMenu[3].c_str(), strlen(_mainMenu[3].c_str()));
+	//	IMAGEMANAGER->findImage("selectIcon")->render(dc, CAMERAMANAGER->getX() + 70, CAMERAMANAGER->getY() + 100 + 20 * _selectNum - 6);
+	//
+	//}
 }
 

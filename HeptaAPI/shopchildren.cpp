@@ -52,6 +52,7 @@ HRESULT shopchildren::init()
 	_itemSelcet.potionSelcet = false;
 	_itemSelcet.ppPotionSelect = false;
 	_itemSelcet.skillSelcet = false;
+	_itemSelcet.loopSelcet = false;
 
 
 	return S_OK;
@@ -95,7 +96,7 @@ void shopchildren::update()
 
 
 
-	if (_shopbuy.buySelect && !_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet)
+	if (_shopbuy.buySelect && !_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet && !_itemSelcet.loopSelcet)
 	{
 		if(KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
@@ -109,6 +110,9 @@ void shopchildren::update()
 				break;
 			case item_skill:
 				_itemSelcet.skillSelcet = true;
+				break;
+			case item_loop :
+				_itemSelcet.loopSelcet = true;
 				break;
 			case item_end:
 				break;
@@ -124,46 +128,86 @@ void shopchildren::update()
 	{
 		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
-			if (_inven->getVitem().size() >= 10) return;
-			Item* potion = new Item;
+			if (_player->getMoney() >= 50)
+			{
+				if (_inven->getVitem().size() >= 10) return;
+				Item* potion = new Item;
 
-			potion->setPotion("회복약", 1, 50, 50, type_hpPotion);
+				potion->setPotion("회복약", 1, 50, 50, type_hpPotion);
 
-			_inven->setItem(potion);
-			SCENEMANAGER->changeParent();
-			_itemSelcet.potionSelcet = false;
+				_player->setAddMoney(_player->getMoney() - 50);
+				_inven->setItem(potion);
+				SCENEMANAGER->changeParent();
+				_itemSelcet.potionSelcet = false;
+			}
 		}
 	}
 	if (_sele == buy && _itemSelcet.ppPotionSelect)
 	{
-		if (_inven->getVitem().size() >= 10) return;
-		Item* Pppotion = new Item;
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		{
+			if (_player->getMoney() >= 100)
+			{
+				if (_inven->getVitem().size() >= 10) return;
+				Item* Pppotion = new Item;
 
-		Pppotion->setPotion("PP포션", 1, 50, 50, type_ppPotion);
+				Pppotion->setPotion("PP포션", 1, 50, 50, type_ppPotion);
 
-		_inven->setItem(Pppotion);
-		SCENEMANAGER->changeParent();
-		_itemSelcet.ppPotionSelect = false;
+				_player->setAddMoney(_player->getMoney() - 100);
+				_inven->setItem(Pppotion);
+				SCENEMANAGER->changeParent();
+				_itemSelcet.ppPotionSelect = false;
+			}
+		}
 	}
 	if (_sele == buy && _itemSelcet.skillSelcet)
 	{
-		if (_inven->getVitem().size() >= 10) return;
-		Item* Skill = new Item;
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		{
+			if (_player->getMoney() >= 150)
+			{
+				if (_inven->getVitem().size() >= 10) return;
+				Item* Skill = new Item;
 
 
-		Skill->setSkillItem("폭렬열매", "FireT", 1, 100, type_skillItem);
+				Skill->setSkillItem("폭렬열매", "FireT", 1, 100, type_skillItem);
 
-		_inven->setItem(Skill);
-		SCENEMANAGER->changeParent();
-		_itemSelcet.skillSelcet = false;
+				_player->setAddMoney(_player->getMoney() - 150);
+				_inven->setItem(Skill);
+				SCENEMANAGER->changeParent();
+				_itemSelcet.skillSelcet = false;
+			}
+		}
 	}
+
+	if (_sele == buy && _itemSelcet.loopSelcet)
+	{
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+		{
+			if (_player->getMoney() >= 150)
+			{
+				if (_inven->getVitem().size() >= 10) return;
+				Item* loop = new Item;
+
+
+				loop->setItem("도망쳐", "town", WINSIZEX / 2, WINSIZEY - 50, type_loop, 100);
+
+				_player->setAddMoney(_player->getMoney() - 150);
+				_inven->setItem(loop);
+				SCENEMANAGER->changeParent();
+				_itemSelcet.loopSelcet = false;
+			}
+		}
+	}
+
+
 
 
 	//=============================================================================//
 
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
 	{
-		if(!_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet)
+		if(!_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet && !_itemSelcet.loopSelcet)
 		{
 			switch (_shopClick)
 			{
@@ -195,6 +239,9 @@ void shopchildren::update()
 			break;
 		case item_skill:
 			_itemSelcet.skillSelcet = false;
+			break;
+		case item_loop :
+			_itemSelcet.loopSelcet = false;
 			break;
 		case item_end:
 			break;
@@ -258,16 +305,53 @@ void shopchildren::render()
 		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 50, price, strlen(price));
 		char four[128];
 		sprintf(four, "PP포션");
+
+		if (_player->getMoney() <= 100)
+		{
+			SetTextColor(dc, RGB(255, 0, 0));
+		}
+		if (_player->getMoney() >= 100)
+		{
+			SetTextColor(dc, RGB(255, 255, 255));
+		}
 		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 100, four, strlen(four));
 		char price1[128];
 		sprintf(price1, "100");
 		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 100, price1, strlen(price1));
+		if (_player->getMoney() <= 150)
+		{
+			SetTextColor(dc, RGB(255, 0, 0));
+		}
+		if (_player->getMoney() >= 150)
+		{
+			SetTextColor(dc, RGB(255, 255, 255));
+		}
 		char tall[128];
 		sprintf(tall, "폭렬열매");
 		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 150, tall, strlen(tall));
 		char price2[128];
 		sprintf(price2, "150");
 		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 150, price2, strlen(price2));
+		if (_player->getMoney() <= 150)
+		{
+			SetTextColor(dc, RGB(255, 0, 0));
+		}
+		if (_player->getMoney() >= 150)
+		{
+			SetTextColor(dc, RGB(255, 255, 255));
+		}
+		char tall2[128];
+		sprintf(tall2, "도망쳐");
+		TextOut(dc, _shopbuy.x + 50, _shopbuy.y + 200, tall2, strlen(tall2));
+		TextOut(dc, _shopbuy.x + 250, _shopbuy.y + 200, price2, strlen(price2));
+
+
+		SetTextColor(dc, RGB(255, 255, 255));
+		char money[128];
+		sprintf(money, "%d", _player->getMoney());
+		TextOut(dc, 400, 270, money, strlen(money));
+
+
 
 
 		switch (_itembuy)																		//아이템 선택 햇을때!!
@@ -325,6 +409,23 @@ void shopchildren::render()
 				}
 			}
 			break;
+		case item_loop :
+			_shop.pointimage->render(dc, _shopbuy.x + 20, _shopbuy.y + 200);
+			if (_itemSelcet.loopSelcet)
+			{
+				_shopbuy.buyimage2->render(dc, _shopbuy.rc2.left, _shopbuy.rc2.top);
+				switch (_sele)
+				{
+				case buy:
+					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 30);
+					break;
+				case no:
+					_shop.pointimage->render(dc, _shopbuy.x2 + 20, _shopbuy.y2 + 60);
+					break;
+				}
+			}
+			break;
+
 		case item_end :
 			break;
 		}
@@ -352,7 +453,7 @@ void shopchildren::render()
 void shopchildren::keyMove()				// 각 위치에서의 스위치 변경 옵션
 {
 
-	if (!_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet)
+	if (!_itemSelcet.potionSelcet && !_itemSelcet.ppPotionSelect && !_itemSelcet.skillSelcet && !_itemSelcet.loopSelcet)
 	{
 		if (!_shopbuy.buySelect)
 		{
@@ -412,6 +513,9 @@ void shopchildren::keyMove()				// 각 위치에서의 스위치 변경 옵션
 					_itembuy = item_skill;
 					break;
 				case item_skill:
+					_itembuy = item_loop;
+					break;
+				case item_loop :
 					_itembuy = item_potion;
 					break;
 				case item_end:
@@ -423,13 +527,16 @@ void shopchildren::keyMove()				// 각 위치에서의 스위치 변경 옵션
 				switch (_itembuy)
 				{
 				case item_potion:
-					_itembuy = item_skill;
+					_itembuy = item_loop;
 					break;
 				case item_ppPotion:
 					_itembuy = item_potion;
 					break;
 				case item_skill:
 					_itembuy = item_ppPotion;
+					break;
+				case item_loop:
+					_itembuy = item_skill;
 					break;
 				case item_end:
 					break;
@@ -438,7 +545,7 @@ void shopchildren::keyMove()				// 각 위치에서의 스위치 변경 옵션
 		}
 	}
 
-	if (_itemSelcet.potionSelcet || _itemSelcet.ppPotionSelect || _itemSelcet.skillSelcet)
+	if (_itemSelcet.potionSelcet || _itemSelcet.ppPotionSelect || _itemSelcet.skillSelcet || _itemSelcet.loopSelcet)
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_DOWN))
 		{

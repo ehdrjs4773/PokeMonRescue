@@ -29,7 +29,7 @@ HRESULT battleScene::init()
 	_player->setStageMemAdressLink(_nowStage);
 	_player->setEmMemAdressLink(_em);
 
-	_player->init("府磊根");
+	//_player->init("府磊根");
 	_player->setPosition(_nowStage->getPlayerStartUpid().x * 24 + 12, _nowStage->getPlayerStartUpid().y * 24 + 12);
 
 	_em->setStageMemoryAdressLink(_nowStage);
@@ -141,6 +141,13 @@ void battleScene::update()				//可单捞飘!~~~
 	_em->update();
 	_nowStage->update(_player->getX(), _player->getY());
 	
+	if (KEYMANAGER->isOnceKeyDown('P'))
+	{
+		SCENEMANAGER->changeChild("ui");
+		SCENEMANAGER->init("Stage1");
+	}
+
+
 }
 
 

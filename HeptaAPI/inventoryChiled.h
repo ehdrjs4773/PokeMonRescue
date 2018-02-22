@@ -13,6 +13,12 @@ private :
 	vector<Item> _vitem;
 	vector<Item>::iterator _viItem;
 	
+
+
+	int _itemNum;
+	int _x, _y;
+
+
 	player* _player;
 
 public:

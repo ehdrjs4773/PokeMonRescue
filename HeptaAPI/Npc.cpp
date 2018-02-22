@@ -7,6 +7,10 @@
 
 Npc::Npc()
 {
+	_town.inout = false;
+	_house = true;
+
+
 }
 
 
@@ -33,8 +37,7 @@ HRESULT Npc::init()
 	_npc2.rc = RectMakeCenter(_npc2.x, _npc2.y, _npc2.image->getWidth(), _npc2.image->getHeight());
 	_npc2.collsionrc = RectMakeCenter(_npc2.x, _npc2.y + 10, _npc2.image->getWidth(), 15);
 
-	_town.inout = false;
-	
+
 	_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
 
 	//´Ù ‰ç¾î¿ä Âô±ß ><*
@@ -43,7 +46,6 @@ HRESULT Npc::init()
 	_rc2 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2+ 130, 50, 30);
 	_rc3 = RectMakeCenter(WINSIZEX - 7, WINSIZEY - 40, 15, 80);
 	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
-	_house = true;
 
 	_issaveload = false;
 
@@ -143,19 +145,19 @@ void Npc::render()
 		IMAGEMANAGER->findImage("town")->render(dc, 0, 0);
 		_npc1.image->render(dc, _npc1.x - _npc1.image->getWidth() / 2, _npc1.y - _npc1.image->getHeight() / 2);
 		_npc2.image->render(dc, _npc2.x - _npc2.image->getWidth() / 2, _npc2.y - _npc2.image->getHeight() / 2);
-		Rectangle(dc, _npc1.collsionrc.left, _npc1.collsionrc.top, _npc1.collsionrc.right, _npc1.collsionrc.bottom);
-		Rectangle(dc, _player->getRect().left, _player->getRect().top, _player->getRect().right, _player->getRect().bottom);
-		Rectangle(dc, _rc.left, _rc.top, _rc.right, _rc.bottom);
+		//Rectangle(dc, _npc1.collsionrc.left, _npc1.collsionrc.top, _npc1.collsionrc.right, _npc1.collsionrc.bottom);
+		//Rectangle(dc, _player->getRect().left, _player->getRect().top, _player->getRect().right, _player->getRect().bottom);
+		//Rectangle(dc, _rc.left, _rc.top, _rc.right, _rc.bottom);
 	}
 
 	if (!_town.inout)
 	{
 		IMAGEMANAGER->findImage("alphamap")->alphaRender(dc, 0, 0, 255);
 		IMAGEMANAGER->findImage("saveTown")->render(dc, WINSIZEX / 2 - IMAGEMANAGER->findImage("saveTown")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("saveTown")->getHeight() / 2);
-		Rectangle(dc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
+		//Rectangle(dc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
 	}
-	Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
-	Rectangle(dc, _rc4.left, _rc4.top, _rc4.right, _rc4.bottom);
+	//Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
+	//Rectangle(dc, _rc4.left, _rc4.top, _rc4.right, _rc4.bottom);
 	_player->render();
 	if (_issaveload)
 	{

@@ -60,6 +60,7 @@ enum itembuy
 	item_potion,
 	item_ppPotion,
 	item_skill,
+	item_loop,
 	item_end
 };
 
@@ -76,6 +77,7 @@ struct itemSelcet
 	bool potionSelcet;
 	bool ppPotionSelect;
 	bool skillSelcet;
+	bool loopSelcet;
 };
 
 class player;

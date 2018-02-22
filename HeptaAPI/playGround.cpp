@@ -17,10 +17,9 @@ HRESULT playGround::init()
 	gameNode::init(true);
 
 	this->imageInitaialization();
-	soundInit();
+
 	_player = new player;
 	
-	_player->init("¸®ÀÚ¸ù");
 	SCENEMANAGER->addScene("npc", new Npc);
 	_player->setTownMapMemAdressLink((Npc*)SCENEMANAGER->findScene("npc")->currentScene);
 

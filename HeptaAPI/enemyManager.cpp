@@ -20,6 +20,7 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
+	soundInit();
 	imageInit();
 
 
@@ -75,7 +76,7 @@ void enemyManager::update()
 	else if (_mapNum ==3)
 	{ 
 		if(_vEnemyPokemon.size()==0)
-		enemyBirth(BOSS, _pl->getPlayerTileIndexX() ,_pl->getPlayerTileIndexY()-5, 1);
+		enemyBirth(ENEMY_DANDEGI, _pl->getPlayerTileIndexX() ,_pl->getPlayerTileIndexY()-5, 1);
 
 		for (int i = 0; i < _vEnemyPokemon.size(); i++)
 		{
@@ -425,16 +426,6 @@ void enemyManager::enemyBirth(ENEMY enemys, int tileX, int tileY, int level)
 		_electivire->init(_electivireName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_electivire);
-		break;
-
-	case BOSS:
-		_boss = new boss;
-		_boss->setStageMemoryAdressLink(_stage);
-		_boss->setPlayerMemoryAdressLink(_pl);
-
-		_boss->init(_bossName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
-		_vEnemyPokemon.push_back(_boss);
 		break;
 	}
 }

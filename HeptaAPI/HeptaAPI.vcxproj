@@ -196,7 +196,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />
-    <ClCompile Include="playGround+soundInit.cpp" />
+    <ClCompile Include="enemyManager+soundInit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action.h" />

@@ -16,18 +16,21 @@ void player::correction()
 			{
 				_player.direction = PLAYER_BOTTOM;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 			{
 				_player.direction = PLAYER_LEFT_BOTTOM;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 			{
 				_player.direction = PLAYER_RIGHT_BOTTOM;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			break;
@@ -36,6 +39,7 @@ void player::correction()
 			{
 				_player.direction = PLAYER_LEFT_BOTTOM;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			break;
@@ -44,18 +48,21 @@ void player::correction()
 			{
 				_player.direction = PLAYER_LEFT;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 			{
 				_player.direction = PLAYER_LEFT_BOTTOM;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_UP))
 			{
 				_player.direction = PLAYER_LEFT_TOP;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			break;
@@ -64,6 +71,7 @@ void player::correction()
 			{
 				_player.direction = PLAYER_LEFT_TOP;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			break;
@@ -72,18 +80,21 @@ void player::correction()
 			{
 				_player.direction = PLAYER_TOP;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 			{
 				_player.direction = PLAYER_LEFT_TOP;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 			{
 				_player.direction = PLAYER_RIGHT_TOP;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			break;
@@ -92,6 +103,7 @@ void player::correction()
 			{
 				_player.direction = PLAYER_RIGHT_TOP;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			break;
@@ -100,18 +112,21 @@ void player::correction()
 			{
 				_player.direction = PLAYER_RIGHT;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 			{
 				_player.direction = PLAYER_RIGHT_BOTTOM;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			if (KEYMANAGER->isStayKeyDown(VK_UP))
 			{
 				_player.direction = PLAYER_RIGHT_TOP;
 				_player.state = PLAYER_MOVE;
+				valueInit();
 				return;
 			}
 			break;
@@ -120,6 +135,7 @@ void player::correction()
 			{
 				_player.direction = PLAYER_RIGHT_BOTTOM;
 				_player.state = PLAYER_IDLE;
+				valueInit();
 				return;
 			}
 			break;

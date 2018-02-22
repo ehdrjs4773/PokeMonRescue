@@ -15,40 +15,98 @@ void player::FrameUpdate()
 		switch (_player.direction)
 		{
 		case PLAYER_BOTTOM:
-			_idleFrameX = _idleFrameY = 0;
+			_idleFrameY = 0;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
+
 			break;
 		case PLAYER_LEFT_BOTTOM:
-			_idleFrameX = 0;
 			_idleFrameY = 1;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_LEFT:
-			_idleFrameX = 0;
 			_idleFrameY = 2;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_LEFT_TOP:
-			_idleFrameX = 0;
 			_idleFrameY = 3;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_TOP:
-			_idleFrameX = 0;
 			_idleFrameY = 4;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_RIGHT_TOP:
-			_idleFrameX = 0;
 			_idleFrameY = 5;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_RIGHT:
-			_idleFrameX = 0;
 			_idleFrameY = 6;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_RIGHT_BOTTOM:
-			_idleFrameX = 0;
 			_idleFrameY = 7;
+			_idleCount++;
+			if (_idleCount % MOVE_FRAME_UPDATE_SPEED == 0)
+			{
+				_idleFrameX++;
+				if (_idleFrameX > IMAGEMANAGER->findImage(tempNameIdle.c_str())->getMaxFrameX())
+					_idleFrameX = 0;
+				_idleCount = 0;
+			}
 			break;
 		case PLAYER_DIRECTION_END:
 			break;
 
-		}	  //기본상태
+		}
 		break;
 	case PLAYER_MOVE:
 		switch (_player.direction)

@@ -56,11 +56,13 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("objectlist", ".//bmps//map//items.bmp", 240, 24, 10, 1, false, true, MAGENTA);
 	IMAGEMANAGER->addImage("alphamap", ".\\bmps\\map\\usingalpha.bmp", 480, 360, true, true, MAGENTA);
 	
-	//포켓몬 이미지
+	// ## 포켓몬 이미지 ##
+	
+	//리자몽
 	IMAGEMANAGER->addFrameImage("리자몽_idle", ".\\bmps\\pokemon_state\\리자몽_idle.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
 	IMAGEMANAGER->addFrameImage("리자몽_move",".\\bmps\\pokemon_state\\리자몽_move.bmp"
-		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//움직임
+		, 0, 0, 216, 576, 3, 8, false, true, RGB(255, 0, 255));								//움직임
 	IMAGEMANAGER->addFrameImage("리자몽_attack", ".\\bmps\\pokemon_state\\리자몽_attack.bmp"
 		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//공격
 	IMAGEMANAGER->addFrameImage("리자몽_specialAttack",".\\bmps\\pokemon_state\\리자몽_specialAttack.bmp"
@@ -68,8 +70,9 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("리자몽_hurt", ".\\bmps\\pokemon_state\\리자몽_hurt.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 	IMAGEMANAGER->addFrameImage("리자몽_die", ".\\bmps\\pokemon_state\\리자몽_die.bmp"
-		, 0, 0, 144, 72, 2, 1, false, true, RGB(255, 0, 255));								//피격
+		, 0, 0, 144, 72, 2, 1, false, true, RGB(255, 0, 255));								//죽음
 
+	//지라치
 	IMAGEMANAGER->addFrameImage("지라치_idle", ".\\bmps\\pokemon_state\\지라치_idle.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
 	IMAGEMANAGER->addFrameImage("지라치_move", ".\\bmps\\pokemon_state\\지라치_move.bmp"
@@ -81,6 +84,45 @@ void playGround::imageInitaialization(void)
 	IMAGEMANAGER->addFrameImage("지라치_hurt", ".\\bmps\\pokemon_state\\지라치_hurt.bmp"
 		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
 
+	//뮤츠
+	IMAGEMANAGER->addFrameImage("뮤츠_idle", ".\\bmps\\pokemon_state\\뮤츠_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
+	IMAGEMANAGER->addFrameImage("뮤츠_move", ".\\bmps\\pokemon_state\\뮤츠_move.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//움직임
+	IMAGEMANAGER->addFrameImage("뮤츠_attack", ".\\bmps\\pokemon_state\\뮤츠_attack.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//공격
+	IMAGEMANAGER->addFrameImage("뮤츠_specialAttack", ".\\bmps\\pokemon_state\\뮤츠_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
+	IMAGEMANAGER->addFrameImage("뮤츠_hurt", ".\\bmps\\pokemon_state\\뮤츠_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
+
+	//프리져
+	IMAGEMANAGER->addFrameImage("프리져_idle", ".\\bmps\\pokemon_state\\프리져_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
+	IMAGEMANAGER->addFrameImage("프리져_move", ".\\bmps\\pokemon_state\\프리져_move.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//움직임
+	IMAGEMANAGER->addFrameImage("프리져_attack", ".\\bmps\\pokemon_state\\프리져_attack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//공격
+	IMAGEMANAGER->addFrameImage("프리져_specialAttack", ".\\bmps\\pokemon_state\\프리져_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
+	IMAGEMANAGER->addFrameImage("프리져_hurt", ".\\bmps\\pokemon_state\\프리져_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
+	IMAGEMANAGER->addFrameImage("프리져_die", ".\\bmps\\pokemon_state\\프리져_die.bmp"
+		, 0, 0, 144, 72, 2, 1, false, true, RGB(255, 0, 255));								//죽음
+
+	//뮤
+	IMAGEMANAGER->addFrameImage("뮤_idle", ".\\bmps\\pokemon_state\\뮤_idle.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//기본상태
+	IMAGEMANAGER->addFrameImage("뮤_move", ".\\bmps\\pokemon_state\\뮤_move.bmp"
+		, 0, 0, 216, 576, 3, 8, false, true, RGB(255, 0, 255));								//움직임
+	IMAGEMANAGER->addFrameImage("뮤_attack", ".\\bmps\\pokemon_state\\뮤_attack.bmp"
+		, 0, 0, 288, 576, 4, 8, false, true, RGB(255, 0, 255));								//공격
+	IMAGEMANAGER->addFrameImage("뮤_specialAttack", ".\\bmps\\pokemon_state\\뮤_specialAttack.bmp"
+		, 0, 0, 144, 576, 2, 8, false, true, RGB(255, 0, 255));								//스페셜공격
+	IMAGEMANAGER->addFrameImage("뮤_hurt", ".\\bmps\\pokemon_state\\뮤_hurt.bmp"
+		, 0, 0, 72, 576, 1, 8, false, true, RGB(255, 0, 255));								//피격
+	IMAGEMANAGER->addFrameImage("뮤_die", ".\\bmps\\pokemon_state\\뮤_die.bmp"
+		, 0, 0, 144, 72, 2, 1, false, true, RGB(255, 0, 255));								//죽음
 
 	// UI 이미지 초기화 
 

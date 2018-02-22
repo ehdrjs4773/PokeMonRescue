@@ -65,13 +65,13 @@ void playerPartner::render()
 
 void playerPartner::townMove()
 {
-	this->frameUpdate();
+	//this->frameUpdate();
 	this->partnerTownMove();
 }
 
 void playerPartner::dgMove()
 {
-	this->frameUpdate();
+	//this->frameUpdate();
 	this->partnerDgMove();
 }
 

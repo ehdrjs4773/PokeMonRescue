@@ -79,12 +79,6 @@ using namespace HEPTA_UTIL;
 #define PLAYER_SELECT_KEY	'X'
 #define PLAYER_CANCLE_KEY	'C'
 
-// 정민 프레임 업뎃 카운트 
-#define MOVE_FRAME_UPDATE_SPEED		5
-#define ATTACK_FRAME_UPDATE_SPEED	5
-#define S_ATTACK_FRAME_UPDATE_SPEED 10
-#define HURT_FRAME_UPDATE_SPEED		20
-
 //=======================================================
 // ## 매크로 ## 2017.11.15 ##
 //=======================================================

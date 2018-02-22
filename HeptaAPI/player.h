@@ -6,10 +6,10 @@
 #define PLAYER_TOWN_SPEED 3
 #define PLAYER_DUNGEON_SPEED 1
 
-//#define MOVE_FRAME_UPDATE_SPEED 5
-//#define ATTACK_FRAME_UPDATE_SPEED 5
-//#define S_ATTACK_FRAME_UPDATE_SPEED 10
-//#define HURT_FRAME_UPDATE_SPEED 20
+#define MOVE_FRAME_UPDATE_SPEED 5
+#define ATTACK_FRAME_UPDATE_SPEED 10
+#define S_ATTACK_FRAME_UPDATE_SPEED 20
+#define HURT_FRAME_UPDATE_SPEED 30
 
 #define SPEED_UP_KEY 'Z'
 
@@ -126,6 +126,8 @@ private: // ## 불값 ##
 	bool _isRightBottomMove;
 	
 	bool _isWallCrash;			//벽에 부딪혔니?
+
+	bool _tileCheakMode;
 
 private: // ## 프레임 돌릴 변수들 ## 
 	//기본

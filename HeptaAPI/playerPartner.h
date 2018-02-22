@@ -108,7 +108,7 @@ public:
 	virtual void render();
 
 	virtual void valueInit();
-	virtual void frameUpdate();
+	//virtual void frameUpdate();
 	virtual void draw();
 	virtual void partnerTownMove();
 	virtual void partnerDgMove();

@@ -36,6 +36,7 @@ HRESULT player::init(string charName)
 	_player.townSpeed = 3.0f;
 	_player.money = 1000;
 	_isDie = false;
+	_tileCheakMode = false;
 	
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
@@ -45,7 +46,7 @@ HRESULT player::init(string charName)
 	tempNameDie = charName + "_die";
 
 	_playerStatus = new pokemon;
-	_playerStatus->pokemonStatus(charName, 1);
+	_playerStatus->pokemonStatus(charName, INT_MAX);
 	_player.currentHp = _playerStatus->getCurrentHP();
 
 	skills* temp;
@@ -149,7 +150,7 @@ void player::render()
 
 	SetBkMode(hdc, TRANSPARENT);
 	char str[128];
-	sprintf_s(str, " 맞앗닭 : %d ", _isHurt);
+	sprintf_s(str, " 돈 : %d ", _player.money);
 	TextOut(hdc, x + 100, y + 50, str, strlen(str));
 	char str2[128];
 	sprintf_s(str2, " _player.currentHp 현재 값 : %d ", _player.currentHp);
@@ -415,8 +416,15 @@ void player::dungeonMove()
 		//몇번째 타일에 있냐
 		_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 
-		//타일검출
-		tileCheak();
+		if (KEYMANAGER->isOnceKeyDown(VK_F1)) _tileCheakMode = true;
+		if (KEYMANAGER->isOnceKeyDown(VK_F2)) _tileCheakMode = false;
+
+		if (_tileCheakMode)
+		{
+			//타일검출
+			tileCheak();
+		}
+		
 
 		//피격상태
 		if (_player.currentHp != _playerStatus->getCurrentHP())
@@ -601,7 +609,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					
 					}
 				}
 				break;
@@ -621,7 +634,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -640,7 +658,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -660,7 +683,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -679,7 +707,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -699,7 +732,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -718,7 +756,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;
@@ -738,7 +781,12 @@ void player::dungeonMove()
 					//아이템 먹었을 때
 					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
 					{
+						if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() == 0)
+						{
+							_player.money += 10;
+						}
 						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+						
 					}
 				}
 				break;

@@ -156,4 +156,23 @@ void enemyManager::imageInit()
 		8, true, true, RGB(255, 0, 255));
 	//에레키블
 
+	//에레키블
+	_bossName.pokemonName = "레쿠쟈";
+	_bossName.idleImage = "LEKUKA_IDLE";
+	_bossName.moveImage = "LEKUKA_MOVE";
+	_bossName.attackImage = "LEKUKA_ATTACK";
+	_bossName.hurtImage = "LEKUKA_HURTS";
+
+	IMAGEMANAGER->addFrameImage(_bossName.idleImage, ".//enemyImage//LEKUJA_HYPERBEAM.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_bossName.moveImage, ".//enemyImage//LEKUJA_HYPERBEAM.bmp", 216, 576, 3,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_bossName.attackImage, ".//enemyImage//LEKUJA_HYPERBEAM.bmp", 144, 576, 2,
+		8, true, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage(_bossName.hurtImage, ".//enemyImage//LEKUJA_HYPERBEAM.bmp", 72, 576, 1,
+		8, true, true, RGB(255, 0, 255));
+	//에레키블
+
+	
+
 }

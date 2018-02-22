@@ -70,6 +70,9 @@ private://利按眉 包访 积魂
 	tagImageName	_mankeyName;
 	tagImageName	_tanguriName;
 	tagImageName	_electivireName;
+	tagImageName	_bossName;
+
+
 
 	ENEMYACTION _enemyAction;
 

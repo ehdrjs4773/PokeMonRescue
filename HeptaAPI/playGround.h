@@ -26,6 +26,7 @@ public:
 	virtual void render(void);		//그려주는 함수
 
 	virtual void imageInitaialization(void); //이미지 초기화 함수
+	virtual void soundInit(void);
 	playGround();
 	~playGround();
 };

@@ -209,9 +209,9 @@ void Npc::render()
 				"존재하지 않습니다.", strlen("존재하지 않습니다."));
 		}
 		SetTextColor(dc, RGB(0, 0, 0));
-		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 41, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 2,
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20 - 3,
 			"세이브 파일이", strlen("세이브 파일이"));
-		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 41, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 2,
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 40, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 45 - 3,
 			"존재하지 않습니다.", strlen("존재하지 않습니다."));
 	}
 	else if (_issaveload)

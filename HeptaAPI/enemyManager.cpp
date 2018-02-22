@@ -24,8 +24,7 @@ HRESULT enemyManager::init()
 	imageInit();
 
 
-	if (_mapNum == 0 && _floorNum == 0)
-	{
+	
 		enemyBirth(ENEMY_CHICORITA,
 			_stage->getrespontile()[0]->getIndexX(),
 			_stage->getrespontile()[0]->getIndexY(), 1);
@@ -43,7 +42,7 @@ HRESULT enemyManager::init()
 			_stage->getrespontile()[7]->getIndexY(), 1);
 		enemyBirth(ENEMY_TANGURI, _stage->getrespontile()[8]->getIndexX(),
 			_stage->getrespontile()[8]->getIndexY(), 1);
-	}
+
 
 	_selectSkill = 0;
 	_enemyTurn = false;
@@ -74,11 +73,18 @@ void enemyManager::update()
 	{
 		_vEnemyPokemon.clear();
 	}
-	else if (_mapNum == 3)
-	{
+	else if (_mapNum ==3)
+	{ 
 		if(_vEnemyPokemon.size()==0)
-		enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[_stage->getrespontile().size()-1]->getIndexX(),
-			_stage->getrespontile()[_stage->getrespontile().size() - 1]->getIndexY(), 1);
+		enemyBirth(ENEMY_DANDEGI, _pl->getPlayerTileIndexX() ,_pl->getPlayerTileIndexY()-5, 1);
+
+		for (int i = 0; i < _vEnemyPokemon.size(); i++)
+		{
+			_vEnemyPokemon[i]->update();
+			_tileCheckX = _pl->getPlayerTileIndexX();
+			_tileCheckY = _pl->getPlayerTileIndexY();
+			enemyDead();
+		}
 	}
 
 			

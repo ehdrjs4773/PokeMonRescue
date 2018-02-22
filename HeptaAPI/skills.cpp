@@ -11,7 +11,7 @@ skills::~skills()
 HRESULT skills::init(string name)
 {
 	_skillName = DATABASE->getSkillsData(name)->name;
-	_skillElement = (SKILL_ELEMENT)DATABASE->getSkillsData(name)->skillElement;
+	_skillElement = (ELEMENT)DATABASE->getSkillsData(name)->skillElement;
 	_power = DATABASE->getSkillsData(name)->power;
 	_currentPP = DATABASE->getSkillsData(name)->pp;
 	_maxPP = DATABASE->getSkillsData(name)->pp;
@@ -21,7 +21,7 @@ HRESULT skills::init(string name)
 void skills::setSkill(string name, int currentPP)
 {
 	_skillName = DATABASE->getSkillsData(name)->name;
-	_skillElement = (SKILL_ELEMENT)DATABASE->getSkillsData(name)->skillElement;
+	_skillElement = (ELEMENT)DATABASE->getSkillsData(name)->skillElement;
 	_power = DATABASE->getSkillsData(name)->power;
 	_maxPP = DATABASE->getSkillsData(name)->pp;
 	_currentPP = currentPP;

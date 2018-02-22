@@ -15,7 +15,7 @@
 class pokemon : public gameNode
 {
 protected:
-	SKILL_ELEMENT _element;		// 포켓몬의 속성
+	ELEMENT _element;		// 포켓몬의 속성
 	string _pokemonName;	// 포켓몬 이름(종류)
 
 	USHORT _level;			// 레벨	
@@ -65,7 +65,7 @@ public:
 	inline int getSpecialATK() { return _specialATK; }
 	inline int getSpecialDef() { return _specialDEF; }
 	inline int getLevel() { return _level; }
-	inline SKILL_ELEMENT getElement() { return _element; }
+	inline ELEMENT getElement() { return _element; }
 	inline string getName() { return _pokemonName; }
 
 	inline vector<skills*> getVSkill() { return _vSkills; }

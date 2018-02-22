@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-enum SKILL_ELEMENT
+enum ELEMENT
 {
 	ELEMENT_NORMAL,		// ³ë¸»	0
 	ELEMENT_FIRE,			// ºÒ	1
@@ -26,7 +26,7 @@ enum SKILL_ELEMENT
 class skills
 {
 protected:
-	SKILL_ELEMENT _skillElement;
+	ELEMENT _skillElement;
 	string _skillName;
 	USHORT _power;
 	USHORT _maxPP;
@@ -41,7 +41,7 @@ public:
 
 	inline void useSkill() { _currentPP--; }
 
-	inline SKILL_ELEMENT getSkillElement() { return _skillElement; }
+	inline ELEMENT getSkillElement() { return _skillElement; }
 	inline USHORT getCurrentPP() { return _currentPP; }
 	inline USHORT getMaxPP() { return _maxPP; }
 	inline USHORT getPower() { return _power; }

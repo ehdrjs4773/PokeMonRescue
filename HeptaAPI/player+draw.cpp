@@ -333,28 +333,8 @@ void player::draw()
 		}
 		break;
 	case PLAYER_DIE:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			break;
-		case PLAYER_LEFT_BOTTOM:
-			break;
-		case PLAYER_LEFT:
-			break;
-		case PLAYER_LEFT_TOP:
-			break;
-		case PLAYER_TOP:
-			break;
-		case PLAYER_RIGHT_TOP:
-			break;
-		case PLAYER_RIGHT:
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			break;
-		case PLAYER_DIRECTION_END:
-			break;
-
-		}
+		IMAGEMANAGER->findImage(tempNameDie.c_str())->frameRender(hdc, _player.imageRc.left, _player.imageRc.top,
+			_dieFrameX, 0);		
 		break;
 	case PLAYER_STATE_END:
 		break;

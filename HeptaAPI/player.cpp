@@ -35,16 +35,88 @@ HRESULT player::init(string charName)
 	_isWallCrash = false;
 	_player.townSpeed = 3.0f;
 	_player.money = 1000;
+	_isDie = false;
 	
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
 	tempNameAttack = charName + "_attack";
 	tempNameSpecialAttack = charName + "_specialAttack";
 	tempNameHurt = charName + "_hurt";
+	tempNameDie = charName + "_die";
 
 	_playerStatus = new pokemon;
 	_playerStatus->pokemonStatus(charName, 1);
 	_player.currentHp = _playerStatus->getCurrentHP();
+
+	skills* temp;
+	string tempSkillName;
+	switch (_playerStatus->getElement())
+	{
+	case SKILL_ELEMENT_NORMAL:
+		tempSkillName = "노말";
+		break;
+	case SKILL_ELEMENT_FIRE:
+		tempSkillName = "불";
+		break;
+	case SKILL_ELEMENT_WATER:
+		tempSkillName = "물";
+		break;
+	case SKILL_ELEMENT_ELECTRIC:
+		tempSkillName = "전기";
+		break;
+	case SKILL_ELEMENT_PLANT:
+		tempSkillName = "풀";
+		break;
+	case SKILL_ELEMENT_ICE:
+		tempSkillName = "얼음";
+		break;
+	case SKILL_ELEMENT_FIGHT:
+		tempSkillName = "격투";
+		break;
+	case SKILL_ELEMENT_POISON:
+		tempSkillName = "독";
+		break;
+	case SKILL_ELEMENT_EARTH:
+		tempSkillName = "땅";
+		break;
+	case SKILL_ELEMENT_WING:
+		tempSkillName = "비행";
+		break;
+	case SKILL_ELEMENT_ESPER:
+		tempSkillName = "에스퍼";
+		break;
+	case SKILL_ELEMENT_INSECT:
+		tempSkillName = "곤충";
+		break;
+	case SKILL_ELEMENT_ROCK:
+		tempSkillName = "바위";
+		break;
+	case SKILL_ELEMENT_GHOST:
+		tempSkillName = "고스트";
+		break;
+	case SKILL_ELEMENT_DRAGON:
+		tempSkillName = "드래곤";
+		break;
+	case SKILL_ELEMENT_DARK:
+		tempSkillName = "악";
+		break;
+	case SKILL_ELEMENT_STEEL:
+		tempSkillName = "강철";
+		break;
+	case SKILL_ELEMENT_END:
+		break;
+	default:
+		break;
+	}
+	
+	for (int i = 0; i < 4; ++i)
+	{
+		char str[32];
+		sprintf(str, "%s_%d", tempSkillName.c_str(), i);
+		temp = new skills;
+		temp->init(str);
+		_playerStatus->addSkill(temp);
+	}
 
 	return S_OK;
 }
@@ -327,348 +399,352 @@ void player::townMove()
 void player::dungeonMove()
 {
 
-	//if (_playerStatus->getCurrentHP() <= 0)
-	//{
-	//	_player.state = PLAYER_DIE;
-	//}
-	//if (_player.state == PLAYER_DIE) return;
-
-	//몇번째 타일에 있는지 인덱스 x,y
-	_player.idx = _player.x / 24;
-	_player.idy = _player.y / 24;
-
-	//몇번째 타일에 있냐
-	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
-
-	//타일검출
-	tileCheak();
-
-	//피격상태
-	if (_player.currentHp != _playerStatus->getCurrentHP())
+	if (_playerStatus->getCurrentHP() <= 0 || _playerStatus->getCurrentHP() >= 60000)
 	{
-		_isHurt = true;
-		_player.state = PLAYER_HURT;
-
+		_isDie = true;
+		_player.state = PLAYER_DIE;
 	}
-	_player.currentHp = _playerStatus->getCurrentHP();
 	
 
-	//스페셜 공격 1
-	if (KEYMANAGER->isOnceKeyDown('Q') && !_isAttack && !_onceMove && !_isHurt)
+	if (!_isDie)
 	{
-		SOUNDMANAGER->play("폭발음");
-		_isAttack = true;
-		_player.state = PLAYER_SPECIAL_ATTACK_1;
-	}
+		//몇번째 타일에 있는지 인덱스 x,y
+		_player.idx = _player.x / 24;
+		_player.idy = _player.y / 24;
 
-	//스페셜 공격 2
-	if (KEYMANAGER->isOnceKeyDown('W') && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_isAttack = true;
-		_player.state = PLAYER_SPECIAL_ATTACK_2;
-	}
+		//몇번째 타일에 있냐
+		_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 
-	//스페셜 공격 2
-	if (KEYMANAGER->isOnceKeyDown('E') && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_isAttack = true;
-		_player.state = PLAYER_SPECIAL_ATTACK_3;
-	}
+		//타일검출
+		tileCheak();
 
-	//공격키
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_isAttack = true;
-		_player.state = PLAYER_ATTACK;
-	}
-	//왼쪽아래
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_LEFT_BOTTOM;
-
-		if (_isLeftBottomMove)
+		//피격상태
+		if (_player.currentHp != _playerStatus->getCurrentHP())
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
+			_isHurt = true;
+			_player.state = PLAYER_HURT;
 
-			_player.state = PLAYER_MOVE;
 		}
-	}
-	//오른쪽아래
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_RIGHT_BOTTOM;
+		_player.currentHp = _playerStatus->getCurrentHP();
 
-		if (_isRightBottomMove)
+
+		//스페셜 공격 1
+		if (KEYMANAGER->isOnceKeyDown('Q') && !_isAttack && !_onceMove && !_isHurt)
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
+			SOUNDMANAGER->play("폭발음");
+			_isAttack = true;
+			_player.state = PLAYER_SPECIAL_ATTACK_1;
 		}
-	}
-	//왼쪽위
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_LEFT_TOP;
 
-		if (_isLeftTopMove)
+		//스페셜 공격 2
+		if (KEYMANAGER->isOnceKeyDown('W') && !_isAttack && !_onceMove && !_isHurt)
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
+			_isAttack = true;
+			_player.state = PLAYER_SPECIAL_ATTACK_2;
 		}
-	}
-	//오른쪽위
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
-		!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_RIGHT_TOP;
 
-		if (_isRightTopMove)
+		//스페셜 공격 2
+		if (KEYMANAGER->isOnceKeyDown('E') && !_isAttack && !_onceMove && !_isHurt)
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
+			_isAttack = true;
+			_player.state = PLAYER_SPECIAL_ATTACK_3;
 		}
-	}
-	//아래
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !_isAttack && !_onceMove && !_isHurt )
-	{
-		_player.direction = PLAYER_BOTTOM;
 
-		if (_isBottomMove)
+		//공격키
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE) && !_isAttack && !_onceMove && !_isHurt)
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
+			_isAttack = true;
+			_player.state = PLAYER_ATTACK;
 		}
-	}
-	//위
-	if (KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_LEFT))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_TOP;
-
-		if (_isTopMove)
+		//왼쪽아래
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
+			!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
 		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
+			_player.direction = PLAYER_LEFT_BOTTOM;
 
-			_player.state = PLAYER_MOVE;
-		}
-	}
-	//왼쪽
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_LEFT;
-
-		if (_isLeftMove)
-		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
-		}
-	}
-	//오른쪽
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
-		&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
-	{
-		_player.direction = PLAYER_RIGHT;
-
-		if (_isRightMove)
-		{
-			_onceMove = true;
-			_player.startX = _player.x;
-			_player.startY = _player.y;
-
-			_player.state = PLAYER_MOVE;
-		}
-	}
-
-	//player+move.cpp에 있음
-	playerDgMove();
-
-	//이걸로 한타일씩 이동하는것처럼 보이게 할거임
-	switch (_player.state)
-	{
-	case PLAYER_MOVE:
-		switch (_player.direction)
-		{
-		case PLAYER_BOTTOM:
-			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+			if (_isLeftBottomMove)
 			{
-				_onceMove = false;
-				
-				//보정			
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//오른쪽아래
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
+			!(KEYMANAGER->isStayKeyDown(VK_UP)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_RIGHT_BOTTOM;
+
+			if (_isRightBottomMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//왼쪽위
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) &&
+			!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_LEFT_TOP;
+
+			if (_isLeftTopMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//오른쪽위
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) &&
+			!(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_RIGHT_TOP;
+
+			if (_isRightTopMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//아래
+		if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
+			&& !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_BOTTOM;
+
+			if (_isBottomMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//위
+		if (KEYMANAGER->isStayKeyDown(VK_UP) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_LEFT))
+			&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_TOP;
+
+			if (_isTopMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//왼쪽
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && !(KEYMANAGER->isStayKeyDown(VK_RIGHT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
+			&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_LEFT;
+
+			if (_isLeftMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+		//오른쪽
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !(KEYMANAGER->isStayKeyDown(VK_LEFT)) && !(KEYMANAGER->isStayKeyDown(VK_UP))
+			&& !(KEYMANAGER->isStayKeyDown(VK_DOWN)) && !_isAttack && !_onceMove && !_isHurt)
+		{
+			_player.direction = PLAYER_RIGHT;
+
+			if (_isRightMove)
+			{
+				_onceMove = true;
+				_player.startX = _player.x;
+				_player.startY = _player.y;
+
+				_player.state = PLAYER_MOVE;
+			}
+		}
+
+		//player+move.cpp에 있음
+		playerDgMove();
+
+		//이걸로 한타일씩 이동하는것처럼 보이게 할거임
+		switch (_player.state)
+		{
+		case PLAYER_MOVE:
+			switch (_player.direction)
+			{
+			case PLAYER_BOTTOM:
+				if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
 				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					_onceMove = false;
+
+					//보정			
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
 				}
+				break;
+			case PLAYER_LEFT_BOTTOM:
+				if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
+					<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_LEFT:
+				if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_LEFT_TOP:
+				if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
+					<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_TOP:
+				if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_RIGHT_TOP:
+				if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
+					<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_RIGHT:
+				if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
+			case PLAYER_RIGHT_BOTTOM:
+				if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
+					<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
+				{
+					_onceMove = false;
+
+					//보정
+					if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
+						_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
+					if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
+						_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
+					_player.state = PLAYER_IDLE;
+					_battle->setTurn(enemyTurn);
+					//아이템 먹었을 때
+					if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
+					{
+						_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
+					}
+				}
+				break;
 			}
 			break;
-		case PLAYER_LEFT_BOTTOM:
-			if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
-				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_LEFT:
-			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_LEFT_TOP:
-			if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
-				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_TOP:
-			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_RIGHT_TOP:
-			if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
-				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_RIGHT:
-			if (TILESIZEX <= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
-		case PLAYER_RIGHT_BOTTOM:
-			if (sqrtf(TILESIZEX * TILESIZEX + TILESIZEY * TILESIZEY)
-				<= getDistance(_player.startX, _player.startY, _player.x, _player.y))
-			{
-				_onceMove = false;
-
-				//보정
-				if (_player.x != _stage->getTileAdress()[_player.tileIndex]->getCenterX())
-					_player.x = _stage->getTileAdress()[_player.tileIndex]->getCenterX();
-				if (_player.y != _stage->getTileAdress()[_player.tileIndex]->getCenterY())
-					_player.y = _stage->getTileAdress()[_player.tileIndex]->getCenterY();
-				_player.state = PLAYER_IDLE;
-				_battle->setTurn(enemyTurn);
-				//아이템 먹었을 때
-				if ((int)_stage->getTileAdress()[_player.tileIndex]->getObject() < 6)
-				{
-					_stage->getTileAdress()[_player.tileIndex]->setObject(OBJECT_NONE);
-				}
-			}
-			break;
 		}
-		break;
 	}
 
 	//프레임 업뎃
@@ -684,16 +760,16 @@ void player::dungeonMove()
 	
 }
 
-void player::addPartner(pokemon* p)
-{
-	if (_vPartner.size() >= 3)
-		return;
-
-	playerPartner* temp;
-	temp->init(p->getName());
-	
-	_vPartner.push_back(temp);
-}
+//void player::addPartner(pokemon* p)
+//{
+//	if (_vPartner.size() >= 3)
+//		return;
+//
+//	playerPartner* temp;
+//	temp->init(p->getName());
+//	
+//	_vPartner.push_back(temp);
+//}
 
 void player::setPosition(float startX, float startY)
 {

@@ -44,27 +44,6 @@ enum PLAYER_STATE
 	PLAYER_STATE_END
 };
 
-enum PLAYER_EL
-{
-	PLAYER_NORMAL,		// 노말	0
-	PLAYER_FIRE,		// 불	1
-	PLAYER_WATER,		// 물	2
-	PLAYER_ELECTRIC,	// 전기	3
-	PLAYER_PLANT,		// 풀	4
-	PLAYER_ICE,			// 얼음	5
-	PLAYER_FIGHT,		// 격투	6
-	PLAYER_POISON,		// 독	7
-	PLAYER_EARTH,		// 땅	8
-	PLAYER_WING,		// 비행	9
-	PLAYER_ESPER,		// 에스퍼10
-	PLAYER_INSECT,		// 곤충	11
-	PLAYER_ROCK,		// 바위	12
-	PLAYER_GHOST,		// 고스트13
-	PLAYER_DRAGON,		// 드래곤14
-	PLAYER_DARK,		// 악	15
-	PLAYER_STEEL,		// 강철	16
-	PLAYER_END
-};
 
 enum playerAction	//(임시)
 {
@@ -128,8 +107,7 @@ private:
 	string tempNameAttack;
 	string tempNameSpecialAttack;
 	string tempNameHurt;
-
-	string tempNameEl;
+	string tempNameDie;
 
 private: // ## 불값 ##
 	bool _isAttack;		//공격햇늬?
@@ -182,6 +160,11 @@ private: // ## 프레임 돌릴 변수들 ##
 	SHORT _hurtCount;
 	SHORT _hurtFrameX, _hurtFrameY;
 
+	//죽음
+	SHORT _dieCount;
+	SHORT _dieFrameX;
+	bool _isDie;
+
 
 public:
 	player();
@@ -206,7 +189,6 @@ public:
 	void correction();		//보정작업
 	void pixelCollision();	//픽셀충돌
 	void tileCheak();		//타일검출
-	void effects();
 
 	//void addPartner(pokemon* p);	//파트너 추가 함수
 	//void addPartner(string charName);	//파트너 추가 함수

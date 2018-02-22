@@ -92,16 +92,19 @@ void battleScene::update()				//옵데이트!~~~
 			{
 				//공격하고 턴을 넘겨줌
 				//if(_player->getIsAttack())
+				_player->setPlayerAction(playerEnd);
 				_battleTrun = enemyTurn; //턴 넘겨줌
 			}
 			else if (_player->getPlayerAction() == playerUseSkill)
 			{
 				//스킬쓰고 넘겨줌
+				_player->setPlayerAction(playerEnd);
 				_battleTrun = enemyTurn; //턴 넘겨줌
 			}
 			else if (_player->getPlayerAction() == playerUseItem)
 			{
 				//아이템쓰고 넘겨줌
+				_player->setPlayerAction(playerEnd);
 				_battleTrun = enemyTurn; //턴 넘겨줌
 			}
 		}

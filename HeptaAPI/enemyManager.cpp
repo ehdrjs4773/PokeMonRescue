@@ -22,29 +22,28 @@ HRESULT enemyManager::init()
 {
 	soundInit();
 	imageInit();
-	enemyBirth(ENEMY_CHICORITA, 
-	_stage->getrespontile()[0]->getIndexX(),
-	_stage->getrespontile()[0]->getIndexY(),	1);
 
 
-	enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
-		_stage->getrespontile()[1]->getIndexY(), 1);
-	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
-		_stage->getrespontile()[3]->getIndexY()+1, 1);
-	enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
-		_stage->getrespontile()[4]->getIndexY(), 1);
-	enemyBirth(ENEMY_RUKARIO, _stage->getrespontile()[5]->getIndexX(),
-		_stage->getrespontile()[5]->getIndexY(), 1);
-	enemyBirth(ENEMY_GRAENA, _stage->getrespontile()[6]->getIndexX(),
-		_stage->getrespontile()[6]->getIndexY(), 1);
-	enemyBirth(ENEMY_MANKEY, _stage->getrespontile()[7]->getIndexX(),
-		_stage->getrespontile()[7]->getIndexY(), 1);
-	enemyBirth(ENEMY_TANGURI, _stage->getrespontile()[8]->getIndexX(),
-		_stage->getrespontile()[8]->getIndexY(), 		1);
-
-
-	enemyBirth(BOSS, _stage->getrespontile()[_stage->getrespontile().size()-1]->getIndexX(),
-		_stage->getrespontile()[8]->getIndexY(), 1);
+	if (_mapNum == 0 && _floorNum == 0)
+	{
+		enemyBirth(ENEMY_CHICORITA,
+			_stage->getrespontile()[0]->getIndexX(),
+			_stage->getrespontile()[0]->getIndexY(), 1);
+		enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
+			_stage->getrespontile()[1]->getIndexY(), 1);
+		enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
+			_stage->getrespontile()[3]->getIndexY() + 1, 1);
+		enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
+			_stage->getrespontile()[4]->getIndexY(), 1);
+		enemyBirth(ENEMY_RUKARIO, _stage->getrespontile()[5]->getIndexX(),
+			_stage->getrespontile()[5]->getIndexY(), 1);
+		enemyBirth(ENEMY_GRAENA, _stage->getrespontile()[6]->getIndexX(),
+			_stage->getrespontile()[6]->getIndexY(), 1);
+		enemyBirth(ENEMY_MANKEY, _stage->getrespontile()[7]->getIndexX(),
+			_stage->getrespontile()[7]->getIndexY(), 1);
+		enemyBirth(ENEMY_TANGURI, _stage->getrespontile()[8]->getIndexX(),
+			_stage->getrespontile()[8]->getIndexY(), 1);
+	}
 
 	_selectSkill = 0;
 	_enemyTurn = false;
@@ -71,17 +70,27 @@ void enemyManager::update()
 		_tileCheckY = _pl->getPlayerTileIndexY();
 		enemyDead();
 	}
-	
+	else if(_mapNum == 0 && _floorNum == 1)
+	{
+		_vEnemyPokemon.clear();
+	}
+	else if (_mapNum == 3)
+	{
+		if(_vEnemyPokemon.size()==0)
+		enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[_stage->getrespontile().size()-1]->getIndexX(),
+			_stage->getrespontile()[_stage->getrespontile().size() - 1]->getIndexY(), 1);
+	}
+
+			
 }
 void enemyManager::render()	
 {
-	if (_mapNum == 0 && _floorNum == 0)
+
+	for (int i = 0; i < _vEnemyPokemon.size(); i++)
 	{
-		for (int i = 0; i < _vEnemyPokemon.size(); i++)
-		{
 			_vEnemyPokemon[i]->render();
-		}
 	}
+
 }
 
 
@@ -428,6 +437,7 @@ void enemyManager::enemyDead()
 			{
 				if (SOUNDMANAGER->isPlaySound("Çª¸°ÀÇ³ë·¡"))
 					SOUNDMANAGER->stop("Çª¸°ÀÇ³ë·¡");
+
 			}
 			_vEnemyPokemon.erase(_vEnemyPokemon.begin() + i);
 		}

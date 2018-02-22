@@ -65,7 +65,8 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	_moveIndex	= 0;
 	_atkIndex	= 0;
 	_hurtIndex	= 0;
-	
+	_bossIndex = 0;
+	_beamIndex = 0;
 	_distance	= 0;
 	_target		= 0;
 	_count		= 0;
@@ -80,7 +81,7 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	_cheackTrun		=		false;
 	_needAstar		=		false;
 
-	
+	_beamReady = false;
 	
 	
 	
@@ -143,6 +144,15 @@ void enemy::render()
 	case STATE_SKILL:
 		IMAGEMANAGER->findImage("단데기스킬")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x -24,
 			_pokemon.y -60, _atkIndex , _pokemon.direction);
+		break;
+	case STATE_BEAM:
+		IMAGEMANAGER->findImage("HyperBeam")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - 48,
+			_pokemon.y - 60, _bossIndex, 0);
+		if (_beamReady)
+		{
+			IMAGEMANAGER->findImage("Beam")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - 48,
+				_pokemon.y, 0, _beamIndex);
+		}
 		break;
 	}
 
@@ -216,6 +226,21 @@ void enemy::setState()
 			_moveIndex = 0;
 			_hurtIndex = 0;
 			break;
+
+		case STATE_BEAM:
+				if (!_beamReady)
+				{
+					_bossIndex++;
+				}
+				if (_beamReady)
+				{
+					_beamIndex++;
+				}
+
+			_idleIndex = 0;
+			_moveIndex = 0;
+			_hurtIndex = 0;
+			break;
 		}
 		
 		_count = 0;
@@ -241,7 +266,20 @@ void enemy::setState()
 			_pokemon.state = STATE_IDLE;
 			_myTrun = false;
 		}
+	
+		if (_bossIndex >= 2)
+		{
+			_beamReady = true;
+		}
 
+		if (_beamReady && _beamIndex >=4)
+		{
+			_bossIndex = 0;
+			_beamIndex = 0;
+			_pokemon.state = STATE_IDLE;
+			_beamReady = false;
+			_myTrun = false;
+		}
 
 	//타격관련
 		if (_hurtIndex >= _pokemon.hurtImage->getMaxFrameX()) { _hurtReverse = true; }
@@ -430,6 +468,11 @@ void enemy::enemyskillSign()
 	if(_pokemoName =="단데기")
 	_pokemon.state = STATE_SKILL;
 }
+void enemy::enemyBeamSign()
+{
+	if (_pokemoName == "단데기")
+		_pokemon.state = STATE_BEAM;
+}
 void enemy::enemyHurtMotion()
 {
 	if (_pokemon.state != STATE_HURT)
@@ -440,6 +483,10 @@ void enemy::enemyHurtMotion()
 }
 void enemy::enemyMoveSign()
 {
+	if (_pokemonName == "레쿠쟈")
+	{
+		return;
+	}
 	if (_pokemoName == "푸린")
 	{
 		float volumedisTance = getDistance(_pokemon.x, _pokemon.y, _pl->getX(), _pl->getY()) / 200;

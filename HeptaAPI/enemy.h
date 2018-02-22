@@ -54,7 +54,8 @@ enum state
 	STATE_ATTACK,
 	STATE_MOVE,
 	STATE_HURT,
-	STATE_SKILL
+	STATE_SKILL,
+	STATE_BEAM
 };
 
 
@@ -80,6 +81,8 @@ private:
 	int _idleIndex;
 	int _moveIndex;
 	int _atkIndex;
+	int _bossIndex;
+	int _beamIndex;
 	int _hurtIndex;
 	int _count;
 
@@ -89,6 +92,7 @@ private:
 	bool _hurtReverse;
 	bool _moveReverse;
 	bool _isMove;
+	bool _beamReady;
 	
 	string _pokemoName;
 
@@ -137,6 +141,7 @@ public:
 	void enemyTileMove();
 	void enemyMoveSign();
 	void enemyskillSign( );
+	void enemyBeamSign();
 	void enemyASTARStart();
 
 

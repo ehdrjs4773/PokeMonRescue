@@ -24,11 +24,13 @@ HRESULT enemyManager::init()
 
 
 	
-		enemyBirth(ENEMY_CHICORITA,
-			_stage->getrespontile()[0]->getIndexX(),
-			_stage->getrespontile()[0]->getIndexY(), 1);
-		enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
+		enemyBirth(ENEMY_DANDEGI,
+			_stage->getrespontile()[1]->getIndexX(),
 			_stage->getrespontile()[1]->getIndexY(), 1);
+
+
+
+
 		enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
 			_stage->getrespontile()[3]->getIndexY() + 1, 1);
 		enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
@@ -186,13 +188,15 @@ void enemyManager::enemyMoveManager(int arrNum)
 void enemyManager::enemyAtkManager(int arrNum)
 {
 	if(_vEnemyPokemon[arrNum]->getState() != STATE_ATTACK 
-		&&_vEnemyPokemon[arrNum]->getState() != STATE_SKILL)
-	_selectSkill = RND->getInt(2);
+		&&_vEnemyPokemon[arrNum]->getState() != STATE_SKILL
+		&& _vEnemyPokemon[arrNum]->getState() != STATE_BEAM)
+	_selectSkill = RND->getInt(3);
 
 	if (_vEnemyPokemon[arrNum]->getPokemoName() != "´Üµ¥±â")
 	{
 		_selectSkill = 0;
 	}
+
 
 	switch (_selectSkill)
 	{
@@ -219,8 +223,19 @@ void enemyManager::enemyAtkManager(int arrNum)
 			SOUNDMANAGER->play("·¹ÄíÀð", 1, false);
 		}
 		_vEnemyPokemon[arrNum]->enemyskillSign();
+		break;
 
+	case 2:
+		if (_vEnemyPokemon[arrNum]->getState() != STATE_BEAM)
+		{
+			int plHP = _pl->getCurrentHP();
+			int emAtk = 20;
+			plHP -= emAtk;
+			_pl->getStatus()->setCurrentHP(plHP);
 
+			SOUNDMANAGER->play("·¹ÄíÀð", 1, false);
+		}
+		_vEnemyPokemon[arrNum]->enemyBeamSign();
 		break;
 	}
 }
@@ -425,6 +440,17 @@ void enemyManager::enemyBirth(ENEMY enemys, int tileX, int tileY, int level)
 		_electivire->init(_electivireName, _tile[tileX]->getCenterX()
 			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
 		_vEnemyPokemon.push_back(_electivire);
+		break;
+
+	case BOSS:
+		_boss  = new boss;
+		_boss->setStageMemoryAdressLink(_stage);
+		_boss->setPlayerMemoryAdressLink(_pl);
+
+		_boss->init(_bossName, _tile[tileX]->getCenterX()
+			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
+		_vEnemyPokemon.push_back(_boss);
+		break;
 		break;
 	}
 }

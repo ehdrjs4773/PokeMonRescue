@@ -351,7 +351,9 @@ void shopchildren::render()
 		sprintf(money, "%d", _player->getMoney());
 		TextOut(dc, 400, 270, money, strlen(money));
 
-
+		char str2[128];
+		sprintf(str2, "%d", _inven->getVitem().size());
+		TextOut(dc, 350, 200, str2, strlen(str2));
 
 
 		switch (_itembuy)																		//아이템 선택 햇을때!!

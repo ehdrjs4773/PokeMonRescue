@@ -42,12 +42,12 @@ void inventoryChiled::update()
 		if(_itemNum< _vitem.size())
 		{
 			_itemNum++;
-			_y += 20;
+			_y += 23;
 
 			if (_itemNum >= _vitem.size())
 			{
 				_itemNum = _vitem.size() - 1;
-				_y -= 20;
+				_y -= 23;
 			}
 
 		}
@@ -57,20 +57,21 @@ void inventoryChiled::update()
 	{
 		if (_itemNum >= 0)
 		{
-		    _y -= 20;
+		    _y -= 23;
 			_itemNum--;
 		
 
 			if (_itemNum < 0)
 			{
 				_itemNum = 0;
-				_y += 20;
+				_y += 23;
 			}
 		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 	{
+		
 		if(_vitem[_itemNum].getPotionType() == type_hpPotion)
 		{
 			_player->setCurrentHp(_player->getCurrentHP() + _vitem[_itemNum].getPotionAbillity());
@@ -82,16 +83,25 @@ void inventoryChiled::update()
 			_vitem.erase(_vitem.begin() + _itemNum);
 		}
 
-		if (_vitem[_itemNum].getPotionType() == type_loop)
+		if (SCENEMANAGER->getCurrentScene() != SCENEMANAGER->findScene("npc"))
 		{
-			_player->setPosition(WINSIZEX / 2, WINSIZEY - 50);
-			SCENEMANAGER->changeParent();
-			SCENEMANAGER->changeScene("npc");
-			SCENEMANAGER->init("npc");
-			//CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
-			_vitem.erase(_vitem.begin() + _itemNum);
+			if (_vitem[_itemNum].getPotionType() == type_loop)
+			{
+				_player->setPosition(WINSIZEX / 2, WINSIZEY - 50);
+				SCENEMANAGER->changeParent();
+				SCENEMANAGER->changeScene("npc");
+				SCENEMANAGER->init("npc");
+				//CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
+				_vitem.erase(_vitem.begin() + _itemNum);
+			}
+		}
+		if (_itemNum != 0)
+		{
+			_y -= 23;
+			_itemNum--;
 		}
 	}
+
 
 
 }
@@ -107,21 +117,21 @@ void inventoryChiled::render()
 	{
 		char str[128];
 		sprintf(str, "%d", _vitem[i].getPrice());
-		TextOut(dc, CAMERAMANAGER->getX() + 250, CAMERAMANAGER->getY() + 70 + i * 20, str, strlen(str));
-		TextOut(dc, CAMERAMANAGER->getX() +100, CAMERAMANAGER->getY() + 70 + i * 20, _vitem[i].getName().c_str(), strlen(_vitem[i].getName().c_str()));
+		TextOut(dc, CAMERAMANAGER->getX() + 250, CAMERAMANAGER->getY() + 70 + i * 23, str, strlen(str));
+		TextOut(dc, CAMERAMANAGER->getX() +100, CAMERAMANAGER->getY() + 70 + i * 23, _vitem[i].getName().c_str(), strlen(_vitem[i].getName().c_str()));
 		
-		char str1[128];
-		sprintf(str1, "%d", _itemNum);
-		TextOut(dc, CAMERAMANAGER->getX() + WINSIZEX / 2, CAMERAMANAGER->getY() + WINSIZEY / 2, str1, strlen(str1));
-		char str2[128];
-		sprintf(str2, "%d", _vitem.size());
-		TextOut(dc, CAMERAMANAGER->getX() + WINSIZEX / 2 + 50, CAMERAMANAGER->getY() + WINSIZEY / 2 +50 , str2, strlen(str2));
+		//char str1[128];
+		//sprintf(str1, "%d", _itemNum);
+		//TextOut(dc, CAMERAMANAGER->getX() + WINSIZEX / 2, CAMERAMANAGER->getY() + WINSIZEY / 2, str1, strlen(str1));
+		//char str2[128];
+		//sprintf(str2, "%d", _vitem.size());
+		//TextOut(dc, CAMERAMANAGER->getX() + WINSIZEX / 2 + 50, CAMERAMANAGER->getY() + WINSIZEY / 2 +50 , str2, strlen(str2));
 	}
 
 
 	if(_vitem.size() > 0)
 	{
-		IMAGEMANAGER->findImage("point")->render(dc,CAMERAMANAGER->getX() + _x, CAMERAMANAGER->getY()+ _y);
+		IMAGEMANAGER->findImage("point")->render(dc,CAMERAMANAGER->getX() + _x, CAMERAMANAGER->getY() + _y);
 	}
 }
 

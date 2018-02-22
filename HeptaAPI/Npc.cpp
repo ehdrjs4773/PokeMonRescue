@@ -10,7 +10,6 @@ Npc::Npc()
 	_town.inout = false;
 	_house = true;
 
-
 }
 
 
@@ -36,9 +35,6 @@ HRESULT Npc::init()
 	_npc2.y = WINSIZEY - 135;
 	_npc2.rc = RectMakeCenter(_npc2.x, _npc2.y, _npc2.image->getWidth(), _npc2.image->getHeight());
 	_npc2.collsionrc = RectMakeCenter(_npc2.x, _npc2.y + 10, _npc2.image->getWidth(), 15);
-
-
-	_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
 
 	//´Ù ‰ç¾î¿ä Âô±ß ><*
 

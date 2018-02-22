@@ -7,6 +7,7 @@
 #include "UI.h"
 #include "pokeinfo.h"
 #include "battleScene.h"
+#include "Ending.h"
 
 
 
@@ -71,6 +72,8 @@ void oPeningMovie::update()
 		SCENEMANAGER->addChildScene("npc", "inventory", new inventoryChiled);
 		SCENEMANAGER->addChildScene("npc", "shopchiled", new shopchildren);
 		SCENEMANAGER->addChildScene("npc", "pokeinfo", new pokeinfo);
+		//ending
+		SCENEMANAGER->addScene("ending", new Ending);
 
 		map<string, gameNode*>::iterator tempInven = SCENEMANAGER->findScene("npc")->children.find("inventory");
 		map<string, gameNode*>::iterator tempIter = SCENEMANAGER->findScene("npc")->children.find("shopchiled");

@@ -243,6 +243,9 @@
     <ClInclude Include="boss.h">
       <Filter>playGround\이준우\적객체모집</Filter>
     </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>playGround\한재윤</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -430,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="playGround+soundInit.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>playGround\한재윤</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

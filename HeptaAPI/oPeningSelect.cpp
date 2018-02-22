@@ -100,7 +100,7 @@ void oPeningSelect::update(void)
 	switch (_Opening)
 	{
 	case Opening_One:
-		if (DIALOGUE->getCurrentLine() >= 15)
+		if (DIALOGUE->getCurrentLine() >= 24)
 		{
 
 				_Opening = Opening_Two;

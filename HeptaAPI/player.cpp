@@ -52,58 +52,58 @@ HRESULT player::init(string charName)
 	string tempSkillName;
 	switch (_playerStatus->getElement())
 	{
-	case SKILL_ELEMENT_NORMAL:
+	case ELEMENT_NORMAL:
 		tempSkillName = "노말";
 		break;
-	case SKILL_ELEMENT_FIRE:
+	case ELEMENT_FIRE:
 		tempSkillName = "불";
 		break;
-	case SKILL_ELEMENT_WATER:
+	case ELEMENT_WATER:
 		tempSkillName = "물";
 		break;
-	case SKILL_ELEMENT_ELECTRIC:
+	case ELEMENT_ELECTRIC:
 		tempSkillName = "전기";
 		break;
-	case SKILL_ELEMENT_PLANT:
+	case ELEMENT_PLANT:
 		tempSkillName = "풀";
 		break;
-	case SKILL_ELEMENT_ICE:
+	case ELEMENT_ICE:
 		tempSkillName = "얼음";
 		break;
-	case SKILL_ELEMENT_FIGHT:
+	case ELEMENT_FIGHT:
 		tempSkillName = "격투";
 		break;
-	case SKILL_ELEMENT_POISON:
+	case ELEMENT_POISON:
 		tempSkillName = "독";
 		break;
-	case SKILL_ELEMENT_EARTH:
+	case ELEMENT_EARTH:
 		tempSkillName = "땅";
 		break;
-	case SKILL_ELEMENT_WING:
+	case ELEMENT_WING:
 		tempSkillName = "비행";
 		break;
-	case SKILL_ELEMENT_ESPER:
+	case ELEMENT_ESPER:
 		tempSkillName = "에스퍼";
 		break;
-	case SKILL_ELEMENT_INSECT:
+	case ELEMENT_INSECT:
 		tempSkillName = "곤충";
 		break;
-	case SKILL_ELEMENT_ROCK:
+	case ELEMENT_ROCK:
 		tempSkillName = "바위";
 		break;
-	case SKILL_ELEMENT_GHOST:
+	case ELEMENT_GHOST:
 		tempSkillName = "고스트";
 		break;
-	case SKILL_ELEMENT_DRAGON:
+	case ELEMENT_DRAGON:
 		tempSkillName = "드래곤";
 		break;
-	case SKILL_ELEMENT_DARK:
+	case ELEMENT_DARK:
 		tempSkillName = "악";
 		break;
-	case SKILL_ELEMENT_STEEL:
+	case ELEMENT_STEEL:
 		tempSkillName = "강철";
 		break;
-	case SKILL_ELEMENT_END:
+	case ELEMENT_END:
 		break;
 	default:
 		break;

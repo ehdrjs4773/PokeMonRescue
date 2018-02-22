@@ -45,6 +45,8 @@ HRESULT Npc::init()
 	_rc4 = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2 - 37, 30, 30);
 	_house = true;
 
+	_issaveload = false;
+
 	CAMERAMANAGER->init(480, 360, WINSIZEX, WINSIZEY);
 	return S_OK;
 }
@@ -59,62 +61,74 @@ void Npc::release()
 void Npc::update()
 {
 	_player->update();
-	_player->townMove();
-	RECT temp;
-	if (_town.inout)
+	if (_issaveload)
 	{
-		if (IntersectRect(&temp, &_npc1.collsionrc, &_player->getRect()))
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
 		{
-			if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+			map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
+			((inventoryChiled*)tmepIter->second)->save();
+			_issaveload = false;
+		}
+		if (KEYMANAGER->isOnceKeyDown(PLAYER_CANCLE_KEY))
+		{
+			remove(".//save.load");
+			_issaveload = false;
+		}
+	}
+	else
+	{
+		_player->townMove();
+		RECT temp;
+		if (_town.inout)
+		{
+			if (IntersectRect(&temp, &_npc1.collsionrc, &_player->getRect()))
 			{
-				SCENEMANAGER->changeChild("shopchiled");
-				SCENEMANAGER->init("npc");
+				if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+				{
+					SCENEMANAGER->changeChild("shopchiled");
+					SCENEMANAGER->init("npc");
+				}
 			}
 
-		}
-
-		if (IntersectRect(&temp, &_rc, &_player->getRect()))
-		{
-			_town.inout = false;
-			_house = true;
-			_player->setPosition(_rc2.left + 25, WINSIZEY / 2 + 100);
-
-		}
-	}
-
-
-	if (!_town.inout)
-	{
-		if (IntersectRect(&temp, &_rc2, &_player->getRect()))
-		{
-			_town.inout = true;
-			_house = false;
-			_player->setPosition(_rc.left + 15, WINSIZEY / 2 + 45);
-		}
-
-		if (IntersectRect(&temp, &_rc4, &_player->getRect()))
-		{
-			if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+			if (IntersectRect(&temp, &_rc, &_player->getRect()))
 			{
-				map<string, gameNode*>::iterator tmepIter = SCENEMANAGER->findScene("npc")->children.find("inventory");
-				((inventoryChiled*)tmepIter->second)->save();
+				_town.inout = false;
+				_house = true;
+				_player->setPosition(_rc2.left + 25, WINSIZEY / 2 + 100);
+
 			}
 		}
-	}
 
+		if (!_town.inout)
+		{
+			if (IntersectRect(&temp, &_rc2, &_player->getRect()))
+			{
+				_town.inout = true;
+				_house = false;
+				_player->setPosition(_rc.left + 15, WINSIZEY / 2 + 45);
+			}
 
-	if (KEYMANAGER->isOnceKeyDown('Q'))
-	{
-		SCENEMANAGER->changeChild("ui");
-		SCENEMANAGER->init("npc");
-	}
+			if (IntersectRect(&temp, &_rc4, &_player->getRect()))
+			{
+				if (KEYMANAGER->isOnceKeyDown(PLAYER_SELECT_KEY))
+				{
+					_issaveload = true;
+				}
+			}
+		}
 
-	if (IntersectRect(&temp, &_rc3, &_player->getRect()))
-	{
-		SCENEMANAGER->changeScene("Stage1");
-		SCENEMANAGER->init("Stage1");
+		if (KEYMANAGER->isOnceKeyDown('Q'))
+		{
+			SCENEMANAGER->changeChild("ui");
+			SCENEMANAGER->init("npc");
+		}
+
+		if (IntersectRect(&temp, &_rc3, &_player->getRect()))
+		{
+			SCENEMANAGER->changeScene("Stage1");
+			SCENEMANAGER->init("Stage1");
+		}
 	}
-	
 }
 
 
@@ -136,12 +150,21 @@ void Npc::render()
 
 	if (!_town.inout)
 	{
-		IMAGEMANAGER->findImage("alphamap")->alphaRender(CAMERAMANAGER->getMemDC(),	0, 0, 255);
+		IMAGEMANAGER->findImage("alphamap")->alphaRender(dc, 0, 0, 255);
 		IMAGEMANAGER->findImage("saveTown")->render(dc, WINSIZEX / 2 - IMAGEMANAGER->findImage("saveTown")->getWidth() / 2, WINSIZEY / 2 - IMAGEMANAGER->findImage("saveTown")->getHeight() / 2);
 		Rectangle(dc, _rc2.left, _rc2.top, _rc2.right, _rc2.bottom);
 	}
 	Rectangle(dc, _rc3.left, _rc3.top, _rc3.right, _rc3.bottom);
 	Rectangle(dc, _rc4.left, _rc4.top, _rc4.right, _rc4.bottom);
 	_player->render();
+	if (_issaveload)
+	{
+		SetBkMode(dc, 0);
+		IMAGEMANAGER->findImage("대화창")->render(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight());
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 30, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 20,
+			"세이브를 하려면 'X'", strlen("세이브를 하려면 'X'"));
+		TextOut(dc, (WINSIZEX - IMAGEMANAGER->findImage("대화창")->getWidth()) / 2 + 30, WINSIZEY - IMAGEMANAGER->findImage("대화창")->getHeight() + 50,
+				"세이브를 지우려면 'C'", strlen("세이브를 지우려면 'C'"));
+	}
 }
 

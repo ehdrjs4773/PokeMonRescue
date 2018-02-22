@@ -1,6 +1,11 @@
-#include "enemyManager.h"
-void enemyManager::soundInit()
+#include "stdafx.h"
+#include "playGround.h"
+
+
+
+void playGround::soundInit(void)
 {
+
 	SOUNDMANAGER->addSound("Çª¸°ÀÇ³ë·¡", ".//music//purin.mp3", true, true);
 	SOUNDMANAGER->addSound("·¹ÄíÀð", ".//music//lekujya.mp3", false, false);
 
@@ -9,5 +14,4 @@ void enemyManager::soundInit()
 
 	SOUNDMANAGER->addSound("Æø¹ßÀ½", ".//music//explosion.mp3", false, false);
 	SOUNDMANAGER->addSound("°ø°Ý", ".//music//hit.wav", false, false);
-
 }

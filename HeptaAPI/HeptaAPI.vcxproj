@@ -139,6 +139,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="aStar.cpp" />
     <ClCompile Include="battleScene.cpp" />
+    <ClCompile Include="boss.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="collision.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="aStar.h" />
     <ClInclude Include="battleScene.h" />
+    <ClInclude Include="boss.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="collision.h" />

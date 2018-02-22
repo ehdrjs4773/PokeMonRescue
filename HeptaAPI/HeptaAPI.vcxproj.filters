@@ -240,6 +240,9 @@
     <ClInclude Include="oPeningSelect.h">
       <Filter>playGround\한재윤</Filter>
     </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>playGround\이준우\적객체모집</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winMain.cpp">
@@ -424,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="enemyManager+soundInit.cpp">
       <Filter>playGround\이준우</Filter>
+    </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>playGround\이준우\적객체모집</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

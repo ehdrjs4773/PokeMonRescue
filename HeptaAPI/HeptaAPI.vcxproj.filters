@@ -428,5 +428,8 @@
     <ClCompile Include="boss.cpp">
       <Filter>playGround\이준우\적객체모집</Filter>
     </ClCompile>
+    <ClCompile Include="playGround+soundInit.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

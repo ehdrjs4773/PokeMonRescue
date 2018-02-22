@@ -3,12 +3,16 @@
 #include <Vfw.h>
 #pragma comment(lib,"vfw32.lib")
 
+class player;
+
 class oPeningMovie : public gameNode
 {
 private:
 	
 	HDC _hdc;
 	HWND hWndAVI = 0;
+
+	player* _player;
 
 public:
 	oPeningMovie();

@@ -176,6 +176,7 @@
     <ClCompile Include="playerPartner+valueInit.cpp" />
     <ClCompile Include="playerPartner.cpp" />
     <ClCompile Include="playGround+imageInitialization.cpp" />
+    <ClCompile Include="playGround+soundInit.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="pokeinfo.cpp" />
     <ClCompile Include="pokemon.cpp" />

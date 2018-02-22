@@ -27,6 +27,7 @@ HRESULT oPeningSelect::init(void)
 		return S_OK;
 	}
 	SOUNDMANAGER->play("¿ÀÇÁ´×", 1, true);
+
 	CAMERAMANAGER->init(WINSIZEX, WINSIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
 
 	IMAGEMANAGER->addImage("±Û¹è°æ", ".\\bmps\\oPeningSelect\\openingDialogue.bmp", 320, 58, false, true, MAGENTA);
@@ -35,7 +36,7 @@ HRESULT oPeningSelect::init(void)
 	IMAGEMANAGER->addImage("select", ".\\bmps\\oPeningSelect\\selectImg.bmp", 15, 15, false, true, MAGENTA);
 
 	_startingMonster[0] = "¸®ÀÚ¸ù";
-	_startingMonster[1] = "¸®ÀÚ¸ù";
+	_startingMonster[1] = "¹Â";
 	_startingMonster[2] = "Áö¶óÄ¡";
 	_startingMonster[3] = "¸®ÀÚ¸ù";
 	_startingMonster[4] = "¸®ÀÚ¸ù";
@@ -116,7 +117,7 @@ void oPeningSelect::update(void)
 		
 		break;
 	case Opening_Three:
-		if (DIALOGUE->getCurrentLine() == 34)
+		if (DIALOGUE->getCurrentLine() == 30)
 		{
 			_Opening = Opening_Four;
 		}
@@ -199,6 +200,8 @@ void oPeningSelect::keyControl(void)
 		case Opening_Four:
 
 			_player->init(_startingMonster[_selectNum].c_str());
+			SCENEMANAGER->init("Stage1");
+			_player->setPosition(WINSIZEX / 2, WINSIZEY / 2);
 			if (SOUNDMANAGER->isPlaySound("¿ÀÇÁ´×"))
 			{
 				SOUNDMANAGER->stop("¿ÀÇÁ´×");

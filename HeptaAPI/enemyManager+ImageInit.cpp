@@ -182,7 +182,8 @@ void enemyManager::imageInit()
 		1, true, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("Beam", ".//enemyImage//HYPERBEAM.bmp", 120, 480, 1,
 		4, true, true, RGB(255, 0, 255));
-
+	IMAGEMANAGER->addFrameImage("Ring", ".//enemyImage//Ring.bmp", 960, 120, 8,
+		1, true, true, RGB(255, 0, 255));
 	//에레키블
 
 

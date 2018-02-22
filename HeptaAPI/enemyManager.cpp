@@ -23,14 +23,10 @@ HRESULT enemyManager::init()
 	imageInit();
 
 
-	
-		enemyBirth(ENEMY_DANDEGI,
-			_stage->getrespontile()[1]->getIndexX(),
-			_stage->getrespontile()[1]->getIndexY(), 1);
 
 
-
-
+	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[1]->getIndexX(),
+		_stage->getrespontile()[1]->getIndexY() + 1, 1);
 		enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
 			_stage->getrespontile()[3]->getIndexY() + 1, 1);
 		enemyBirth(ENEMY_PURIN, _stage->getrespontile()[4]->getIndexX(),
@@ -72,12 +68,17 @@ void enemyManager::update()
 	}
 	else if(_mapNum == 0 && _floorNum == 1)
 	{
+		if (SOUNDMANAGER->isPlaySound("푸린의노래"))
+			SOUNDMANAGER->stop("푸린의노래");
 		_vEnemyPokemon.clear();
 	}
 	else if (_mapNum ==3)
 	{ 
-		if(_vEnemyPokemon.size()==0)
-		enemyBirth(ENEMY_DANDEGI, _pl->getPlayerTileIndexX() ,_pl->getPlayerTileIndexY()-5, 1);
+		if (_vEnemyPokemon.size() == 0)
+		{
+			enemyBirth(ENEMY_DANDEGI, _pl->getPlayerTileIndexX(), _pl->getPlayerTileIndexY() - 5, RND->getInt(99));
+			SOUNDMANAGER->play("보스테마", 0.75);
+		}
 
 		for (int i = 0; i < _vEnemyPokemon.size(); i++)
 		{
@@ -442,16 +443,6 @@ void enemyManager::enemyBirth(ENEMY enemys, int tileX, int tileY, int level)
 		_vEnemyPokemon.push_back(_electivire);
 		break;
 
-	case BOSS:
-		_boss  = new boss;
-		_boss->setStageMemoryAdressLink(_stage);
-		_boss->setPlayerMemoryAdressLink(_pl);
-
-		_boss->init(_bossName, _tile[tileX]->getCenterX()
-			, _tile[_stage->gettileCountX() * tileY]->getCenterY(), level);
-		_vEnemyPokemon.push_back(_boss);
-		break;
-		break;
 	}
 }
 
@@ -464,14 +455,24 @@ void enemyManager::enemyDead()
 		//언사인드 인트라 체력이 0밑으로가면 오버플로우로 제일 윗부분으로 가서 그냥 이렇게 해놨음 ㅎ
 		if (_vEnemyPokemon[i]->getCurrentHP() >= 60000 || _vEnemyPokemon[i]->getCurrentHP() <= 0)
 		{
+			_pl->setAddMoney(30);
+			_pl->getStatus()->expPlus(20);
+
 			if (_vEnemyPokemon[i]->getName() == "푸린")
 			{
 				if (SOUNDMANAGER->isPlaySound("푸린의노래"))
 					SOUNDMANAGER->stop("푸린의노래");
 
 			}
+			if (_vEnemyPokemon[i]->getName() == "단데기")
+			{
+				SCENEMANAGER->init("ending");
+				SCENEMANAGER->changeScene("ending");
+			}
 			_vEnemyPokemon.erase(_vEnemyPokemon.begin() + i);
 		}
+
+
 	}
 }
 

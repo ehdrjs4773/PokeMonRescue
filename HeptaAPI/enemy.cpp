@@ -65,8 +65,14 @@ HRESULT enemy::init(tagImageName PokemonName, float x, float y,  int level)
 	_moveIndex	= 0;
 	_atkIndex	= 0;
 	_hurtIndex	= 0;
+	
+	
 	_bossIndex = 0;
 	_beamIndex = 0;
+	_ringIndex = 0;
+
+
+
 	_distance	= 0;
 	_target		= 0;
 	_count		= 0;
@@ -147,6 +153,8 @@ void enemy::render()
 		break;
 	case STATE_BEAM:
 		IMAGEMANAGER->findImage("HyperBeam")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - 48,
+			_pokemon.y - 60, _bossIndex, 0);
+		IMAGEMANAGER->findImage("Ring")->frameRender(CAMERAMANAGER->getMemDC(), _pokemon.x - 48,
 			_pokemon.y - 60, _bossIndex, 0);
 		if (_beamReady)
 		{
@@ -231,10 +239,12 @@ void enemy::setState()
 				if (!_beamReady)
 				{
 					_bossIndex++;
+					_ringIndex++;
 				}
 				if (_beamReady)
 				{
 					_beamIndex++;
+					_ringIndex++;
 				}
 
 			_idleIndex = 0;
@@ -276,6 +286,7 @@ void enemy::setState()
 		{
 			_bossIndex = 0;
 			_beamIndex = 0;
+			_ringIndex = 0;
 			_pokemon.state = STATE_IDLE;
 			_beamReady = false;
 			_myTrun = false;
@@ -458,10 +469,15 @@ void enemy::enemyTileMove()
 	_pokemon.speed = _tempSpeed;
 }
 
+
+
+
 void enemy::enemyAttackMotion()
 {
 	_pokemon.state = STATE_ATTACK;
 }
+
+
 
 void enemy::enemyskillSign()
 {
@@ -481,6 +497,10 @@ void enemy::enemyHurtMotion()
 	}
 	_pokemon.state = STATE_HURT;
 }
+
+
+
+
 void enemy::enemyMoveSign()
 {
 	if (_pokemonName == "·¹ÄíÀð")

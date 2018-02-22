@@ -83,6 +83,7 @@ private:
 	int _atkIndex;
 	int _bossIndex;
 	int _beamIndex;
+	int _ringIndex;
 	int _hurtIndex;
 	int _count;
 

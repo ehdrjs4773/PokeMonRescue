@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include "enemy.h"
-#include "boss.h"
 #include "gameNode.h"
 
 
@@ -44,7 +43,7 @@ private: //전방선언 클래스 선언구간
 	Stage* _stage;
 	player* _pl;
 	battleScene* _bs;
-	boss* _boss;
+
 private://적객체 관련 생산
 
 	//적의 객체 틀 생성

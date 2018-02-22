@@ -79,9 +79,6 @@
     <Filter Include="playGround\정경훈">
       <UniqueIdentifier>{f280135c-5722-4046-8f9f-403bd44fc925}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\이준우\적객체모집">
-      <UniqueIdentifier>{7940f756-1577-4a7e-b846-348f38d484de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\이정민\파트너">
       <UniqueIdentifier>{7a9129f1-298d-4078-be4b-bbffc0c0eb37}</UniqueIdentifier>
     </Filter>
@@ -239,9 +236,6 @@
     </ClInclude>
     <ClInclude Include="oPeningSelect.h">
       <Filter>playGround\한재윤</Filter>
-    </ClInclude>
-    <ClInclude Include="boss.h">
-      <Filter>playGround\이준우\적객체모집</Filter>
     </ClInclude>
     <ClInclude Include="Ending.h">
       <Filter>playGround\한재윤</Filter>
@@ -427,9 +421,6 @@
     </ClCompile>
     <ClCompile Include="oPeningSelect.cpp">
       <Filter>playGround\한재윤</Filter>
-    </ClCompile>
-    <ClCompile Include="boss.cpp">
-      <Filter>playGround\이준우\적객체모집</Filter>
     </ClCompile>
     <ClCompile Include="playGround+soundInit.cpp">
       <Filter>playGround</Filter>

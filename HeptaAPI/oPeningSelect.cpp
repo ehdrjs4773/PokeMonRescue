@@ -26,7 +26,7 @@ HRESULT oPeningSelect::init(void)
 		SCENEMANAGER->init("npc");
 		return S_OK;
 	}
-	SOUNDMANAGER->play("¿ÀÇÁ´×", 1, true);
+	SOUNDMANAGER->play("¿ÀÇÁ´×", 0.75, true);
 
 	CAMERAMANAGER->init(WINSIZEX, WINSIZEY, WINSIZEX, WINSIZEY, 0, 0, 1);
 

@@ -425,9 +425,6 @@
     <ClCompile Include="oPeningSelect.cpp">
       <Filter>playGround\한재윤</Filter>
     </ClCompile>
-    <ClCompile Include="enemyManager+soundInit.cpp">
-      <Filter>playGround\이준우</Filter>
-    </ClCompile>
     <ClCompile Include="boss.cpp">
       <Filter>playGround\이준우\적객체모집</Filter>
     </ClCompile>

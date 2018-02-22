@@ -20,7 +20,6 @@ enemyManager::~enemyManager()
 
 HRESULT enemyManager::init()
 {
-	soundInit();
 	imageInit();
 
 

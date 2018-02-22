@@ -78,20 +78,20 @@ HRESULT soundManager::init()
 
 void soundManager::release()
 {
-	if (*_channel != NULL || *_sound != NULL)
-	{
-		for (int i = 0; i < TOTALSOUNDBUFFER; ++i)
-		{
-			if (_channel != NULL)
-			{
-				if (_channel[i])_channel[i]->stop();
-			}
-			if (_sound != NULL)
-			{
-				if (_sound[i] != NULL) _sound[i]->release();
-			}
-		}
-	}
+	//if (*_channel != NULL || *_sound != NULL)
+	//{
+	//	for (int i = 0; i < TOTALSOUNDBUFFER; ++i)
+	//	{
+	//		if (_channel != NULL)
+	//		{
+	//			if (_channel[i])_channel[i]->stop();
+	//		}
+	//		if (_sound != NULL)
+	//		{
+	//			if (_sound[i] != NULL) _sound[i]->release();
+	//		}
+	//	}
+	//}
 
 	//메모리 지워준다
 	//배열이므로

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "enemy.h"
+
 #include "gameNode.h"
 
 
@@ -16,7 +17,8 @@ enum ENEMY
 	ENEMY_RUKARIO,
 	ENEMY_MANKEY,
 	ENEMY_TANGURI,
-	ENEMY_ELECTIVIRE
+	ENEMY_ELECTIVIRE,
+	BOSS
 };
 
 
@@ -33,13 +35,15 @@ enum ENEMYACTION
 class tile;
 class Stage;
 class player;
+class battleScene;
+
 class enemyManager : public gameNode
 {
 private: //전방선언 클래스 선언구간
 	vector<tile*> _tile;
 	Stage* _stage;
 	player* _pl;
-
+	battleScene* _bs;
 private://적객체 관련 생산
 
 	//적의 객체 틀 생성
@@ -81,6 +85,12 @@ private:
 	int _tileCheckY;
 	int _selectSkill;
 
+	int* _pMapNum;
+	int _mapNum;
+	
+	int* _pFloorNum;
+	int _floorNum;
+	
 	int _r;
 	bool _canAtk;
 
@@ -108,6 +118,10 @@ public:
 	inline void setTileMemoryAdressLink(vector<tile*> tiles) { _tile = tiles; }
 	inline void setStageMemoryAdressLink(Stage* stage) { _stage = stage; }
 	inline void setPlayerMemoryAdressLink(player* pl) { _pl = pl; }
+	inline void setBattleSceneAdressLink(battleScene* bs) { _bs = bs; }
+
+	inline void getMapNum(int* mapNum) { _pMapNum = mapNum ; }
+	inline void getFloorNum(int* floorNum) { _pFloorNum = floorNum; }
 
 
 	inline ENEMYACTION getEnemyAction() { return _enemyAction; }

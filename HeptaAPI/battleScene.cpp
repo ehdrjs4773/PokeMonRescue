@@ -35,6 +35,9 @@ HRESULT battleScene::init()
 	_em->setStageMemoryAdressLink(_nowStage);
 	_em->setTileMemoryAdressLink(_nowStage->getTileAdress());
 	_em->setPlayerMemoryAdressLink(_player);
+	_em->getFloorNum(&_floor);
+	_em->getMapNum(&DungoenNum);
+
 
 	_em->init();
 
@@ -59,6 +62,9 @@ void battleScene::release()
 
 void battleScene::update()				//옵데이트!~~~
 {
+	_em->getFloorNum(&_floor);
+	_em->getMapNum(&DungoenNum);
+
 	_alphaMap += 5;
 	if (_alphaMap > 255)_alphaMap = 255; _player->dungeonMove();
 	if (_alphaMap == 255)//알파로 255가된 화면이 나오면 움직일수있뜸!!

@@ -25,6 +25,8 @@ HRESULT enemyManager::init()
 	enemyBirth(ENEMY_CHICORITA, 
 	_stage->getrespontile()[0]->getIndexX(),
 	_stage->getrespontile()[0]->getIndexY(),	1);
+
+
 	enemyBirth(ENEMY_DANDEGI, _stage->getrespontile()[1]->getIndexX(),
 		_stage->getrespontile()[1]->getIndexY(), 1);
 	enemyBirth(ENEMY_POLYGON, _stage->getrespontile()[3]->getIndexX(),
@@ -40,8 +42,13 @@ HRESULT enemyManager::init()
 	enemyBirth(ENEMY_TANGURI, _stage->getrespontile()[8]->getIndexX(),
 		_stage->getrespontile()[8]->getIndexY(), 		1);
 
+
+	enemyBirth(BOSS, _stage->getrespontile()[_stage->getrespontile().size()-1]->getIndexX(),
+		_stage->getrespontile()[8]->getIndexY(), 1);
+
 	_selectSkill = 0;
 	_enemyTurn = false;
+
 	return S_OK;
 }
 void enemyManager::release()
@@ -50,23 +57,31 @@ void enemyManager::release()
 }
 void enemyManager::update()	
 {
-	for (int i = 0; i < _vEnemyPokemon.size(); i++)
-	{
-		_vEnemyPokemon[i]->update();
-	}
-	_tileCheckX = _pl->getPlayerTileIndexX();
-	_tileCheckY = _pl->getPlayerTileIndexY();
-	enemyDead();
 
+	_mapNum = *_pMapNum;
+	_floorNum = *_pFloorNum;
+
+	if (_mapNum == 0 && _floorNum == 0)
+	{
+		for (int i = 0; i < _vEnemyPokemon.size(); i++)
+		{
+			_vEnemyPokemon[i]->update();
+		}
+		_tileCheckX = _pl->getPlayerTileIndexX();
+		_tileCheckY = _pl->getPlayerTileIndexY();
+		enemyDead();
+	}
+	
 }
 void enemyManager::render()	
 {
-
-	for (int i = 0; i < _vEnemyPokemon.size(); i++)
+	if (_mapNum == 0 && _floorNum == 0)
 	{
-		_vEnemyPokemon[i]->render();
+		for (int i = 0; i < _vEnemyPokemon.size(); i++)
+		{
+			_vEnemyPokemon[i]->render();
+		}
 	}
-	
 }
 
 
@@ -413,7 +428,6 @@ void enemyManager::enemyDead()
 			{
 				if (SOUNDMANAGER->isPlaySound("Çª¸°ÀÇ³ë·¡"))
 					SOUNDMANAGER->stop("Çª¸°ÀÇ³ë·¡");
-
 			}
 			_vEnemyPokemon.erase(_vEnemyPokemon.begin() + i);
 		}

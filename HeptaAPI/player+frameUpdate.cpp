@@ -1437,8 +1437,10 @@ void player::FrameUpdate()
 				_player.state = PLAYER_IDLE;
 				_player.direction = PLAYER_BOTTOM;
 				_isDie = false;
+				setPosition(WINSIZEX / 2 - 50, 325);
 				SCENEMANAGER->changeScene("npc");
 				SCENEMANAGER->init("npc");
+				
 			}
 			_dieCount = 0;
 			

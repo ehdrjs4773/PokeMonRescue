@@ -36,8 +36,9 @@ HRESULT player::init(string charName)
 	_player.townSpeed = 3.0f;
 	_player.money = 1000;
 	_isDie = false;
-	_tileCheakMode = false;
-	
+	_tileCheakMode = true;
+
+	//이미지 키값
 	tempNameIdle = charName + "_idle";
 	tempNameMove = charName + "_move";
 	tempNameAttack = charName + "_attack";
@@ -45,10 +46,12 @@ HRESULT player::init(string charName)
 	tempNameHurt = charName + "_hurt";
 	tempNameDie = charName + "_die";
 
+	//포켓몬 정보 받아옴
 	_playerStatus = new pokemon;
-	_playerStatus->pokemonStatus(charName, INT_MAX);
-	_player.currentHp = _playerStatus->getCurrentHP();
-
+	//							키값 , 레벨설정
+	_playerStatus->pokemonStatus(charName, 1);
+	
+	//포켓몬 속성에 맞는 스킬, 키값 대입
 	skills* temp;
 	string tempSkillName;
 	switch (_playerStatus->getElement())
@@ -110,6 +113,7 @@ HRESULT player::init(string charName)
 		break;
 	}
 	
+	//스킬추가
 	for (int i = 0; i < 4; ++i)
 	{
 		char str[32];
@@ -118,6 +122,8 @@ HRESULT player::init(string charName)
 		temp->init(str);
 		_playerStatus->addSkill(temp);
 	}
+
+	_player.currentHp = _playerStatus->getCurrentHP();
 
 	return S_OK;
 }
@@ -148,18 +154,21 @@ void player::render()
 	int x = CAMERAMANAGER->getX();
 	int y = CAMERAMANAGER->getY();
 
-	SetBkMode(hdc, TRANSPARENT);
-	char str[128];
-	sprintf_s(str, " 돈 : %d ", _player.money);
-	TextOut(hdc, x + 100, y + 50, str, strlen(str));
-	char str2[128];
-	sprintf_s(str2, " _player.currentHp 현재 값 : %d ", _player.currentHp);
-	TextOut(hdc, x + 100, y + 75, str2, strlen(str2));
-	char str3[128];
-	sprintf_s(str3, " _playerStatus->getCurrentHP() 현재 값 : %d ", _playerStatus->getCurrentHP());
-	TextOut(hdc, x + 100, y + 100, str3, strlen(str3));
+	//SetBkMode(hdc, TRANSPARENT);
+	//char str[128];
+	//sprintf_s(str, " 현재 소지금 : %d ", _player.money);
+	//TextOut(hdc, x + 150, y + 50, str, strlen(str));
+	//char str2[128];
+	//sprintf_s(str2, " _player.currentHp 현재 값 : %d ", _player.currentHp);
+	//TextOut(hdc, x + 100, y + 75, str2, strlen(str2));
+	//char str3[128];
+	//sprintf_s(str3, " _playerStatus->getCurrentHP() 현재 값 : %d ", _playerStatus->getCurrentHP());
+	//TextOut(hdc, x + 100, y + 100, str3, strlen(str3));
 
-	//Rectangle(getMemDC(), _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	if (_isDebug)
+	{
+		Rectangle(hdc, _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
+	}
 	draw();
 	EFFECTMANAGER->render(hdc);
 }
@@ -822,14 +831,14 @@ void player::dungeonMove()
 void player::setPosition(float startX, float startY)
 {
 	//좌표
-	_player.x = startX /** 24 + 12*/;
-	_player.y = startY /** 24 + 12*/;
+	_player.x = startX;
+	_player.y = startY;
 
 	//몇번째 타일 x, y에 있나
 	_player.idx = _player.x / 24;
 	_player.idy = _player.y / 24;
 
-	//몇번째 타일에 있냐
+	//몇번째 타일에 있나
 	_player.tileIndex = _player.idx + (_player.idy * _stage->gettileCountX());
 
 	//실제 사용될 렉트

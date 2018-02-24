@@ -455,7 +455,7 @@ void enemyManager::enemyDead()
 		//언사인드 인트라 체력이 0밑으로가면 오버플로우로 제일 윗부분으로 가서 그냥 이렇게 해놨음 ㅎ
 		if (_vEnemyPokemon[i]->getCurrentHP() >= 60000 || _vEnemyPokemon[i]->getCurrentHP() <= 0)
 		{
-			_pl->setAddMoney(30);
+			_pl->setAddMoney(_pl->getMoney() + 30);
 			_pl->getStatus()->expPlus(20);
 
 			if (_vEnemyPokemon[i]->getName() == "푸린")

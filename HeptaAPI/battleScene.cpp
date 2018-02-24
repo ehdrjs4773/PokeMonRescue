@@ -65,8 +65,8 @@ void battleScene::update()				//옵데이트!~~~
 	_em->getFloorNum(&_floor);
 	_em->getMapNum(&DungoenNum);
 
-	_alphaMap += 5;
-	if (_alphaMap > 255)_alphaMap = 255; _player->dungeonMove();
+	//_alphaMap += 5;
+	//if (_alphaMap > 255)_alphaMap = 255; _player->dungeonMove();
 	if (_alphaMap == 255)//알파로 255가된 화면이 나오면 움직일수있뜸!!
 	{
 	
@@ -143,6 +143,7 @@ void battleScene::update()				//옵데이트!~~~
 	}
 	else
 	{
+		_battleTrun = playerTurn;
 		_alphaMap += 5;
 		if (_alphaMap > 255)_alphaMap = 255;
 	}

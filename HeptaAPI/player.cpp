@@ -49,7 +49,7 @@ HRESULT player::init(string charName)
 	//포켓몬 정보 받아옴
 	_playerStatus = new pokemon;
 	//							키값 , 레벨설정
-	_playerStatus->pokemonStatus(charName, 1);
+	_playerStatus->pokemonStatus(charName, 10);
 	
 	//포켓몬 속성에 맞는 스킬, 키값 대입
 	skills* temp;
@@ -436,7 +436,7 @@ void player::dungeonMove()
 		
 
 		//피격상태
-		if (_player.currentHp != _playerStatus->getCurrentHP())
+		if (_playerStatus->getCurrentHP() < _player.currentHp)
 		{
 			_isHurt = true;
 			_player.state = PLAYER_HURT;

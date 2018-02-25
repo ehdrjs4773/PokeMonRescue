@@ -35,10 +35,6 @@ void Ending::release(void)
 
 void Ending::update(void)
 {
-	if (SOUNDMANAGER->isPlaySound("엔딩"));
-	{
-		SOUNDMANAGER->stop("엔딩");
-	}
 	_y += 1;
 	if (_y > 2000 - WINSIZEY)
 		_y = 2000 - WINSIZEY;
